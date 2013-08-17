@@ -1,13 +1,13 @@
 package org.epstudios.epcoding;
 
+import org.epstudios.epcoding.dummy.DummyContent;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import org.epstudios.epcoding.dummy.DummyContent;
 
 /**
  * A list fragment representing a list of Procedures. This fragment also
@@ -71,9 +71,9 @@ public class ProcedureListFragment extends ListFragment {
 		super.onCreate(savedInstanceState);
 
 		// TODO: replace with a real list adapter.
-		setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-				android.R.layout.simple_list_item_activated_1,
-				android.R.id.text1, DummyContent.ITEMS));
+		setListAdapter(new ArrayAdapter<ProcedureTypes.ProcedureType>(
+				getActivity(), android.R.layout.simple_list_item_activated_1,
+				android.R.id.text1, ProcedureTypes.ITEMS));
 	}
 
 	@Override
