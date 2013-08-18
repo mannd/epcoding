@@ -3,5 +3,15 @@
 
     <string name="app_name">EP Coding</string>
     <string name="title_procedure_detail">Procedure Codes</string>
+    <string name="ablation_afb_title">Atrial Fibrillation Ablation</string>
+    <string name="ablation_afb_code">atrial fibrillation ablation (xxxxxx)</string>
+    <string name="components_label">Required components</string>
+    <string name="ablation_afb_components">multiple transseptal cath\n
+        induction or attempted induction of arrhythmia\n
+        R and L atrial pacing where possible\n
+        R and L atrial recording where possibl\n
+        RV pacing and recording\n
+        His bundle recording\n
+        pulmonary vein isolation</string>
 
 </resources>
