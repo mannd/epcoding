@@ -1,0 +1,117 @@
+* AFB 93656
+# comment
+** Components
+   - Multiple TS catheterizations
+   - Induction or attempted induction of arrhythmia
+   - R and L atrial pacing where possible
+   - R and L atrial recording where possible
+   - RV pacing
+   - RV recording 
+   - His bundle recording
+   - PV isolation
+** If any of the above not done add 52 modifier
+** Not included
+   - 93657  additional linear or focal ablation for treatment of AFB
+   - Can be reported multiple times
+   - 93655 SVT unmasked during AFB procedure (distinct arrhythmia from
+     original mechanism).  
+** Do not add in 93656 (LA pacing/recording) or TS catheterization (93642)
+* AV Node Ablation 93650
+* SVT, including AVNRT, WPW, AFL, AT 93653
+** Components
+   - Induction or attempted induction of arrhythmia
+   - RA pacing
+   - RA recording
+   - RV pacing
+   - RV recording
+   - His recording
+** Use 93655 for each additional SVT mechanism
+* VT ablation 93654
+** Components
+   - includes 3D mapping when done (93613)
+   - includes left ventricular pacing and recording when done (93622)
+   - do not report these two codes in addition to VT ablation
+* Add ins to any of above
+** Isuprel infusion (93623)
+** 2D mapping (93609)
+** Intracardiac echo (93662)
+** Arterial line placement (36620)
+* Add ins to any except VT ablation
+** 3D mapping (93613)
+** LV pacing and recording (93622)
+* Add ins to any except AFB ablation
+** LA pacing and recording (93622)
+** Transseptal catheterization (93642)
+* AV Node Ablation 93650
+* Diagnostic EP Testing with attempted arrhythmia induction 93620
+** +93621 LA or CS pacing and recording
+** +93622 LV pacing and recording
+** +93623 3-D mapping
+* Tilt Table Test 93660
+* Cardioversion
+** 92960 External
+** 92961 Internal
+* Single chamber PPM implant 33207
+* Dual chamber PPM implant 33208
+* Single chamber PPM replacement 33227
+* Dual chamber PPM replacement 33228
+* Lead revisions with PPM replacement
+** new V lead 33207 and 33233 removal of PPM pulse generator
+** new A lead 33206 and 33233 removal of PPM pulse generator
+* New leads without replacement
+** 33216 insertion of single lead (PPM or ICD)
+** 33217 insertion of two leads (PPM or ICD)
+* Single or dual chamber ICD initial implant 33249
+** with DFT testing 93641
+* Single chamber ICD generator replacement 33262
+** with DFT testing 93641
+* Upgrade of single to dual chamber ICD, new A lead
+** 33249 insertion of ICD
+** 33241 removal of ICD pulse generator
+** 93641 DFT testing
+* Upgrade of dual chamber PPM to dual chamber ICD
+** 33249 insertion of ICD
+** 33233 removal of PPM generator
+** 93641 DFT testing
+* 33225
+  Addition of LV lead to new pacemaker or defibrillator
+* CRT-D initial implant, CS venogram
+** 33249 insertion of ICD with one or two leads
+** 33225 insertion of LV lead
+** 93641 DFT testing
+* CRT-D initial implant, can't place LV lead
+** 33249 insertion ICD
+** 33225-53 failed LV lead insertion
+** 93641 DFT testing
+* CRT-D generator replacement
+** 33263 removal of ICD pulse generator with replacement, dual lead system
+** 93641 DFT testing
+* Upgrade of single or dual ICD to CRT-D with new RA or RV lead
+** 33249 insertion of ICD with one or two leads
+** 33225 insertion of LV lead
+** 33241-51 removal of ICD pulse generator
+** 93641 DFT testing
+* Upgrade of dual chamber ICD to CRT-D using existing A/V leads
+** 33264 removal of ICD generator
+** 33225 insertion of LV lead
+** optional DFT testing
+* Insertion of LV lead only for previously implanted CRT-D device
+** 33224 Insertion of pacing electrode of LV pacing, attaching to previously placed generator
+* Initial insertion of CRT-P system
+** 33208 PPM insertion
+** 33225 LV lead insertion
+* Upgrade of dual chamber PPM to CRT-P
+** 33229 removal and replacement of PPM
+** 33225 LV lead insertion
+* CRT-P generator replacement
+** 33229
+* Single chamber upgrade to CRT-P with new A lead, LV lead
+** 33214 upgrade of single chamber to dual chamber PPM system
+** 33225 LV lead insertion
+* Modifiers
+  | 22 | increased procedural service      |
+  | 26 | professional component            |
+  | 51 | multiple procedures, not distinct |
+  | 52 | reduced service                   |
+  | 53 | aborted procedure                 |
+  | 59 | distinct procedure                |

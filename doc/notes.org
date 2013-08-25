@@ -1,0 +1,11 @@
+* Structure of EP Coding
+  - Procedure list
+  - Page for each procedure
+  - Loaded from strings.xml
+  - laid out with Markdown/html
+    Example
+    |----------------------------+-------|
+    | Single chamber PPM implant | 33207 |
+    | Dual chamber PPM implant   | 33208 |
+    |----------------------------+-------|
+* Details    
