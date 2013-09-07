@@ -4,6 +4,14 @@
     <string name="app_name">EP Coding</string>
     <string name="title_procedure_detail">Procedure Codes</string>
     <string name="ablation_afb_title">Atrial Fibrillation Ablation</string>
+    <string name="ablation_other_title">Other Ablation</string>
+    <string name="ablation_av_node_title">AV Node Ablation</string>
+    <string name="other_procedure_title">Other Procedures</string>
+    <string name="office_visit_title">Office Visit</string>
+    <string name="hospital_rounds_title">Hospital Rounds</string>
+    <string name="new_device_implant_title">New Device Implant</string>
+    <string name="device_replacement_title">Device Replacement</string>
+    <string name="device_upgrade_revision_title">Device Upgrade or Revision</string>
     <string name="ablation_afb_code">atrial fibrillation ablation (xxxxxx)</string>
     <string name="components_label">Required components</string>
     <string name="ablation_afb_components">\nmultiple transseptal cath\n
