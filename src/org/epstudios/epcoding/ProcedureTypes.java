@@ -26,9 +26,14 @@ public class ProcedureTypes {
 
 	static {
 		// Add 3 sample items.
-		addItem(new ProcedureType("1", "Ablation AFB"));
-		addItem(new ProcedureType("2", "Other Ablation"));
-		addItem(new ProcedureType("3", "ICD Implant"));
+		addItem(new ProcedureType("1", "AFB Ablation"));
+		addItem(new ProcedureType("2", "SVT Ablation"));
+		addItem(new ProcedureType("3", "VT Ablation"));
+		addItem(new ProcedureType("4", "Devices"));
+		addItem(new ProcedureType("5", "Misc Procedures")); // Cardioversion,
+															// Tilt Table
+		addItem(new ProcedureType("6", "Office Visits"));
+		addItem(new ProcedureType("7", "Hospital Visits"));
 	}
 
 	private static void addItem(ProcedureType item) {

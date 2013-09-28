@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.epstudios.epcoding.dummy.DummyContent;
-
 /**
  * A fragment representing a single Procedure detail screen. This fragment is
  * either contained in a {@link ProcedureListActivity} in two-pane mode (on
@@ -24,7 +22,7 @@ public class ProcedureDetailFragment extends Fragment {
 	/**
 	 * The dummy content this fragment is presenting.
 	 */
-	private DummyContent.DummyItem mItem;
+	private String mItem;
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -41,8 +39,7 @@ public class ProcedureDetailFragment extends Fragment {
 			// Load the dummy content specified by the fragment
 			// arguments. In a real-world scenario, use a Loader
 			// to load content from a content provider.
-			mItem = DummyContent.ITEM_MAP.get(getArguments().getString(
-					ARG_ITEM_ID));
+			mItem = getArguments().getString(ARG_ITEM_ID);
 		}
 	}
 
@@ -55,7 +52,7 @@ public class ProcedureDetailFragment extends Fragment {
 		// Show the dummy content as text in a TextView.
 		if (mItem != null) {
 			((TextView) rootView.findViewById(R.id.procedure_detail))
-					.setText(mItem.content);
+					.setText(mItem);
 		}
 
 		return rootView;

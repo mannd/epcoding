@@ -1,7 +1,5 @@
 package org.epstudios.epcoding;
 
-import org.epstudios.epcoding.dummy.DummyContent;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -116,7 +114,7 @@ public class ProcedureListFragment extends ListFragment {
 
 		// Notify the active callbacks interface (the activity, if the
 		// fragment is attached to one) that an item has been selected.
-		mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+		mCallbacks.onItemSelected(String.valueOf(id));
 	}
 
 	@Override
