@@ -24,6 +24,7 @@
     <string name="coding_summary_label">Coding Summary</string>
     <string name="settings_label">Settings</string>
     <string name="about_title">About</string>
+    <string name="about_label">About EP Coding</string>
     <string name="settings_shortcut">s</string>
     <string name="about_text">EP Coding is designed to help cardiac
             electrophysiologists in coding electrophysiology procedures.

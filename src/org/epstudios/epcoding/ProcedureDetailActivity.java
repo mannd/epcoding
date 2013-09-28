@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 /**
@@ -63,7 +65,20 @@ public class ProcedureDetailActivity extends FragmentActivity {
 			NavUtils.navigateUpTo(this, new Intent(this,
 					ProcedureListActivity.class));
 			return true;
+		case R.id.about:
+			startActivity(new Intent(this, About.class));
+			return true;
+
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu, menu);
+		return true;
+	}
+
 }
