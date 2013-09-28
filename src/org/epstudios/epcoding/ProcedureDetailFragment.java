@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 /**
@@ -22,7 +24,7 @@ public class ProcedureDetailFragment extends Fragment {
 	/**
 	 * The dummy content this fragment is presenting.
 	 */
-	private String mItem;
+	private int mItem;
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -30,6 +32,8 @@ public class ProcedureDetailFragment extends Fragment {
 	 */
 	public ProcedureDetailFragment() {
 	}
+
+	private Button clearButton;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,22 +43,55 @@ public class ProcedureDetailFragment extends Fragment {
 			// Load the dummy content specified by the fragment
 			// arguments. In a real-world scenario, use a Loader
 			// to load content from a content provider.
-			mItem = getArguments().getString(ARG_ITEM_ID);
+			String itemID = getArguments().getString(ARG_ITEM_ID);
+			if (itemID != null) // if it is null, screen 0 (AFB ablation) will
+								// be shown
+				mItem = Integer.parseInt(itemID);
 		}
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_procedure_detail,
-				container, false);
+		View rootView;
+		if (mItem >= 0 && mItem <= 2) {
+			rootView = inflater
+					.inflate(R.layout.ablation_afb, container, false);
+			if (mItem == 0) {
+				CheckBox v = (CheckBox) rootView
+						.findViewById(R.id.la_pace_record);
+				v.setChecked(false);
+				v.setEnabled(false);
+				v = (CheckBox) rootView.findViewById(R.id.transseptal_cath);
+				v.setChecked(false);
+				v.setEnabled(false);
+				// ??v.setPaintFlags(v.getPaintFlags()
+				// & ~Paint.STRIKE_THRU_TEXT_FLAG);
+				clearButton = (Button) rootView.findViewById(R.id.clear_button);
+				clearButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						switch (v.getId()) {
+						case R.id.clear_button:
+							clearEntries();
+							break;
+						}
+					}
+				});
 
-		// Show the dummy content as text in a TextView.
-		if (mItem != null) {
+			}
+		} else {
+			rootView = inflater.inflate(R.layout.fragment_procedure_detail,
+					container, false);
+
 			((TextView) rootView.findViewById(R.id.procedure_detail))
-					.setText(mItem);
+					.setText(String.valueOf(mItem));
+
 		}
 
 		return rootView;
+	}
+
+	private void clearEntries() {
 	}
 }
