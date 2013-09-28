@@ -22,5 +22,18 @@
         His bundle recording\n
         pulmonary vein isolation</string>
     <string name="coding_summary_label">Coding Summary</string>
+    <string name="settings_label">Settings</string>
+    <string name="about_title">About</string>
+    <string name="settings_shortcut">s</string>
+    <string name="about_text">EP Coding is designed to help cardiac
+            electrophysiologists in coding electrophysiology procedures.
+            These are just guidelines and are not intended to be used by
+            professional coders.
+			If you have suggestions or comments, please contact us.
+		\n\nEmail: mannd@epstudiossoftware.com
+		\nWeb: www.epstudiossoftware.com
+		\nSource: github.com/mannd/epcoding
+		\n\nCopyright \u00a9 2013 EP Studios, Inc.
+		\nLicensed under GNU GPL v3.</string>
 
 </resources>

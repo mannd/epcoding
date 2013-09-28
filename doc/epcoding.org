@@ -109,9 +109,12 @@
 ** 33214 upgrade of single chamber to dual chamber PPM system
 ** 33225 LV lead insertion
 * Modifiers
+  |----+-----------------------------------|
   | 22 | increased procedural service      |
   | 26 | professional component            |
   | 51 | multiple procedures, not distinct |
   | 52 | reduced service                   |
   | 53 | aborted procedure                 |
   | 59 | distinct procedure                |
+  |----+-----------------------------------|
+ 
