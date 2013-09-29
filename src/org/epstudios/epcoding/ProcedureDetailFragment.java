@@ -22,9 +22,20 @@ public class ProcedureDetailFragment extends Fragment {
 	public static final String ARG_ITEM_ID = "item_id";
 
 	/**
-	 * The dummy content this fragment is presenting.
+	 * The content this fragment is presenting.
 	 */
 	private int mItem;
+
+	private Button clearButton;
+	private CheckBox additionalSvtCheckBox;
+	private CheckBox additionalAfbCheckBox;
+	private CheckBox twoDMapCheckBox;
+	private CheckBox threeDMapCheckBox;
+	private CheckBox laPaceRecordCheckBox;
+	private CheckBox lvPaceRecordCheckBox;
+	private CheckBox ivDrugCheckBox;
+	private CheckBox iceCheckBox;
+	private CheckBox transseptalCathCheckBox;
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -32,8 +43,6 @@ public class ProcedureDetailFragment extends Fragment {
 	 */
 	public ProcedureDetailFragment() {
 	}
-
-	private Button clearButton;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -57,27 +66,40 @@ public class ProcedureDetailFragment extends Fragment {
 		if (mItem >= 0 && mItem <= 2) {
 			rootView = inflater
 					.inflate(R.layout.ablation_afb, container, false);
+			additionalSvtCheckBox = (CheckBox) rootView
+					.findViewById(R.id.additional_svt);
+			additionalAfbCheckBox = (CheckBox) rootView
+					.findViewById(R.id.additional_afb);
+			twoDMapCheckBox = (CheckBox) rootView.findViewById(R.id.two_d_map);
+			threeDMapCheckBox = (CheckBox) rootView
+					.findViewById(R.id.three_d_map);
+			laPaceRecordCheckBox = (CheckBox) rootView
+					.findViewById(R.id.la_pace_record);
+			lvPaceRecordCheckBox = (CheckBox) rootView
+					.findViewById(R.id.lv_pace_record);
+			ivDrugCheckBox = (CheckBox) rootView.findViewById(R.id.iv_drug);
+			iceCheckBox = (CheckBox) rootView.findViewById(R.id.ice);
+			transseptalCathCheckBox = (CheckBox) rootView
+					.findViewById(R.id.transseptal_cath);
+			clearButton = (Button) rootView.findViewById(R.id.clear_button);
+			clearButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					switch (v.getId()) {
+					case R.id.clear_button:
+						clearEntries();
+						break;
+					}
+				}
+			});
+
 			if (mItem == 0) {
-				CheckBox v = (CheckBox) rootView
-						.findViewById(R.id.la_pace_record);
-				v.setChecked(false);
-				v.setEnabled(false);
-				v = (CheckBox) rootView.findViewById(R.id.transseptal_cath);
-				v.setChecked(false);
-				v.setEnabled(false);
+				laPaceRecordCheckBox.setChecked(false);
+				laPaceRecordCheckBox.setEnabled(false);
+				transseptalCathCheckBox.setChecked(false);
+				transseptalCathCheckBox.setEnabled(false);
 				// ??v.setPaintFlags(v.getPaintFlags()
 				// & ~Paint.STRIKE_THRU_TEXT_FLAG);
-				clearButton = (Button) rootView.findViewById(R.id.clear_button);
-				clearButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						switch (v.getId()) {
-						case R.id.clear_button:
-							clearEntries();
-							break;
-						}
-					}
-				});
 
 			}
 		} else {
@@ -93,5 +115,14 @@ public class ProcedureDetailFragment extends Fragment {
 	}
 
 	private void clearEntries() {
+		additionalSvtCheckBox.setChecked(false);
+		additionalAfbCheckBox.setChecked(false);
+		twoDMapCheckBox.setChecked(false);
+		threeDMapCheckBox.setChecked(false);
+		laPaceRecordCheckBox.setChecked(false);
+		lvPaceRecordCheckBox.setChecked(false);
+		ivDrugCheckBox.setChecked(false);
+		iceCheckBox.setChecked(false);
+		transseptalCathCheckBox.setChecked(false);
 	}
 }

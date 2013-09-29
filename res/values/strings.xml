@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">EP Coding</string>
-    <string name="title_procedure_detail">Procedure Codes</string>
+    <string name="title_procedure_detail">Coding</string>
     <string name="ablation_afb_title">Atrial Fibrillation Ablation</string>
     <string name="ablation_other_title">Other Ablation</string>
     <string name="ablation_av_node_title">AV Node Ablation</string>
@@ -21,7 +21,6 @@
         RV pacing and recording\n
         His bundle recording\n
         pulmonary vein isolation</string>
-    <string name="coding_summary_label">Coding Summary</string>
     <string name="settings_label">Settings</string>
     <string name="about_title">About</string>
     <string name="about_label">About EP Coding</string>
@@ -36,5 +35,19 @@
 		\nSource: github.com/mannd/epcoding
 		\n\nCopyright \u00a9 2013 EP Studios, Inc.
 		\nLicensed under GNU GPL v3.</string>
+    <string name="add_on_codes_label">Add-on Codes</string>
+    <string name="code_93656_label">AFB Ablation (93656)</string>
+    <string name="code_93655_label">Additional SVT or VT Ablation (93655)</string>
+    <string name="code_93657_label">Additional AFB Ablation (93657)</string>
+    <string name="code_93609_label">2D Mapping (93609)</string>
+    <string name="code_93613_label">3D Mapping (93613)</string>
+    <string name="code_93621_label">LA Pacing &amp; Recording (93621)</string>
+    <string name="code_93622_label">LV Pacing &amp; Recording (93622)</string>
+    <string name="code_93623_label">Induce post IV Drug (93623)</string>
+    <string name="code_93662_label">Intra-cardiac Echo (93622)</string>
+    <string name="code_93462_label">Transseptal Cath (93462)</string>
+    <string name="coding_summary_label">Summary</string>
+    <string name="clear_label">Clear</string>
+    <string name="info_label">Info</string>
 
 </resources>

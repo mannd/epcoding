@@ -1,105 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-
-    <TextView
-        android:id="@+id/code_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:text="AFB Ablation (93656)"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add-On Codes"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <CheckBox
-        android:id="@+id/checkBox1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Additional SVT or VT Ablation (93655)" />
-
-    <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Additional AFB Ablation (93657)" />
-
-    <CheckBox
-        android:id="@+id/checkBox3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2D Map (93609)" />
-
-    <CheckBox
-        android:id="@+id/checkBox4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="3D Map (93613)" />
-
-    <CheckBox
-        android:id="@+id/la_pace_record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LA Pace &amp; Record (93621)" />
-
-    <CheckBox
-        android:id="@+id/lv_pace_record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LV Pace &amp; Record (93622)" />
-
-    <CheckBox
-        android:id="@+id/checkBox5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Induce Post IV Drug (93623-59)" />
-
-    <CheckBox
-        android:id="@+id/checkBox6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="IntraCardiac Echo (93662)" />
-
-    <CheckBox
-        android:id="@+id/transseptal_cath"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Transseptal Cath (93462)" />
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/button1"
+        <TextView
+            android:id="@+id/code_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="@string/code_93656_label"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/coding_summary_label" />
+            android:text="@string/add_on_codes_label"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <Button
-            android:id="@+id/clear_button"
+        <CheckBox
+            android:id="@+id/additional_svt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Clear" />
+            android:text="@string/code_93655_label" />
 
-        <Button
-            android:id="@+id/button3"
+        <CheckBox
+            android:id="@+id/additional_afb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Info" />
+            android:text="@string/code_93657_label" />
+
+        <CheckBox
+            android:id="@+id/two_d_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/code_93609_label" />
+
+        <CheckBox
+            android:id="@+id/three_d_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/code_93613_label" />
+
+        <CheckBox
+            android:id="@+id/la_pace_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/code_93621_label" />
+
+        <CheckBox
+            android:id="@+id/lv_pace_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/code_93622_label" />
+
+        <CheckBox
+            android:id="@+id/iv_drug"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/code_93623_label" />
+
+        <CheckBox
+            android:id="@+id/ice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/code_93662_label" />
+
+        <CheckBox
+            android:id="@+id/transseptal_cath"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/code_93462_label" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/summary_button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/coding_summary_label" />
+
+            <Button
+                android:id="@+id/clear_button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/clear_label" />
+
+            <Button
+                android:id="@+id/info_button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/info_label" />
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
