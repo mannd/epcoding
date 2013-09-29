@@ -101,7 +101,10 @@ public class ProcedureDetailFragment extends Fragment {
 			});
 
 			if (mItem == afbAblation) {
-				codeTextView.setText(getString(R.string.code_93656_label));
+				// codeTextView.setText(getString(R.string.code_93656_label));
+				// test
+				codeTextView.setText(Codes.getCode("99999")
+						.getCodeFirstDescription());
 				laPaceRecordCheckBox.setChecked(false);
 				laPaceRecordCheckBox.setEnabled(false);
 				transseptalCathCheckBox.setChecked(false);
