@@ -21,6 +21,7 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="4dip"
             android:text="@string/add_on_codes_label"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 

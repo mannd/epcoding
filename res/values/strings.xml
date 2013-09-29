@@ -3,9 +3,6 @@
 
     <string name="app_name">EP Coding</string>
     <string name="title_procedure_detail">Coding</string>
-    <string name="ablation_afb_title">Atrial Fibrillation Ablation</string>
-    <string name="ablation_other_title">Other Ablation</string>
-    <string name="ablation_av_node_title">AV Node Ablation</string>
     <string name="other_procedure_title">Other Procedures</string>
     <string name="office_visit_title">Office Visit</string>
     <string name="hospital_rounds_title">Hospital Rounds</string>
@@ -37,6 +34,8 @@
 		\nLicensed under GNU GPL v3.</string>
     <string name="add_on_codes_label">Add-on Codes</string>
     <string name="code_93656_label">AFB Ablation (93656)</string>
+    <string name="code_93654_label">VT Ablation (93654)</string>
+    <string name="code_93653_label">SVT Ablation (93653)</string>
     <string name="code_93655_label">Additional SVT or VT Ablation (93655)</string>
     <string name="code_93657_label">Additional AFB Ablation (93657)</string>
     <string name="code_93609_label">2D Mapping (93609)</string>
