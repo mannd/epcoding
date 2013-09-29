@@ -23,10 +23,10 @@
     <string name="about_label">About EP Coding</string>
     <string name="settings_shortcut">s</string>
     <string name="about_text">EP Coding is designed to help cardiac
-            electrophysiologists in coding electrophysiology procedures.
+            electrophysiologists use coding to document electrophysiology procedures.
             These are just guidelines and are not intended to be used by
-            professional coders.
-			If you have suggestions or comments, please contact us.
+            professional coders, nor are the codes selected necessarily the
+            final codes submitted to payers. If you have suggestions or comments, please contact us.
 		\n\nEmail: mannd@epstudiossoftware.com
 		\nWeb: www.epstudiossoftware.com
 		\nSource: github.com/mannd/epcoding
@@ -43,7 +43,7 @@
     <string name="code_93621_label">LA Pacing &amp; Recording (93621)</string>
     <string name="code_93622_label">LV Pacing &amp; Recording (93622)</string>
     <string name="code_93623_label">Induce post IV Drug (93623)</string>
-    <string name="code_93662_label">Intra-cardiac Echo (93622)</string>
+    <string name="code_93662_label">Intra-cardiac Echo (93662)</string>
     <string name="code_93462_label">Transseptal Cath (93462)</string>
     <string name="coding_summary_label">Summary</string>
     <string name="clear_label">Clear</string>
