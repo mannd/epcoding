@@ -25,6 +25,13 @@
             android:text="@string/add_on_codes_label"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
+        <LinearLayout
+            android:id="@+id/checkbox_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
         <CheckBox
             android:id="@+id/additional_svt"
             android:layout_width="wrap_content"

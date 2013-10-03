@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -25,6 +26,8 @@ public class ProcedureDetailFragment extends Fragment {
 	 * The content this fragment is presenting.
 	 */
 	private int mItem;
+
+	private LinearLayout checkBoxLayout;
 
 	private Button clearButton;
 	private CheckBox additionalAfbCheckBox;
@@ -68,72 +71,65 @@ public class ProcedureDetailFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView;
-		if (mItem >= afbAblation && mItem <= vtAblation) {
-			rootView = inflater
-					.inflate(R.layout.ablation_afb, container, false);
-			codeTextView = (TextView) rootView.findViewById(R.id.code_title);
-			checkBoxes[0] = (CheckBox) rootView
-					.findViewById(R.id.additional_svt);
-			checkBoxes[1] = additionalAfbCheckBox = (CheckBox) rootView
-					.findViewById(R.id.additional_afb);
-			checkBoxes[2] = twoDMapCheckBox = (CheckBox) rootView
-					.findViewById(R.id.two_d_map);
-			checkBoxes[3] = threeDMapCheckBox = (CheckBox) rootView
-					.findViewById(R.id.three_d_map);
-			checkBoxes[4] = laPaceRecordCheckBox = (CheckBox) rootView
-					.findViewById(R.id.la_pace_record);
-			checkBoxes[5] = lvPaceRecordCheckBox = (CheckBox) rootView
-					.findViewById(R.id.lv_pace_record);
-			checkBoxes[6] = (CheckBox) rootView.findViewById(R.id.iv_drug);
-			checkBoxes[7] = (CheckBox) rootView.findViewById(R.id.ice);
-			checkBoxes[8] = transseptalCathCheckBox = (CheckBox) rootView
-					.findViewById(R.id.transseptal_cath);
-			clearButton = (Button) rootView.findViewById(R.id.clear_button);
-			clearButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					switch (v.getId()) {
-					case R.id.clear_button:
-						clearEntries();
-						break;
-					}
+
+		rootView = inflater.inflate(R.layout.ablation_afb, container, false);
+		codeTextView = (TextView) rootView.findViewById(R.id.code_title);
+		checkBoxLayout = (LinearLayout) rootView
+				.findViewById(R.id.checkbox_layout);
+
+		checkBoxes[0] = (CheckBox) rootView.findViewById(R.id.additional_svt);
+		CheckBox testCheckBox = new CheckBox(getActivity());
+		testCheckBox.setText(Codes.getCode("99999").getDescription());
+		checkBoxLayout.addView(testCheckBox);
+		checkBoxes[1] = additionalAfbCheckBox = (CheckBox) rootView
+				.findViewById(R.id.additional_afb);
+		checkBoxes[2] = twoDMapCheckBox = (CheckBox) rootView
+				.findViewById(R.id.two_d_map);
+		checkBoxes[3] = threeDMapCheckBox = (CheckBox) rootView
+				.findViewById(R.id.three_d_map);
+		checkBoxes[4] = laPaceRecordCheckBox = (CheckBox) rootView
+				.findViewById(R.id.la_pace_record);
+		checkBoxes[5] = lvPaceRecordCheckBox = (CheckBox) rootView
+				.findViewById(R.id.lv_pace_record);
+		checkBoxes[6] = (CheckBox) rootView.findViewById(R.id.iv_drug);
+		checkBoxes[7] = (CheckBox) rootView.findViewById(R.id.ice);
+		checkBoxes[8] = transseptalCathCheckBox = (CheckBox) rootView
+				.findViewById(R.id.transseptal_cath);
+		clearButton = (Button) rootView.findViewById(R.id.clear_button);
+		clearButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				switch (v.getId()) {
+				case R.id.clear_button:
+					clearEntries();
+					break;
 				}
-			});
-
-			if (mItem == afbAblation) {
-				// codeTextView.setText(getString(R.string.code_93656_label));
-				// test
-				codeTextView.setText(Codes.getCode("99999")
-						.getCodeFirstDescription());
-				laPaceRecordCheckBox.setChecked(false);
-				laPaceRecordCheckBox.setEnabled(false);
-				transseptalCathCheckBox.setChecked(false);
-				transseptalCathCheckBox.setEnabled(false);
-				// ??v.setPaintFlags(v.getPaintFlags()
-				// & ~Paint.STRIKE_THRU_TEXT_FLAG);
-
-			} else if (mItem == svtAblation) {
-				codeTextView.setText(getString(R.string.code_93653_label));
-				additionalAfbCheckBox.setChecked(false);
-				additionalAfbCheckBox.setEnabled(false);
-			} else if (mItem == vtAblation) {
-				codeTextView.setText(getString(R.string.code_93654_label));
-				additionalAfbCheckBox.setChecked(false);
-				additionalAfbCheckBox.setEnabled(false);
-				twoDMapCheckBox.setChecked(false);
-				twoDMapCheckBox.setEnabled(false);
-				threeDMapCheckBox.setChecked(false);
-				threeDMapCheckBox.setEnabled(false);
-				lvPaceRecordCheckBox.setEnabled(false);
-				lvPaceRecordCheckBox.setEnabled(false);
-
 			}
-		} else {
-			rootView = inflater.inflate(R.layout.fragment_procedure_detail,
-					container, false);
+		});
 
-			((TextView) rootView.findViewById(R.id.procedure_detail))
-					.setText(String.valueOf(mItem));
+		if (mItem == afbAblation) {
+			codeTextView.setText(Codes.getCode("93656").getDescription());
+			laPaceRecordCheckBox.setChecked(false);
+			laPaceRecordCheckBox.setEnabled(false);
+			transseptalCathCheckBox.setChecked(false);
+			transseptalCathCheckBox.setEnabled(false);
+			// ??v.setPaintFlags(v.getPaintFlags()
+			// & ~Paint.STRIKE_THRU_TEXT_FLAG);
+
+		} else if (mItem == svtAblation) {
+			codeTextView.setText(getString(R.string.code_93653_label));
+			additionalAfbCheckBox.setChecked(false);
+			additionalAfbCheckBox.setEnabled(false);
+		} else if (mItem == vtAblation) {
+			codeTextView.setText(getString(R.string.code_93654_label));
+			additionalAfbCheckBox.setChecked(false);
+			additionalAfbCheckBox.setEnabled(false);
+			twoDMapCheckBox.setChecked(false);
+			twoDMapCheckBox.setEnabled(false);
+			threeDMapCheckBox.setChecked(false);
+			threeDMapCheckBox.setEnabled(false);
+			lvPaceRecordCheckBox.setEnabled(false);
+			lvPaceRecordCheckBox.setEnabled(false);
 
 		}
 
