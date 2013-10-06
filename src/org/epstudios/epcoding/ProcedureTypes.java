@@ -29,7 +29,7 @@ public class ProcedureTypes {
 		addItem(new ProcedureType("1", "AFB Ablation"));
 		addItem(new ProcedureType("2", "SVT Ablation"));
 		addItem(new ProcedureType("3", "VT Ablation"));
-		addItem(new ProcedureType("4", "Devices"));
+		addItem(new ProcedureType("4", "EP Testing"));
 		addItem(new ProcedureType("5", "Misc Procedures")); // Cardioversion,
 															// Tilt Table
 		addItem(new ProcedureType("6", "Office Visits"));

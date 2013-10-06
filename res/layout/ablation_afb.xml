@@ -32,60 +32,6 @@
             android:orientation="vertical" >
         </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/additional_svt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/code_93655_label" />
-
-        <CheckBox
-            android:id="@+id/additional_afb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/code_93657_label" />
-
-        <CheckBox
-            android:id="@+id/two_d_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/code_93609_label" />
-
-        <CheckBox
-            android:id="@+id/three_d_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/code_93613_label" />
-
-        <CheckBox
-            android:id="@+id/la_pace_record"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/code_93621_label" />
-
-        <CheckBox
-            android:id="@+id/lv_pace_record"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/code_93622_label" />
-
-        <CheckBox
-            android:id="@+id/iv_drug"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/code_93623_label" />
-
-        <CheckBox
-            android:id="@+id/ice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/code_93662_label" />
-
-        <CheckBox
-            android:id="@+id/transseptal_cath"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/code_93462_label" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
