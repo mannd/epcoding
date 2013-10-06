@@ -18,7 +18,7 @@ EP Coding is open source, and licensed under the
 [GNU GPL v3 license.](http://www.gnu.org/licenses/gpl.html)
 
 ## License
-Copyright 2013 [EP Studios, Inc.](http://www.epstudiossoftware.com)
+Copyright © 2013 [EP Studios, Inc.](http://www.epstudiossoftware.com)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -50,3 +50,9 @@ codes applicable to EP is covered under the
 [Fair Use Doctrine](http://http://en.wikipedia.org/wiki/Fair_use) of
 the Copyright Act and not subjected to the licensing fees imposed by
 the AMA.
+
+## Author
+David Mann
+
+Email: [mannd@epstudiossoftware.com](mailto:mannd@epstudiossoftware.com)  
+Website: [http://www.epstudiossoftware.com](http://www.epstudiossoftware.com)   
