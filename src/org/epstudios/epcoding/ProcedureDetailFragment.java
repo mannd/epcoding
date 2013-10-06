@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 /**
  * A fragment representing a single Procedure detail screen. This fragment is
@@ -31,22 +30,28 @@ public class ProcedureDetailFragment extends Fragment implements
 	 */
 	private int mItem;
 
+	private LinearLayout primaryCheckBoxLayout;
 	private LinearLayout checkBoxLayout;
 
 	private Button clearButton;
 	private Button summarizeButton;
 	private Button infoButton;
 	private CheckBox additionalAfbCheckBox;
+	private CheckBox additionalSvtCheckBox;
 	private CheckBox twoDMapCheckBox;
 	private CheckBox threeDMapCheckBox;
 	private CheckBox laPaceRecordCheckBox;
 	private CheckBox lvPaceRecordCheckBox;
 	private CheckBox transseptalCathCheckBox;
 
+	private final int numPrimaryCheckBoxes = 5;
+	private final CheckBox[] primaryCheckBoxes = new CheckBox[numPrimaryCheckBoxes];
+
 	private final int numCheckBoxes = 10;
 	private final CheckBox[] checkBoxes = new CheckBox[numCheckBoxes];
 
-	private TextView codeTextView;
+	private final int numAblationCodes = 10;
+	private final Code[] ablationCodes = new Code[numAblationCodes];
 
 	final private int afbAblation = 0;
 	final private int svtAblation = 1;
@@ -94,33 +99,40 @@ public class ProcedureDetailFragment extends Fragment implements
 		View rootView;
 
 		rootView = inflater.inflate(R.layout.ablation_afb, container, false);
-		codeTextView = (TextView) rootView.findViewById(R.id.code_title);
+		primaryCheckBoxLayout = (LinearLayout) rootView
+				.findViewById(R.id.primary_checkbox_layout);
 		checkBoxLayout = (LinearLayout) rootView
 				.findViewById(R.id.checkbox_layout);
 		Context context = getActivity();
-		checkBoxes[0] = new CheckBox(context);
-		checkBoxes[0].setText(Codes.getCode("93655").getDescription());
+		primaryCheckBoxes[0] = new CheckBox(context);
+		// temp, need to handle variable length array of checkboxes
+		primaryCheckBoxLayout.addView(primaryCheckBoxes[0]);
 
-		checkBoxes[1] = additionalAfbCheckBox = new CheckBox(context);
-		checkBoxes[1].setText(Codes.getCode("93657").getDescription());
-		checkBoxes[2] = twoDMapCheckBox = new CheckBox(context);
-		checkBoxes[2].setText(Codes.getCode("93609").getDescription());
-		checkBoxes[3] = threeDMapCheckBox = new CheckBox(context);
-		checkBoxes[3].setText(Codes.getCode("93613").getDescription());
-		checkBoxes[4] = laPaceRecordCheckBox = new CheckBox(context);
-		checkBoxes[4].setText(Codes.getCode("93621").getDescription());
-		checkBoxes[5] = lvPaceRecordCheckBox = new CheckBox(context);
-		checkBoxes[5].setText(Codes.getCode("93622").getDescription());
-		checkBoxes[6] = new CheckBox(context);
-		checkBoxes[6].setText(Codes.getCode("93623").getDescription());
-		checkBoxes[7] = new CheckBox(context);
-		checkBoxes[7].setText(Codes.getCode("93662").getDescription());
-		checkBoxes[8] = transseptalCathCheckBox = new CheckBox(context);
-		checkBoxes[8].setText(Codes.getCode("93462").getDescription());
-		checkBoxes[9] = new CheckBox(context);
-		checkBoxes[9].setText(Codes.getCode("36620").getDescription());
-		for (int i = 0; i < numCheckBoxes; ++i)
+		// initialize ablation codes
+		ablationCodes[0] = Codes.getCode("93655");
+		ablationCodes[1] = Codes.getCode("93657");
+		ablationCodes[2] = Codes.getCode("93609");
+		ablationCodes[3] = Codes.getCode("93613");
+		ablationCodes[4] = Codes.getCode("93621");
+		ablationCodes[5] = Codes.getCode("93622");
+		ablationCodes[6] = Codes.getCode("93623");
+		ablationCodes[7] = Codes.getCode("93662");
+		ablationCodes[8] = Codes.getCode("93642");
+		ablationCodes[9] = Codes.getCode("36620");
+
+		for (int i = 0; i < numCheckBoxes; ++i) {
+			checkBoxes[i] = new CheckBox(context);
+			checkBoxes[i].setText(ablationCodes[i].getDescription());
 			checkBoxLayout.addView(checkBoxes[i]);
+		}
+		// special checkBoxes
+		laPaceRecordCheckBox = checkBoxes[4];
+		transseptalCathCheckBox = checkBoxes[8];
+		additionalAfbCheckBox = checkBoxes[1];
+		additionalSvtCheckBox = checkBoxes[0];
+		twoDMapCheckBox = checkBoxes[2];
+		threeDMapCheckBox = checkBoxes[3];
+		lvPaceRecordCheckBox = checkBoxes[5];
 
 		clearButton = (Button) rootView.findViewById(R.id.clear_button);
 		clearButton.setOnClickListener(this);
@@ -147,8 +159,11 @@ public class ProcedureDetailFragment extends Fragment implements
 		} else if (mItem == epTesting) {
 			majorCode = Codes.getCode("93620");
 			disableCheckBox(additionalAfbCheckBox);
+			disableCheckBox(additionalSvtCheckBox);
 		}
-		codeTextView.setText(majorCode.getDescription());
+		primaryCheckBoxes[0].setText(majorCode.getDescription());
+		primaryCheckBoxes[0].setChecked(true);
+		primaryCheckBoxes[0].setEnabled(false);
 
 		return rootView;
 	}

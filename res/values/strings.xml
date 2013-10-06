@@ -32,7 +32,8 @@
 		\nSource: github.com/mannd/epcoding
 		\n\nCopyright \u00a9 2013 EP Studios, Inc.
 		\nLicensed under GNU GPL v3.</string>
-    <string name="add_on_codes_label">Add-on Codes</string>
+    <string name="primary_codes_label">Primary Code(s)</string>
+    <string name="add_on_codes_label">Additional Code(s)</string>
     <string name="code_93656_label">AFB Ablation (93656)</string>
     <string name="code_93654_label">VT Ablation (93654)</string>
     <string name="code_93653_label">SVT Ablation (93653)</string>

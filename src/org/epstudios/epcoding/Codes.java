@@ -53,11 +53,11 @@ public class Codes {
 		codeNum = "93662";
 		Code intraCardiacEcho = new Code(codeNum, "Intracardiac Echo", true);
 		result.put(codeNum, intraCardiacEcho);
-		codeNum = "93462";
+		codeNum = "93642";
 		Code transseptalCath = new Code(codeNum, "Transseptal Cath", true);
 		result.put(codeNum, transseptalCath);
 		codeNum = "36620";
-		Code arterialLine = new Code(codeNum, "Arterial Line Placement", true);
+		Code arterialLine = new Code(codeNum, "Arterial Line Placement", false);
 		result.put(codeNum, arterialLine);
 		return Collections.unmodifiableMap(result);
 	}

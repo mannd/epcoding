@@ -9,21 +9,27 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/code_title"
+            android:id="@+id/primary_code_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
-            android:text="@string/code_93656_label"
+            android:gravity="center"
+            android:text="@string/primary_codes_label"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <LinearLayout
+            android:id="@+id/primary_checkbox_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="4dip"
+            android:gravity="center"
             android:text="@string/add_on_codes_label"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <LinearLayout
             android:id="@+id/checkbox_layout"

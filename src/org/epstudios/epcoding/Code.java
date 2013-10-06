@@ -27,7 +27,7 @@ public class Code {
 	}
 
 	public String getCode() {
-		return code;
+		return (isAddOn ? "+" : "") + code;
 	}
 
 	public String getShortDescription() {
@@ -35,7 +35,7 @@ public class Code {
 	}
 
 	public String getDescription() {
-		return shortDescription + " (" + code + ")";
+		return shortDescription + " (" + getCode() + ")";
 	}
 
 	public String getCodeFirstDescription() {
