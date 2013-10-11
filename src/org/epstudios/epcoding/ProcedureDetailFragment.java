@@ -1,5 +1,9 @@
 package org.epstudios.epcoding;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -44,8 +48,7 @@ public class ProcedureDetailFragment extends Fragment implements
 	private CheckBox lvPaceRecordCheckBox;
 	private CheckBox transseptalCathCheckBox;
 
-	private final int numPrimaryCheckBoxes = 5;
-	private final CheckBox[] primaryCheckBoxes = new CheckBox[numPrimaryCheckBoxes];
+	private final List<CodeCheckBox> primaryCheckBoxList = new ArrayList<CodeCheckBox>();
 
 	private final int numCheckBoxes = 10;
 	private final CheckBox[] checkBoxes = new CheckBox[numCheckBoxes];
@@ -53,10 +56,12 @@ public class ProcedureDetailFragment extends Fragment implements
 	private final int numAblationCodes = 10;
 	private final Code[] ablationCodes = new Code[numAblationCodes];
 
+	// these correspond with the procedure list order
 	final private int afbAblation = 0;
 	final private int svtAblation = 1;
 	final private int vtAblation = 2;
 	final private int epTesting = 3;
+	final private int pacemakers = 4;
 
 	private Code majorCode;
 
@@ -104,9 +109,10 @@ public class ProcedureDetailFragment extends Fragment implements
 		checkBoxLayout = (LinearLayout) rootView
 				.findViewById(R.id.checkbox_layout);
 		Context context = getActivity();
-		primaryCheckBoxes[0] = new CheckBox(context);
+		primaryCheckBoxList.add(new CodeCheckBox(context));
+		// primaryCheckBoxes[0] = new CheckBox(context);
 		// temp, need to handle variable length array of checkboxes
-		primaryCheckBoxLayout.addView(primaryCheckBoxes[0]);
+		// primaryCheckBoxLayout.addView(primaryCheckBoxes[0]);
 
 		// initialize ablation codes
 		ablationCodes[0] = Codes.getCode("93655");
@@ -120,7 +126,7 @@ public class ProcedureDetailFragment extends Fragment implements
 		ablationCodes[8] = Codes.getCode("93642");
 		ablationCodes[9] = Codes.getCode("36620");
 
-		for (int i = 0; i < numCheckBoxes; ++i) {
+		for (int i = 0; i < checkBoxes.length; ++i) {
 			checkBoxes[i] = new CheckBox(context);
 			checkBoxes[i].setText(ablationCodes[i].getDescription());
 			checkBoxLayout.addView(checkBoxes[i]);
@@ -161,9 +167,16 @@ public class ProcedureDetailFragment extends Fragment implements
 			disableCheckBox(additionalAfbCheckBox);
 			disableCheckBox(additionalSvtCheckBox);
 		}
-		primaryCheckBoxes[0].setText(majorCode.getDescription());
-		primaryCheckBoxes[0].setChecked(true);
-		primaryCheckBoxes[0].setEnabled(false);
+
+		ListIterator<CodeCheckBox> iter = primaryCheckBoxList.listIterator();
+		while (iter.hasNext()) {
+			CodeCheckBox c = iter.next();
+			c.setCode(majorCode);
+			c.setText(majorCode.getDescription());
+			c.setChecked(true);
+			c.setEnabled(false);
+			primaryCheckBoxLayout.addView(c);
+		}
 
 		return rootView;
 	}
@@ -174,14 +187,20 @@ public class ProcedureDetailFragment extends Fragment implements
 	}
 
 	private void clearEntries() {
-		for (int i = 0; i < numCheckBoxes; ++i)
+		for (int i = 0; i < checkBoxes.length; ++i)
 			checkBoxes[i].setChecked(false);
 	}
 
 	private void summarizeCoding() {
 		Context context = getActivity();
 		AlertDialog dialog = new AlertDialog.Builder(context).create();
-		String message = majorCode.getCode();
+		String message = "ERROR";
+		ListIterator<CodeCheckBox> iter = primaryCheckBoxList.listIterator();
+		while (iter.hasNext()) {
+			CodeCheckBox c = iter.next();
+			message = c.getCode().getCode();
+		}
+
 		dialog.setMessage(message);
 		dialog.setTitle(getString(R.string.coding_summary_label));
 		dialog.show();
