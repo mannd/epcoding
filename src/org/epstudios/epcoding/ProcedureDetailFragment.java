@@ -35,7 +35,7 @@ public class ProcedureDetailFragment extends Fragment implements
 	private int mItem;
 
 	private LinearLayout primaryCheckBoxLayout;
-	private LinearLayout checkBoxLayout;
+	private LinearLayout secondaryCheckBoxLayout;
 
 	private Button clearButton;
 	private Button summarizeButton;
@@ -49,9 +49,7 @@ public class ProcedureDetailFragment extends Fragment implements
 	private CheckBox transseptalCathCheckBox;
 
 	private final List<CodeCheckBox> primaryCheckBoxList = new ArrayList<CodeCheckBox>();
-
-	private final int numCheckBoxes = 10;
-	private final CheckBox[] checkBoxes = new CheckBox[numCheckBoxes];
+	private final List<CodeCheckBox> secondaryCheckBoxList = new ArrayList<CodeCheckBox>();
 
 	private final int numAblationCodes = 10;
 	private final Code[] ablationCodes = new Code[numAblationCodes];
@@ -106,10 +104,9 @@ public class ProcedureDetailFragment extends Fragment implements
 		rootView = inflater.inflate(R.layout.ablation_afb, container, false);
 		primaryCheckBoxLayout = (LinearLayout) rootView
 				.findViewById(R.id.primary_checkbox_layout);
-		checkBoxLayout = (LinearLayout) rootView
+		secondaryCheckBoxLayout = (LinearLayout) rootView
 				.findViewById(R.id.checkbox_layout);
 		Context context = getActivity();
-		primaryCheckBoxList.add(new CodeCheckBox(context));
 		// primaryCheckBoxes[0] = new CheckBox(context);
 		// temp, need to handle variable length array of checkboxes
 		// primaryCheckBoxLayout.addView(primaryCheckBoxes[0]);
@@ -126,26 +123,21 @@ public class ProcedureDetailFragment extends Fragment implements
 		ablationCodes[8] = Codes.getCode("93642");
 		ablationCodes[9] = Codes.getCode("36620");
 
-		for (int i = 0; i < checkBoxes.length; ++i) {
-			checkBoxes[i] = new CheckBox(context);
-			checkBoxes[i].setText(ablationCodes[i].getDescription());
-			checkBoxLayout.addView(checkBoxes[i]);
+		for (int i = 0; i < ablationCodes.length; ++i) {
+			CodeCheckBox secondaryCheckBox = new CodeCheckBox(context);
+			secondaryCheckBox.setCode(ablationCodes[i]);
+			secondaryCheckBoxList.add(secondaryCheckBox);
+			secondaryCheckBoxLayout.addView(secondaryCheckBox);
 		}
 		// special checkBoxes
-		laPaceRecordCheckBox = checkBoxes[4];
-		transseptalCathCheckBox = checkBoxes[8];
-		additionalAfbCheckBox = checkBoxes[1];
-		additionalSvtCheckBox = checkBoxes[0];
-		twoDMapCheckBox = checkBoxes[2];
-		threeDMapCheckBox = checkBoxes[3];
-		lvPaceRecordCheckBox = checkBoxes[5];
+		laPaceRecordCheckBox = secondaryCheckBoxList.get(4);
+		transseptalCathCheckBox = secondaryCheckBoxList.get(8);
+		additionalAfbCheckBox = secondaryCheckBoxList.get(1);
+		additionalSvtCheckBox = secondaryCheckBoxList.get(0);
+		twoDMapCheckBox = secondaryCheckBoxList.get(2);
+		threeDMapCheckBox = secondaryCheckBoxList.get(3);
+		lvPaceRecordCheckBox = secondaryCheckBoxList.get(5);
 
-		clearButton = (Button) rootView.findViewById(R.id.clear_button);
-		clearButton.setOnClickListener(this);
-		summarizeButton = (Button) rootView.findViewById(R.id.summary_button);
-		summarizeButton.setOnClickListener(this);
-		infoButton = (Button) rootView.findViewById(R.id.info_button);
-		infoButton.setOnClickListener(this);
 		// remove when all conditions covered
 		majorCode = Codes.getCode("99999");
 		if (mItem == afbAblation) {
@@ -168,15 +160,24 @@ public class ProcedureDetailFragment extends Fragment implements
 			disableCheckBox(additionalSvtCheckBox);
 		}
 
+		CodeCheckBox primaryCheckBox = new CodeCheckBox(context);
+		primaryCheckBox.setCode(majorCode);
+		primaryCheckBoxList.add(primaryCheckBox);
+
 		ListIterator<CodeCheckBox> iter = primaryCheckBoxList.listIterator();
 		while (iter.hasNext()) {
 			CodeCheckBox c = iter.next();
-			c.setCode(majorCode);
-			c.setText(majorCode.getDescription());
 			c.setChecked(true);
 			c.setEnabled(false);
 			primaryCheckBoxLayout.addView(c);
 		}
+
+		clearButton = (Button) rootView.findViewById(R.id.clear_button);
+		clearButton.setOnClickListener(this);
+		summarizeButton = (Button) rootView.findViewById(R.id.summary_button);
+		summarizeButton.setOnClickListener(this);
+		infoButton = (Button) rootView.findViewById(R.id.info_button);
+		infoButton.setOnClickListener(this);
 
 		return rootView;
 	}
@@ -187,18 +188,28 @@ public class ProcedureDetailFragment extends Fragment implements
 	}
 
 	private void clearEntries() {
-		for (int i = 0; i < checkBoxes.length; ++i)
-			checkBoxes[i].setChecked(false);
+		ListIterator<CodeCheckBox> iter = secondaryCheckBoxList.listIterator();
+		while (iter.hasNext()) {
+			CodeCheckBox c = iter.next();
+			c.setChecked(false);
+		}
 	}
 
 	private void summarizeCoding() {
 		Context context = getActivity();
 		AlertDialog dialog = new AlertDialog.Builder(context).create();
-		String message = "ERROR";
+		String message = "";
 		ListIterator<CodeCheckBox> iter = primaryCheckBoxList.listIterator();
 		while (iter.hasNext()) {
 			CodeCheckBox c = iter.next();
-			message = c.getCode().getCode();
+			message += c.getCode().getCode() + "\n";
+		}
+		ListIterator<CodeCheckBox> secondaryIter = secondaryCheckBoxList
+				.listIterator();
+		while (secondaryIter.hasNext()) {
+			CodeCheckBox c = secondaryIter.next();
+			if (c.isChecked())
+				message += c.getCode().getCode() + "\n";
 		}
 
 		dialog.setMessage(message);
