@@ -49,5 +49,6 @@
     <string name="coding_summary_label">Coding Summary</string>
     <string name="clear_label">Clear</string>
     <string name="info_label">Info</string>
+    <string name="no_codes_selected_label">No Codes Selected</string>
 
 </resources>
