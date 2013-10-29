@@ -5,65 +5,39 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Codes {
-	private static Map<String, Code> codes = createMap();
 
-	private static Map<String, Code> createMap() {
-		Map<String, Code> result = new HashMap<String, Code>();
-		String codeNum = new String();
+	private final static Map<String, Code> allCodes = createMap();
+
+	private final static Map<String, Code> createMap() {
+		Map<String, Code> map = new HashMap<String, Code>();
 		// initialize all codes here
-		codeNum = "99999";
-		Code testCode = new Code(codeNum, "Test Code", false);
-		result.put(codeNum, testCode);
+		addCode(map, "99999", "Test Code", false);
 		// Ablation and EP testing codes
-		codeNum = "93656";
-		Code afbAblation = new Code(codeNum, "AFB Ablation", false);
-		result.put(codeNum, afbAblation);
-		codeNum = "93654";
-		Code vtAblation = new Code(codeNum, "VT Ablation", false);
-		result.put(codeNum, vtAblation);
-		codeNum = "93653";
-		Code svtAblation = new Code(codeNum, "SVT Ablation", false);
-		result.put(codeNum, svtAblation);
-		codeNum = "93620";
-		Code epTesting = new Code(codeNum, "EP Testing", false);
-		result.put(codeNum, epTesting);
-		codeNum = "93655";
-		Code additionalSvtAblation = new Code(codeNum,
-				"Additional SVT or VT Ablation", true);
-		result.put(codeNum, additionalSvtAblation);
-		codeNum = "93657";
-		Code additionalAfbAblation = new Code(codeNum,
-				"Additional AFB Ablation", true);
-		result.put(codeNum, additionalAfbAblation);
-		codeNum = "93609";
-		Code twoDMapping = new Code(codeNum, "2D Mapping", true);
-		result.put(codeNum, twoDMapping);
-		codeNum = "93613";
-		Code threeDMapping = new Code(codeNum, "3D Mapping", true);
-		result.put(codeNum, threeDMapping);
-		codeNum = "93621";
-		Code laPaceRecord = new Code(codeNum, "LA Pacing & Recording", true);
-		result.put(codeNum, laPaceRecord);
-		codeNum = "93622";
-		Code lvPaceRecord = new Code(codeNum, "LV Pacing & Recording", true);
-		result.put(codeNum, lvPaceRecord);
-		codeNum = "93623";
-		Code induceIvDrug = new Code(codeNum, "Induce Post IV Drug", true);
-		result.put(codeNum, induceIvDrug);
-		codeNum = "93662";
-		Code intraCardiacEcho = new Code(codeNum, "Intracardiac Echo", true);
-		result.put(codeNum, intraCardiacEcho);
-		codeNum = "93642";
-		Code transseptalCath = new Code(codeNum, "Transseptal Cath", true);
-		result.put(codeNum, transseptalCath);
-		codeNum = "36620";
-		Code arterialLine = new Code(codeNum, "Arterial Line Placement", false);
-		result.put(codeNum, arterialLine);
-		return Collections.unmodifiableMap(result);
+		addCode(map, "93656", "AFB Ablation", false);
+		addCode(map, "93654", "VT Ablation", false);
+		addCode(map, "93653", "SVT Ablation", false);
+		addCode(map, "93620", "EP Testing", false);
+		addCode(map, "93655", "Additional SVT Ablation", true);
+		addCode(map, "93657", "Additional AFB Ablation", true);
+		addCode(map, "93609", "2D Mapping", true);
+		addCode(map, "93613", "3D Mapping", true);
+		addCode(map, "93621", "LA Pacing & Recording", true);
+		addCode(map, "93622", "LV Pacing & Recording", true);
+		addCode(map, "93623", "Induce Post IV Drug", true);
+		addCode(map, "93662", "Intracardiac Echo", true);
+		addCode(map, "93642", "Transseptal Cath", true);
+		addCode(map, "36620", "Arterial Line Placement", false);
+		return Collections.unmodifiableMap(map);
 	}
 
-	public static Code getCode(String code) {
-		return codes.get(code);
+	private final static void addCode(Map<String, Code> map, String codeNumber,
+			String name, boolean isAddOn) {
+		map.put(codeNumber, new Code(codeNumber, name, isAddOn));
+
+	}
+
+	public final static Code getCode(String code) {
+		return allCodes.get(code);
 	}
 
 }
