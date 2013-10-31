@@ -107,7 +107,7 @@ public class ProcedureDetailFragment extends Fragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView;
-
+		// / TODO rename ablation_afb layout
 		rootView = inflater.inflate(R.layout.ablation_afb, container, false);
 		primaryCheckBoxLayout = (LinearLayout) rootView
 				.findViewById(R.id.primary_checkbox_layout);
@@ -153,7 +153,8 @@ public class ProcedureDetailFragment extends Fragment implements
 		}
 
 		// remove when all conditions covered
-		majorCode = Codes.getCode("99999");
+		// majorCode = Codes.getCode("99999");
+		majorCode = Codes.getCodes("")[0];
 		if (mItem == afbAblation) {
 			majorCode = Codes.getCode("93656");
 

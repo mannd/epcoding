@@ -66,4 +66,10 @@ public class Codes {
 		return codes.get(code);
 	}
 
+	public static Code[] getCodes(String codesName) {
+		Code[] codes = new Code[1];
+		codes[0] = getCode("99999");
+		return codes;
+	}
+
 }
