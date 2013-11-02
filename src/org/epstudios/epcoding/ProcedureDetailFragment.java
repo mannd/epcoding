@@ -136,6 +136,7 @@ public class ProcedureDetailFragment extends Fragment implements
 		otherProcedureCodes[0] = Codes.getCode("99999");
 
 		if (mItem != otherProcedures) {
+			Code[] ablationCodes = Codes.getAblationSecondaryCodes();
 			for (int i = 0; i < ablationCodes.length; ++i) {
 				CodeCheckBox secondaryCheckBox = new CodeCheckBox(context);
 				secondaryCheckBox.setCode(ablationCodes[i]);
