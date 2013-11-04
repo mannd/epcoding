@@ -30,6 +30,10 @@ public class Codes {
 		return Collections.unmodifiableMap(map);
 	}
 
+	public final static String[] ablationSecondaryCodeNumbers = { "93655",
+			"93657", "93609", "93613", "93621", "93622", "93623", "93662",
+			"93642", "36620" };
+
 	private final static void addCode(Map<String, Code> map, String codeNumber,
 			String name, boolean isAddOn) {
 		map.put(codeNumber, new Code(codeNumber, name, isAddOn));
@@ -43,6 +47,13 @@ public class Codes {
 	public static Code[] getCodes(String codesName) {
 		Code[] codes = new Code[1];
 		codes[0] = getCode("99999");
+		return codes;
+	}
+
+	public static Code[] getAblationSecondaryCodes() {
+		Code[] codes = new Code[ablationSecondaryCodeNumbers.length];
+		for (int i = 0; i < ablationSecondaryCodeNumbers.length; ++i)
+			codes[i] = getCode(ablationSecondaryCodeNumbers[i]);
 		return codes;
 	}
 

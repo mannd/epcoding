@@ -1,8 +1,12 @@
 package org.epstudios.epcoding;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -41,20 +45,11 @@ public class ProcedureDetailFragment extends Fragment implements
 	private Button clearButton;
 	private Button summarizeButton;
 	private Button infoButton;
-	private CheckBox additionalAfbCheckBox;
-	private CheckBox additionalSvtCheckBox;
-	private CheckBox twoDMapCheckBox;
-	private CheckBox threeDMapCheckBox;
-	private CheckBox laPaceRecordCheckBox;
-	private CheckBox lvPaceRecordCheckBox;
-	private CheckBox transseptalCathCheckBox;
 	private TextView secondaryCodeTextView;
 
 	private final List<CodeCheckBox> primaryCheckBoxList = new ArrayList<CodeCheckBox>();
-	private final List<CodeCheckBox> secondaryCheckBoxList = new ArrayList<CodeCheckBox>();
 
-	private final int numAblationCodes = 10;
-	private final Code[] ablationCodes = new Code[numAblationCodes];
+	private final Map<String, CodeCheckBox> secondaryCheckBoxMap = new HashMap<String, CodeCheckBox>();
 
 	private final int numOtherProcedures = 1;
 	private final Code[] otherProcedureCodes = new Code[numOtherProcedures];
@@ -67,6 +62,7 @@ public class ProcedureDetailFragment extends Fragment implements
 	// final private int pacemakers = 4;
 	//
 	final private int otherProcedures = 8;
+	final Set<Integer> ablationProceduresSet = new TreeSet<Integer>();
 
 	private Code majorCode;
 
@@ -89,6 +85,11 @@ public class ProcedureDetailFragment extends Fragment implements
 								// be shown
 				mItem = Integer.parseInt(itemID);
 		}
+		ablationProceduresSet.add(afbAblation);
+		ablationProceduresSet.add(svtAblation);
+		ablationProceduresSet.add(vtAblation);
+		ablationProceduresSet.add(epTesting);
+
 	}
 
 	@Override
@@ -116,40 +117,19 @@ public class ProcedureDetailFragment extends Fragment implements
 		secondaryCodeTextView = (TextView) rootView
 				.findViewById(R.id.secondary_code_textView);
 		Context context = getActivity();
-		// primaryCheckBoxes[0] = new CheckBox(context);
-		// temp, need to handle variable length array of checkboxes
-		// primaryCheckBoxLayout.addView(primaryCheckBoxes[0]);
-
-		// initialize ablation codes
-		ablationCodes[0] = Codes.getCode("93655");
-		ablationCodes[1] = Codes.getCode("93657");
-		ablationCodes[2] = Codes.getCode("93609");
-		ablationCodes[3] = Codes.getCode("93613");
-		ablationCodes[4] = Codes.getCode("93621");
-		ablationCodes[5] = Codes.getCode("93622");
-		ablationCodes[6] = Codes.getCode("93623");
-		ablationCodes[7] = Codes.getCode("93662");
-		ablationCodes[8] = Codes.getCode("93642");
-		ablationCodes[9] = Codes.getCode("36620");
 
 		// initialize other procedure codes
 		otherProcedureCodes[0] = Codes.getCode("99999");
 
-		if (mItem != otherProcedures) {
+		if (ablationProceduresSet.contains(mItem)) {
+			Code[] ablationCodes = Codes.getAblationSecondaryCodes();
 			for (int i = 0; i < ablationCodes.length; ++i) {
 				CodeCheckBox secondaryCheckBox = new CodeCheckBox(context);
 				secondaryCheckBox.setCode(ablationCodes[i]);
-				secondaryCheckBoxList.add(secondaryCheckBox);
+				secondaryCheckBoxMap.put(ablationCodes[i].getCodeNumber(),
+						secondaryCheckBox);
 				secondaryCheckBoxLayout.addView(secondaryCheckBox);
 			}
-			// special checkBoxes
-			laPaceRecordCheckBox = secondaryCheckBoxList.get(4);
-			transseptalCathCheckBox = secondaryCheckBoxList.get(8);
-			additionalAfbCheckBox = secondaryCheckBoxList.get(1);
-			additionalSvtCheckBox = secondaryCheckBoxList.get(0);
-			twoDMapCheckBox = secondaryCheckBoxList.get(2);
-			threeDMapCheckBox = secondaryCheckBoxList.get(3);
-			lvPaceRecordCheckBox = secondaryCheckBoxList.get(5);
 		}
 
 		// remove when all conditions covered
@@ -157,22 +137,21 @@ public class ProcedureDetailFragment extends Fragment implements
 		majorCode = Codes.getCodes("")[0];
 		if (mItem == afbAblation) {
 			majorCode = Codes.getCode("93656");
-
-			disableCheckBox(laPaceRecordCheckBox);
-			disableCheckBox(transseptalCathCheckBox);
+			disableCheckBox(secondaryCheckBoxMap.get("93621"));
+			disableCheckBox(secondaryCheckBoxMap.get("93642"));
 		} else if (mItem == svtAblation) {
 			majorCode = Codes.getCode("93653");
-			disableCheckBox(additionalAfbCheckBox);
+			disableCheckBox(secondaryCheckBoxMap.get("93657"));
 		} else if (mItem == vtAblation) {
 			majorCode = Codes.getCode("93654");
-			disableCheckBox(additionalAfbCheckBox);
-			disableCheckBox(twoDMapCheckBox);
-			disableCheckBox(threeDMapCheckBox);
-			disableCheckBox(lvPaceRecordCheckBox);
+			disableCheckBox(secondaryCheckBoxMap.get("93657"));
+			disableCheckBox(secondaryCheckBoxMap.get("93609"));
+			disableCheckBox(secondaryCheckBoxMap.get("93613"));
+			disableCheckBox(secondaryCheckBoxMap.get("93622"));
 		} else if (mItem == epTesting) {
 			majorCode = Codes.getCode("93620");
-			disableCheckBox(additionalAfbCheckBox);
-			disableCheckBox(additionalSvtCheckBox);
+			disableCheckBox(secondaryCheckBoxMap.get("93657"));
+			disableCheckBox(secondaryCheckBoxMap.get("93655"));
 		}
 
 		if (mItem == otherProcedures) {
@@ -222,11 +201,10 @@ public class ProcedureDetailFragment extends Fragment implements
 			if (c.isEnabled()) // only clear enabled checkboxes
 				c.setChecked(false);
 		}
-		ListIterator<CodeCheckBox> iter = secondaryCheckBoxList.listIterator();
-		while (iter.hasNext()) {
-			CodeCheckBox c = iter.next();
-			c.setChecked(false);
-		}
+		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
+				.entrySet())
+			entry.getValue().setChecked(false);
+
 	}
 
 	private void summarizeCoding() {
@@ -237,15 +215,22 @@ public class ProcedureDetailFragment extends Fragment implements
 		while (iter.hasNext()) {
 			CodeCheckBox c = iter.next();
 			if (c.isChecked())
-				message += c.getCode().getCode() + "\n";
+				message += c.getCode().getCodeNumberWithAddOn() + "\n";
 		}
-		ListIterator<CodeCheckBox> secondaryIter = secondaryCheckBoxList
-				.listIterator();
-		while (secondaryIter.hasNext()) {
-			CodeCheckBox c = secondaryIter.next();
-			if (c.isChecked())
-				message += c.getCode().getCode() + "\n";
+		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
+				.entrySet()) {
+			if (entry.getValue().isChecked())
+				message += entry.getValue().getCode().getCodeNumberWithAddOn()
+						+ "\n";
 		}
+
+		// ListIterator<CodeCheckBox> secondaryIter = secondaryCheckBoxList
+		// .listIterator();
+		// while (secondaryIter.hasNext()) {
+		// CodeCheckBox c = secondaryIter.next();
+		// if (c.isChecked())
+		// message += c.getCode().getCodeNumberWithAddOn() + "\n";
+		// }
 		if (message.isEmpty())
 			message = getString(R.string.no_codes_selected_label);
 
