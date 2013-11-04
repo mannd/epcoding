@@ -26,8 +26,16 @@ public class Code {
 		checkBox.setEnabled(enabled);
 	}
 
-	public String getCode() {
+	// public String getCode() {
+	// return (isAddOn ? "+" : "") + code;
+	// }
+
+	public String getCodeNumberWithAddOn() {
 		return (isAddOn ? "+" : "") + code;
+	}
+
+	public String getCodeNumber() {
+		return code;
 	}
 
 	public String getShortDescription() {
@@ -35,7 +43,7 @@ public class Code {
 	}
 
 	public String getDescription() {
-		return shortDescription + " (" + getCode() + ")";
+		return shortDescription + " (" + getCodeNumberWithAddOn() + ")";
 	}
 
 	public String getCodeFirstDescription() {
