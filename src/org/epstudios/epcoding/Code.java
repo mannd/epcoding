@@ -7,11 +7,21 @@ public class Code {
 	private final String shortDescription;
 	private final boolean isAddOn;
 	private CheckBox checkBox;
+	private boolean isSelected;
 
 	public Code(String code, String shortDescription, boolean isAddOn) {
 		this.code = code;
 		this.shortDescription = shortDescription;
 		this.isAddOn = isAddOn;
+		this.isSelected = false;
+	}
+
+	public void setIsSelected(boolean value) {
+		isSelected = value;
+	}
+
+	public boolean isSelected() {
+		return isSelected;
 	}
 
 	public void setCheckBox(CheckBox checkBox) {

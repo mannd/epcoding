@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -42,8 +41,8 @@ public class ProcedureDetailFragment extends Fragment implements
 	private LinearLayout primaryCheckBoxLayout;
 	private LinearLayout secondaryCheckBoxLayout;
 
-	private Button clearButton;
 	private Button summarizeButton;
+	private Button clearButton;
 	private Button infoButton;
 	private TextView secondaryCodeTextView;
 
@@ -137,21 +136,21 @@ public class ProcedureDetailFragment extends Fragment implements
 		majorCode = Codes.getCodes("")[0];
 		if (mItem == afbAblation) {
 			majorCode = Codes.getCode("93656");
-			disableCheckBox(secondaryCheckBoxMap.get("93621"));
-			disableCheckBox(secondaryCheckBoxMap.get("93642"));
+			secondaryCheckBoxMap.get("93621").disable();
+			secondaryCheckBoxMap.get("93642").disable();
 		} else if (mItem == svtAblation) {
 			majorCode = Codes.getCode("93653");
-			disableCheckBox(secondaryCheckBoxMap.get("93657"));
+			secondaryCheckBoxMap.get("93657").disable();
 		} else if (mItem == vtAblation) {
 			majorCode = Codes.getCode("93654");
-			disableCheckBox(secondaryCheckBoxMap.get("93657"));
-			disableCheckBox(secondaryCheckBoxMap.get("93609"));
-			disableCheckBox(secondaryCheckBoxMap.get("93613"));
-			disableCheckBox(secondaryCheckBoxMap.get("93622"));
+			secondaryCheckBoxMap.get("93657").disable();
+			secondaryCheckBoxMap.get("93609").disable();
+			secondaryCheckBoxMap.get("93613").disable();
+			secondaryCheckBoxMap.get("93622").disable();
 		} else if (mItem == epTesting) {
 			majorCode = Codes.getCode("93620");
-			disableCheckBox(secondaryCheckBoxMap.get("93657"));
-			disableCheckBox(secondaryCheckBoxMap.get("93655"));
+			secondaryCheckBoxMap.get("93657").disable();
+			secondaryCheckBoxMap.get("93655").disable();
 		}
 
 		if (mItem == otherProcedures) {
@@ -178,19 +177,14 @@ public class ProcedureDetailFragment extends Fragment implements
 			}
 		}
 
-		clearButton = (Button) rootView.findViewById(R.id.clear_button);
-		clearButton.setOnClickListener(this);
 		summarizeButton = (Button) rootView.findViewById(R.id.summary_button);
 		summarizeButton.setOnClickListener(this);
+		clearButton = (Button) rootView.findViewById(R.id.clear_button);
+		clearButton.setOnClickListener(this);
 		infoButton = (Button) rootView.findViewById(R.id.info_button);
 		infoButton.setOnClickListener(this);
 
 		return rootView;
-	}
-
-	private void disableCheckBox(CheckBox c) {
-		c.setChecked(false);
-		c.setEnabled(false);
 	}
 
 	private void clearEntries() {
@@ -198,8 +192,7 @@ public class ProcedureDetailFragment extends Fragment implements
 				.listIterator();
 		while (primaryIter.hasNext()) {
 			CodeCheckBox c = primaryIter.next();
-			if (c.isEnabled()) // only clear enabled checkboxes
-				c.setChecked(false);
+			c.clearIfEnabled();
 		}
 		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
 				.entrySet())
@@ -223,14 +216,6 @@ public class ProcedureDetailFragment extends Fragment implements
 				message += entry.getValue().getCode().getCodeNumberWithAddOn()
 						+ "\n";
 		}
-
-		// ListIterator<CodeCheckBox> secondaryIter = secondaryCheckBoxList
-		// .listIterator();
-		// while (secondaryIter.hasNext()) {
-		// CodeCheckBox c = secondaryIter.next();
-		// if (c.isChecked())
-		// message += c.getCode().getCodeNumberWithAddOn() + "\n";
-		// }
 		if (message.isEmpty())
 			message = getString(R.string.no_codes_selected_label);
 

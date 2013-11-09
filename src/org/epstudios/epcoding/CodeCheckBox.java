@@ -23,4 +23,14 @@ public class CodeCheckBox extends CheckBox {
 		return code;
 	}
 
+	public void disable() {
+		setChecked(false);
+		setEnabled(false);
+	}
+
+	public void clearIfEnabled() {
+		if (isEnabled())
+			setChecked(false);
+	}
+
 }
