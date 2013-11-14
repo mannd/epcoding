@@ -128,6 +128,7 @@ public class ProcedureDetailFragment extends Fragment implements
 				secondaryCheckBoxMap.put(ablationCodes[i].getCodeNumber(),
 						secondaryCheckBox);
 				secondaryCheckBoxLayout.addView(secondaryCheckBox);
+
 			}
 		}
 
@@ -176,6 +177,7 @@ public class ProcedureDetailFragment extends Fragment implements
 				primaryCheckBoxLayout.addView(c);
 			}
 		}
+		// apply saved configurations here
 
 		summarizeButton = (Button) rootView.findViewById(R.id.summary_button);
 		summarizeButton.setOnClickListener(this);

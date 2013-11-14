@@ -30,14 +30,17 @@ public class ProcedureTypes {
 		addItem(new ProcedureType("2", "SVT Ablation"));
 		addItem(new ProcedureType("3", "VT Ablation"));
 		addItem(new ProcedureType("4", "EP Testing"));
-		addItem(new ProcedureType("5", "Pacemakers"));
-		addItem(new ProcedureType("6", "ICDs"));
-		addItem(new ProcedureType("7", "CRT-P"));
-		addItem(new ProcedureType("8", "CRT-D"));
-		addItem(new ProcedureType("9", "Other Procs")); // Cardioversion, Tilt
-														// Table
-		addItem(new ProcedureType("10", "Office Visits"));
-		addItem(new ProcedureType("11", "Hospital Rounds"));
+		addItem(new ProcedureType("5", "AV Node Ablation"));
+		addItem(new ProcedureType("6", "New PPM"));
+		addItem(new ProcedureType("7", "New ICD"));
+		addItem(new ProcedureType("8", "PPM Replace"));
+		addItem(new ProcedureType("9", "ICD Replace"));
+		addItem(new ProcedureType("10", "Upgrade/Revision/Extraction"));
+		// Cardioversion, Tilt
+		// Table
+		addItem(new ProcedureType("11", "Other Proc"));
+		addItem(new ProcedureType("12", "Office Visits"));
+		addItem(new ProcedureType("13", "Hospital Rounds"));
 	}
 
 	private static void addItem(ProcedureType item) {
