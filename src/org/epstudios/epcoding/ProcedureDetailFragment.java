@@ -8,7 +8,9 @@ import java.util.TreeSet;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -222,7 +224,7 @@ public class ProcedureDetailFragment extends Fragment implements
 				new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-
+						save();
 					}
 				});
 		dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
@@ -234,11 +236,52 @@ public class ProcedureDetailFragment extends Fragment implements
 		dialog.show();
 	}
 
+	private void save() {
+		Context context = getActivity();
+		Toast toast = Toast.makeText(context, "Saving codes",
+				Toast.LENGTH_SHORT);
+		toast.show();
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(context);
+		String mItemString = String.valueOf(mItem);
+		Set<String> checkedCodeNumbers = new TreeSet<String>();
+		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
+				.entrySet()) {
+			if (entry.getValue().isChecked())
+				checkedCodeNumbers.add(entry.getValue().getCode()
+						.getCodeNumber());
+		}
+		SharedPreferences.Editor prefsEditor = prefs.edit();
+		prefsEditor.putStringSet(mItemString, checkedCodeNumbers);
+		prefsEditor.commit();
+	}
+
 	public void loadCoding() {
 		Context context = getActivity();
 		Toast toast = Toast.makeText(context, "Loading codes",
 				Toast.LENGTH_SHORT);
 		toast.show();
+		load(context);
+	}
+
+	private void load(Context context) {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(context);
+		String mItemString = String.valueOf(mItem);
+		Set<String> defaultStringSet = new TreeSet<String>();
+		defaultStringSet.add("99999");
+		Set<String> codeNumbersChecked = prefs.getStringSet(mItemString,
+				defaultStringSet);
+		String numbers = codeNumbersChecked.toString();
+		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
+				.entrySet()) {
+			if (codeNumbersChecked.contains(entry.getValue().getCode()
+					.getCodeNumber()))
+				entry.getValue().setChecked(true);
+		}
+		Toast toast = Toast.makeText(context, numbers, Toast.LENGTH_SHORT);
+		toast.show();
+
 	}
 
 }
