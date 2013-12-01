@@ -7,6 +7,7 @@ import java.util.TreeSet;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 /**
  * A fragment representing a single Procedure detail screen. This fragment is
@@ -52,10 +54,11 @@ public class ProcedureDetailFragment extends Fragment implements
 	final private int vtAblation = 2;
 	final private int epTesting = 3;
 	// final private int pacemakers = 4;
+	final private int ppmReplacement = 7;
 	//
 	// final private int otherProcedures = 8;
 
-	final Set<Integer> ablationProceduresSet = new TreeSet<Integer>();
+	final private Set<Integer> ablationProceduresSet = new TreeSet<Integer>();
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -165,6 +168,7 @@ public class ProcedureDetailFragment extends Fragment implements
 		}
 
 		// apply saved configurations here
+		loadCoding();
 
 		summarizeButton = (Button) rootView.findViewById(R.id.summary_button);
 		summarizeButton.setOnClickListener(this);
@@ -209,11 +213,32 @@ public class ProcedureDetailFragment extends Fragment implements
 	}
 
 	public void saveCoding() {
+		Context context = getActivity();
+		AlertDialog dialog = new AlertDialog.Builder(context).create();
+		String message = "Save these selections as a default?";
+		dialog.setMessage(message);
+		dialog.setTitle("Save Defaults");
+		dialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
 
+					}
+				});
+		dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+					}
+				});
+		dialog.show();
 	}
 
 	public void loadCoding() {
-
+		Context context = getActivity();
+		Toast toast = Toast.makeText(context, "Loading codes",
+				Toast.LENGTH_SHORT);
+		toast.show();
 	}
 
 }

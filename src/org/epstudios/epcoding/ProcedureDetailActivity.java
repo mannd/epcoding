@@ -66,6 +66,10 @@ public class ProcedureDetailActivity extends FragmentActivity {
 					ProcedureListActivity.class));
 			return true;
 		case R.id.edit:
+			ProcedureDetailFragment fragment = (ProcedureDetailFragment) getSupportFragmentManager()
+					.findFragmentById(R.id.procedure_detail_container);
+			if (fragment != null && fragment instanceof ProcedureDetailFragment)
+				fragment.saveCoding();
 			return true;
 		case R.id.settings:
 			return true;

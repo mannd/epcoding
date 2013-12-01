@@ -3,6 +3,7 @@ package org.epstudios.epcoding;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -92,8 +93,27 @@ public class ProcedureListActivity extends FragmentActivity implements
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		case android.R.id.home:
+			// This ID represents the Home or Up button. In the case of this
+			// activity, the Up button is shown. Use NavUtils to allow users
+			// to navigate up one level in the application structure. For
+			// more details, see the Navigation pattern on Android Design:
+			//
+			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
+			//
+			NavUtils.navigateUpTo(this, new Intent(this,
+					ProcedureListActivity.class));
+			return true;
 		case R.id.about:
 			startActivity(new Intent(this, About.class));
+			return true;
+		case R.id.edit:
+			ProcedureDetailFragment fragment = (ProcedureDetailFragment) getSupportFragmentManager()
+					.findFragmentById(R.id.procedure_detail_container);
+			if (fragment != null && fragment instanceof ProcedureDetailFragment)
+				fragment.saveCoding();
+			return true;
+		case R.id.settings:
 			return true;
 		}
 		return false;
