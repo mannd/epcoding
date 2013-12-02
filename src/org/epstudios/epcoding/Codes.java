@@ -32,6 +32,9 @@ public class Codes {
 		addCode(map, "33227", "Single chamber PPM generator replacement", false);
 		addCode(map, "33228", "Dual chamber PPM generator replacement", false);
 
+		addCode(map, "92960", "Cardioversion (external)", false);
+		addCode(map, "92961", "Cardioversion (internal)", false);
+
 		return Collections.unmodifiableMap(map);
 	}
 
@@ -46,6 +49,9 @@ public class Codes {
 	public final static String[] ablationSecondaryCodeNumbers = { "93655",
 			"93657", "93609", "93613", "93621", "93622", "93623", "93662",
 			"93642", "36620" };
+
+	public final static String[] deviceSecondaryCodeNumbers = { "92960",
+			"92961" };
 
 	public final static String[] afbAblationDisabledCodeNumbers = { "93621",
 			"93642" };
@@ -75,6 +81,10 @@ public class Codes {
 
 	public static Code[] getAblationSecondaryCodes() {
 		return getCodes(ablationSecondaryCodeNumbers);
+	}
+
+	public static Code[] getDeviceSecondaryCodes() {
+		return getCodes(deviceSecondaryCodeNumbers);
 	}
 
 }

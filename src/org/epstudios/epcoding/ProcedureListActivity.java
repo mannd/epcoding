@@ -7,6 +7,7 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 /**
  * An activity representing a list of Procedures. This activity has different
@@ -92,6 +93,8 @@ public class ProcedureListActivity extends FragmentActivity implements
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		ProcedureDetailFragment fragment = (ProcedureDetailFragment) getSupportFragmentManager()
+				.findFragmentById(R.id.procedure_detail_container);
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			// This ID represents the Home or Up button. In the case of this
@@ -108,15 +111,23 @@ public class ProcedureListActivity extends FragmentActivity implements
 			startActivity(new Intent(this, About.class));
 			return true;
 		case R.id.edit:
-			ProcedureDetailFragment fragment = (ProcedureDetailFragment) getSupportFragmentManager()
-					.findFragmentById(R.id.procedure_detail_container);
 			if (fragment != null && fragment instanceof ProcedureDetailFragment)
 				fragment.saveCoding();
 			return true;
 		case R.id.settings:
+			if (fragment != null && fragment instanceof ProcedureDetailFragment)
+				fragment.saveSettings();
+			else
+				saveSettings(); // fragment not present
 			return true;
 		}
-		return false;
+		return super.onOptionsItemSelected(item);
+	}
+
+	public void saveSettings() {
+		Toast toast = Toast.makeText(this, "Saving settings",
+				Toast.LENGTH_SHORT);
+		toast.show();
 	}
 
 }

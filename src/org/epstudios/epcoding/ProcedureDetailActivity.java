@@ -53,6 +53,8 @@ public class ProcedureDetailActivity extends FragmentActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		ProcedureDetailFragment fragment = (ProcedureDetailFragment) getSupportFragmentManager()
+				.findFragmentById(R.id.procedure_detail_container);
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			// This ID represents the Home or Up button. In the case of this
@@ -65,18 +67,17 @@ public class ProcedureDetailActivity extends FragmentActivity {
 			NavUtils.navigateUpTo(this, new Intent(this,
 					ProcedureListActivity.class));
 			return true;
+		case R.id.about:
+			startActivity(new Intent(this, About.class));
+			return true;
 		case R.id.edit:
-			ProcedureDetailFragment fragment = (ProcedureDetailFragment) getSupportFragmentManager()
-					.findFragmentById(R.id.procedure_detail_container);
 			if (fragment != null && fragment instanceof ProcedureDetailFragment)
 				fragment.saveCoding();
 			return true;
 		case R.id.settings:
+			if (fragment != null && fragment instanceof ProcedureDetailFragment)
+				fragment.saveSettings();
 			return true;
-		case R.id.about:
-			startActivity(new Intent(this, About.class));
-			return true;
-
 		}
 		return super.onOptionsItemSelected(item);
 	}

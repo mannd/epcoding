@@ -85,7 +85,8 @@ public class ProcedureDetailFragment extends Fragment implements
 		ablationProceduresSet.add(svtAblation);
 		ablationProceduresSet.add(vtAblation);
 		ablationProceduresSet.add(epTesting);
-
+		Toast.makeText(getActivity(), "mItem = " + mItem, Toast.LENGTH_SHORT)
+				.show();
 	}
 
 	@Override
@@ -112,45 +113,46 @@ public class ProcedureDetailFragment extends Fragment implements
 				.findViewById(R.id.secondary_checkbox_layout);
 
 		Context context = getActivity();
+		loadSettings();
 
 		// initialize other procedure codes
 		otherProcedureCodes[0] = Codes.getCode("99999");
 
-		if (ablationProceduresSet.contains(mItem)) {
-			Code[] ablationSecondaryCodes = Codes.getAblationSecondaryCodes();
-			for (int i = 0; i < ablationSecondaryCodes.length; ++i) {
-				CodeCheckBox secondaryCheckBox = new CodeCheckBox(context);
-				secondaryCheckBox.setCode(ablationSecondaryCodes[i]);
-				secondaryCheckBoxMap.put(
-						ablationSecondaryCodes[i].getCodeNumber(),
-						secondaryCheckBox);
-				secondaryCheckBoxLayout.addView(secondaryCheckBox);
+		Code[] secondaryCodes;
+		if (isAblationCodeSet())
+			secondaryCodes = Codes.getAblationSecondaryCodes();
+		else
+			secondaryCodes = Codes.getDeviceSecondaryCodes();
 
-			}
+		for (int i = 0; i < secondaryCodes.length; ++i) {
+			CodeCheckBox secondaryCheckBox = new CodeCheckBox(context);
+			secondaryCheckBox.setCode(secondaryCodes[i]);
+			secondaryCheckBoxMap.put(secondaryCodes[i].getCodeNumber(),
+					secondaryCheckBox);
+			secondaryCheckBoxLayout.addView(secondaryCheckBox);
+
 		}
-
-		String[] disabledCodeNumbers = { "99999" };
-		String[] primaryCodeNumbers = disabledCodeNumbers;
+		final String[] errorCodeNumbers = { "99999" };
+		String[] disabledCodeNumbers = errorCodeNumbers;
+		String[] primaryCodeNumbers = errorCodeNumbers;
 		if (mItem == afbAblation) {
-
 			primaryCodeNumbers = Codes.afbAblationPrimaryCodeNumbers;
 			disabledCodeNumbers = Codes.afbAblationDisabledCodeNumbers;
 		} else if (mItem == svtAblation) {
-
 			primaryCodeNumbers = Codes.svtAblationPrimaryCodeNumbers;
 			disabledCodeNumbers = Codes.svtAblationDisabledCodeNumbers;
 		} else if (mItem == vtAblation) {
-
 			primaryCodeNumbers = Codes.vtAblationPrimaryCodeNumbers;
 			disabledCodeNumbers = Codes.vtAblationDisabledCodeNumbers;
 		} else if (mItem == epTesting) {
-
 			primaryCodeNumbers = Codes.epTestingPrimaryCodeNumbers;
 			disabledCodeNumbers = Codes.epTestingDisabledCodeNumbers;
+		} else if (mItem == ppmReplacement) {
+			primaryCodeNumbers = Codes.ppmGeneratorReplacementCodeNumbers;
 		}
-		for (int i = 0; i < disabledCodeNumbers.length; ++i)
-			secondaryCheckBoxMap.get(disabledCodeNumbers[i]).disable();
-
+		if (isAblationCodeSet())
+			for (int i = 0; i < disabledCodeNumbers.length; ++i)
+				secondaryCheckBoxMap.get(disabledCodeNumbers[i]).disable();
 		Code[] primaryCodes = Codes.getCodes(primaryCodeNumbers);
 		for (int i = 0; i < primaryCodeNumbers.length; ++i) {
 			CodeCheckBox primaryCheckBox = new CodeCheckBox(context);
@@ -160,7 +162,7 @@ public class ProcedureDetailFragment extends Fragment implements
 			primaryCheckBoxLayout.addView(primaryCheckBox);
 		}
 
-		if (ablationProceduresSet.contains(mItem)) {
+		if (isAblationCodeSet()) {
 			// check and disable primary checkboxes for ablation type items
 			for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
 					.entrySet()) {
@@ -177,6 +179,10 @@ public class ProcedureDetailFragment extends Fragment implements
 		clearButton = (Button) rootView.findViewById(R.id.clear_button);
 		clearButton.setOnClickListener(this);
 		return rootView;
+	}
+
+	private boolean isAblationCodeSet() {
+		return ablationProceduresSet.contains(mItem);
 	}
 
 	private void clearEntries() {
@@ -282,6 +288,20 @@ public class ProcedureDetailFragment extends Fragment implements
 		Toast toast = Toast.makeText(context, numbers, Toast.LENGTH_SHORT);
 		toast.show();
 
+	}
+
+	public void loadSettings() {
+		Context context = getActivity();
+		Toast toast = Toast.makeText(context, "Loading settings",
+				Toast.LENGTH_SHORT);
+		toast.show();
+	}
+
+	public void saveSettings() {
+		Context context = getActivity();
+		Toast toast = Toast.makeText(context, "Saving settings",
+				Toast.LENGTH_SHORT);
+		toast.show();
 	}
 
 }
