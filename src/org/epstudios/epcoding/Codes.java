@@ -11,6 +11,7 @@ public class Codes {
 	private final static Map<String, Code> createMap() {
 		Map<String, Code> map = new HashMap<String, Code>();
 		// initialize all codes here
+		// addCode(map, String codeNumber, String codeName, boolean isAddOn)
 		addCode(map, "99999", "Test Code", false);
 		// Ablation and EP testing codes
 		addCode(map, "93656", "AFB ablation", false);
@@ -28,9 +29,33 @@ public class Codes {
 		addCode(map, "93642", "Transseptal cath", true);
 		addCode(map, "36620", "Arterial line placement", false);
 		// Devices
+		// New PPM
 		addCode(map, "33206", "New or replacement PPM with new A lead", false);
+		addCode(map, "33207", "New or replacement PPM with new V lead", false);
+		addCode(map, "33208", "New or replacement PPM with new A and V leads",
+				false);
+		// Replacement PPM
 		addCode(map, "33227", "Single chamber PPM generator replacement", false);
 		addCode(map, "33228", "Dual chamber PPM generator replacement", false);
+		// New ICD/CRT
+		addCode(map, "33249", "New ICD, single or dual, with leads", false);
+		addCode(map, "33225",
+				"Insertion of LV lead at time of ICD/PPM insertion", false);
+		addCode(map, "33224",
+				"Addition of LV lead to preexisting ICD/PPM system", false);
+		// Replacement ICD/CRT
+		addCode(map, "32229", "Replacement of CRT PPM generator only", false);
+		addCode(map, "33262", "Replacement of single lead ICD generator only",
+				false);
+		addCode(map, "33263", "Replacement of dual lead ICD generator only",
+				false);
+		addCode(map, "33229", "Replacement of CRT ICD generator only", false);
+		// Misc
+		addCode(map, "33282", "Insertion of loop recorder", false);
+		addCode(map, "33284", "Removal of loop recorder", false);
+		addCode(map, "93660", "Tilt table test", false);
+		addCode(map, "93641", "DFT testing at time of ICD implant/replacement",
+				false);
 
 		addCode(map, "92960", "Cardioversion (external)", false);
 		addCode(map, "92961", "Cardioversion (internal)", false);
