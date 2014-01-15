@@ -39,8 +39,8 @@ public class ProcedureTypes {
 		// Cardioversion, Tilt
 		// Table
 		addItem(new ProcedureType("11", "Other Proc"));
-		addItem(new ProcedureType("12", "Office Visits"));
-		addItem(new ProcedureType("13", "Hospital Rounds"));
+		addItem(new ProcedureType("12", "All Codes"));
+		addItem(new ProcedureType("13", "All Codes Sorted By Code"));
 	}
 
 	private static void addItem(ProcedureType item) {
