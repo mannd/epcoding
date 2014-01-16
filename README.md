@@ -18,7 +18,7 @@ EP Coding is open source, and licensed under the
 [GNU GPL v3 license.](http://www.gnu.org/licenses/gpl.html)
 
 ## License
-Copyright © 2013 [EP Studios, Inc.](http://www.epstudiossoftware.com)
+Copyright © 2013, 2014 [EP Studios, Inc.](http://www.epstudiossoftware.com)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## Sources
-The ultimate source is the CPT® 2013 Professional Edition, available
+The ultimate source is the CPT® 2013 and 2014 Professional Editions, available
 from the
 [American Medical Association](http://http://www.ama-assn.org/ama/pub/physician-resources/solutions-managing-your-practice/coding-billing-insurance/cpt/cpt-featured-products.page?).
 The AMA stipulates a license fee for use of their codes.  The CPT®

@@ -122,5 +122,4 @@ public class Codes {
 	public static Code[] getDeviceSecondaryCodes() {
 		return getCodes(deviceSecondaryCodeNumbers);
 	}
-
 }

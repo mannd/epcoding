@@ -49,11 +49,7 @@ public class ProcedureDetailFragment extends Fragment implements
 	private final Map<String, CodeCheckBox> primaryCheckBoxMap = new HashMap<String, CodeCheckBox>();
 	private final Map<String, CodeCheckBox> secondaryCheckBoxMap = new HashMap<String, CodeCheckBox>();
 
-	private final int numOtherProcedures = 1;
-	private final Code[] otherProcedureCodes = new Code[numOtherProcedures];
-
 	// these correspond with the procedure list order
-	// note this is 1 less than ProcedureType -- why??
 	final private int afbAblation = 0;
 	final private int svtAblation = 1;
 	final private int vtAblation = 2;
@@ -63,7 +59,6 @@ public class ProcedureDetailFragment extends Fragment implements
 	//
 	// final private int otherProcedures = 8;
 	final private int allProcedures = 11;
-	final private int allProceduresSorted = 12;
 
 	final private Set<Integer> ablationProceduresSet = new TreeSet<Integer>();
 
@@ -86,10 +81,12 @@ public class ProcedureDetailFragment extends Fragment implements
 								// be shown
 				mItem = Integer.parseInt(itemID);
 		}
+		// TODO: procedure sets in individual Procedures
 		ablationProceduresSet.add(afbAblation);
 		ablationProceduresSet.add(svtAblation);
 		ablationProceduresSet.add(vtAblation);
 		ablationProceduresSet.add(epTesting);
+		// //////////////////////////////////////
 		Toast.makeText(getActivity(), "mItem = " + mItem, Toast.LENGTH_SHORT)
 				.show();
 	}
@@ -103,15 +100,16 @@ public class ProcedureDetailFragment extends Fragment implements
 		case R.id.clear_button:
 			clearEntries();
 			break;
+		// case R.id.help_button: etc.
 		}
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView;
-		// / TODO rename ablation_afb layout
-		rootView = inflater.inflate(R.layout.ablation_afb, container, false);
+		Context context = getActivity();
+		View rootView = inflater.inflate(R.layout.procedure_codes, container,
+				false);
 		primaryCheckBoxLayout = (LinearLayout) rootView
 				.findViewById(R.id.primary_checkbox_layout);
 		secondaryCheckBoxLayout = (LinearLayout) rootView
@@ -119,11 +117,7 @@ public class ProcedureDetailFragment extends Fragment implements
 		secondaryCodeTextView = (TextView) rootView
 				.findViewById(R.id.secondary_code_textView);
 
-		Context context = getActivity();
-		loadSettings();
-
-		// initialize other procedure codes
-		otherProcedureCodes[0] = Codes.getCode("99999");
+		loadSettings(); // no settings implemented yet§
 
 		Code[] secondaryCodes;
 		if (isAblationCodeSet())

@@ -26,19 +26,19 @@ public class ProcedureTypes {
 
 	static {
 		// Add 3 sample items.
-		addItem(new ProcedureType("1", "AFB Ablation"));
-		addItem(new ProcedureType("2", "SVT Ablation"));
-		addItem(new ProcedureType("3", "VT Ablation"));
-		addItem(new ProcedureType("4", "EP Testing"));
-		addItem(new ProcedureType("5", "AV Node Ablation"));
-		addItem(new ProcedureType("6", "New PPM"));
-		addItem(new ProcedureType("7", "New ICD"));
-		addItem(new ProcedureType("8", "PPM Replace"));
-		addItem(new ProcedureType("9", "ICD Replace"));
-		addItem(new ProcedureType("10", "Upgrade/Revision/Extraction"));
+		addItem(new ProcedureType("0", "AFB Ablation"));
+		addItem(new ProcedureType("1", "SVT Ablation"));
+		addItem(new ProcedureType("2", "VT Ablation"));
+		addItem(new ProcedureType("3", "EP Testing"));
+		addItem(new ProcedureType("4", "AV Node Ablation"));
+		addItem(new ProcedureType("5", "New PPM"));
+		addItem(new ProcedureType("6", "New ICD"));
+		addItem(new ProcedureType("7", "PPM Replace"));
+		addItem(new ProcedureType("8", "ICD Replace"));
+		addItem(new ProcedureType("9", "Upgrade/Revision/Extraction"));
 		// Cardioversion, Tilt Table
-		addItem(new ProcedureType("11", "Other Proc"));
-		addItem(new ProcedureType("12", "All Codes"));
+		addItem(new ProcedureType("10", "Other Proc"));
+		addItem(new ProcedureType("11", "All Codes"));
 	}
 
 	private static void addItem(ProcedureType item) {
