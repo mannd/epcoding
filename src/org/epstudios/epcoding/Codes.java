@@ -1,5 +1,6 @@
 package org.epstudios.epcoding;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -102,6 +103,16 @@ public class Codes {
 			codes[i] = getCode(codeNumbers[i]);
 
 		return codes;
+	}
+
+	public static String[] allCodeNumbersSorted() {
+		String[] codeNumbers = new String[allCodes.size()];
+		int i = 0;
+		for (Map.Entry<String, Code> entry : allCodes.entrySet()) {
+			codeNumbers[i++] = entry.getKey();
+		}
+		Arrays.sort(codeNumbers);
+		return codeNumbers;
 	}
 
 	public static Code[] getAblationSecondaryCodes() {

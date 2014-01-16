@@ -36,11 +36,9 @@ public class ProcedureTypes {
 		addItem(new ProcedureType("8", "PPM Replace"));
 		addItem(new ProcedureType("9", "ICD Replace"));
 		addItem(new ProcedureType("10", "Upgrade/Revision/Extraction"));
-		// Cardioversion, Tilt
-		// Table
+		// Cardioversion, Tilt Table
 		addItem(new ProcedureType("11", "Other Proc"));
 		addItem(new ProcedureType("12", "All Codes"));
-		addItem(new ProcedureType("13", "All Codes Sorted By Code"));
 	}
 
 	private static void addItem(ProcedureType item) {

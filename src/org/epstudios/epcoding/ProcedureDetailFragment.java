@@ -18,6 +18,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -40,6 +41,7 @@ public class ProcedureDetailFragment extends Fragment implements
 
 	private LinearLayout primaryCheckBoxLayout;
 	private LinearLayout secondaryCheckBoxLayout;
+	private TextView secondaryCodeTextView;
 
 	private Button summarizeButton;
 	private Button clearButton;
@@ -51,6 +53,7 @@ public class ProcedureDetailFragment extends Fragment implements
 	private final Code[] otherProcedureCodes = new Code[numOtherProcedures];
 
 	// these correspond with the procedure list order
+	// note this is 1 less than ProcedureType -- why??
 	final private int afbAblation = 0;
 	final private int svtAblation = 1;
 	final private int vtAblation = 2;
@@ -59,6 +62,8 @@ public class ProcedureDetailFragment extends Fragment implements
 	final private int ppmReplacement = 7;
 	//
 	// final private int otherProcedures = 8;
+	final private int allProcedures = 11;
+	final private int allProceduresSorted = 12;
 
 	final private Set<Integer> ablationProceduresSet = new TreeSet<Integer>();
 
@@ -111,6 +116,8 @@ public class ProcedureDetailFragment extends Fragment implements
 				.findViewById(R.id.primary_checkbox_layout);
 		secondaryCheckBoxLayout = (LinearLayout) rootView
 				.findViewById(R.id.secondary_checkbox_layout);
+		secondaryCodeTextView = (TextView) rootView
+				.findViewById(R.id.secondary_code_textView);
 
 		Context context = getActivity();
 		loadSettings();
@@ -124,14 +131,19 @@ public class ProcedureDetailFragment extends Fragment implements
 		else
 			secondaryCodes = Codes.getDeviceSecondaryCodes();
 
-		for (int i = 0; i < secondaryCodes.length; ++i) {
-			CodeCheckBox secondaryCheckBox = new CodeCheckBox(context);
-			secondaryCheckBox.setCode(secondaryCodes[i]);
-			secondaryCheckBoxMap.put(secondaryCodes[i].getCodeNumber(),
-					secondaryCheckBox);
-			secondaryCheckBoxLayout.addView(secondaryCheckBox);
-
+		if (showSecondaryCheckBoxLayout()) {
+			for (int i = 0; i < secondaryCodes.length; ++i) {
+				CodeCheckBox secondaryCheckBox = new CodeCheckBox(context);
+				secondaryCheckBox.setCode(secondaryCodes[i]);
+				secondaryCheckBoxMap.put(secondaryCodes[i].getCodeNumber(),
+						secondaryCheckBox);
+				secondaryCheckBoxLayout.addView(secondaryCheckBox);
+			}
+		} else {
+			secondaryCheckBoxLayout.setVisibility(View.GONE);
+			secondaryCodeTextView.setVisibility(View.GONE);
 		}
+
 		final String[] errorCodeNumbers = { "99999" };
 		String[] disabledCodeNumbers = errorCodeNumbers;
 		String[] primaryCodeNumbers = errorCodeNumbers;
@@ -149,6 +161,8 @@ public class ProcedureDetailFragment extends Fragment implements
 			disabledCodeNumbers = Codes.epTestingDisabledCodeNumbers;
 		} else if (mItem == ppmReplacement) {
 			primaryCodeNumbers = Codes.ppmGeneratorReplacementCodeNumbers;
+		} else if (mItem == allProcedures) {
+			primaryCodeNumbers = Codes.allCodeNumbersSorted();
 		}
 		if (isAblationCodeSet())
 			for (int i = 0; i < disabledCodeNumbers.length; ++i)
@@ -183,6 +197,10 @@ public class ProcedureDetailFragment extends Fragment implements
 
 	private boolean isAblationCodeSet() {
 		return ablationProceduresSet.contains(mItem);
+	}
+
+	private boolean showSecondaryCheckBoxLayout() {
+		return mItem != allProcedures;
 	}
 
 	private void clearEntries() {
