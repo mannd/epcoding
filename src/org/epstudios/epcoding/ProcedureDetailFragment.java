@@ -45,6 +45,7 @@ public class ProcedureDetailFragment extends Fragment implements
 
 	private Button summarizeButton;
 	private Button clearButton;
+	private Button helpButton;
 
 	private final Map<String, CodeCheckBox> primaryCheckBoxMap = new HashMap<String, CodeCheckBox>();
 	private final Map<String, CodeCheckBox> secondaryCheckBoxMap = new HashMap<String, CodeCheckBox>();
@@ -100,7 +101,9 @@ public class ProcedureDetailFragment extends Fragment implements
 		case R.id.clear_button:
 			clearEntries();
 			break;
-		// case R.id.help_button: etc.
+		case R.id.help_button:
+			help();
+			break;
 		}
 	}
 
@@ -169,11 +172,13 @@ public class ProcedureDetailFragment extends Fragment implements
 
 		// apply saved configurations here
 		loadCoding();
-
+		// set up buttons
 		summarizeButton = (Button) rootView.findViewById(R.id.summary_button);
 		summarizeButton.setOnClickListener(this);
 		clearButton = (Button) rootView.findViewById(R.id.clear_button);
 		clearButton.setOnClickListener(this);
+		helpButton = (Button) rootView.findViewById(R.id.help_button);
+		helpButton.setOnClickListener(this);
 		return rootView;
 	}
 
@@ -207,8 +212,6 @@ public class ProcedureDetailFragment extends Fragment implements
 	}
 
 	private void summarizeCoding() {
-		Context context = getActivity();
-		AlertDialog dialog = new AlertDialog.Builder(context).create();
 		String message = "";
 		for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
 				.entrySet()) {
@@ -224,11 +227,20 @@ public class ProcedureDetailFragment extends Fragment implements
 		}
 		if (message.isEmpty())
 			message = getString(R.string.no_codes_selected_label);
+		displayMessage(getString(R.string.coding_summary_label), message);
+	}
 
+	private void help() {
+		String message = "Help message.";
+		displayMessage(getString(R.string.help_label), message);
+	}
+
+	private void displayMessage(String title, String message) {
+		Context context = getActivity();
+		AlertDialog dialog = new AlertDialog.Builder(context).create();
 		dialog.setMessage(message);
-		dialog.setTitle(getString(R.string.coding_summary_label));
+		dialog.setTitle(title);
 		dialog.show();
-
 	}
 
 	public void saveCoding() {
@@ -286,7 +298,6 @@ public class ProcedureDetailFragment extends Fragment implements
 				.getDefaultSharedPreferences(context);
 		String mItemString = String.valueOf(mItem);
 		Set<String> defaultStringSet = new TreeSet<String>();
-		defaultStringSet.add("99999");
 		Set<String> codeNumbersChecked = prefs.getStringSet(mItemString,
 				defaultStringSet);
 		String numbers = codeNumbersChecked.toString();
