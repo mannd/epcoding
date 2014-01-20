@@ -39,6 +39,8 @@ public class ProcedureDetailFragment extends Fragment implements
 	 */
 	private int mItem;
 
+	private Context context;
+
 	private LinearLayout primaryCheckBoxLayout;
 	private LinearLayout secondaryCheckBoxLayout;
 	private TextView secondaryCodeTextView;
@@ -63,6 +65,8 @@ public class ProcedureDetailFragment extends Fragment implements
 
 	final private Set<Integer> ablationProceduresSet = new TreeSet<Integer>();
 
+	private Procedure procedure;
+
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
 	 * fragment (e.g. upon screen orientation changes).
@@ -82,6 +86,7 @@ public class ProcedureDetailFragment extends Fragment implements
 								// be shown
 				mItem = Integer.parseInt(itemID);
 		}
+		context = getActivity();
 		// TODO: procedure sets in individual Procedures
 		ablationProceduresSet.add(afbAblation);
 		ablationProceduresSet.add(svtAblation);
@@ -110,7 +115,6 @@ public class ProcedureDetailFragment extends Fragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		Context context = getActivity();
 		View rootView = inflater.inflate(R.layout.procedure_codes, container,
 				false);
 		primaryCheckBoxLayout = (LinearLayout) rootView
@@ -120,7 +124,16 @@ public class ProcedureDetailFragment extends Fragment implements
 		secondaryCodeTextView = (TextView) rootView
 				.findViewById(R.id.secondary_code_textView);
 
-		loadSettings(); // no settings implemented yet§
+		loadSettings(); // no settings implemented yet
+
+		switch (mItem) {
+		case allProcedures:
+			procedure = new AllCodes();
+			break;
+		default:
+			procedure = new AllCodes();
+			break;
+		}
 
 		Code[] secondaryCodes;
 		if (isAblationCodeSet())
@@ -232,11 +245,12 @@ public class ProcedureDetailFragment extends Fragment implements
 
 	private void help() {
 		String message = "Help message.";
+		if (mItem == allProcedures)
+			message = procedure.helpText(context);
 		displayMessage(getString(R.string.help_label), message);
 	}
 
 	private void displayMessage(String title, String message) {
-		Context context = getActivity();
 		AlertDialog dialog = new AlertDialog.Builder(context).create();
 		dialog.setMessage(message);
 		dialog.setTitle(title);
@@ -244,7 +258,6 @@ public class ProcedureDetailFragment extends Fragment implements
 	}
 
 	public void saveCoding() {
-		Context context = getActivity();
 		AlertDialog dialog = new AlertDialog.Builder(context).create();
 		String message = "Save these selections as a default?";
 		dialog.setMessage(message);
@@ -266,7 +279,6 @@ public class ProcedureDetailFragment extends Fragment implements
 	}
 
 	private void save() {
-		Context context = getActivity();
 		Toast toast = Toast.makeText(context, "Saving codes",
 				Toast.LENGTH_SHORT);
 		toast.show();
@@ -286,7 +298,6 @@ public class ProcedureDetailFragment extends Fragment implements
 	}
 
 	public void loadCoding() {
-		Context context = getActivity();
 		Toast toast = Toast.makeText(context, "Loading codes",
 				Toast.LENGTH_SHORT);
 		toast.show();
@@ -313,14 +324,12 @@ public class ProcedureDetailFragment extends Fragment implements
 	}
 
 	public void loadSettings() {
-		Context context = getActivity();
 		Toast toast = Toast.makeText(context, "Loading settings",
 				Toast.LENGTH_SHORT);
 		toast.show();
 	}
 
 	public void saveSettings() {
-		Context context = getActivity();
 		Toast toast = Toast.makeText(context, "Saving settings",
 				Toast.LENGTH_SHORT);
 		toast.show();

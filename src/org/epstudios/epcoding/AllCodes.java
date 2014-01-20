@@ -1,5 +1,7 @@
 package org.epstudios.epcoding;
 
+import android.content.Context;
+
 public class AllCodes implements Procedure {
 
 	@Override
@@ -16,6 +18,12 @@ public class AllCodes implements Procedure {
 	@Override
 	public Code[] secondaryCodes() {
 		return null;
+	}
+
+	@Override
+	public String helpText(Context context) {
+
+		return context.getString(R.string.ablation_help_text);
 	}
 
 }
