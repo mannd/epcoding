@@ -37,13 +37,14 @@ public class ProcedureDetailFragment extends Fragment implements
 	/**
 	 * The content this fragment is presenting.
 	 */
-	private int mItem;
+	private int mItem = 0;
 
 	private Context context;
 
 	private LinearLayout primaryCheckBoxLayout;
 	private LinearLayout secondaryCheckBoxLayout;
 	private TextView secondaryCodeTextView;
+	private TextView titleTextView;
 
 	private Button summarizeButton;
 	private Button clearButton;
@@ -62,8 +63,6 @@ public class ProcedureDetailFragment extends Fragment implements
 	//
 	// final private int otherProcedures = 8;
 	final private int allProcedures = 11;
-
-	final private Set<Integer> ablationProceduresSet = new TreeSet<Integer>();
 
 	private Procedure procedure;
 
@@ -86,13 +85,7 @@ public class ProcedureDetailFragment extends Fragment implements
 								// be shown
 				mItem = Integer.parseInt(itemID);
 		}
-		context = getActivity();
-		// TODO: procedure sets in individual Procedures
-		ablationProceduresSet.add(afbAblation);
-		ablationProceduresSet.add(svtAblation);
-		ablationProceduresSet.add(vtAblation);
-		ablationProceduresSet.add(epTesting);
-		// //////////////////////////////////////
+
 		Toast.makeText(getActivity(), "mItem = " + mItem, Toast.LENGTH_SHORT)
 				.show();
 	}
@@ -117,6 +110,8 @@ public class ProcedureDetailFragment extends Fragment implements
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.procedure_codes, container,
 				false);
+		context = getActivity();
+
 		primaryCheckBoxLayout = (LinearLayout) rootView
 				.findViewById(R.id.primary_checkbox_layout);
 		secondaryCheckBoxLayout = (LinearLayout) rootView
@@ -130,14 +125,24 @@ public class ProcedureDetailFragment extends Fragment implements
 		case allProcedures:
 			procedure = new AllCodes();
 			break;
+		case afbAblation:
+			procedure = new AfbAblation();
+			break;
+		case svtAblation:
+			procedure = new SvtAblation();
+			break;
 		default:
 			procedure = new AllCodes();
 			break;
 		}
 
+		getActivity().setTitle(procedure.title());
+
 		Code[] secondaryCodes;
-		if (isAblationCodeSet())
-			secondaryCodes = Codes.getAblationSecondaryCodes();
+		// test for secondary codes using procedure.hasSecondaryCodes() here
+		if (mItem == afbAblation || mItem == svtAblation
+				|| mItem == allProcedures)
+			secondaryCodes = procedure.secondaryCodes();
 		else
 			secondaryCodes = Codes.getDeviceSecondaryCodes();
 
@@ -151,13 +156,7 @@ public class ProcedureDetailFragment extends Fragment implements
 
 		String[] disabledCodeNumbers = {};
 		String[] primaryCodeNumbers = {};
-		if (mItem == afbAblation) {
-			primaryCodeNumbers = Codes.afbAblationPrimaryCodeNumbers;
-			disabledCodeNumbers = Codes.afbAblationDisabledCodeNumbers;
-		} else if (mItem == svtAblation) {
-			primaryCodeNumbers = Codes.svtAblationPrimaryCodeNumbers;
-			disabledCodeNumbers = Codes.svtAblationDisabledCodeNumbers;
-		} else if (mItem == vtAblation) {
+		if (mItem == vtAblation) {
 			primaryCodeNumbers = Codes.vtAblationPrimaryCodeNumbers;
 			disabledCodeNumbers = Codes.vtAblationDisabledCodeNumbers;
 		} else if (mItem == epTesting) {
@@ -165,16 +164,20 @@ public class ProcedureDetailFragment extends Fragment implements
 			disabledCodeNumbers = Codes.epTestingDisabledCodeNumbers;
 		} else if (mItem == ppmReplacement) {
 			primaryCodeNumbers = Codes.ppmGeneratorReplacementCodeNumbers;
-		} else if (mItem == allProcedures) {
-			primaryCodeNumbers = Codes.allCodeNumbersSorted();
+		}
+		Code[] primaryCodes = Codes.getCodes(primaryCodeNumbers);
+		if (mItem == afbAblation || mItem == svtAblation
+				|| mItem == allProcedures) {
+			primaryCodes = procedure.primaryCodes();
+			disabledCodeNumbers = procedure.disabledCodeNumbers();
 		}
 		for (int i = 0; i < disabledCodeNumbers.length; ++i)
 			secondaryCheckBoxMap.get(disabledCodeNumbers[i]).disable();
-		Code[] primaryCodes = Codes.getCodes(primaryCodeNumbers);
+
 		createCheckBoxLayoutAndCodeMap(primaryCodes, primaryCheckBoxMap,
 				primaryCheckBoxLayout, context);
 
-		if (isAblationCodeSet()) {
+		if (procedure.disablePrimaryCodes()) {
 			// check and disable primary checkboxes for ablation type items
 			for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
 					.entrySet()) {
@@ -204,10 +207,6 @@ public class ProcedureDetailFragment extends Fragment implements
 			codeCheckBoxMap.put(codes[i].getCodeNumber(), codeCheckBox);
 			layout.addView(codeCheckBox);
 		}
-	}
-
-	private boolean isAblationCodeSet() {
-		return ablationProceduresSet.contains(mItem);
 	}
 
 	private boolean showSecondaryCheckBoxLayout() {
@@ -245,7 +244,8 @@ public class ProcedureDetailFragment extends Fragment implements
 
 	private void help() {
 		String message = "Help message.";
-		if (mItem == allProcedures)
+		if (mItem == allProcedures || mItem == afbAblation
+				|| mItem == svtAblation)
 			message = procedure.helpText(context);
 		displayMessage(getString(R.string.help_label), message);
 	}

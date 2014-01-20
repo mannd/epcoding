@@ -53,5 +53,6 @@
     <string name="no_codes_selected_label">No Codes Selected</string>
     <string name="ablation_help_text">Temp ablation procedures help text</string>
     <string name="devices_help_text">Temp device procedures help text</string>
+    <string name="all_codes_help_text">All codes help text</string>
 
 </resources>
