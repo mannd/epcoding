@@ -65,11 +65,11 @@ public class ProcedureDetailActivity extends FragmentActivity {
 			return true;
 		case R.id.editCodeList:
 			if (fragment != null && fragment instanceof ProcedureDetailFragment)
-				fragment.saveCoding();
+				; // fragment.editCodeList();
 			return true;
 		case R.id.saveCodeSelection:
 			if (fragment != null && fragment instanceof ProcedureDetailFragment)
-				; // fragment.saveCodeSelection();
+				fragment.saveCoding();
 			return true;
 		case R.id.settings:
 			if (fragment != null && fragment instanceof ProcedureDetailFragment)
