@@ -131,22 +131,19 @@ public class ProcedureDetailFragment extends Fragment implements
 		case svtAblation:
 			procedure = new SvtAblation();
 			break;
+		case vtAblation:
+			procedure = new VtAblation();
+			break;
 		default:
 			procedure = new AllCodes();
 			break;
 		}
 
-		getActivity().setTitle(procedure.title());
+		getActivity().setTitle(procedure.title(context));
 
-		Code[] secondaryCodes;
-		// test for secondary codes using procedure.hasSecondaryCodes() here
-		if (mItem == afbAblation || mItem == svtAblation
-				|| mItem == allProcedures)
-			secondaryCodes = procedure.secondaryCodes();
-		else
-			secondaryCodes = Codes.getDeviceSecondaryCodes();
+		Code[] secondaryCodes = procedure.secondaryCodes();
 
-		if (showSecondaryCheckBoxLayout()) {
+		if (procedure.hasSecondaryCodes()) {
 			createCheckBoxLayoutAndCodeMap(secondaryCodes,
 					secondaryCheckBoxMap, secondaryCheckBoxLayout, context);
 		} else {
@@ -154,23 +151,9 @@ public class ProcedureDetailFragment extends Fragment implements
 			secondaryCodeTextView.setVisibility(View.GONE);
 		}
 
-		String[] disabledCodeNumbers = {};
-		String[] primaryCodeNumbers = {};
-		if (mItem == vtAblation) {
-			primaryCodeNumbers = Codes.vtAblationPrimaryCodeNumbers;
-			disabledCodeNumbers = Codes.vtAblationDisabledCodeNumbers;
-		} else if (mItem == epTesting) {
-			primaryCodeNumbers = Codes.epTestingPrimaryCodeNumbers;
-			disabledCodeNumbers = Codes.epTestingDisabledCodeNumbers;
-		} else if (mItem == ppmReplacement) {
-			primaryCodeNumbers = Codes.ppmGeneratorReplacementCodeNumbers;
-		}
-		Code[] primaryCodes = Codes.getCodes(primaryCodeNumbers);
-		if (mItem == afbAblation || mItem == svtAblation
-				|| mItem == allProcedures) {
-			primaryCodes = procedure.primaryCodes();
-			disabledCodeNumbers = procedure.disabledCodeNumbers();
-		}
+		Code[] primaryCodes = procedure.primaryCodes();
+		String[] disabledCodeNumbers = procedure.disabledCodeNumbers();
+
 		for (int i = 0; i < disabledCodeNumbers.length; ++i)
 			secondaryCheckBoxMap.get(disabledCodeNumbers[i]).disable();
 
@@ -209,10 +192,6 @@ public class ProcedureDetailFragment extends Fragment implements
 		}
 	}
 
-	private boolean showSecondaryCheckBoxLayout() {
-		return mItem != allProcedures;
-	}
-
 	private void clearEntries() {
 		for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
 				.entrySet())
@@ -243,10 +222,7 @@ public class ProcedureDetailFragment extends Fragment implements
 	}
 
 	private void help() {
-		String message = "Help message.";
-		if (mItem == allProcedures || mItem == afbAblation
-				|| mItem == svtAblation)
-			message = procedure.helpText(context);
+		String message = procedure.helpText(context);
 		displayMessage(getString(R.string.help_label), message);
 	}
 

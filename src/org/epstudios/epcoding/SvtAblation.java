@@ -1,14 +1,11 @@
 package org.epstudios.epcoding;
 
+import android.content.Context;
+
 public class SvtAblation extends AblationProcedure implements Procedure {
 	@Override
-	public String title() {
-		return "SVT Ablation";
-	}
-
-	@Override
-	public boolean hasSecondaryCodes() {
-		return true;
+	public String title(Context context) {
+		return context.getString(R.string.svt_ablation_title);
 	}
 
 	@Override

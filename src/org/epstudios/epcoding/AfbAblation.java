@@ -1,14 +1,11 @@
 package org.epstudios.epcoding;
 
+import android.content.Context;
+
 public class AfbAblation extends AblationProcedure implements Procedure {
 	@Override
-	public String title() {
-		return "AFB Ablation";
-	}
-
-	@Override
-	public boolean hasSecondaryCodes() {
-		return true;
+	public String title(Context context) {
+		return context.getString(R.string.afb_ablation_title);
 	}
 
 	@Override

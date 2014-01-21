@@ -54,5 +54,9 @@
     <string name="ablation_help_text">Temp ablation procedures help text</string>
     <string name="devices_help_text">Temp device procedures help text</string>
     <string name="all_codes_help_text">All codes help text</string>
+    <string name="afb_ablation_title">AFB Ablation</string>
+    <string name="svt_ablation_title">SVT Ablation</string>
+    <string name="vt_ablation_title">VT Ablation</string>
+    <string name="all_codes_title">All Codes</string>
 
 </resources>

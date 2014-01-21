@@ -4,8 +4,8 @@ import android.content.Context;
 
 public class AllCodes implements Procedure {
 	@Override
-	public String title() {
-		return "All Codes";
+	public String title(Context context) {
+		return context.getString(R.string.all_codes_title);
 	}
 
 	@Override
