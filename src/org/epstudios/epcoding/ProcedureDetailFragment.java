@@ -44,7 +44,6 @@ public class ProcedureDetailFragment extends Fragment implements
 	private LinearLayout primaryCheckBoxLayout;
 	private LinearLayout secondaryCheckBoxLayout;
 	private TextView secondaryCodeTextView;
-	private TextView titleTextView;
 
 	private Button summarizeButton;
 	private Button clearButton;
@@ -58,10 +57,13 @@ public class ProcedureDetailFragment extends Fragment implements
 	final private int svtAblation = 1;
 	final private int vtAblation = 2;
 	final private int epTesting = 3;
-	// final private int pacemakers = 4;
+	final private int avnAblation = 4;
+	final private int newPpm = 5;
+	final private int newIcd =6;
 	final private int ppmReplacement = 7;
-	//
-	// final private int otherProcedures = 8;
+	final private int icdReplacement = 8;
+	final private int deviceUpgrade = 9;
+	final private int otherProcedure = 10;
 	final private int allProcedures = 11;
 
 	private Procedure procedure;
@@ -134,8 +136,29 @@ public class ProcedureDetailFragment extends Fragment implements
 		case vtAblation:
 			procedure = new VtAblation();
 			break;
+		case epTesting:
+			// procedure = new EpTesting();
+			break;
+		case avnAblation:
+			// procedure = new AvnAblation();
+			break;
+		case newPpm:
+			// procedure = new NewPpm();
+			break;
+		case newIcd:
+			// procedure = new NewIcd();
+			break;
 		case ppmReplacement:
 			procedure = new PpmReplacement();
+			break;
+		case icdReplacement:
+			// procedure = new IcdReplacement();
+			break;
+		case deviceUpgrade:
+			// procedure = new DeviceUpgrade();
+			break;
+		case otherProcedure:
+			// procedure = new OtherProcedure();
 			break;
 		default:
 			procedure = new AllCodes();
