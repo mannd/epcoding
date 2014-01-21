@@ -9,11 +9,6 @@ public class AllCodes implements Procedure {
 	}
 
 	@Override
-	public boolean hasSecondaryCodes() {
-		return false;
-	}
-
-	@Override
 	public Code[] primaryCodes() {
 		// TODO Auto-generated method stub
 		return Codes.getCodes(Codes.allCodeNumbersSorted());
@@ -26,7 +21,8 @@ public class AllCodes implements Procedure {
 
 	@Override
 	public Code[] secondaryCodes() {
-		return null;
+		Code[] codes = {};
+		return codes;
 	}
 
 	@Override

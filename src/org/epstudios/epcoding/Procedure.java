@@ -5,8 +5,6 @@ import android.content.Context;
 public interface Procedure {
 	String title(Context context);
 
-	boolean hasSecondaryCodes();
-
 	Code[] primaryCodes();
 
 	boolean disablePrimaryCodes();

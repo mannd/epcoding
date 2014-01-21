@@ -7,10 +7,6 @@ public class DeviceProcedure {
 		return false;
 	}
 
-	public boolean hasSecondaryCodes() {
-		return true;
-	}
-
 	public Code[] secondaryCodes() {
 		return Codes.getDeviceSecondaryCodes();
 	}

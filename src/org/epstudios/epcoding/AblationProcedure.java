@@ -9,10 +9,6 @@ public class AblationProcedure {
 		return true;
 	}
 
-	public boolean hasSecondaryCodes() {
-		return true;
-	}
-
 	public Code[] secondaryCodes() {
 		return Codes.getAblationSecondaryCodes();
 	}

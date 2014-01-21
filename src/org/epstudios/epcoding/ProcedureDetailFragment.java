@@ -134,6 +134,9 @@ public class ProcedureDetailFragment extends Fragment implements
 		case vtAblation:
 			procedure = new VtAblation();
 			break;
+		case ppmReplacement:
+			procedure = new PpmReplacement();
+			break;
 		default:
 			procedure = new AllCodes();
 			break;
@@ -143,7 +146,7 @@ public class ProcedureDetailFragment extends Fragment implements
 
 		Code[] secondaryCodes = procedure.secondaryCodes();
 
-		if (procedure.hasSecondaryCodes()) {
+		if (secondaryCodes.length > 0) {
 			createCheckBoxLayoutAndCodeMap(secondaryCodes,
 					secondaryCheckBoxMap, secondaryCheckBoxLayout, context);
 		} else {
