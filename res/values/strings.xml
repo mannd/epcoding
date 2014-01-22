@@ -58,6 +58,7 @@
     <string name="afb_ablation_title">AFB Ablation</string>
     <string name="svt_ablation_title">SVT Ablation</string>
     <string name="vt_ablation_title">VT Ablation</string>
+    <string name="avn_ablation_title">AV Node Ablation</string>
     <string name="ppm_replacement_title">PPM Replacement</string>
     <string name="all_codes_title">All Codes</string>
     <string name="save_code_selection_error_message">First select a procedure</string>

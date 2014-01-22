@@ -18,6 +18,7 @@ public class Codes {
 		addCode(map, "93656", "AFB ablation", false);
 		addCode(map, "93654", "VT ablation", false);
 		addCode(map, "93653", "SVT ablation", false);
+		addCode(map, "93650", "AV node ablation", false);
 		addCode(map, "93620", "EP testing", false);
 		addCode(map, "93655", "Additional SVT ablation", true);
 		addCode(map, "93657", "Additional AFB ablation", true);
@@ -41,7 +42,7 @@ public class Codes {
 		// New ICD/CRT
 		addCode(map, "33249", "New ICD, single or dual, with leads", false);
 		addCode(map, "33225",
-				"Insertion of LV lead at time of ICD/PPM insertion", false);
+				"Insertion of LV lead at time of ICD/PPM insertion", true);
 		addCode(map, "33224",
 				"Addition of LV lead to preexisting ICD/PPM system", false);
 		// Replacement ICD/CRT
@@ -67,6 +68,7 @@ public class Codes {
 	public final static String[] afbAblationPrimaryCodeNumbers = { "93656" };
 	public final static String[] svtAblationPrimaryCodeNumbers = { "93653" };
 	public final static String[] vtAblationPrimaryCodeNumbers = { "93654" };
+	public final static String[] avnAblationPrimaryCodeNumbers = { "93650" };
 	public final static String[] epTestingPrimaryCodeNumbers = { "93620" };
 
 	public final static String[] ppmGeneratorReplacementCodeNumbers = {
@@ -75,6 +77,9 @@ public class Codes {
 	public final static String[] ablationSecondaryCodeNumbers = { "93655",
 			"93657", "93609", "93613", "93621", "93622", "93623", "93662",
 			"93642", "36620" };
+
+	public final static String[] avnAblationSecondaryCodeNumbers = { "93620",
+			"33207", "33208", "33249", "33225", "92960", "92961" };
 
 	public final static String[] deviceSecondaryCodeNumbers = { "92960",
 			"92961" };
