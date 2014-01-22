@@ -48,7 +48,7 @@
     <string name="code_93623_label">Induce post IV Drug (93623)</string>
     <string name="code_93662_label">Intra-cardiac Echo (93662)</string>
     <string name="code_93462_label">Transseptal Cath (93462)</string>
-    <string name="coding_summary_label">Coding Summary</string>
+    <string name="coding_summary_label">Summary</string>
     <string name="clear_label">Clear</string>
     <string name="help_label">Help</string>
     <string name="no_codes_selected_label">No Codes Selected</string>
@@ -60,5 +60,6 @@
     <string name="vt_ablation_title">VT Ablation</string>
     <string name="ppm_replacement_title">PPM Replacement</string>
     <string name="all_codes_title">All Codes</string>
+    <string name="save_code_selection_error_message">First select a procedure</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package org.epstudios.epcoding;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -111,6 +112,8 @@ public class ProcedureListActivity extends FragmentActivity implements
 		case R.id.saveCodeSelection:
 			if (fragment != null && fragment instanceof ProcedureDetailFragment)
 				fragment.saveCoding();
+			else
+				saveCodeSelectionErrorMessage();
 			return true;
 			// case R.id.settings:
 			// if (fragment != null && fragment instanceof
@@ -121,8 +124,10 @@ public class ProcedureListActivity extends FragmentActivity implements
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void saveSettings() {
-		Toast toast = Toast.makeText(this, "Saving settings",
+	private void saveCodeSelectionErrorMessage() {
+		Activity activity = this;
+		Toast toast = Toast.makeText(this,
+				activity.getString(R.string.save_code_selection_error_message),
 				Toast.LENGTH_SHORT);
 		toast.show();
 	}

@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * A fragment representing a single Procedure detail screen. This fragment is
@@ -56,10 +55,10 @@ public class ProcedureDetailFragment extends Fragment implements
 	final private int afbAblation = 0;
 	final private int svtAblation = 1;
 	final private int vtAblation = 2;
-	final private int epTesting = 3;
-	final private int avnAblation = 4;
+	final private int avnAblation = 3;
+	final private int epTesting = 4;
 	final private int newPpm = 5;
-	final private int newIcd =6;
+	final private int newIcd = 6;
 	final private int ppmReplacement = 7;
 	final private int icdReplacement = 8;
 	final private int deviceUpgrade = 9;
@@ -88,8 +87,8 @@ public class ProcedureDetailFragment extends Fragment implements
 				mItem = Integer.parseInt(itemID);
 		}
 
-		Toast.makeText(getActivity(), "mItem = " + mItem, Toast.LENGTH_SHORT)
-				.show();
+		// Toast.makeText(getActivity(), "mItem = " + mItem, Toast.LENGTH_SHORT)
+		// .show();
 	}
 
 	@Override
@@ -281,9 +280,9 @@ public class ProcedureDetailFragment extends Fragment implements
 	}
 
 	private void save() {
-		Toast toast = Toast.makeText(context, "Saving codes",
-				Toast.LENGTH_SHORT);
-		toast.show();
+		// Toast toast = Toast.makeText(context, "Saving codes",
+		// Toast.LENGTH_SHORT);
+		// toast.show();
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		String mItemString = String.valueOf(mItem);
@@ -300,9 +299,9 @@ public class ProcedureDetailFragment extends Fragment implements
 	}
 
 	public void loadCoding() {
-		Toast toast = Toast.makeText(context, "Loading codes",
-				Toast.LENGTH_SHORT);
-		toast.show();
+		// Toast toast = Toast.makeText(context, "Loading codes",
+		// Toast.LENGTH_SHORT);
+		// toast.show();
 		load(context);
 	}
 
@@ -313,28 +312,29 @@ public class ProcedureDetailFragment extends Fragment implements
 		Set<String> defaultStringSet = new TreeSet<String>();
 		Set<String> codeNumbersChecked = prefs.getStringSet(mItemString,
 				defaultStringSet);
-		String numbers = codeNumbersChecked.toString();
+		// String numbers = codeNumbersChecked.toString();
 		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
 				.entrySet()) {
 			if (codeNumbersChecked.contains(entry.getValue().getCode()
 					.getCodeNumber()))
 				entry.getValue().setChecked(true);
 		}
-		Toast toast = Toast.makeText(context, numbers, Toast.LENGTH_SHORT);
-		toast.show();
+		// Toast toast = Toast.makeText(context, numbers, Toast.LENGTH_SHORT);
+		// toast.show();
 
 	}
 
 	public void loadSettings() {
-		Toast toast = Toast.makeText(context, "Loading settings",
-				Toast.LENGTH_SHORT);
-		toast.show();
+		// no setting so far, but just in case
+		// Toast toast = Toast.makeText(context, "Loading settings",
+		// Toast.LENGTH_SHORT);
+		// toast.show();
 	}
 
 	public void saveSettings() {
-		Toast toast = Toast.makeText(context, "Saving settings",
-				Toast.LENGTH_SHORT);
-		toast.show();
+		// Toast toast = Toast.makeText(context, "Saving settings",
+		// Toast.LENGTH_SHORT);
+		// toast.show();
 	}
 
 }
