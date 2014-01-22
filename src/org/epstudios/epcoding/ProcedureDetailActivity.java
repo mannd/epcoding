@@ -63,18 +63,20 @@ public class ProcedureDetailActivity extends FragmentActivity {
 		case R.id.about:
 			startActivity(new Intent(this, About.class));
 			return true;
-		case R.id.editCodeList:
-			if (fragment != null && fragment instanceof ProcedureDetailFragment)
-				; // fragment.editCodeList();
-			return true;
+			// case R.id.editCodeList:
+			// if (fragment != null && fragment instanceof
+			// ProcedureDetailFragment)
+			// ; // fragment.editCodeList();
+			// return true;
 		case R.id.saveCodeSelection:
 			if (fragment != null && fragment instanceof ProcedureDetailFragment)
 				fragment.saveCoding();
 			return true;
-		case R.id.settings:
-			if (fragment != null && fragment instanceof ProcedureDetailFragment)
-				fragment.saveSettings();
-			return true;
+			// case R.id.settings:
+			// if (fragment != null && fragment instanceof
+			// ProcedureDetailFragment)
+			// fragment.saveSettings();
+			// return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

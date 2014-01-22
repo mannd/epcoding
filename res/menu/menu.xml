@@ -3,13 +3,15 @@
 
     <item
         android:id="@+id/saveCodeSelection"
-        android:icon="@drawable/ic_action_save"
+        android:icon="@android:drawable/ic_menu_save"
         android:showAsAction="ifRoom"
         android:title="@string/save_code_selection_title">
     </item>
-    <item
+    <!--
+    options below may or may not be implemented in future version
+         <item
         android:id="@+id/editCodeList"
-        android:icon="@drawable/ic_action_edit"
+        android:icon="@android:drawable/ic_action_edit"
         android:showAsAction="ifRoom"
         android:title="@string/edit_code_list_title">
     </item>
@@ -18,6 +20,7 @@
         android:showAsAction="never"
         android:title="@string/settings_title">
     </item>
+    -->
     <item
         android:id="@+id/about"
         android:showAsAction="never"
