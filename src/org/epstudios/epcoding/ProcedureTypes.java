@@ -37,7 +37,7 @@ public class ProcedureTypes {
 		addItem(new ProcedureType("8", "ICD Replace"));
 		addItem(new ProcedureType("9", "Upgrade/Revision/Extraction"));
 		// Cardioversion, Tilt Table
-		addItem(new ProcedureType("10", "Other Proc"));
+		addItem(new ProcedureType("10", "Other Procedure"));
 		addItem(new ProcedureType("11", "All Codes"));
 	}
 

@@ -157,7 +157,7 @@ public class ProcedureDetailFragment extends Fragment implements
 			// procedure = new DeviceUpgrade();
 			break;
 		case otherProcedure:
-			// procedure = new OtherProcedure();
+			procedure = new OtherProcedure();
 			break;
 		default:
 			procedure = new AllCodes();

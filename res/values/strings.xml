@@ -3,7 +3,6 @@
 
     <string name="app_name">EP Coding</string>
     <string name="title_procedure_detail">Coding</string>
-    <string name="other_procedure_title">Other Procedures</string>
     <string name="office_visit_title">Office Visit</string>
     <string name="hospital_rounds_title">Hospital Rounds</string>
     <string name="new_device_implant_title">New Device Implant</string>
@@ -55,11 +54,13 @@
     <string name="ablation_help_text">Temp ablation procedures help text</string>
     <string name="devices_help_text">Temp device procedures help text</string>
     <string name="all_codes_help_text">All codes help text</string>
+    <string name="other_procedure_help_text">Other procedure help text</string>
     <string name="afb_ablation_title">AFB Ablation</string>
     <string name="svt_ablation_title">SVT Ablation</string>
     <string name="vt_ablation_title">VT Ablation</string>
     <string name="avn_ablation_title">AV Node Ablation</string>
     <string name="ppm_replacement_title">PPM Replacement</string>
+    <string name="other_procedure_title">Other Procedure</string>
     <string name="all_codes_title">All Codes</string>
     <string name="save_code_selection_error_message">First select a procedure</string>
 
