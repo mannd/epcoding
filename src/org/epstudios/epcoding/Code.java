@@ -31,6 +31,10 @@ public class Code {
 		return (isAddOn ? "+" : "") + code;
 	}
 
+	public String getCodeNumberWithAddOnWithDescription() {
+		return getCodeNumberWithAddOn() + " (" + shortDescription + ")";
+	}
+
 	public String getCodeNumber() {
 		return code;
 	}

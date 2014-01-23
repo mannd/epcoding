@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A fragment representing a single Procedure detail screen. This fragment is
@@ -229,21 +230,47 @@ public class ProcedureDetailFragment extends Fragment implements
 
 	private void summarizeCoding() {
 		String message = "";
+		// we will extract the raw selected codes and shoot them to the code
+		// analyzer
+		Code[] codes = new Code[Codes.allCodesSize()];
+		int i = 0;
 		for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
 				.entrySet()) {
-			if (entry.getValue().isChecked())
-				message += entry.getValue().getCode().getCodeNumberWithAddOn()
-						+ "\n";
+			if (entry.getValue().isChecked()) {
+				codes[i] = entry.getValue().getCode();
+				// maybe use getCodeNumberWithAddOnWithDescription depending on
+				// settings?
+				message += codes[i++].getCodeNumberWithAddOn() + "\n";
+			}
 		}
 		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
 				.entrySet()) {
-			if (entry.getValue().isChecked())
-				message += entry.getValue().getCode().getCodeNumberWithAddOn()
-						+ "\n";
+			if (entry.getValue().isChecked()) {
+				codes[i] = entry.getValue().getCode();
+				message += codes[i++].getCodeNumberWithAddOn() + "\n";
+			}
 		}
 		if (message.isEmpty())
 			message = getString(R.string.no_codes_selected_label);
-		displayMessage(getString(R.string.coding_summary_label), message);
+		else
+			// analyze codes for problems
+			message += codeAnalysis(codes);
+		displayMessage(getString(R.string.coding_summary_dialog_label), message);
+	}
+
+	private String codeAnalysis(Code[] codes) {
+		// use primary and secondary code maps for analysis
+		// assumes user has selected some codes (checked in calling function)
+		// No code analysis done for All Codes
+		if (mItem == allProcedures)
+			return getString(R.string.no_code_analysis_performed_message);
+		// this is a big chunk of analysis that can be as sophisticated as we
+		// want
+		// Maybe delegate to a class
+		// String message = CodeAnalyzer.analyze(codes);
+		// return message;
+		// if no errors found above will:
+		return getString(R.string.no_code_errors_message);
 	}
 
 	private void help() {
@@ -259,6 +286,14 @@ public class ProcedureDetailFragment extends Fragment implements
 	}
 
 	public void saveCoding() {
+		// don't bother if no secondary codes to save
+		if (secondaryCheckBoxMap.isEmpty()) {
+			Toast toast = Toast.makeText(context,
+					getString(R.string.no_secondary_codes_error_message),
+					Toast.LENGTH_SHORT);
+			toast.show();
+			return;
+		}
 		AlertDialog dialog = new AlertDialog.Builder(context).create();
 		String message = "Save these selections as a default?";
 		dialog.setMessage(message);

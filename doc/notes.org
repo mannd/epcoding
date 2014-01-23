@@ -9,3 +9,13 @@
     | Dual chamber PPM implant   | 33208 |
     |----------------------------+-------|
 * Details    
+* TODO
+** Reorder secondary codes
+   They should be generally in numeric order, but can also have some
+   logical order.  It makes no sense to put the A line code in first,
+   even though it comes numerically before the others.
+** Write help texts
+** Put Settings in?
+   - verbosity setting for coding summary
+   - coding analysis warning levels?
+   - ? toggle coding analysis
