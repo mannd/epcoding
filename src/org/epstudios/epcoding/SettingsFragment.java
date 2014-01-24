@@ -8,6 +8,11 @@ import android.preference.PreferenceFragment;
 
 public class SettingsFragment extends PreferenceFragment implements
 		OnSharedPreferenceChangeListener {
+	private final String defaultVerbosity = getActivity().getString(
+			R.string.default_verbosity);
+	private final String verbosityKey = getActivity().getString(
+			R.string.code_verbosity_key);
+
 	public SettingsFragment() {
 		// empty constructor
 	}
@@ -16,14 +21,18 @@ public class SettingsFragment extends PreferenceFragment implements
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.settings);
+		Preference codeVerbosity = findPreference(verbosityKey);
+		codeVerbosity.setSummary(getPreferenceScreen().getSharedPreferences()
+				.getString(verbosityKey, defaultVerbosity));
 	}
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			String key) {
-		if (key.equals("code_verbosity")) {
+		if (key.equals(verbosityKey)) {
 			Preference codeVerbosity = findPreference(key);
-			codeVerbosity.setSummary(sharedPreferences.getString(key, ""));
+			codeVerbosity.setSummary(sharedPreferences.getString(key,
+					defaultVerbosity));
 		}
 
 	}

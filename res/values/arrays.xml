@@ -2,12 +2,12 @@
 <resources>
 
     <array name="verbosity_names">
-        <item>"Verbose"</item>
-        <item>"Brief"</item>
+        <item>Verbose</item>
+        <item>Brief</item>
     </array>
     <array name="verbosity_values">
-        <item>""VERBOSE""</item>
-        <item>"BRIEF"</item>
+        <item>Verbose</item>
+        <item>Brief</item>
     </array>
 
 </resources>

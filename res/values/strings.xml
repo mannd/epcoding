@@ -73,5 +73,7 @@
     <string name="code_summary_settings_label">Code Summary</string>
     <string name="show_code_details_label">Show code details</string>
     <string name="code_analysis_verbosity_label">Code analysis verbosity</string>
+    <string name="code_verbosity_key">code_verbosity</string>
+    <string name="default_verbosity">Verbose</string>
 
 </resources>
