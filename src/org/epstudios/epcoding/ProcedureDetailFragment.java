@@ -141,7 +141,7 @@ public class ProcedureDetailFragment extends Fragment implements
 			procedure = new AvnAblation();
 			break;
 		case epTesting:
-			// procedure = new EpTesting();
+			procedure = new EpTesting();
 			break;
 		case newPpm:
 			// procedure = new NewPpm();

@@ -19,6 +19,8 @@
    - verbosity setting for coding summary
    - coding analysis warning levels?
    - ? toggle coding analysis
+** Bugs
+   - rotation of screen loses check marks
 * Settings screen
   - Settings
     - Code Display

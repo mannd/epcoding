@@ -60,6 +60,7 @@
     <string name="svt_ablation_title">SVT Ablation</string>
     <string name="vt_ablation_title">VT Ablation</string>
     <string name="avn_ablation_title">AV Node Ablation</string>
+    <string name="ep_testing_title">EP Testing</string>
     <string name="ppm_replacement_title">PPM Replacement</string>
     <string name="other_procedure_title">Other Procedure</string>
     <string name="all_codes_title">All Codes</string>

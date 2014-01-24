@@ -150,6 +150,8 @@ public class Codes {
 			"93657", "93609", "93613", "93621", "93622", "93623", "93662",
 			"93642", "36620" };
 
+	// epTestingSecondaryCodeNumbers need to include device implants
+
 	public final static String[] avnAblationSecondaryCodeNumbers = { "93620",
 			"33207", "33208", "33249", "33225", "92960", "92961" };
 
