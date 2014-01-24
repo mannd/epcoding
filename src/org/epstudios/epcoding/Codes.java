@@ -137,6 +137,9 @@ public class Codes {
 	public final static String[] vtAblationPrimaryCodeNumbers = { "93654" };
 	public final static String[] avnAblationPrimaryCodeNumbers = { "93650" };
 	public final static String[] epTestingPrimaryCodeNumbers = { "93620" };
+	public final static String[] subQIcdPrimaryCodeNumbers = { "0319T",
+			"0320T", "0321T", "0322T", "0323T", "0324T", "0325T", "0326T",
+			"0327T", "0328T" };
 	public final static String[] otherProcedurePrimaryCodeNumbers = { "33282",
 			"33284", "93660", "92960", "92961" };
 

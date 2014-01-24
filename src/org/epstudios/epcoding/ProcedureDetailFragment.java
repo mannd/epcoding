@@ -63,8 +63,9 @@ public class ProcedureDetailFragment extends Fragment implements
 	final private int ppmReplacement = 7;
 	final private int icdReplacement = 8;
 	final private int deviceUpgrade = 9;
-	final private int otherProcedure = 10;
-	final private int allProcedures = 11;
+	final private int subQIcd = 10;
+	final private int otherProcedure = 11;
+	final private int allProcedures = 12;
 
 	private Procedure procedure;
 
@@ -156,6 +157,9 @@ public class ProcedureDetailFragment extends Fragment implements
 			break;
 		case deviceUpgrade:
 			// procedure = new DeviceUpgrade();
+			break;
+		case subQIcd:
+			procedure = new SubQIcd();
 			break;
 		case otherProcedure:
 			procedure = new OtherProcedure();
@@ -373,11 +377,4 @@ public class ProcedureDetailFragment extends Fragment implements
 		String codeVerbosity = sharedPreferences.getString("code_verbosity",
 				"VERBOSE");
 	}
-
-	public void saveSettings() {
-		// Toast toast = Toast.makeText(context, "Saving settings",
-		// Toast.LENGTH_SHORT);
-		// toast.show();
-	}
-
 }
