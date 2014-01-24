@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="verbosity_names">
+        <item>"Verbose"</item>
+        <item>"Brief"</item>
+    </array>
+    <array name="verbosity_values">
+        <item>""VERBOSE""</item>
+        <item>"BRIEF"</item>
+    </array>
+
+</resources>

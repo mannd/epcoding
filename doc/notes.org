@@ -19,3 +19,12 @@
    - verbosity setting for coding summary
    - coding analysis warning levels?
    - ? toggle coding analysis
+* Settings screen
+  - Settings
+    - Code Display
+      - Show + for add-on codes
+      - Allow changing primary codes
+    - Code Summary
+      - Show + for add-on codes
+      - Show code details
+      - Code analysis verbosity

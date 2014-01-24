@@ -360,10 +360,18 @@ public class ProcedureDetailFragment extends Fragment implements
 	}
 
 	public void loadSettings() {
-		// no setting so far, but just in case
-		// Toast toast = Toast.makeText(context, "Loading settings",
-		// Toast.LENGTH_SHORT);
-		// toast.show();
+		SharedPreferences sharedPreferences = PreferenceManager
+				.getDefaultSharedPreferences(context);
+		boolean showPlusDisplay = sharedPreferences.getBoolean(
+				"show_plus_code_display", true);
+		boolean allowChangingPrimaryCodes = sharedPreferences.getBoolean(
+				"allow_changing_primary_codes", false);
+		boolean showPlusCodeSummary = sharedPreferences.getBoolean(
+				"show_plus_code_summary", true);
+		boolean showDetailsCodeSummary = sharedPreferences.getBoolean(
+				"show_details_code_summary", false);
+		String codeVerbosity = sharedPreferences.getString("code_verbosity",
+				"VERBOSE");
 	}
 
 	public void saveSettings() {

@@ -67,5 +67,11 @@
     <string name="no_secondary_codes_error_message">Only additional codes can be saved. This group has only primary codes.</string>
     <string name="no_code_errors_message">No errors found in code analysis.</string>
     <string name="no_code_analysis_performed_message">Please note that no analysis of coding is done when using the All Codes module.</string>
+    <string name="code_display_settings_label">Code Display</string>
+    <string name="show_add_on_plus_label">Show + for add-on codes</string>
+    <string name="allow_changing_primary_codes_label">Primary codes enabled</string>
+    <string name="code_summary_settings_label">Code Summary</string>
+    <string name="show_code_details_label">Show code details</string>
+    <string name="code_analysis_verbosity_label">Code analysis verbosity</string>
 
 </resources>
