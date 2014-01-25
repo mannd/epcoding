@@ -50,6 +50,8 @@ public class Codes {
 				false);
 
 		// Leads
+		addCode(map, "33210", "Insert temporary transvenous pacing electrode",
+				false);
 		addCode(map, "33216", "Place single lead (A or V, PPM or ICD) only",
 				false);
 		addCode(map, "33217", "Place dual leads (PPM or ICD) only", false);
@@ -143,8 +145,22 @@ public class Codes {
 	public final static String[] otherProcedurePrimaryCodeNumbers = { "33282",
 			"33284", "93660", "92960", "92961" };
 
-	public final static String[] ppmGeneratorReplacementCodeNumbers = {
-			"33227", "33228" };
+	public final static String[] newPpmPrimaryCodeNumbers = { "33206", "33207",
+			"33208", "33225" };
+
+	public final static String[] ppmGeneratorReplacementPrimaryCodeNumbers = {
+			"33227", "33228", "33229" };
+
+	public final static String[] newIcdPrimaryCodeNumbers = { "33240", "33230",
+			"33225" };
+
+	public final static String[] IcdReplacementPrimaryCodeNumbers = { "33262",
+			"33263", "33264" };
+
+	public final static String[] deviceUpgradePrimaryCodeNumbers = { "33216",
+			"33217", "33212", "33213", "33214", "33221", "33233", "33240",
+			"33230", "33241", "33231", "33233", "33224", "33225", "33234",
+			"33235", "33244" };
 
 	public final static String[] ablationSecondaryCodeNumbers = { "93655",
 			"93657", "93609", "93613", "93621", "93622", "93623", "93662",
@@ -153,10 +169,13 @@ public class Codes {
 	// epTestingSecondaryCodeNumbers need to include device implants
 
 	public final static String[] avnAblationSecondaryCodeNumbers = { "93620",
-			"33207", "33208", "33249", "33225", "92960", "92961" };
+			"33207", "33208", "33210", "33249", "33225", "92960", "92961" };
 
-	public final static String[] deviceSecondaryCodeNumbers = { "92960",
-			"92961" };
+	public final static String[] deviceSecondaryCodeNumbers = { "33210",
+			"92960", "92961" };
+
+	public final static String[] icdDeviceSecondaryCodeNumbers = { "93641",
+			"33210", "92960", "92961" };
 
 	public final static String[] afbAblationDisabledCodeNumbers = { "93621",
 			"93642" };

@@ -144,19 +144,19 @@ public class ProcedureDetailFragment extends Fragment implements
 			procedure = new EpTesting();
 			break;
 		case newPpm:
-			// procedure = new NewPpm();
+			procedure = new NewPpm();
 			break;
 		case newIcd:
-			// procedure = new NewIcd();
+			procedure = new NewIcd();
 			break;
 		case ppmReplacement:
 			procedure = new PpmReplacement();
 			break;
 		case icdReplacement:
-			// procedure = new IcdReplacement();
+			procedure = new IcdReplacement();
 			break;
 		case deviceUpgrade:
-			// procedure = new DeviceUpgrade();
+			procedure = new DeviceUpgrade();
 			break;
 		case subQIcd:
 			procedure = new SubQIcd();

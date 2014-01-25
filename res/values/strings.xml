@@ -78,5 +78,13 @@
     <string name="default_verbosity">Verbose</string>
     <string name="subq_icd_title">SubQ ICD</string>
     <string name="subq_icd_help_text">SubQ ICD help text</string>
+    <string name="new_ppm_title">New PPM</string>
+    <string name="new_ppm_help_text">New PPM help text</string>
+    <string name="new_icd_title">New ICD</string>
+    <string name="new_icd_help_text">New ICD help text</string>
+    <string name="icd_replacement_title">ICD Replacement</string>
+    <string name="icd_replacement_help_text">ICD replacement help text</string>
+    <string name="device_upgrade_title">Device Upgrade/Revision</string>
+    <string name="device_upgrade_help_text">Device upgrade help text</string>
 
 </resources>

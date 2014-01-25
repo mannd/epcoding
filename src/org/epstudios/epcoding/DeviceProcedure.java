@@ -11,6 +11,11 @@ public class DeviceProcedure {
 		return Codes.getDeviceSecondaryCodes();
 	}
 
+	public String[] disabledCodeNumbers() {
+		String[] numbers = {};
+		return numbers;
+	}
+
 	public String helpText(Context context) {
 		return context.getString(R.string.devices_help_text);
 	}

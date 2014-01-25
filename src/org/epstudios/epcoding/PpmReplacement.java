@@ -11,7 +11,7 @@ public class PpmReplacement extends DeviceProcedure implements Procedure {
 
 	@Override
 	public Code[] primaryCodes() {
-		return Codes.getCodes(Codes.ppmGeneratorReplacementCodeNumbers);
+		return Codes.getCodes(Codes.ppmGeneratorReplacementPrimaryCodeNumbers);
 	}
 
 	@Override
