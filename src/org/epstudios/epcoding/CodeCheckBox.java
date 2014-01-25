@@ -34,6 +34,10 @@ public class CodeCheckBox extends CheckBox {
 		return code;
 	}
 
+	public String getCodeNumber() {
+		return code.getCodeNumber();
+	}
+
 	public void disable() {
 		setChecked(false);
 		setEnabled(false);

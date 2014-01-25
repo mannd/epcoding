@@ -88,9 +88,22 @@ public class ProcedureDetailFragment extends Fragment implements
 								// be shown
 				mItem = Integer.parseInt(itemID);
 		}
+	}
 
-		// Toast.makeText(getActivity(), "mItem = " + mItem, Toast.LENGTH_SHORT)
-		// .show();
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		super.onSaveInstanceState(savedInstanceState);
+		// // store check marks here
+		// Set<String> checkedPrimaryCodeNumbers = new TreeSet<String>();
+		// for (Map.Entry<String, CodeCheckBox> entry :
+		// primaryCheckBoxMap.entrySet()) {
+		// if (entry.getValue().isChecked())
+		// checkedPrimaryCodeNumbers.add(entry.getValue().getCode().getCodeNumber());
+		// }
+		// savedInstanceState..putStringSet("PrimaryCodes",
+		// checkedPrimaryCodeNumbers);
+		// // do same for secondary strings
+
 	}
 
 	@Override
@@ -200,6 +213,19 @@ public class ProcedureDetailFragment extends Fragment implements
 		}
 
 		// apply saved configurations here
+		// if (null != savedInstanceState) {
+		// // restore state
+		// Set<String> primaryCodesStringSet =
+		// savedInstanceState.getStringSet("PrimaryCodes");
+		// for (Map.Entry<String, CodeCheckBox> entry :
+		// primaryCheckBoxMap.entrySet()) {
+		// if
+		// (primaryCodesStringSet.contains(entry.getValue().getCode().getCodeNumber()))
+		// entry.getValue().setChecked(true);
+		//
+		//
+		// }
+		// else
 		loadCoding();
 		// set up buttons
 		summarizeButton = (Button) rootView.findViewById(R.id.summary_button);
@@ -319,9 +345,6 @@ public class ProcedureDetailFragment extends Fragment implements
 	}
 
 	private void save() {
-		// Toast toast = Toast.makeText(context, "Saving codes",
-		// Toast.LENGTH_SHORT);
-		// toast.show();
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		String mItemString = String.valueOf(mItem);
@@ -329,8 +352,7 @@ public class ProcedureDetailFragment extends Fragment implements
 		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
 				.entrySet()) {
 			if (entry.getValue().isChecked())
-				checkedCodeNumbers.add(entry.getValue().getCode()
-						.getCodeNumber());
+				checkedCodeNumbers.add(entry.getValue().getCodeNumber());
 		}
 		SharedPreferences.Editor prefsEditor = prefs.edit();
 		prefsEditor.putStringSet(mItemString, checkedCodeNumbers);
@@ -338,9 +360,6 @@ public class ProcedureDetailFragment extends Fragment implements
 	}
 
 	public void loadCoding() {
-		// Toast toast = Toast.makeText(context, "Loading codes",
-		// Toast.LENGTH_SHORT);
-		// toast.show();
 		load(context);
 	}
 
@@ -354,12 +373,9 @@ public class ProcedureDetailFragment extends Fragment implements
 		// String numbers = codeNumbersChecked.toString();
 		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
 				.entrySet()) {
-			if (codeNumbersChecked.contains(entry.getValue().getCode()
-					.getCodeNumber()))
+			if (codeNumbersChecked.contains(entry.getValue().getCodeNumber()))
 				entry.getValue().setChecked(true);
 		}
-		// Toast toast = Toast.makeText(context, numbers, Toast.LENGTH_SHORT);
-		// toast.show();
 
 	}
 
