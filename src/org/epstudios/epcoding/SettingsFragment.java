@@ -34,7 +34,6 @@ public class SettingsFragment extends PreferenceFragment implements
 			codeVerbosity.setSummary(sharedPreferences.getString(key,
 					defaultVerbosity));
 		}
-
 	}
 
 	@Override

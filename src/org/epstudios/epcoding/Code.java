@@ -55,6 +55,24 @@ public class Code {
 		this.descriptionShown = descriptionShown;
 	}
 
+	// applies _all_ formatting settings with code given first
+	public String getCodeFirstFormatted() {
+		return getCodeNumberWithAddOn()
+				+ (descriptionShown ? " (" + (getFormattedDescription()) + ")"
+						: "");
+	}
+
+	// applies _all_ formatting settings with description given first
+	public String getDescriptionFirstFormatted() {
+		return getFormattedDescription() + " (" + getCodeNumberWithAddOn()
+				+ ")";
+	}
+
+	private String getFormattedDescription() {
+		return descriptionShortened ? truncateString(shortDescription, 20, 10)
+				: shortDescription;
+	}
+
 	private String truncateString(final String s, final int newLength,
 			final int minLength) {
 		if (newLength > s.length() || s.length() < minLength)

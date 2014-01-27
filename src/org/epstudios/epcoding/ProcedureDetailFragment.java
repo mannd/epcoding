@@ -153,7 +153,7 @@ public class ProcedureDetailFragment extends Fragment implements
 		secondaryCodeTextView = (TextView) rootView
 				.findViewById(R.id.secondary_code_textView);
 
-		loadSettings(); // no settings implemented yet
+		loadSettings();
 
 		switch (mItem) {
 		case allProcedures:
@@ -261,6 +261,7 @@ public class ProcedureDetailFragment extends Fragment implements
 			Map<String, CodeCheckBox> codeCheckBoxMap, LinearLayout layout) {
 		for (int i = 0; i < codes.length; ++i) {
 			CodeCheckBox codeCheckBox = new CodeCheckBox(context);
+			codes[i].setPlusShown(plusShownInDisplay);
 			codeCheckBox.setCode(codes[i]);
 			codeCheckBoxMap.put(codes[i].getCodeNumber(), codeCheckBox);
 			layout.addView(codeCheckBox);
@@ -287,10 +288,10 @@ public class ProcedureDetailFragment extends Fragment implements
 				.entrySet()) {
 			if (entry.getValue().isChecked()) {
 				codes[i] = entry.getValue().getCode();
-				// maybe use getCodeNumberWithAddOnWithDescription depending on
-				// settings?
 				codes[i].setPlusShown(plusShownInSummary);
-				message += codes[i++].getCodeNumberWithAddOn() + "\n";
+				codes[i].setDescriptionShown(codeDescriptionInSummary);
+				if (codeDescriptionInSummary)
+					message += codes[i++].getCodeFirstFormatted() + "\n";
 			}
 		}
 		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
@@ -298,7 +299,9 @@ public class ProcedureDetailFragment extends Fragment implements
 			if (entry.getValue().isChecked()) {
 				codes[i] = entry.getValue().getCode();
 				codes[i].setPlusShown(plusShownInSummary);
-				message += codes[i++].getCodeNumberWithAddOn() + "\n";
+				codes[i].setDescriptionShown(codeDescriptionInSummary);
+				if (codeDescriptionInSummary)
+					message += codes[i++].getCodeFirstFormatted() + "\n";
 			}
 		}
 		if (message.isEmpty())
