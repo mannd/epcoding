@@ -93,17 +93,20 @@ public class ProcedureDetailFragment extends Fragment implements
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 		super.onSaveInstanceState(savedInstanceState);
-		// // store check marks here
-		// Set<String> checkedPrimaryCodeNumbers = new TreeSet<String>();
-		// for (Map.Entry<String, CodeCheckBox> entry :
-		// primaryCheckBoxMap.entrySet()) {
-		// if (entry.getValue().isChecked())
-		// checkedPrimaryCodeNumbers.add(entry.getValue().getCode().getCodeNumber());
-		// }
-		// savedInstanceState..putStringSet("PrimaryCodes",
-		// checkedPrimaryCodeNumbers);
-		// // do same for secondary strings
-
+		// store check marks here
+		boolean[] primaryCodeState = new boolean[primaryCheckBoxMap.size()];
+		int i = 0;
+		for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
+				.entrySet())
+			primaryCodeState[i++] = entry.getValue().isChecked();
+		i = 0;
+		boolean[] secondaryCodeState = new boolean[secondaryCheckBoxMap.size()];
+		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
+				.entrySet())
+			secondaryCodeState[i++] = entry.getValue().isChecked();
+		savedInstanceState.putBooleanArray("primary_codes", primaryCodeState);
+		savedInstanceState.putBooleanArray("secondary_codes",
+				secondaryCodeState);
 	}
 
 	@Override
@@ -213,20 +216,27 @@ public class ProcedureDetailFragment extends Fragment implements
 		}
 
 		// apply saved configurations here
-		// if (null != savedInstanceState) {
-		// // restore state
-		// Set<String> primaryCodesStringSet =
-		// savedInstanceState.getStringSet("PrimaryCodes");
-		// for (Map.Entry<String, CodeCheckBox> entry :
-		// primaryCheckBoxMap.entrySet()) {
-		// if
-		// (primaryCodesStringSet.contains(entry.getValue().getCode().getCodeNumber()))
-		// entry.getValue().setChecked(true);
-		//
-		//
-		// }
-		// else
-		loadCoding();
+		if (null != savedInstanceState) {
+			// restore state
+			boolean[] primaryCodesState = savedInstanceState
+					.getBooleanArray("primary_codes");
+			boolean[] secondaryCodesState = savedInstanceState
+					.getBooleanArray("secondary_codes");
+			int i = 0;
+			for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
+					.entrySet())
+				entry.getValue().setChecked(primaryCodesState[i++]);
+			i = 0;
+			for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
+					.entrySet())
+				entry.getValue().setChecked(secondaryCodesState[i++]);
+			// if
+			// (primaryCodesStringSet.contains(entry.getValue().getCode().getCodeNumber()))
+			// entry.getValue().setChecked(true);
+			//
+			//
+		} else
+			loadCoding();
 		// set up buttons
 		summarizeButton = (Button) rootView.findViewById(R.id.summary_button);
 		summarizeButton.setOnClickListener(this);
