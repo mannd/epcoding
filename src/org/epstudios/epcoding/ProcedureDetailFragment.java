@@ -39,7 +39,16 @@ public class ProcedureDetailFragment extends Fragment implements
 	 */
 	private int mItem = 0;
 
+	// get context from owning Activity
 	private Context context;
+
+	// Settings
+	boolean plusShownInDisplay; // show plus in main display
+	boolean allowChangingPrimaryCodes;
+	boolean plusShownInSummary;
+	boolean codeDescriptionInSummary;
+	String codeVerbosity;
+	// shorten description based on screen width?
 
 	private LinearLayout primaryCheckBoxLayout;
 	private LinearLayout secondaryCheckBoxLayout;
@@ -81,13 +90,19 @@ public class ProcedureDetailFragment extends Fragment implements
 		super.onCreate(savedInstanceState);
 
 		if (getArguments().containsKey(ARG_ITEM_ID)) {
-			// Load the content specified by the fragment
-			// arguments.
 			String itemID = getArguments().getString(ARG_ITEM_ID);
-			if (itemID != null) // if it is null, screen 0 (AFB ablation) will
-								// be shown
+			try {
 				mItem = Integer.parseInt(itemID);
+			} catch (NumberFormatException e) {
+				mItem = 0; // AFB ablation will be shown
+			}
 		}
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		loadSettings();
 	}
 
 	@Override
@@ -191,7 +206,7 @@ public class ProcedureDetailFragment extends Fragment implements
 
 		if (secondaryCodes.length > 0) {
 			createCheckBoxLayoutAndCodeMap(secondaryCodes,
-					secondaryCheckBoxMap, secondaryCheckBoxLayout, context);
+					secondaryCheckBoxMap, secondaryCheckBoxLayout);
 		} else {
 			secondaryCheckBoxLayout.setVisibility(View.GONE);
 			secondaryCodeTextView.setVisibility(View.GONE);
@@ -204,7 +219,7 @@ public class ProcedureDetailFragment extends Fragment implements
 			secondaryCheckBoxMap.get(disabledCodeNumbers[i]).disable();
 
 		createCheckBoxLayoutAndCodeMap(primaryCodes, primaryCheckBoxMap,
-				primaryCheckBoxLayout, context);
+				primaryCheckBoxLayout);
 
 		if (procedure.disablePrimaryCodes()) {
 			// check and disable primary checkboxes for ablation type items
@@ -230,11 +245,6 @@ public class ProcedureDetailFragment extends Fragment implements
 			for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
 					.entrySet())
 				entry.getValue().setChecked(secondaryCodesState[i++]);
-			// if
-			// (primaryCodesStringSet.contains(entry.getValue().getCode().getCodeNumber()))
-			// entry.getValue().setChecked(true);
-			//
-			//
 		} else
 			loadCoding();
 		// set up buttons
@@ -248,8 +258,7 @@ public class ProcedureDetailFragment extends Fragment implements
 	}
 
 	private void createCheckBoxLayoutAndCodeMap(Code[] codes,
-			Map<String, CodeCheckBox> codeCheckBoxMap, LinearLayout layout,
-			Context context) {
+			Map<String, CodeCheckBox> codeCheckBoxMap, LinearLayout layout) {
 		for (int i = 0; i < codes.length; ++i) {
 			CodeCheckBox codeCheckBox = new CodeCheckBox(context);
 			codeCheckBox.setCode(codes[i]);
@@ -280,6 +289,7 @@ public class ProcedureDetailFragment extends Fragment implements
 				codes[i] = entry.getValue().getCode();
 				// maybe use getCodeNumberWithAddOnWithDescription depending on
 				// settings?
+				codes[i].setPlusShown(plusShownInSummary);
 				message += codes[i++].getCodeNumberWithAddOn() + "\n";
 			}
 		}
@@ -287,6 +297,7 @@ public class ProcedureDetailFragment extends Fragment implements
 				.entrySet()) {
 			if (entry.getValue().isChecked()) {
 				codes[i] = entry.getValue().getCode();
+				codes[i].setPlusShown(plusShownInSummary);
 				message += codes[i++].getCodeNumberWithAddOn() + "\n";
 			}
 		}
@@ -392,15 +403,15 @@ public class ProcedureDetailFragment extends Fragment implements
 	public void loadSettings() {
 		SharedPreferences sharedPreferences = PreferenceManager
 				.getDefaultSharedPreferences(context);
-		boolean showPlusDisplay = sharedPreferences.getBoolean(
+		plusShownInDisplay = sharedPreferences.getBoolean(
 				"show_plus_code_display", true);
-		boolean allowChangingPrimaryCodes = sharedPreferences.getBoolean(
+		allowChangingPrimaryCodes = sharedPreferences.getBoolean(
 				"allow_changing_primary_codes", false);
-		boolean showPlusCodeSummary = sharedPreferences.getBoolean(
+		plusShownInSummary = sharedPreferences.getBoolean(
 				"show_plus_code_summary", true);
-		boolean showDetailsCodeSummary = sharedPreferences.getBoolean(
+		codeDescriptionInSummary = sharedPreferences.getBoolean(
 				"show_details_code_summary", false);
-		String codeVerbosity = sharedPreferences.getString("code_verbosity",
-				"VERBOSE");
+		codeVerbosity = sharedPreferences
+				.getString("code_verbosity", "VERBOSE");
 	}
 }

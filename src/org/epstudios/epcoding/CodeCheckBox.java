@@ -13,17 +13,6 @@ public class CodeCheckBox extends CheckBox {
 		code = Codes.getCode("99999");
 	}
 
-	// public static void createCheckBoxMap(Context context, Map<String,
-	// CodeCheckBox> map, Layout layout) {
-	// for (int i = 0; i < map.length; ++i) {
-	// CodeCheckBox secondaryCheckBox = new CodeCheckBox(context);
-	// secondaryCheckBox.setCode(map[i]);
-	// secondaryCheckBoxMap.put(map[i].getCodeNumber(),
-	// secondaryCheckBox);
-	// secondaryCheckBoxLayout.addView(secondaryCheckBox);
-	// }
-	// }
-
 	public void setCode(Code c) {
 		code = c;
 		// text is automatically set to code description
