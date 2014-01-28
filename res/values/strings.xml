@@ -19,7 +19,7 @@
         pulmonary vein isolation</string>
     <string name="edit_code_list_title">Edit Code List</string>
     <string name="save_code_selection_title">Save Code Selection</string>
-    <string name="settings_title">Settings</string>
+    <string name="settings_title">Coding Summary Settings</string>
     <string name="about_title">About</string>
     <string name="about_label">About EP Coding</string>
     <string name="settings_shortcut">s</string>
@@ -47,7 +47,7 @@
     <string name="code_93623_label">Induce post IV Drug (93623)</string>
     <string name="code_93662_label">Intra-cardiac Echo (93662)</string>
     <string name="code_93462_label">Transseptal Cath (93462)</string>
-    <string name="coding_summary_label">Summary</string>
+    <string name="coding_summary_label">Summarize</string>
     <string name="coding_summary_dialog_label">Coding Summary</string>
     <string name="clear_label">Clear</string>
     <string name="help_label">Help</string>
@@ -69,10 +69,15 @@
     <string name="no_code_errors_message">No errors found in code analysis.</string>
     <string name="no_code_analysis_performed_message">Please note that no analysis of coding is done when using the All Codes module.</string>
     <string name="code_display_settings_label">Code Display</string>
-    <string name="show_add_on_plus_label">Show + for add-on codes</string>
-    <string name="allow_changing_primary_codes_label">Primary codes enabled</string>
+    <string name="show_add_on_plus_label">Distinguish add-on codes</string>
+    <string name="show_add_on_plus_on_summary">Add-on codes have +</string>
+    <string name="show_add_on_plus_off_summary">Add-on codes don\'t have +</string>
     <string name="code_summary_settings_label">Code Summary</string>
-    <string name="show_code_details_label">Show code details</string>
+    <string name="show_code_details_label">Show descriptions</string>
+    <string name="show_code_details_on_summary">Show codes and descriptions</string>
+    <string name="show_code_details_off_summary">Show codes only</string>
+    <string name="truncate_code_descriptions_label">Truncate descriptions</string>
+    <string name="truncate_code_descriptions_summary">Long descriptions can clutter screen</string>
     <string name="code_analysis_verbosity_label">Code analysis verbosity</string>
     <string name="code_verbosity_key">code_verbosity</string>
     <string name="default_verbosity">Verbose</string>

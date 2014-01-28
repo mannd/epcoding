@@ -1,32 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceCategory android:title="@string/code_display_settings_label" >
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="show_plus_code_display"
-            android:title="@string/show_add_on_plus_label" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="allow_changing_primary_codes"
-            android:title="@string/allow_changing_primary_codes_label" />
-    </PreferenceCategory>
-    <PreferenceCategory android:title="@string/code_summary_settings_label" >
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="show_plus_code_summary"
-            android:title="@string/show_add_on_plus_label" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="show_details_code_summary"
-            android:title="@string/show_code_details_label" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="show_plus_code_summary"
+        android:summaryOff="@string/show_add_on_plus_off_summary"
+        android:summaryOn="@string/show_add_on_plus_on_summary"
+        android:title="@string/show_add_on_plus_label" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="show_details_code_summary"
+        android:summaryOff="@string/show_code_details_off_summary"
+        android:summaryOn="@string/show_code_details_on_summary"
+        android:title="@string/show_code_details_label" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="truncate_long_descriptions_code_summary"
+        android:summary="@string/truncate_code_descriptions_summary"
+        android:title="@string/truncate_code_descriptions_label" />
 
-        <ListPreference
-            android:defaultValue="Verbose"
-            android:entries="@array/verbosity_names"
-            android:entryValues="@array/verbosity_values"
-            android:key="@string/code_verbosity_key"
-            android:title="@string/code_analysis_verbosity_label" />
-    </PreferenceCategory>
+    <ListPreference
+        android:defaultValue="Verbose"
+        android:entries="@array/verbosity_names"
+        android:entryValues="@array/verbosity_values"
+        android:key="@string/code_verbosity_key"
+        android:title="@string/code_analysis_verbosity_label" />
 
 </PreferenceScreen>

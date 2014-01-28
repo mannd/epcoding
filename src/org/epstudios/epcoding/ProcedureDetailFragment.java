@@ -43,10 +43,11 @@ public class ProcedureDetailFragment extends Fragment implements
 	private Context context;
 
 	// Settings
-	boolean plusShownInDisplay; // show plus in main display
-	boolean allowChangingPrimaryCodes;
+	// boolean plusShownInDisplay; // show plus in main display
+	// boolean allowChangingPrimaryCodes;
 	boolean plusShownInSummary;
 	boolean codeDescriptionInSummary;
+	boolean descriptionTruncatedInSummary;
 	String codeVerbosity;
 	// shorten description based on screen width?
 
@@ -261,7 +262,7 @@ public class ProcedureDetailFragment extends Fragment implements
 			Map<String, CodeCheckBox> codeCheckBoxMap, LinearLayout layout) {
 		for (int i = 0; i < codes.length; ++i) {
 			CodeCheckBox codeCheckBox = new CodeCheckBox(context);
-			codes[i].setPlusShown(plusShownInDisplay);
+			// codes[i].setPlusShown(plusShownInDisplay);
 			codeCheckBox.setCode(codes[i]);
 			codeCheckBoxMap.put(codes[i].getCodeNumber(), codeCheckBox);
 			layout.addView(codeCheckBox);
@@ -290,8 +291,7 @@ public class ProcedureDetailFragment extends Fragment implements
 				codes[i] = entry.getValue().getCode();
 				codes[i].setPlusShown(plusShownInSummary);
 				codes[i].setDescriptionShown(codeDescriptionInSummary);
-				if (codeDescriptionInSummary)
-					message += codes[i++].getCodeFirstFormatted() + "\n";
+				message += codes[i++].getCodeFirstFormatted() + "\n";
 			}
 		}
 		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
@@ -300,8 +300,7 @@ public class ProcedureDetailFragment extends Fragment implements
 				codes[i] = entry.getValue().getCode();
 				codes[i].setPlusShown(plusShownInSummary);
 				codes[i].setDescriptionShown(codeDescriptionInSummary);
-				if (codeDescriptionInSummary)
-					message += codes[i++].getCodeFirstFormatted() + "\n";
+				message += codes[i++].getCodeFirstFormatted() + "\n";
 			}
 		}
 		if (message.isEmpty())
@@ -406,10 +405,10 @@ public class ProcedureDetailFragment extends Fragment implements
 	public void loadSettings() {
 		SharedPreferences sharedPreferences = PreferenceManager
 				.getDefaultSharedPreferences(context);
-		plusShownInDisplay = sharedPreferences.getBoolean(
-				"show_plus_code_display", true);
-		allowChangingPrimaryCodes = sharedPreferences.getBoolean(
-				"allow_changing_primary_codes", false);
+		// plusShownInDisplay = sharedPreferences.getBoolean(
+		// "show_plus_code_display", true);
+		// allowChangingPrimaryCodes = sharedPreferences.getBoolean(
+		// "allow_changing_primary_codes", false);
 		plusShownInSummary = sharedPreferences.getBoolean(
 				"show_plus_code_summary", true);
 		codeDescriptionInSummary = sharedPreferences.getBoolean(
