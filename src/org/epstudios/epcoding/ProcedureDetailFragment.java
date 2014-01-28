@@ -291,6 +291,7 @@ public class ProcedureDetailFragment extends Fragment implements
 				codes[i] = entry.getValue().getCode();
 				codes[i].setPlusShown(plusShownInSummary);
 				codes[i].setDescriptionShown(codeDescriptionInSummary);
+				codes[i].setDescriptionShortened(descriptionTruncatedInSummary);
 				message += codes[i++].getCodeFirstFormatted() + "\n";
 			}
 		}
@@ -300,6 +301,7 @@ public class ProcedureDetailFragment extends Fragment implements
 				codes[i] = entry.getValue().getCode();
 				codes[i].setPlusShown(plusShownInSummary);
 				codes[i].setDescriptionShown(codeDescriptionInSummary);
+				codes[i].setDescriptionShortened(descriptionTruncatedInSummary);
 				message += codes[i++].getCodeFirstFormatted() + "\n";
 			}
 		}
@@ -410,9 +412,13 @@ public class ProcedureDetailFragment extends Fragment implements
 		// allowChangingPrimaryCodes = sharedPreferences.getBoolean(
 		// "allow_changing_primary_codes", false);
 		plusShownInSummary = sharedPreferences.getBoolean(
-				"show_plus_code_summary", true);
+				getString(R.string.show_plus_code_summary_key), true);
 		codeDescriptionInSummary = sharedPreferences.getBoolean(
-				"show_details_code_summary", false);
+				getString(R.string.show_details_code_summary_key), false);
+		descriptionTruncatedInSummary = sharedPreferences
+				.getBoolean(
+						getString(R.string.truncate_long_descriptions_code_summary_key),
+						false);
 		codeVerbosity = sharedPreferences
 				.getString("code_verbosity", "VERBOSE");
 	}

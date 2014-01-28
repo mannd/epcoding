@@ -69,14 +69,13 @@ public class Code {
 	}
 
 	private String getFormattedDescription() {
-		return descriptionShortened ? truncateString(shortDescription, 20, 10)
+		return descriptionShortened ? truncateString(shortDescription, 22)
 				: shortDescription;
 	}
 
-	private String truncateString(final String s, final int newLength,
-			final int minLength) {
-		if (newLength > s.length() || s.length() < minLength)
+	private String truncateString(final String s, final int newLength) {
+		if (newLength > s.length())
 			return s;
-		return s.substring(0, s.length() - 3) + "...";
+		return s.substring(0, newLength - 3) + "...";
 	}
 }

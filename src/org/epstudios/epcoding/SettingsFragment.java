@@ -10,6 +10,8 @@ public class SettingsFragment extends PreferenceFragment implements
 		OnSharedPreferenceChangeListener {
 	private String defaultVerbosity;
 	private String verbosityKey;
+	private String showDescriptionsKey;
+	private String truncateDescriptionsKey;
 
 	public SettingsFragment() {
 		// empty constructor
@@ -20,10 +22,17 @@ public class SettingsFragment extends PreferenceFragment implements
 		super.onCreate(savedInstanceState);
 		defaultVerbosity = getActivity().getString(R.string.default_verbosity);
 		verbosityKey = getActivity().getString(R.string.code_verbosity_key);
+		showDescriptionsKey = getActivity().getString(
+				R.string.show_details_code_summary_key);
+		truncateDescriptionsKey = getActivity().getString(
+				R.string.truncate_long_descriptions_code_summary_key);
 		addPreferencesFromResource(R.xml.settings);
 		Preference codeVerbosity = findPreference(verbosityKey);
 		codeVerbosity.setSummary(getPreferenceScreen().getSharedPreferences()
 				.getString(verbosityKey, defaultVerbosity));
+		Preference truncatePreference = findPreference(truncateDescriptionsKey);
+		truncatePreference.setEnabled(getPreferenceScreen()
+				.getSharedPreferences().getBoolean(showDescriptionsKey, true));
 	}
 
 	@Override
@@ -33,6 +42,11 @@ public class SettingsFragment extends PreferenceFragment implements
 			Preference codeVerbosity = findPreference(key);
 			codeVerbosity.setSummary(sharedPreferences.getString(key,
 					defaultVerbosity));
+		}
+		if (key.equals(showDescriptionsKey)) {
+			boolean isEnabled = sharedPreferences.getBoolean(key, true);
+			Preference truncateDescriptions = findPreference(truncateDescriptionsKey);
+			truncateDescriptions.setEnabled(isEnabled);
 		}
 	}
 
