@@ -16,12 +16,20 @@ public class Codes {
 		// Ablation and EP testing codes
 
 		// EP Testing and Mapping
+		// older codes
+		addCode(map, "93600", "His bundle recording only", false);
+
 		addCode(map, "93609", "2D mapping", true);
 		addCode(map, "93613", "3D mapping", true);
-		addCode(map, "93620", "EP testing", false);
+		addCode(map, "93619",
+				"EP testing without attempted arrhythmia induction", false);
+		addCode(map, "93620", "EP testing with attempted arrhythmia induction",
+				false);
 		addCode(map, "93621", "LA pacing & recording", true);
 		addCode(map, "93622", "LV pacing & recording", true);
 		addCode(map, "93623", "Induce post IV drug", true);
+		addCode(map, "93624", "Follow-up EP testing", false);
+		addCode(map, "93631", "Intro-op mapping", false);
 
 		// Ablation
 		addCode(map, "93650", "AV node ablation", false);
@@ -34,14 +42,29 @@ public class Codes {
 		// Ancillary to EP Testing/Ablation, Other EP Procedures
 		addCode(map, "92960", "Cardioversion (external)", false);
 		addCode(map, "92961", "Cardioversion (internal)", false);
+		// note, not clear if 92961 can be used with ICD cardioversion
+
 		// skipped code 93640 used to test leads externally, not through device
-		addCode(map, "93641", "DFT testing at time of ICD implant/replacement",
+		addCode(map, "93641",
+				"DFT testing using ICD at time of ICD implant/replacement",
 				false);
-		addCode(map, "93642", "Transseptal cath", true);
+		addCode(map, "93642",
+				"DFT testing using ICD not at time of implant/replacement",
+				false);
+		addCode(map, "93462", "Transseptal cath", true);
 		addCode(map, "93660", "Tilt table test", false);
 		addCode(map, "93662", "Intracardiac echo", true);
 
+		// Unlisted procedure
+		addCode(map, "93799", "Unlisted procedure", false);
+
 		// Devices
+
+		// Surgical approach
+		addCode(map, "33202", "Insert epicardial electrode(s), open approach",
+				false);
+		addCode(map, "33203", "Insert epicardial electrode(s) endoscopically",
+				false);
 
 		// New PPM
 		addCode(map, "33206", "New or replacement PPM with new A lead", false);
@@ -52,9 +75,16 @@ public class Codes {
 		// Leads
 		addCode(map, "33210", "Insert temporary transvenous pacing electrode",
 				false);
+		addCode(map, "33211",
+				"Insert temporary transvenous A and V pacing electrodes", false);
+		addCode(map, "33215", "Repositioning of PPM or ICD electrode", false);
 		addCode(map, "33216", "Place single lead (A or V, PPM or ICD) only",
 				false);
 		addCode(map, "33217", "Place dual leads (PPM or ICD) only", false);
+		addCode(map, "33218", "Repair of single (PPM or ICD) electrode", false);
+		addCode(map, "33220", "Repair of 2 (PPM or ICD) electrodes", false);
+		addCode(map, "33222", "PPM pocket revision", false);
+		addCode(map, "33223", "ICD pocket revision", false);
 
 		// PPM Generators
 		addCode(map, "33212",
@@ -138,7 +168,8 @@ public class Codes {
 	public final static String[] svtAblationPrimaryCodeNumbers = { "93653" };
 	public final static String[] vtAblationPrimaryCodeNumbers = { "93654" };
 	public final static String[] avnAblationPrimaryCodeNumbers = { "93650" };
-	public final static String[] epTestingPrimaryCodeNumbers = { "93620" };
+	public final static String[] epTestingPrimaryCodeNumbers = { "93619",
+			"93620" };
 	public final static String[] subQIcdPrimaryCodeNumbers = { "0319T",
 			"0320T", "0321T", "0322T", "0323T", "0324T", "0325T", "0326T",
 			"0327T", "0328T" };
@@ -164,7 +195,7 @@ public class Codes {
 
 	public final static String[] ablationSecondaryCodeNumbers = { "93655",
 			"93657", "93609", "93613", "93621", "93622", "93623", "93662",
-			"93642", "36620" };
+			"93462", "36620" };
 
 	// epTestingSecondaryCodeNumbers need to include device implants
 
@@ -178,7 +209,7 @@ public class Codes {
 			"33210", "92960", "92961" };
 
 	public final static String[] afbAblationDisabledCodeNumbers = { "93621",
-			"93642" };
+			"93462" };
 	public final static String[] svtAblationDisabledCodeNumbers = { "93657" };
 	public final static String[] vtAblationDisabledCodeNumbers = { "93657",
 			"93609", "93613", "93622" };

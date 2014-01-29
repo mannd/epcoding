@@ -282,8 +282,11 @@ public class ProcedureDetailFragment extends Fragment implements
 	private void summarizeCoding() {
 		String message = "";
 		// we will extract the raw selected codes and shoot them to the code
-		// analyzer
+		// analyzer, as well as check for no primary or secondary codes
 		Code[] codes = new Code[Codes.allCodesSize()];
+		int primaryCodeCounter = 0;
+		boolean noPrimaryCodes = true;
+		boolean noSecondaryCodes = true;
 		int i = 0;
 		for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
 				.entrySet()) {
@@ -295,6 +298,8 @@ public class ProcedureDetailFragment extends Fragment implements
 				message += codes[i++].getCodeFirstFormatted() + "\n";
 			}
 		}
+		primaryCodeCounter = i;
+		noPrimaryCodes = primaryCodeCounter == 0;
 		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
 				.entrySet()) {
 			if (entry.getValue().isChecked()) {
@@ -305,17 +310,22 @@ public class ProcedureDetailFragment extends Fragment implements
 				message += codes[i++].getCodeFirstFormatted() + "\n";
 			}
 		}
-		if (message.isEmpty())
-			message = getString(R.string.no_codes_selected_label);
-		else
-			// analyze codes for problems
-			message += codeAnalysis(codes);
+		noSecondaryCodes = primaryCodeCounter == i;
+		// analyze codes for problems
+		message += codeAnalysis(codes, noPrimaryCodes, noSecondaryCodes);
 		displayMessage(getString(R.string.coding_summary_dialog_label), message);
 	}
 
-	private String codeAnalysis(Code[] codes) {
-		// use primary and secondary code maps for analysis
-		// assumes user has selected some codes (checked in calling function)
+	private String codeAnalysis(Code[] codes, boolean noPrimaryCodes,
+			boolean noSecondaryCodes) {
+		// CodeAnalyzer analyzer = new CodeAnalyzer.analyze(codes,
+		// noPrimaryCodes,
+		// noSecondaryCodes, context);
+		// analyzer.setVerbosity(codeVerbosity);
+		// return analyzer.analysisMessage();
+		// for now:
+		if (noPrimaryCodes && noSecondaryCodes)
+			return getString(R.string.no_codes_selected_label);
 		// No code analysis done for All Codes
 		if (mItem == allProcedures)
 			return getString(R.string.no_code_analysis_performed_message);

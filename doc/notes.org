@@ -15,11 +15,11 @@
    logical order.  It makes no sense to put the A line code in first,
    even though it comes numerically before the others.
 ** Write help texts
-** Put Settings in?
+** DONE Put Settings in?
    - verbosity setting for coding summary
    - coding analysis warning levels?
    - ? toggle coding analysis
-** Bugs
+** DONE Bugs
    - rotation of screen loses check marks
 * Settings screen
   - Settings
@@ -30,3 +30,64 @@
       - Show + for add-on codes
       - Show code details
       - Code analysis verbosity
+* Code analysis
+** Errors and warnings
+   - do not report 2D and 3D mapping together
+   - 2D mapping and AV node ablation may not be allowed
+   - Note clear if temp V pacer and AV node ablation can be billed
+     together
+   - Warm if no secondary codes chosen (unlikely AFB ablation done
+     with mapping, eg.)
+   - Warn if EP testing without arrhythmia induction coded
+   - Disallow 93619 and 93620 together
+   - Possibly do check for forbidden combinations in AllCodes
+     (e.g. SVT ablation + additional AFB ablation)
+** Verbosity
+*** Brief
+    - Errors
+      - 93619 & 93620
+      - All Addon codes
+      - 93414 & 93621
+    - Warnings
+      - No secondary codes
+      - No primary codes
+      - ? No mapping codes
+*** Verbose
+    - Errors
+      - 93619 & 93620: do not combine 2D and 3D mapping
+      - All Addon codes: you must have some non-addon codes to use
+        addon codes
+    - Warnings
+      - No secondary codes: you may be missing some secondary codes
+      - No mapping codes: most ablation procedures include mapping
+** Mechanics
+   - Forbidden codes sets 
+     e.g. { 93619, 93620 }
+   - make string sets of all codes, primary, and secondary codes
+   - check for no primary and no secondary
+   - check if all codes set contains any forbidden set
+** Symbols
+   - Error: ⚠ u26A0 (or use this as warning with X as error) or Ⓧ u24cd
+   - NO errors: ☺ u263a
+   - Warning: ? or ?? or X or ⚠ u26A0
+* Help notes
+** Purpose
+   - Only EP!!
+   - Allow easy look-up of commonly used codes
+   - Define common coding scenarios
+   - Demonstrate which codes cannot be combined
+   - Help with code entry by physician in EHR such as EPIC
+   - Meant to help the EP physician do what is required by EHR
+** Excluded
+   - Office codes
+   - Surgical codes
+   - Device interrogation/follow-up codes
+   - Modifiers
+   - Code components
+* Limitations
+  - Code descriptions are paraphrased
+  - All information freely available on web
+  - Not for trained coders
+  - Physician and coder must still be familiar with components and
+    document properly and completely
+
