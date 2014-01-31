@@ -318,24 +318,23 @@ public class ProcedureDetailFragment extends Fragment implements
 
 	private String codeAnalysis(Code[] codes, boolean noPrimaryCodes,
 			boolean noSecondaryCodes) {
-		// CodeAnalyzer analyzer = new CodeAnalyzer.analyze(codes,
-		// noPrimaryCodes,
-		// noSecondaryCodes, context);
-		// analyzer.setVerbosity(codeVerbosity);
-		// return analyzer.analysisMessage();
+		CodeAnalyzer analyzer = new CodeAnalyzer(codes, noPrimaryCodes,
+				noSecondaryCodes, context);
+		analyzer.setVerbose(codeVerbosity.equals("Verbose"));
+		// return analyzer.analysis();
 		// for now:
-		if (noPrimaryCodes && noSecondaryCodes)
-			return getString(R.string.no_codes_selected_label);
 		// No code analysis done for All Codes
-		if (mItem == allProcedures)
-			return getString(R.string.no_code_analysis_performed_message);
+		// if (mItem == allProcedures) {
+		// return getString(R.string.no_code_analysis_performed_message);
+		// // return getString(R.string.no_code_analysis_performed_message);
+		// }
 		// this is a big chunk of analysis that can be as sophisticated as we
 		// want
 		// Maybe delegate to a class
 		// String message = CodeAnalyzer.analyze(codes);
 		// return message;
 		// if no errors found above will:
-		return getString(R.string.no_code_errors_message);
+		return analyzer.analysis();
 	}
 
 	private void help() {
