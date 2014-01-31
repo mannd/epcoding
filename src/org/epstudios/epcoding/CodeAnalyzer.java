@@ -6,14 +6,17 @@ public class CodeAnalyzer {
 	private final Code[] codes;
 	private final boolean noPrimaryCodes;
 	private final boolean noSecondaryCodes;
+	private final boolean moduleHasNoSecondaryCodes;
 	private final Context context;
 	private boolean verbose = false;
 
 	public CodeAnalyzer(final Code[] codes, final boolean noPrimaryCodes,
-			final boolean noSecondaryCodes, final Context context) {
+			final boolean noSecondaryCodes,
+			final boolean moduleHasNoSecondaryCodes, final Context context) {
 		this.codes = codes;
 		this.noPrimaryCodes = noPrimaryCodes;
 		this.noSecondaryCodes = noSecondaryCodes;
+		this.moduleHasNoSecondaryCodes = moduleHasNoSecondaryCodes;
 		this.context = context;
 	}
 
@@ -38,7 +41,7 @@ public class CodeAnalyzer {
 		else if (noPrimaryCodes)
 			message = getMessage(ERROR, R.string.no_primary_codes_message,
 					R.string.no_primary_codes_verbose_message);
-		else if (noSecondaryCodes)
+		else if (noSecondaryCodes && !moduleHasNoSecondaryCodes)
 			message = getMessage(WARNING, R.string.no_secondary_codes_message,
 					R.string.no_secondary_codes_verbose_message);
 		else

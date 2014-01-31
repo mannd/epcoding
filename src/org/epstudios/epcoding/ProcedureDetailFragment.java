@@ -287,6 +287,7 @@ public class ProcedureDetailFragment extends Fragment implements
 		int primaryCodeCounter = 0;
 		boolean noPrimaryCodes = true;
 		boolean noSecondaryCodes = true;
+		boolean moduleHasNoSecondaryCodes = false;
 		int i = 0;
 		for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
 				.entrySet()) {
@@ -300,26 +301,33 @@ public class ProcedureDetailFragment extends Fragment implements
 		}
 		primaryCodeCounter = i;
 		noPrimaryCodes = primaryCodeCounter == 0;
-		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
-				.entrySet()) {
-			if (entry.getValue().isChecked()) {
-				codes[i] = entry.getValue().getCode();
-				codes[i].setPlusShown(plusShownInSummary);
-				codes[i].setDescriptionShown(codeDescriptionInSummary);
-				codes[i].setDescriptionShortened(descriptionTruncatedInSummary);
-				message += codes[i++].getCodeFirstFormatted() + "\n";
+		// see if there are any secondary codes to begin with
+		if (secondaryCheckBoxMap.size() == 0)
+			moduleHasNoSecondaryCodes = true;
+		else {
+			for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
+					.entrySet()) {
+				if (entry.getValue().isChecked()) {
+					codes[i] = entry.getValue().getCode();
+					codes[i].setPlusShown(plusShownInSummary);
+					codes[i].setDescriptionShown(codeDescriptionInSummary);
+					codes[i].setDescriptionShortened(descriptionTruncatedInSummary);
+					message += codes[i++].getCodeFirstFormatted() + "\n";
+				}
 			}
+			noSecondaryCodes = primaryCodeCounter == i;
 		}
-		noSecondaryCodes = primaryCodeCounter == i;
 		// analyze codes for problems
-		message += codeAnalysis(codes, noPrimaryCodes, noSecondaryCodes);
+		message += codeAnalysis(codes, noPrimaryCodes, noSecondaryCodes,
+				moduleHasNoSecondaryCodes);
 		displayMessage(getString(R.string.coding_summary_dialog_label), message);
 	}
 
-	private String codeAnalysis(Code[] codes, boolean noPrimaryCodes,
-			boolean noSecondaryCodes) {
+	private String codeAnalysis(final Code[] codes,
+			final boolean noPrimaryCodes, final boolean noSecondaryCodes,
+			final boolean moduleHasNoSecondaryCodes) {
 		CodeAnalyzer analyzer = new CodeAnalyzer(codes, noPrimaryCodes,
-				noSecondaryCodes, context);
+				noSecondaryCodes, moduleHasNoSecondaryCodes, context);
 		analyzer.setVerbose(codeVerbosity.equals("Verbose"));
 		// return analyzer.analysis();
 		// for now:

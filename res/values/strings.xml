@@ -26,9 +26,9 @@
     <string name="empty_message"></string>
     <string name="no_codes_selected_label">No codes selected.</string>
     <string name="no_primary_codes_message">No primary codes.</string>
-    <string name="no_primary_codes_verbose_message">You can\'t just have secondary codes.</string>
-    <string name="no_secondary_codes_message">No secondary codes selected.</string>
-    <string name="no_secondary_codes_verbose_message">You may be missing codes.</string>
+    <string name="no_primary_codes_verbose_message">You shouldn\'t just have additional codes.</string>
+    <string name="no_secondary_codes_message">No additional codes selected.</string>
+    <string name="no_secondary_codes_verbose_message">Be certain there aren\'t other codes that you are overlooking.</string>
     <string name="ablation_help_text">Temp ablation procedures help text</string>
     <string name="devices_help_text">Temp device procedures help text</string>
     <string name="all_codes_help_text">All codes help text</string>
