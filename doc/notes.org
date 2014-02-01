@@ -69,7 +69,7 @@
 ** Symbols
    - Error: ⚠ u26A0 (or use this as warning with X as error) or Ⓧ u24cd
    - NO errors: ☺ u263a
-   - Warning: ? or ?? or X or ⚠ u26A0
+   - Warning: ? or ?? or X or ⚠ u26A0  Ⓧ
 * Help notes
 ** Purpose
    - Only EP!!
@@ -90,4 +90,3 @@
   - Not for trained coders
   - Physician and coder must still be familiar with components and
     document properly and completely
-

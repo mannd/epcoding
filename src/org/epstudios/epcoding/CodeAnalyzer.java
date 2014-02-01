@@ -32,28 +32,43 @@ public class CodeAnalyzer {
 									// "\u24CD "; x in circle
 		final String OK = ""; // "\u263A "; // smiley face
 
-		String message = null;
+		String message = "";
 		if (noPrimaryCodes && noSecondaryCodes)
 			message = getMessage(WARNING, R.string.no_codes_selected_label,
 					R.string.empty_message);
-		// message = WARNING
-		// + context.getString(R.string.no_codes_selected_label);
-		else if (noPrimaryCodes)
-			message = getMessage(ERROR, R.string.no_primary_codes_message,
-					R.string.no_primary_codes_verbose_message);
-		else if (noSecondaryCodes && !moduleHasNoSecondaryCodes)
-			message = getMessage(WARNING, R.string.no_secondary_codes_message,
-					R.string.no_secondary_codes_verbose_message);
-		else
+		else {
+			if (noPrimaryCodes)
+				message += getMessage(ERROR, R.string.no_primary_codes_message,
+						R.string.no_primary_codes_verbose_message);
+			if (noSecondaryCodes && !moduleHasNoSecondaryCodes)
+				message += getMessage(WARNING,
+						R.string.no_secondary_codes_message,
+						R.string.no_secondary_codes_verbose_message);
+			if (allAddOnCodes())
+				message += getMessage(ERROR, R.string.all_addons_error_message,
+						R.string.all_addons_verbose_error_message);
 			// other processing here
-			message = OK + context.getString(R.string.no_code_errors_message);
+			if (message.length() == 0) // no errors!
+				message = OK
+						+ context.getString(R.string.no_code_errors_message);
+		}
 		return message;
+	}
+
+	private boolean allAddOnCodes() {
+		boolean allAddOns = true;
+		for (int i = 0; i < codes.length; ++i) {
+			if (codes[i] != null && !codes[i].isAddOn())
+				allAddOns = false;
+		}
+		return allAddOns;
 	}
 
 	private String getMessage(final String threat, final int brief,
 			final int details) {
 		return threat
 				+ (verbose ? context.getString(brief) + " "
-						+ context.getString(details) : context.getString(brief));
+						+ context.getString(details) : context.getString(brief))
+				+ "\n";
 	}
 }

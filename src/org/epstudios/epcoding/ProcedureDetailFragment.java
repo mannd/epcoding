@@ -1,6 +1,6 @@
 package org.epstudios.epcoding;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -59,8 +59,8 @@ public class ProcedureDetailFragment extends Fragment implements
 	private Button clearButton;
 	private Button helpButton;
 
-	private final Map<String, CodeCheckBox> primaryCheckBoxMap = new HashMap<String, CodeCheckBox>();
-	private final Map<String, CodeCheckBox> secondaryCheckBoxMap = new HashMap<String, CodeCheckBox>();
+	private final Map<String, CodeCheckBox> primaryCheckBoxMap = new LinkedHashMap<String, CodeCheckBox>();
+	private final Map<String, CodeCheckBox> secondaryCheckBoxMap = new LinkedHashMap<String, CodeCheckBox>();
 
 	// these correspond with the procedure list order
 	final private int afbAblation = 0;
