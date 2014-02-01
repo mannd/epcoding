@@ -45,6 +45,7 @@
 ** Verbosity
 *** Brief
     - Errors
+      - 93609 & 93613
       - 93619 & 93620
       - All Addon codes
       - 93414 & 93621
