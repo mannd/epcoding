@@ -33,12 +33,13 @@ public class Codes {
 		addCode(map, "0327T", "Interrogation of SubQ ICD system", false);
 		addCode(map, "0328T", "Programming of SubQ ICD system", false);
 
-
 		// Surgical approach - surgical codes not included in EP Coding
-		// addCode(map, "33202", "Insert epicardial electrode(s), open approach",
-		// 		false);
-		// addCode(map, "33203", "Insert epicardial electrode(s) endoscopically",
-		// 		false);
+		// addCode(map, "33202",
+		// "Insert epicardial electrode(s), open approach",
+		// false);
+		// addCode(map, "33203",
+		// "Insert epicardial electrode(s) endoscopically",
+		// false);
 
 		// New PPM with leads
 		addCode(map, "33206", "New or replacement PPM with new A lead", false);
@@ -74,6 +75,12 @@ public class Codes {
 
 		addCode(map, "33221", "Implant CRT PPM generator, existing leads",
 				false);
+		addCode(map, "33224",
+				"Addition of LV lead to preexisting ICD/PPM system", false);
+		addCode(map, "33225",
+				"Insertion of LV lead at time of ICD/PPM insertion", true);
+		addCode(map, "33226", "Repositioning of previously implanted LV lead",
+				false);
 
 		// Replacement/removal/extraction
 		addCode(map, "33227", "Single chamber PPM generator replacement", false);
@@ -92,10 +99,6 @@ public class Codes {
 				"Place single chamber ICD generator, existing lead", false);
 		addCode(map, "33241", "Removal of ICD generator without replacement",
 				false);
-		addCode(map, "33224",
-				"Addition of LV lead to preexisting ICD/PPM system", false);
-		addCode(map, "33225",
-				"Insertion of LV lead at time of ICD/PPM insertion", true);
 		addCode(map, "33244", "Removal one or more electrodes, ICD system",
 				false);
 
@@ -108,11 +111,13 @@ public class Codes {
 		addCode(map, "33263", "Replacement of dual lead ICD generator only",
 				false);
 		addCode(map, "33264", "Replacement of CRT ICD generator only", false);
-		addCode(map, "33266", "Repositioning of previously implanted LV lead", false);
 
 		// ILR
 		addCode(map, "33282", "Insertion of loop recorder", false);
 		addCode(map, "33284", "Removal of loop recorder", false);
+
+		addCode(map, "33999",
+				"Unlisted surgical procedure, e.g. SubQ array lead", false);
 
 		// Misc
 		addCode(map, "36620", "Arterial line placement", false);
@@ -178,7 +183,7 @@ public class Codes {
 			"0320T", "0321T", "0322T", "0323T", "0324T", "0325T", "0326T",
 			"0327T", "0328T" };
 	public final static String[] otherProcedurePrimaryCodeNumbers = { "33282",
-																	  "33284", "93660", "92960", "92961", "76000" };
+			"33284", "93660", "92960", "92961", "76000" };
 
 	public final static String[] newPpmPrimaryCodeNumbers = { "33206", "33207",
 			"33208", "33225" };

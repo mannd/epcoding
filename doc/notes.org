@@ -42,6 +42,11 @@
    - Disallow 93619 and 93620 together
    - Possibly do check for forbidden combinations in AllCodes
      (e.g. SVT ablation + additional AFB ablation)
+   - No 76000 with any other device code
+   - For removal and replacement of PPM and leads uses 33233 with
+     33234 or 33235 and 33206-33208
+   - Don't use 33206-33208 with 33227-33229
+   - Don't use 33214 with 33227-33229
 ** Verbosity
 *** Brief
     - Errors
