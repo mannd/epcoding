@@ -17,8 +17,10 @@ public class CodeAnalyzer {
 
 	private final List<String> duplicateMappingCodes = Arrays.asList("93609",
 			"93613");
+	
+	// also need list of codes that can be compared to a single code,
+	// e.g. 76000 should not be used with any other device code
 
-	// enum here for error flags??
 
 	public CodeAnalyzer(final Code[] codes, final boolean noPrimaryCodes,
 			final boolean noSecondaryCodes,

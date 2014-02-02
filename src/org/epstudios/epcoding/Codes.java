@@ -13,6 +13,113 @@ public class Codes {
 		Map<String, Code> map = new HashMap<String, Code>();
 		// addCode(map, String codeNumber, String codeName, boolean isAddOn)
 
+		// Devices ////////////////////////////////////////
+		// SubQ ICD New Codes
+		addCode(map, "0319T",
+				"Implantation of SubQ ICD system (generator + electrode)",
+				false);
+		addCode(map, "0320T", "Insertion of SubQ defibrillator electrode only",
+				false);
+		addCode(map, "0321T",
+				"Insertion of SubQ ICD generator only with existing electrode",
+				false);
+		addCode(map, "0322T", "Removal of SubQ ICD generator only", false);
+		addCode(map, "0323T", "Removal and Replacement of SubQ ICD generator",
+				false);
+		addCode(map, "0324T", "Removal of SubQ ICD electrode", false);
+		addCode(map, "0325T",
+				"Repositioning of SubQ ICD electrode and/or generator", false);
+		addCode(map, "0326T", "EP evaluation of SubQ ICD system", false);
+		addCode(map, "0327T", "Interrogation of SubQ ICD system", false);
+		addCode(map, "0328T", "Programming of SubQ ICD system", false);
+
+
+		// Surgical approach - surgical codes not included in EP Coding
+		// addCode(map, "33202", "Insert epicardial electrode(s), open approach",
+		// 		false);
+		// addCode(map, "33203", "Insert epicardial electrode(s) endoscopically",
+		// 		false);
+
+		// New PPM with leads
+		addCode(map, "33206", "New or replacement PPM with new A lead", false);
+		addCode(map, "33207", "New or replacement PPM with new V lead", false);
+		addCode(map, "33208", "New or replacement PPM with new A and V leads",
+				false);
+
+		// Temporary transvenous electrodes
+		addCode(map, "33210", "Insert temporary transvenous pacing electrode",
+				false);
+		addCode(map, "33211",
+				"Insert temporary transvenous A and V pacing electrodes", false);
+
+		// PPM Generators
+		addCode(map, "33212",
+				"Implant single chamber PPM generator, existing lead", false);
+		addCode(map, "33213",
+				"Implant dual chamber PPM generator, existing leads", false);
+		addCode(map, "33214", "Upgrade single chamber to dual chamber PPM",
+				false);
+
+		// Leads
+		addCode(map, "33215", "Repositioning of PPM or ICD electrode", false);
+		addCode(map, "33216", "Place single lead (A or V, PPM or ICD) only",
+				false);
+		addCode(map, "33217", "Place dual leads (PPM or ICD) only", false);
+		addCode(map, "33218", "Repair of single (PPM or ICD) electrode", false);
+		addCode(map, "33220", "Repair of 2 (PPM or ICD) electrodes", false);
+
+		// Pocket revisions
+		addCode(map, "33222", "PPM pocket revision", false);
+		addCode(map, "33223", "ICD pocket revision", false);
+
+		addCode(map, "33221", "Implant CRT PPM generator, existing leads",
+				false);
+
+		// Replacement/removal/extraction
+		addCode(map, "33227", "Single chamber PPM generator replacement", false);
+		addCode(map, "33228", "Dual chamber PPM generator replacement", false);
+		addCode(map, "33229", "CRT PPM generator replacement", false);
+		addCode(map, "33230",
+				"Place dual chamber ICD generator, existing leads", false);
+		addCode(map, "33231", "Place CRT ICD generator, existing leads", false);
+		addCode(map, "33233", "Removal of PPM generator without replacement",
+				false);
+		addCode(map, "33234", "Removal electrode only single lead PPM system",
+				false);
+		addCode(map, "33235", "Removal electrodes only dual lead PPM system",
+				false);
+		addCode(map, "33240",
+				"Place single chamber ICD generator, existing lead", false);
+		addCode(map, "33241", "Removal of ICD generator without replacement",
+				false);
+		addCode(map, "33224",
+				"Addition of LV lead to preexisting ICD/PPM system", false);
+		addCode(map, "33225",
+				"Insertion of LV lead at time of ICD/PPM insertion", true);
+		addCode(map, "33244", "Removal one or more electrodes, ICD system",
+				false);
+
+		// New ICD/CRT
+		addCode(map, "33249", "New ICD, single or dual, with leads", false);
+
+		// Replacement ICD/CRT
+		addCode(map, "33262", "Replacement of single lead ICD generator only",
+				false);
+		addCode(map, "33263", "Replacement of dual lead ICD generator only",
+				false);
+		addCode(map, "33264", "Replacement of CRT ICD generator only", false);
+		addCode(map, "33266", "Repositioning of previously implanted LV lead", false);
+
+		// ILR
+		addCode(map, "33282", "Insertion of loop recorder", false);
+		addCode(map, "33284", "Removal of loop recorder", false);
+
+		// Misc
+		addCode(map, "36620", "Arterial line placement", false);
+
+		// note fluoroscopy included in device codes, but this code
+		// used e.g to evaluate a lead such as a Riata
+		addCode(map, "76000", "Fluoroscopic lead evaluation", false);
 		// Ablation and EP testing codes
 
 		// EP Testing and Mapping
@@ -58,109 +165,6 @@ public class Codes {
 		// Unlisted procedure
 		addCode(map, "93799", "Unlisted procedure", false);
 
-		// Devices
-
-		// Surgical approach
-		addCode(map, "33202", "Insert epicardial electrode(s), open approach",
-				false);
-		addCode(map, "33203", "Insert epicardial electrode(s) endoscopically",
-				false);
-
-		// New PPM
-		addCode(map, "33206", "New or replacement PPM with new A lead", false);
-		addCode(map, "33207", "New or replacement PPM with new V lead", false);
-		addCode(map, "33208", "New or replacement PPM with new A and V leads",
-				false);
-
-		// Leads
-		addCode(map, "33210", "Insert temporary transvenous pacing electrode",
-				false);
-		addCode(map, "33211",
-				"Insert temporary transvenous A and V pacing electrodes", false);
-		addCode(map, "33215", "Repositioning of PPM or ICD electrode", false);
-		addCode(map, "33216", "Place single lead (A or V, PPM or ICD) only",
-				false);
-		addCode(map, "33217", "Place dual leads (PPM or ICD) only", false);
-		addCode(map, "33218", "Repair of single (PPM or ICD) electrode", false);
-		addCode(map, "33220", "Repair of 2 (PPM or ICD) electrodes", false);
-		addCode(map, "33222", "PPM pocket revision", false);
-		addCode(map, "33223", "ICD pocket revision", false);
-
-		// PPM Generators
-		addCode(map, "33212",
-				"Implant single chamber PPM generator, existing lead", false);
-		addCode(map, "33213",
-				"Implant dual chamber PPM generator, existing leads", false);
-		addCode(map, "33214", "Upgrade single chamber to dual chamber PPM",
-				false);
-		addCode(map, "33221", "Implant CRT PPM generator, existing leads",
-				false);
-
-		// Replacement PPM
-		addCode(map, "33227", "Single chamber PPM generator replacement", false);
-		addCode(map, "33228", "Dual chamber PPM generator replacement", false);
-		addCode(map, "33229", "CRT PPM generator replacement", false);
-		addCode(map, "33233", "Removal of PPM generator without replacement",
-				false);
-
-		// ICD Generators
-		addCode(map, "33240",
-				"Place single chamber ICD generator, existing lead", false);
-		addCode(map, "33230",
-				"Place dual chamber ICD generator, existing leads", false);
-		addCode(map, "33241", "Removal of ICD generator without replacement",
-				false);
-		addCode(map, "33231", "Place CRT ICD generator, existing leads", false);
-
-		// Lead extraction
-		addCode(map, "33234", "Removal electrode only single lead PPM system",
-				false);
-		addCode(map, "33235", "Removal electrodes only dual lead PPM system",
-				false);
-		addCode(map, "33244", "Removal one or more electrodes, ICD system",
-				false);
-
-		// New ICD/CRT
-		addCode(map, "33249", "New ICD, single or dual, with leads", false);
-		addCode(map, "33225",
-				"Insertion of LV lead at time of ICD/PPM insertion", true);
-		addCode(map, "33224",
-				"Addition of LV lead to preexisting ICD/PPM system", false);
-
-		// Replacement ICD/CRT
-		addCode(map, "32229", "Replacement of CRT PPM generator only", false);
-		addCode(map, "33262", "Replacement of single lead ICD generator only",
-				false);
-		addCode(map, "33263", "Replacement of dual lead ICD generator only",
-				false);
-		addCode(map, "33264", "Replacement of CRT ICD generator only", false);
-
-		// ILR
-		addCode(map, "33282", "Insertion of loop recorder", false);
-		addCode(map, "33284", "Removal of loop recorder", false);
-
-		// Misc
-		addCode(map, "36620", "Arterial line placement", false);
-
-		// SubQ ICD New Codes
-		addCode(map, "0319T",
-				"Implantation of SubQ ICD system (generator + electrode)",
-				false);
-		addCode(map, "0320T", "Insertion of SubQ defibrillator electrode only",
-				false);
-		addCode(map, "0321T",
-				"Insertion of SubQ ICD generator only with existing electrode",
-				false);
-		addCode(map, "0322T", "Removal of SubQ ICD generator only", false);
-		addCode(map, "0323T", "Removal and Replacement of SubQ ICD generator",
-				false);
-		addCode(map, "0324T", "Removal of SubQ ICD electrode", false);
-		addCode(map, "0325T",
-				"Repositioning of SubQ ICD electrode and/or generator", false);
-		addCode(map, "0326T", "EP evaluation of SubQ ICD system", false);
-		addCode(map, "0327T", "Interrogation of SubQ ICD system", false);
-		addCode(map, "0328T", "Programming of SubQ ICD system", false);
-
 		return Collections.unmodifiableMap(map);
 	}
 
@@ -174,7 +178,7 @@ public class Codes {
 			"0320T", "0321T", "0322T", "0323T", "0324T", "0325T", "0326T",
 			"0327T", "0328T" };
 	public final static String[] otherProcedurePrimaryCodeNumbers = { "33282",
-			"33284", "93660", "92960", "92961" };
+																	  "33284", "93660", "92960", "92961", "76000" };
 
 	public final static String[] newPpmPrimaryCodeNumbers = { "33206", "33207",
 			"33208", "33225" };
