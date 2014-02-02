@@ -67,8 +67,7 @@ public class CodeAnalyzer {
 			Set<String> numberSet = new HashSet<String>(
 					Arrays.asList(codeNumbers));
 			if (containsCodesNumbers(duplicateMappingCodes, numberSet))
-				message += getMessage(ERROR,
-						R.string.duplicate_mapping_codes_error_message,
+				message += getCodingErrorMessage(ERROR, duplicateMappingCodes,
 						R.string.duplicate_mapping_codes_verbose_error_message);
 			if (message.length() == 0) // no errors!
 				message = OK
@@ -89,6 +88,19 @@ public class CodeAnalyzer {
 	private boolean containsCodesNumbers(final List<String> badNumbers,
 			final Set<String> codeNumbers) {
 		return codeNumbers.containsAll(badNumbers);
+	}
+
+	// returns string of codes in this format: "[99999, 99991]"
+	private String getCodeString(final List<String> codeList) {
+		return codeList.toString();
+	}
+
+	private String getCodingErrorMessage(final String threat,
+			final List<String> codeList, final int details) {
+		return threat
+				+ (verbose ? getCodeString(codeList) + " "
+						+ context.getString(details) : getCodeString(codeList))
+				+ "\n";
 	}
 
 	private String getMessage(final String threat, final int brief,
