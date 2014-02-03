@@ -317,7 +317,6 @@ public class ProcedureDetailFragment extends Fragment implements
 			}
 			noSecondaryCodes = primaryCodeCounter == i;
 		}
-		// analyze codes for problems
 		message += codeAnalysis(codes, noPrimaryCodes, noSecondaryCodes,
 				moduleHasNoSecondaryCodes);
 		displayMessage(getString(R.string.coding_summary_dialog_label), message);

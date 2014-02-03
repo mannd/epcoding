@@ -46,7 +46,7 @@ public class CodeAnalyzer {
 	public String analysis() {
 		// Note unicode doesn't consistently work on different devices.
 		// use ASCII! Maybe will work in iOS?
-		final String WARNING = "?? "; // \u26A0 "; // ! in triangle
+		final String WARNING = "! "; // "?? "; // \u26A0 "; // ! in triangle
 		final String ERROR = "!! "; // "\u2620 "; // skull and bones
 									// "\u24CD "; x in circle
 		final String OK = ""; // "\u263A "; // smiley face
@@ -54,18 +54,24 @@ public class CodeAnalyzer {
 		if (noPrimaryCodes && noSecondaryCodes)
 			return getMessage(WARNING, R.string.no_codes_selected_label,
 					R.string.empty_message);
+		// no code checking in All & Misc Codes
+		if (moduleHasNoSecondaryCodes)
+			return getMessage(WARNING,
+					R.string.no_code_analysis_performed_message,
+					R.string.empty_message);
+		// Now the details checks
 		String message = "";
 		if (noPrimaryCodes)
 			message += getMessage(ERROR, R.string.no_primary_codes_message,
 					R.string.no_primary_codes_verbose_message);
-		if (noSecondaryCodes && !moduleHasNoSecondaryCodes)
+		if (noSecondaryCodes) // already checked moduleHasNoSecondaryCodes
 			message += getMessage(WARNING, R.string.no_secondary_codes_message,
 					R.string.no_secondary_codes_verbose_message);
 		if (allAddOnCodes())
 			message += getMessage(ERROR, R.string.all_addons_error_message,
 					R.string.all_addons_verbose_error_message);
 		// check for forbidden code combos
-		// first make array of code numbers
+		// first make List and Set of code numbers
 		String[] codeNumbers = new String[codes.length];
 		for (int i = 0; i < codes.length; ++i) {
 			if (codes[i] != null)
@@ -140,6 +146,6 @@ public class CodeAnalyzer {
 
 	private String getMessageFromStrings(final String threat,
 			final String brief, final String details) {
-		return threat + (verbose ? brief + " " + details : brief) + "\n";
+		return "\n" + threat + (verbose ? brief + " " + details : brief) + "\n";
 	}
 }
