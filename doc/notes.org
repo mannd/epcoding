@@ -57,7 +57,7 @@
     - Warnings
       - No secondary codes
       - No primary codes
-      - ? No mapping codes
+      - ? No mapping codes with ablation codes
 *** Verbose
     - Errors
       - 93619 & 93620: do not combine 2D and 3D mapping

@@ -127,8 +127,7 @@ public class Codes {
 		addCode(map, "76000", "Fluoroscopic lead evaluation", false);
 		// Ablation and EP testing codes
 
-		// EP Testing and Mapping
-		// older codes
+		// EP Testing and Mapping ///////////////////////
 		addCode(map, "93600", "His bundle recording only", false);
 
 		addCode(map, "93609", "2D mapping", true);

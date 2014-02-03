@@ -15,12 +15,19 @@ public class CodeAnalyzer {
 	private final Context context;
 	private boolean verbose = false;
 
-	private final List<String> duplicateMappingCodes = Arrays.asList("93609",
+	private static final List<String> mappingCodes = Arrays.asList("93609",
 			"93613");
-	
+	private static final Set<String> mappingCodeSet = new HashSet<String>(
+			mappingCodes);
+	// below doesn't include AV node ablation or VT ablation as mapping not
+	// separately billable
+	private static final List<String> ablationCodes = Arrays.asList("93653",
+			"93656");
+	private static final Set<String> ablationCodeSet = new HashSet<String>(
+			ablationCodes);
+
 	// also need list of codes that can be compared to a single code,
 	// e.g. 76000 should not be used with any other device code
-
 
 	public CodeAnalyzer(final Code[] codes, final boolean noPrimaryCodes,
 			final boolean noSecondaryCodes,
@@ -43,38 +50,37 @@ public class CodeAnalyzer {
 		final String ERROR = "!! "; // "\u2620 "; // skull and bones
 									// "\u24CD "; x in circle
 		final String OK = ""; // "\u263A "; // smiley face
-
-		String message = "";
+		// quick exit for no codes selected
 		if (noPrimaryCodes && noSecondaryCodes)
-			message = getMessage(WARNING, R.string.no_codes_selected_label,
+			return getMessage(WARNING, R.string.no_codes_selected_label,
 					R.string.empty_message);
-		else {
-			if (noPrimaryCodes)
-				message += getMessage(ERROR, R.string.no_primary_codes_message,
-						R.string.no_primary_codes_verbose_message);
-			if (noSecondaryCodes && !moduleHasNoSecondaryCodes)
-				message += getMessage(WARNING,
-						R.string.no_secondary_codes_message,
-						R.string.no_secondary_codes_verbose_message);
-			if (allAddOnCodes())
-				message += getMessage(ERROR, R.string.all_addons_error_message,
-						R.string.all_addons_verbose_error_message);
-			// check for forbidden code combos
-			// first make array of code numbers
-			String[] codeNumbers = new String[codes.length];
-			for (int i = 0; i < codes.length; ++i) {
-				if (codes[i] != null)
-					codeNumbers[i] = codes[i].getCodeNumber();
-			}
-			Set<String> numberSet = new HashSet<String>(
-					Arrays.asList(codeNumbers));
-			if (containsCodesNumbers(duplicateMappingCodes, numberSet))
-				message += getCodingErrorMessage(ERROR, duplicateMappingCodes,
-						R.string.duplicate_mapping_codes_verbose_error_message);
-			if (message.length() == 0) // no errors!
-				message = OK
-						+ context.getString(R.string.no_code_errors_message);
+		String message = "";
+		if (noPrimaryCodes)
+			message += getMessage(ERROR, R.string.no_primary_codes_message,
+					R.string.no_primary_codes_verbose_message);
+		if (noSecondaryCodes && !moduleHasNoSecondaryCodes)
+			message += getMessage(WARNING, R.string.no_secondary_codes_message,
+					R.string.no_secondary_codes_verbose_message);
+		if (allAddOnCodes())
+			message += getMessage(ERROR, R.string.all_addons_error_message,
+					R.string.all_addons_verbose_error_message);
+		// check for forbidden code combos
+		// first make array of code numbers
+		String[] codeNumbers = new String[codes.length];
+		for (int i = 0; i < codes.length; ++i) {
+			if (codes[i] != null)
+				codeNumbers[i] = codes[i].getCodeNumber();
 		}
+		List<String> codeNumberList = Arrays.asList(codeNumbers);
+		Set<String> codeNumberSet = new HashSet<String>(codeNumberList);
+		if (containsCodeNumbers(mappingCodes, codeNumberSet))
+			message += getCodingErrorMessage(ERROR, mappingCodes,
+					R.string.duplicate_mapping_codes_verbose_error_message);
+		if (noMappingCodesForAblation(codeNumberList))
+			message += getMessage(WARNING, R.string.no_mapping_codes_message,
+					R.string.no_mapping_codes_verbose_message);
+		if (message.length() == 0) // no errors!
+			message = OK + context.getString(R.string.no_code_errors_message);
 		return message;
 	}
 
@@ -87,9 +93,21 @@ public class CodeAnalyzer {
 		return allAddOns;
 	}
 
-	private boolean containsCodesNumbers(final List<String> badNumbers,
-			final Set<String> codeNumbers) {
-		return codeNumbers.containsAll(badNumbers);
+	private boolean containsCodeNumbers(final List<String> badNumbers,
+			final Set<String> codeNumberSet) {
+		return codeNumberSet.containsAll(badNumbers);
+	}
+
+	private boolean noMappingCodesForAblation(final List<String> codeNumbers) {
+		boolean noMappingCodes = true;
+		boolean hasAblationCodes = false;
+		for (String codeNumber : codeNumbers) {
+			if (ablationCodeSet.contains(codeNumber))
+				hasAblationCodes = true;
+			if (mappingCodeSet.contains(codeNumber))
+				noMappingCodes = false;
+		}
+		return (hasAblationCodes && noMappingCodes);
 	}
 
 	// returns string of codes in this format: "[99999, 99991]"
@@ -99,17 +117,18 @@ public class CodeAnalyzer {
 
 	private String getCodingErrorMessage(final String threat,
 			final List<String> codeList, final int details) {
-		return threat
-				+ (verbose ? getCodeString(codeList) + " "
-						+ context.getString(details) : getCodeString(codeList))
-				+ "\n";
+		return getMessageFromStrings(threat, getCodeString(codeList),
+				context.getString(details));
 	}
 
 	private String getMessage(final String threat, final int brief,
 			final int details) {
-		return threat
-				+ (verbose ? context.getString(brief) + " "
-						+ context.getString(details) : context.getString(brief))
-				+ "\n";
+		return getMessageFromStrings(threat, context.getString(brief),
+				context.getString(details));
+	}
+
+	private String getMessageFromStrings(final String threat,
+			final String brief, final String details) {
+		return threat + (verbose ? brief + " " + details : brief) + "\n";
 	}
 }
