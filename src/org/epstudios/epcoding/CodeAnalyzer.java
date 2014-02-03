@@ -79,6 +79,10 @@ public class CodeAnalyzer {
 		if (noMappingCodesForAblation(codeNumberList))
 			message += getMessage(WARNING, R.string.no_mapping_codes_message,
 					R.string.no_mapping_codes_verbose_message);
+		if (avnAblationHasMappingCodes(codeNumberSet))
+			message += getMessage(WARNING,
+					R.string.mapping_with_avn_ablation_warning,
+					R.string.mapping_with_avn_ablation_verbose_warning);
 		if (message.length() == 0) // no errors!
 			message = OK + context.getString(R.string.no_code_errors_message);
 		return message;
@@ -108,6 +112,13 @@ public class CodeAnalyzer {
 				noMappingCodes = false;
 		}
 		return (hasAblationCodes && noMappingCodes);
+	}
+
+	private boolean avnAblationHasMappingCodes(final Set<String> codeNumbers) {
+		return codeNumbers.contains("93650")
+				&& (codeNumbers.contains("93609") || codeNumbers
+						.contains("93613"));
+
 	}
 
 	// returns string of codes in this format: "[99999, 99991]"

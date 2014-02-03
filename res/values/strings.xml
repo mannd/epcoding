@@ -34,6 +34,9 @@
     <string name="duplicate_mapping_codes_verbose_error_message">You can\'t combine 2D and 3D mapping codes.</string>
     <string name="no_mapping_codes_message">No mapping codes for ablation.</string>
     <string name="no_mapping_codes_verbose_message">You should be able to code 2D or 3D mapping for this kind of ablation.</string>
+    <string name="mapping_with_avn_ablation_warning">[93650, 93609 or 93613]</string>
+    <string name="mapping_with_avn_ablation_verbose_warning">It is unclear if mapping codes can be included separately with
+        AVN ablation</string>
     <string name="ablation_help_text">Temp ablation procedures help text</string>
     <string name="devices_help_text">Temp device procedures help text</string>
     <string name="all_codes_help_text">All codes help text</string>
