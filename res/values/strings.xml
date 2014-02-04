@@ -17,12 +17,13 @@
 		\nSource: github.com/mannd/epcoding
 		\n\nCopyright \u00a9 2013, 2014 EP Studios, Inc.
 		\nLicensed under GNU GPL v3.</string>
+    <string name="help_title">Help</string>
     <string name="primary_codes_label">Primary Code(s)</string>
     <string name="add_on_codes_label">Additional Code(s)</string>
     <string name="coding_summary_label">Summarize</string>
     <string name="coding_summary_dialog_label">Coding Summary</string>
     <string name="clear_label">Clear</string>
-    <string name="help_label">Help</string>
+    <string name="help_label">Hints</string>
     <string name="empty_message"></string>
     <string name="no_codes_selected_label">No codes selected.</string>
     <string name="no_code_analysis_warning_message">No code analysis performed in this module.</string>
@@ -78,5 +79,6 @@
     <string name="icd_replacement_help_text">ICD replacement help text</string>
     <string name="device_upgrade_title">Device Upgrade/Revision</string>
     <string name="device_upgrade_help_text">Device upgrade help text</string>
+    <string name="general_help_text">General EP Coding Help</string>
 
 </resources>

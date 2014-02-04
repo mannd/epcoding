@@ -60,6 +60,9 @@ public class ProcedureDetailActivity extends FragmentActivity {
 			NavUtils.navigateUpTo(this, new Intent(this,
 					ProcedureListActivity.class));
 			return true;
+		case R.id.help:
+			startActivity(new Intent(this, Help.class));
+			return true;
 		case R.id.about:
 			startActivity(new Intent(this, About.class));
 			return true;

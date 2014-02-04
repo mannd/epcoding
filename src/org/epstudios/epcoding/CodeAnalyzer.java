@@ -90,7 +90,8 @@ public class CodeAnalyzer {
 					R.string.mapping_with_avn_ablation_warning,
 					R.string.mapping_with_avn_ablation_verbose_warning);
 		if (message.length() == 0) // no errors!
-			message = OK + context.getString(R.string.no_code_errors_message);
+			message = getMessage(OK, R.string.no_code_errors_message,
+					R.string.empty_message);
 		return message;
 	}
 

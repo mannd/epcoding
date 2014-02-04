@@ -66,16 +66,6 @@
     - Warnings
       - No secondary codes: you may be missing some secondary codes
       - No mapping codes: most ablation procedures include mapping
-** Mechanics
-   - Forbidden codes sets 
-     e.g. { 93619, 93620 }
-   - make string sets of all codes, primary, and secondary codes
-   - check for no primary and no secondary
-   - check if all codes set contains any forbidden set
-** Symbols
-   - Error: ⚠ u26A0 (or use this as warning with X as error) or Ⓧ u24cd
-   - NO errors: ☺ u263a
-   - Warning: ? or ?? or X or ⚠ u26A0  Ⓧ
 * Help notes
 ** Purpose
    - Only EP!!
@@ -96,3 +86,18 @@
   - Not for trained coders
   - Physician and coder must still be familiar with components and
     document properly and completely
+* More buttons
+** Generator change
+   - PPM
+     - A lead
+     - V lead
+     - dual chamber
+     - CRT
+** Possible buttons
+   |--------+--------|
+   | PPM    | ICD    |
+   | A lead | V lead |
+   | dual   | CRT    |
+   |--------+--------|
+** Buttons aren't needed, we have separate PPM and ICD modules already
+   
