@@ -99,6 +99,7 @@ public class Codes {
 				"Place single chamber ICD generator, existing lead", false);
 		addCode(map, "33241", "Removal of ICD generator without replacement",
 				false);
+		// 33243 is removal of ICD lead by thoracotomy
 		addCode(map, "33244", "Removal one or more electrodes, ICD system",
 				false);
 
@@ -207,8 +208,9 @@ public class Codes {
 
 	// epTestingSecondaryCodeNumbers need to include device implants
 
-	public final static String[] avnAblationSecondaryCodeNumbers = { "93620",
-			"33207", "33208", "33210", "33249", "33225", "92960", "92961" };
+	public final static String[] avnAblationSecondaryCodeNumbers = { "93600",
+			"93619", "93620", "93609", "93613", "33207", "33208", "33210",
+			"33249", "33225", "92960", "92961" };
 
 	public final static String[] deviceSecondaryCodeNumbers = { "33210",
 			"92960", "92961" };

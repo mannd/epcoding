@@ -39,6 +39,8 @@
     <string name="mapping_with_avn_ablation_warning">[93650, 93609 or 93613]</string>
     <string name="mapping_with_avn_ablation_verbose_warning">It is unclear if mapping codes can be included separately with
         AVN ablation</string>
+    <string name="ep_testing_with_avn_ablation_warning">[93650, 93600 or 93619 or 93620]</string>
+    <string name="ep_testing_with_avn_ablation_verbose_warning">It is unclear if EP testing codes can be combined with AV node ablation.</string>
     <string name="ablation_help_text">Temp ablation procedures help text</string>
     <string name="devices_help_text">Temp device procedures help text</string>
     <string name="all_codes_help_text">All codes help text</string>

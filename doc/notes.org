@@ -100,4 +100,127 @@
    | dual   | CRT    |
    |--------+--------|
 ** Buttons aren't needed, we have separate PPM and ICD modules already
-   
+* Rules and Regulations
+** Bibliography						   
+*** CPT symposium 2011 slides					    :cpt2011:
+*** CPT review 2013 slides 					    :cpt2013:
+*** CPT coding changes 2013				     :cptchanges2013:
+*** EP Lab digest Changes Coming 2012				  :eplab2012:
+*** https://www.aapc.com/memberarea/forums/showthread.php?t=19874     :links:
+** Devices
+*** 93640, 93641 reportable at time of device placement/replacememnt :cpt2011:
+     This is DFT testing.  93640 is for external testing of leads
+     with and analyzer and isn't in Codes.java.	
+*** Use 76000 for fluoro of leads (e.g. Riata)			    :cpt2011:
+*** Use 33224 to insert LV lead alone?				    :cpt2011:
+*** Upgrade single to dual PPM 33214 includes gen removal	    :cpt2011:
+*** Upgrade single to dual ICD 33241 & 33249			    :cpt2011:
+*** Extraction and replacement PPM and leads
+**** codes							    :cpt2011:
+     33223 (remove gen) with 33234 or 33235 (remove 1 or 2 leads) and
+     then 33206-33208 for new generator.  Don't use 33206-33208 with
+     generator replacement codes (33227-33229)
+**** 33212, 33213, 33221 single, dual, multi gen insertion only	    :cpt2011:
+     don't combine insertion with 33233 for removal.  Use 33227-33229
+     (replacement codes) only.
+**** 33214 upgrade single to dual ppm				    :cpt2011:
+     - includes removal of prior generator, with new gen and leads.
+     - Don't report with 33227-33229 (replacement only)
+**** Repair 33218, 33220 (single, dual lead repair)		    :cpt2011:
+     - PPM or ICD leads
+     - Use with generator replacements
+***** TODO Add to Additional codes for generator change, upgrade
+**** 33226 Repositioning of LV lead				    :cpt2011:
+     ? Includes removal, insertion and/or replacement of existing generator
+**** 33227-33229						    :cpt2011:
+     - replacement codes
+     - Don't report with 33233 (removal)
+     - report with 33206-33208 (new systems) and 33234, 33235 (lead
+       removal) for upgrades.
+*** ICD codes
+**** 33240, 33230, 33231					    :cpt2011:
+     - 33240 ICD gen only with existing single lead
+     - 33230 --- with existing dual leads
+     - 33231 --- with existing multi leads
+     - Don't report with generator change out at the same time, use
+       33262-33264 (ICD gen change, single, dual, CRT)
+**** 33241							    :cpt2011:
+     - removal of any kind of ICD generator only
+     - use with 33243 or 33244 (ICD lead removal by thoracotomy - not
+       in EP Coding - or transvenously) and 33249 placement of new ICD
+       with leads (single or dual) for removal and replacement of ICD
+       generator and electrodes.
+**** ICD generator change alone					    :cpt2011:
+     - 33262 single lead generator
+     - 33263 dual lead gen
+     - 33264 multi lead gen
+     - Don't use 33262-33264 with 33241 (i.e. don't bill removal and
+       replacement)
+     - Removal of lead(s) and replacement use 33244 (extraction ICD
+       lead) and 33241 (remove generator) or ICD replacement
+       33262-33264. (e.g. you take out a lead, and downgrade the device)
+     - 33249.  Insert/ replace single, dual ICD system including leads.
+     - For lead removal and replacement use 33241 with 33243 and 33249.
+*** Simplified table						    :cpt2011:
+    |---------------------------+---------------+---------------|
+    | Procedure                 |           PPM |           ICD |
+    | insert 1 lead             |         33216 |         33216 |
+    | insert 2 leads            |         33217 |         33217 |
+    | insert 3 leads            | 33217 & 33224 | 33217 & 33224 |
+    |---------------------------+---------------+---------------|
+    | remove 1 lead             |         33234 |         33244 |
+    | remove 2 leads            |         33235 |         33244 |
+    |---------------------------+---------------+---------------|
+    | gen with existing 1 lead  |         33212 |         33240 |
+    | gen with existing 2 leads |         33213 |         33230 |
+    | gen with existing 3 leads |         33221 |         33231 |
+    |---------------------------+---------------+---------------|
+    | gen replacement 1 lead    |         33227 |         33262 |
+    | gen replacement 2 leads   |         33228 |         33263 |
+    | gen replacement 3 leads   |         33229 |         33264 |
+    |---------------------------+---------------+---------------|
+    | gen removal only          |         33233 |         33241 |
+    |---------------------------+---------------+---------------|
+    | new/repl gen with 1 lead  |   33206/33207 |         33249 |
+    | new/repl gen with 2 leads |         33208 |         33249 |
+    | new/repl gen with 3 leads | 33208 & 33225 | 33249 & 33225 |
+    |---------------------------+---------------+---------------|
+    | upgrade sing to dual sys  |         33214 | 33241 & 33249 |
+    |---------------------------+---------------+---------------|
+    | removal gen               |         33233 |         33241 |
+    | removal leads             |   33234/33235 |         33244 |
+    | CS lead placed            |         33225 |         33225 |
+    |---------------------------+---------------+---------------|
+
+
+** EP
+*** Ablation							    :cpt2013:
+    - 93653-93657 (ablations) can't have EP procedure codes reported separately
+    - Note this doesn't include 93650, AV node ablation
+    - Don't report 93621 (LA pacing) with 93656 (afb ablation)
+    - Don't use 93622 (LV pacing) with 93654 (VT ablation)
+*** More ablation					     :cptchanges2013:
+    - AFB ablation includes transseptal puncture (93462) and includes
+      93621 (LA pacing/recording)
+    - Don't report 2D and 3D mapping together
+    - Don't report multiple ablation codes together
+*** More						    :eplab2012:links:
+    - Maybe can't bill IV drug infusion with ablation codes
+    - comment mentions denials for 93650 (AVN ablation) and 93609 (2D
+      mapping), but says nothing in the "book" indicates it is not
+      allowed.  Note on Internet several have asked this question and
+      no definitive answer.  Needs to be a WARNING.
+    - Note that it appears that other EP procedures may be billable
+      with AV node ablation, even His bundle recording.  Needs to be
+      a WARNING
+*** But							     :cptchanges2013:
+    - Latest 2014 parentheticals OK to bill IV drug infusion with
+      ablation codes
+
+** General Help
+*** Surgical codes not included (e.g. epicardial electrodes 33202)
+*** We paraphrase code descriptions
+**** e.g. use CRT system instead of "multi-lead" system
+*** Sources are published on web, seminars, will be on web site
+*** Most of the rules are enforced in the module interface, some in code analysis
+*** Older/Obsolete/little used codes are not included

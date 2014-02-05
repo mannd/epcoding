@@ -44,6 +44,7 @@ public class CodeAnalyzer {
 	}
 
 	public String analysis() {
+		// Note that ERRORs should be tested first, then WARNINGs
 		// Note unicode doesn't consistently work on different devices.
 		// use ASCII! Maybe will work in iOS?
 		final String WARNING = "! "; // "?? "; // \u26A0 "; // ! in triangle
@@ -89,6 +90,14 @@ public class CodeAnalyzer {
 			message += getMessage(WARNING,
 					R.string.mapping_with_avn_ablation_warning,
 					R.string.mapping_with_avn_ablation_verbose_warning);
+		if (avnAblationHasEpTestingCodes(codeNumberSet))
+			message += getMessage(WARNING,
+					R.string.ep_testing_with_avn_ablation_warning,
+					R.string.ep_testing_with_avn_ablation_verbose_warning);
+		// TODO
+		// search for duplicates
+		// e.g. both cardioversion, ep testing with and without induction,
+		// combining pacer, defib codes incorrectly
 		if (message.length() == 0) // no errors!
 			message = getMessage(OK, R.string.no_code_errors_message,
 					R.string.empty_message);
@@ -125,7 +134,13 @@ public class CodeAnalyzer {
 		return codeNumbers.contains("93650")
 				&& (codeNumbers.contains("93609") || codeNumbers
 						.contains("93613"));
+	}
 
+	private boolean avnAblationHasEpTestingCodes(final Set<String> codeNumbers) {
+		return codeNumbers.contains("93650")
+				&& (codeNumbers.contains("93600")
+						|| codeNumbers.contains("93619") || codeNumbers
+							.contains("93620"));
 	}
 
 	// returns string of codes in this format: "[99999, 99991]"
