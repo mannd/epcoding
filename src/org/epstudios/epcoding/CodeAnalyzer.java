@@ -1,5 +1,6 @@
 package org.epstudios.epcoding;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +26,28 @@ public class CodeAnalyzer {
 			"93656");
 	private static final Set<String> ablationCodeSet = new HashSet<String>(
 			ablationCodes);
+
+	// bad coding combos
+
+	private final static List<Combo> badCombos = createBadCombos();
+
+	private final static List<Combo> createBadCombos() {
+		List<Combo> combos = new ArrayList<Combo>();
+		// New PPM implant
+		combos.add(new Combo("33206", "33207"));
+		combos.add(new Combo("33207", "33208"));
+		combos.add(new Combo("33206", "33208"));
+		// too many cardioversion types!
+		combos.add(new Combo("92960", "92961"));
+		// don't do an in and out with an ILR!
+		combos.add(new Combo("33282", "33284"));
+		return combos;
+
+	}
+
+	// Arrays.asList(this.new Combo("33206",
+	// "33207"), this.new Combo("33206", "33208"), this.new Combo("33207",
+	// "33208"), this.new Combo("33227", "33228"));
 
 	// also need list of codes that can be compared to a single code,
 	// e.g. 76000 should not be used with any other device code
@@ -94,10 +117,16 @@ public class CodeAnalyzer {
 			message += getMessage(WARNING,
 					R.string.ep_testing_with_avn_ablation_warning,
 					R.string.ep_testing_with_avn_ablation_verbose_warning);
-		// TODO
 		// search for duplicates
 		// e.g. both cardioversion, ep testing with and without induction,
 		// combining pacer, defib codes incorrectly
+		String badComboCodes = getBadComboCodes(codeNumberSet);
+		if (badComboCodes.length() > 0) {
+			message += getMessageFromStrings(
+					ERROR,
+					badComboCodes,
+					context.getString(R.string.bad_combo_codes_verbose_error_message));
+		}
 		if (message.length() == 0) // no errors!
 			message = getMessage(OK, R.string.no_code_errors_message,
 					R.string.empty_message);
@@ -141,6 +170,16 @@ public class CodeAnalyzer {
 				&& (codeNumbers.contains("93600")
 						|| codeNumbers.contains("93619") || codeNumbers
 							.contains("93620"));
+	}
+
+	private String getBadComboCodes(final Set<String> codeNumbers) {
+		String codes = "";
+		for (Combo badCombo : badCombos) {
+			if (codeNumbers.contains(badCombo.getS1())
+					&& codeNumbers.contains(badCombo.getS2()))
+				codes += badCombo.toString();
+		}
+		return codes;
 	}
 
 	// returns string of codes in this format: "[99999, 99991]"
