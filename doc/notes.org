@@ -191,8 +191,6 @@
     | removal leads             |   33234/33235 |         33244 |
     | CS lead placed            |         33225 |         33225 |
     |---------------------------+---------------+---------------|
-
-
 ** EP
 *** Ablation							    :cpt2013:
     - 93653-93657 (ablations) can't have EP procedure codes reported separately
@@ -224,3 +222,37 @@
 *** Sources are published on web, seminars, will be on web site
 *** Most of the rules are enforced in the module interface, some in code analysis
 *** Older/Obsolete/little used codes are not included
+** Coding the rules
+*** Patterns
+**** Pairs of mutually exclusive codes
+     e.g. ILR implant and ILR explant, internal and external CDVN
+**** Triples of exclusive codes
+     e.g. PPM with 1 lead, with 2 leads, with multi leads
+**** Specific situations
+     e.g. EP testing with AV node ablation, mapping with AV node ablation.
+*** Indicating rules
+**** Prohibited by module
+     forbidden codes not enabled
+**** Warnings and Errors with Code Analysis
+     mutually exclusive codes
+**** Hints
+     Complex procedures like upgrades, lead replacements
+*** Warning/Error messages
+**** Mutually excluded pairs
+     ! [99999, 99998]
+**** Triples
+***** ? indicate all combinations, or just one
+      a) ! [99999, 99997]
+      b) ! [99999, 99997, 99996]
+      c) ! [99999, 99997] [99997, 99996] [99999, 99996]
+      Best solution probably a to indicate one pair, and b for all three. 
+***** check for 2/3 or 2/4 codes and specific warning
+      e.g. ! [99999, 99998] multiple mutually exclusive EP codes, implant codes.
+*** Coding
+**** Combos (pairs)
+     List<Combo> badCombos
+     Set<String> codeNumbers
+     
+**** Triples
+**** TODO Option for no code analysis in Settings
+     

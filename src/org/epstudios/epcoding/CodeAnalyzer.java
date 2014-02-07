@@ -28,21 +28,17 @@ public class CodeAnalyzer {
 			ablationCodes);
 
 	// bad coding combos
+	private final static List<List<String>> combos = createCombos();
 
-	private final static List<Combo> badCombos = createBadCombos();
-
-	private final static List<Combo> createBadCombos() {
-		List<Combo> combos = new ArrayList<Combo>();
-		// New PPM implant
-		combos.add(new Combo("33206", "33207"));
-		combos.add(new Combo("33207", "33208"));
-		combos.add(new Combo("33206", "33208"));
-		// too many cardioversion types!
-		combos.add(new Combo("92960", "92961"));
-		// don't do an in and out with an ILR!
-		combos.add(new Combo("33282", "33284"));
-		return combos;
-
+	private final static List<List<String>> createCombos() {
+		List<List<String>> comboList = new ArrayList<List<String>>();
+		// too many cardioversion types
+		comboList.add(Arrays.asList("92960", "92961"));
+		// too many new PPMs
+		comboList.add(Arrays.asList("33206", "33207", "33208"));
+		// no in and out with an ILR
+		comboList.add(Arrays.asList("33282", "33284"));
+		return comboList;
 	}
 
 	// Arrays.asList(this.new Combo("33206",
@@ -172,14 +168,35 @@ public class CodeAnalyzer {
 							.contains("93620"));
 	}
 
+	// private String getBadComboCodes(final Set<String> codeNumbers) {
+	// String codes = "";
+	// for (Combo badCombo : badCombos) {
+	// if (codeNumbers.contains(badCombo.getS1())
+	// && codeNumbers.contains(badCombo.getS2()))
+	// codes += badCombo.toString();
+	// }
+	// return codes;
+	// }
+
+	// test all bad combos
 	private String getBadComboCodes(final Set<String> codeNumbers) {
 		String codes = "";
-		for (Combo badCombo : badCombos) {
-			if (codeNumbers.contains(badCombo.getS1())
-					&& codeNumbers.contains(badCombo.getS2()))
-				codes += badCombo.toString();
-		}
+		for (List<String> combo : combos)
+			if (hasBadCombo(combo, codeNumbers))
+				codes += combo.toString();
 		return codes;
+
+	}
+
+	// test a list of codes to see if > 1 included
+	private boolean hasBadCombo(final List<String> badCodes,
+			final Set<String> codes) {
+		int count = 0;
+		for (String badCode : badCodes) {
+			if (codes.contains(badCode))
+				count++;
+		}
+		return count > 1;
 	}
 
 	// returns string of codes in this format: "[99999, 99991]"
