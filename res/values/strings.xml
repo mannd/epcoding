@@ -82,6 +82,5 @@
     <string name="icd_replacement_help_text">ICD replacement help text</string>
     <string name="device_upgrade_title">Device Upgrade/Revision</string>
     <string name="device_upgrade_help_text">Device upgrade help text</string>
-    <string name="general_help_text">General EP Coding Help</string>
 
 </resources>

@@ -80,7 +80,32 @@
    - Device interrogation/follow-up codes
    - Modifiers
    - Code components
-** General Help Text
+** Help Text Buffer Options
+#+TITLE:     EP Coding Help
+#+AUTHOR:    David Mann
+#+EMAIL:     mannd@epstudiossoftware.com
+#+DATE:      2014-02-08 Sat
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+#+XSLT:
+** Help file creation
+   - use C-c @ to select EP Coding Help headline
+   - C-c C-e export to html, buffer
+   - Save buffer to help.html
+   - import into strings, or use as resource file
+   - export html to assets/help.html
+   - Note I have added (setq org-export-html-postamble nil) in
+     ~/.emacs to suppress footer information.
+   - Above group of statements in buffer are for formatting the HTML
+** EP Coding Help
 *** Intended target user
     Physicians who perform cardiac electrophysiology procedures and
     are required to submit CPT codes for these procedures.
@@ -111,7 +136,7 @@
       needs to be selected, and additional or optional codes which
       are commonly done along with the procedure.
     - Click on the codes that are relevant.
-    - Codes that shouldn't be selected or must be selected are locked.
+    - Codes that should not be selected or must be selected are locked.
     - Click on summarize to summarize the selections.
     - If code analysis is selected in the Settings (see below),
       Warnings and Errors will be listed including the relevant codes
@@ -128,7 +153,8 @@
     - Click on the Code Analysis Settings for change the level of
       detail shown in the Code Analysis.
     - Note that the All Codes item on the list just lists every code
-      in numerical order.  It can be used for 
+      in numerical order.  It is the a la carte menu of EP Coding.
+      Note that no code analysis is performed in this module.
 * Limitations
   - Code descriptions are paraphrased
   - All information freely available on web

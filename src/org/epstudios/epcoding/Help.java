@@ -6,12 +6,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.webkit.WebView;
 
 public class Help extends Activity {
+	private WebView webView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.help);
+		String url = "file:///android_asset/help.html";
+		webView = (WebView) findViewById(R.id.help_html_content);
+		webView.loadUrl(url);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 	}
