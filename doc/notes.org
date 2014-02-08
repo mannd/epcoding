@@ -106,15 +106,16 @@
      ~/.emacs to suppress footer information.
    - Above group of statements in buffer are for formatting the HTML
 ** EP Coding Help
-*** Intended target user
-    Physicians who perform cardiac electrophysiology procedures and
-    are required to submit CPT codes for these procedures.
+*** Who should use EP Coding?
+    Physicians who perform cardiac electrophysiology (EP) procedures and
+    are required to submit CPT™ codes for these procedures.  Note the
+    scope is limited to EP procedures only.
 *** Rationale
     EHR (Electronic Health Records) put more and more burden on the
     physician to do tasks that in the past were done by ancillary
     personnel.  These responsibilites include proper documentation
     and coding of procedures.  Often physicians are required to enter
-    the CPT codes directly into the computer.  This is difficult
+    CPT™ codes directly into the computer.  This is difficult
     given the complexity of the codes and rules controlling them.
 *** EP Coding is for physicians, not coders!
     Coding procedures nowadays often involves two stages.  Physicians
@@ -125,34 +126,32 @@
     insurance.  EP Coding is intended to help the physician do the
     initial code entry and is not for professional coders!
 *** How does EP Coding help?
-    - It lists the relevant CPT codes for different procedures, with
-      succinct descriptions.
-    - It makes clear which codes cannot be combined for specific procedures.
-    - It analyzes selected codes for errors and warnings.
-    - It provides Hints on how to code procedures.
+    - Lists relevant CPT codes for procedures, with succinct descriptions.
+    - Makes clear which codes cannot be combined for specific procedures.
+    - Analyzes selected codes for errors and warnings.
+    - Provides Hints on how to code procedures.
 *** How to use EP Coding
     - Select a procedure from the list.
     - Codes are organized as primary codes, at least one of which
       needs to be selected, and additional or optional codes which
-      are commonly done along with the procedure.
+      are commonly done used with the procedure.
     - Click on the codes that are relevant.
     - Codes that should not be selected or must be selected are locked.
-    - Click on summarize to summarize the selections.
-    - If code analysis is selected in the Settings (see below),
-      Warnings and Errors will be listed including the relevant codes
-      in brackets, and, if the analyzer is set to verbose, some
-      further explanation.
-    - Click the Clear button to clear the selected codes.  Codes are
+    - Click on *Summarize* to summarize and analyze the coding.
+    - If code analysis is selected in *Settings* Warnings and Errors
+      will be listed including the relevant codes in brackets, and, if
+      the analyzer is set to Verbose, some further explanation.
+    - Click the *Clear* button to clear the selected codes.  Codes are
       also cleared if you return to the procedure list or select
       another procedure.
-    - Click in the Hints button for coding hints.
-    - Click on the Save icon at the top to save your selection of
-      Additional Codes.  If you nearly always select the same
+    - Click the *Hints* button for coding hints.
+    - Click the *Save* icon at the top to save your selection of
+      additional codes.  If you nearly always select the same
       additional codes (e.g. always do 3D mapping with SVT ablation),
       select the codes and save them for future sessions.
-    - Click on the Code Analysis Settings for change the level of
-      detail shown in the Code Analysis.
-    - Note that the All Codes item on the list just lists every code
+    - Click the *Settings* to change the display of codes and level of
+      detail shown in the code analysis dialog.
+    - Note that the *All Codes* module just lists every code
       in numerical order.  It is the a la carte menu of EP Coding.
       Note that no code analysis is performed in this module.
 * Limitations
