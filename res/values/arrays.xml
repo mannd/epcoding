@@ -4,10 +4,12 @@
     <array name="verbosity_names">
         <item>Verbose</item>
         <item>Brief</item>
+        <item>None</item>
     </array>
     <array name="verbosity_values">
         <item>Verbose</item>
         <item>Brief</item>
+        <item>None</item>
     </array>
 
 </resources>

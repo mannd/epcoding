@@ -26,7 +26,7 @@
     <string name="help_label">Hints</string>
     <string name="empty_message"></string>
     <string name="no_codes_selected_label">No codes selected.</string>
-    <string name="no_code_analysis_warning_message">No code analysis performed in this module.</string>
+    <string name="no_code_analysis_warning_message">No code analysis performed.</string>
     <string name="no_primary_codes_message">No primary codes.</string>
     <string name="no_primary_codes_verbose_message">You shouldn\'t just have additional codes.</string>
     <string name="no_secondary_codes_message">No additional codes selected.</string>
@@ -66,7 +66,7 @@
     <string name="show_code_details_off_summary">Show codes only</string>
     <string name="truncate_code_descriptions_label">Truncate descriptions</string>
     <string name="truncate_code_descriptions_summary">Long descriptions can clutter screen</string>
-    <string name="code_analysis_verbosity_label">Code analysis verbosity</string>
+    <string name="code_analysis_verbosity_label">Code analysis detail</string>
     <string name="show_plus_code_summary_key">show_plus_code_summary</string>
     <string name="show_details_code_summary_key">show_details_code_summary</string>
     <string name="truncate_long_descriptions_code_summary_key">truncate_long_descriptions_code_summary</string>

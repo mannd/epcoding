@@ -327,6 +327,7 @@ public class ProcedureDetailFragment extends Fragment implements
 			final boolean moduleHasNoSecondaryCodes) {
 		CodeAnalyzer analyzer = new CodeAnalyzer(codes, noPrimaryCodes,
 				noSecondaryCodes, moduleHasNoSecondaryCodes, context);
+		analyzer.setNoAnalysis(codeVerbosity.equals("None"));
 		analyzer.setVerbose(codeVerbosity.equals("Verbose"));
 		// return analyzer.analysis();
 		// for now:
@@ -436,6 +437,6 @@ public class ProcedureDetailFragment extends Fragment implements
 						getString(R.string.truncate_long_descriptions_code_summary_key),
 						false);
 		codeVerbosity = sharedPreferences
-				.getString("code_verbosity", "VERBOSE");
+				.getString("code_verbosity", "Verbose");
 	}
 }

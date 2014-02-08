@@ -63,14 +63,6 @@ public class ProcedureDetailActivity extends FragmentActivity {
 		case R.id.help:
 			startActivity(new Intent(this, Help.class));
 			return true;
-		case R.id.about:
-			startActivity(new Intent(this, About.class));
-			return true;
-			// case R.id.editCodeList:
-			// if (fragment != null && fragment instanceof
-			// ProcedureDetailFragment)
-			// ; // fragment.editCodeList();
-			// return true;
 		case R.id.saveCodeSelection:
 			if (fragment != null && fragment instanceof ProcedureDetailFragment)
 				fragment.saveCoding();

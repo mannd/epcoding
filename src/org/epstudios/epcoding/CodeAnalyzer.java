@@ -15,6 +15,7 @@ public class CodeAnalyzer {
 	private final boolean moduleHasNoSecondaryCodes;
 	private final Context context;
 	private boolean verbose = false;
+	private boolean noAnalysis = false;
 
 	private static final List<String> mappingCodes = Arrays.asList("93609",
 			"93613");
@@ -62,6 +63,10 @@ public class CodeAnalyzer {
 		this.verbose = verbose;
 	}
 
+	public void setNoAnalysis(boolean value) {
+		this.noAnalysis = value;
+	}
+
 	public String analysis() {
 		// Note that ERRORs should be tested first, then WARNINGs
 		// Note unicode doesn't consistently work on different devices.
@@ -74,6 +79,12 @@ public class CodeAnalyzer {
 		if (noPrimaryCodes && noSecondaryCodes)
 			return getMessage(WARNING, R.string.no_codes_selected_label,
 					R.string.empty_message);
+		// quick exit for noAnalysis
+		if (noAnalysis)
+			return getMessage(WARNING,
+					R.string.no_code_analysis_performed_message,
+					R.string.empty_message);
+		// TODO fix this
 		// no code checking in All & Misc Codes
 		if (moduleHasNoSecondaryCodes)
 			return getMessage(WARNING,
