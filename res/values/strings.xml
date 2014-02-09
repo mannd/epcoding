@@ -42,7 +42,17 @@
     <string name="ep_testing_with_avn_ablation_warning">[93650, 93600 or 93619 or 93620]</string>
     <string name="ep_testing_with_avn_ablation_verbose_warning">It is unclear if EP testing codes can be combined with AV node ablation.</string>
     <string name="bad_combo_codes_verbose_error_message">Codes selected can\'t be combined.</string>
-    <string name="ablation_help_text">Temp ablation procedures help text</string>
+    <string name="ablation_help_text">    Catheter ablation procedures are coded with a primary ablation
+    code.  This code includes comprehensive electrophysiologic
+    testing, which should not be coded separately.  However other
+    components, such as mapping, can be coded for AFB and SVT
+    ablations, but not for VT ablations.  EP Coding disables codes
+    that can\'t be combined.  Note that atrial flutter and atrial
+    tachycardia ablation is coded as an SVT ablation.  Also note that
+    for AFB ablation, there are add-on codes for additional ablation
+    besides pulmonary vein isolation for AFB (such as linear atrial
+    ablation, 93657) and ablation of additional arrhythmia mechanisms (such
+    as focal atrial tachycardia, 93655).</string>
     <string name="devices_help_text">Temp device procedures help text</string>
     <string name="all_codes_help_text">All codes help text</string>
     <string name="other_procedure_help_text">Other procedure help text</string>

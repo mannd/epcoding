@@ -327,7 +327,9 @@ public class ProcedureDetailFragment extends Fragment implements
 			final boolean moduleHasNoSecondaryCodes) {
 		CodeAnalyzer analyzer = new CodeAnalyzer(codes, noPrimaryCodes,
 				noSecondaryCodes, moduleHasNoSecondaryCodes, context);
-		analyzer.setNoAnalysis(codeVerbosity.equals("None"));
+		// no analysis for all procedures module
+		analyzer.setNoAnalysis(codeVerbosity.equals("None")
+				|| mItem == allProcedures);
 		analyzer.setVerbose(codeVerbosity.equals("Verbose"));
 		// return analyzer.analysis();
 		// for now:
