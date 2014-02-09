@@ -15,6 +15,7 @@
 		\n\nEmail: mannd@epstudiossoftware.com
 		\nWeb: www.epstudiossoftware.com
 		\nSource: github.com/mannd/epcoding
+		\n\nCPT\u00ae codes are copyright by the AMA
 		\n\nCopyright \u00a9 2013, 2014 EP Studios, Inc.
 		\nLicensed under GNU GPL v3.</string>
     <string name="help_title">Help</string>
@@ -65,6 +66,15 @@
 	    billed as additional codes to AV node ablation.  Often AV node
 	    ablation is combined with device implant at the same setting and
 	    these codes should be added.</string>
+    <string name="svt_ablation_help_text">SVT ablation includes comprehensive EP testing, but can be
+	    combined with the other codes listed.  Note that the SVT ablation
+	    code (93653) is used not just for supraventricular tachycardia,
+	    but for WPW ablation, atrial flutter ablation, atrial tachycardia
+	    ablation, and presumably premature atrial complex ablation.</string>
+    <string name="vt_ablation_help_text">Mapping codes (93609 or 93613), for reasons only known to the
+	    AMA, cannot be combined with the 93654 VT ablation code.
+	    This is unlike the AFB and SVT ablation codes.  LV pacing and
+	    recording also cannot be combined with VT ablation.</string>
     <string name="devices_help_text">Temp device procedures help text</string>
     <string name="all_codes_help_text">All codes help text</string>
     <string name="other_procedure_help_text">Other procedure help text</string>

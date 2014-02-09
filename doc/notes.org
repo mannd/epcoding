@@ -179,7 +179,20 @@
     tachycardia).
 *** AV node ablation
     It is not clear if electrophysiologic testing and mapping can be
-    billed as additional codes to AV node ablation.
+    billed as additional codes to AV node ablation.  Often AV node
+    ablation is combined with device implant at the same setting and
+    these codes should be added.
+*** SVT ablation
+    SVT ablation includes comprehensive EP testing, but can be
+    combined with the other codes listed.  Note that the SVT ablation
+    code (93653) is used not just for supraventricular tachycardia,
+    but for WPW ablation, atrial flutter ablation, atrial tachycardia
+    ablation, and presumably premature atrial complex ablation.
+*** VT ablation
+    Mapping codes (93609 or 93613), for reasons only known to the
+    AMA, cannot be combined with the 93654 VT ablation code.
+    This is unlike the AFB and SVT ablation codes.  LV pacing and
+    recording also cannot be combined with VT ablation.
 * Limitations
   - Code descriptions are paraphrased
   - All information freely available on web

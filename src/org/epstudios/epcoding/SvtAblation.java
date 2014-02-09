@@ -18,4 +18,9 @@ public class SvtAblation extends AblationProcedure implements Procedure {
 		return Codes.svtAblationDisabledCodeNumbers;
 	}
 
+	@Override
+	public String helpText(Context context) {
+		return context.getString(R.string.svt_ablation_help_text);
+	}
+
 }

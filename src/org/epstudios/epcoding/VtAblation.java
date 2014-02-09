@@ -19,4 +19,9 @@ public class VtAblation extends AblationProcedure implements Procedure {
 		return Codes.vtAblationDisabledCodeNumbers;
 	}
 
+	@Override
+	public String helpText(Context context) {
+		return context.getString(R.string.vt_ablation_help_text);
+	}
+
 }
