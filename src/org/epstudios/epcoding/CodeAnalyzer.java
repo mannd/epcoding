@@ -39,6 +39,8 @@ public class CodeAnalyzer {
 		comboList.add(Arrays.asList("33206", "33207", "33208"));
 		// no in and out with an ILR
 		comboList.add(Arrays.asList("33282", "33284"));
+		// Can't combine different types of EP testing together
+		comboList.add(Arrays.asList("93600", "93619", "93620"));
 		return comboList;
 	}
 

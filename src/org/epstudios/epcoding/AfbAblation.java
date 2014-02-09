@@ -18,4 +18,9 @@ public class AfbAblation extends AblationProcedure implements Procedure {
 		return Codes.afbAblationDisabledCodeNumbers;
 	}
 
+	@Override
+	public String helpText(Context context) {
+		return context.getString(R.string.afb_ablation_help_text);
+	}
+
 }

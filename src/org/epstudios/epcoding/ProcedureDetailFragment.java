@@ -331,19 +331,6 @@ public class ProcedureDetailFragment extends Fragment implements
 		analyzer.setNoAnalysis(codeVerbosity.equals("None")
 				|| mItem == allProcedures);
 		analyzer.setVerbose(codeVerbosity.equals("Verbose"));
-		// return analyzer.analysis();
-		// for now:
-		// No code analysis done for All Codes
-		// if (mItem == allProcedures) {
-		// return getString(R.string.no_code_analysis_performed_message);
-		// // return getString(R.string.no_code_analysis_performed_message);
-		// }
-		// this is a big chunk of analysis that can be as sophisticated as we
-		// want
-		// Maybe delegate to a class
-		// String message = CodeAnalyzer.analyze(codes);
-		// return message;
-		// if no errors found above will:
 		return analyzer.analysis();
 	}
 

@@ -167,6 +167,16 @@
     besides pulmonary vein isolation for AFB (such as linear atrial
     ablation, 93657) and ablation of additional arrhythmia mechanisms (such
     as focal atrial tachycardia, 93655).
+*** AFB Ablation
+    AFB ablation includes comprehensive EP testing, including LA
+    recording and pacing.  It also includes transseptal
+    catheterization, therefore these codes cannot be added on.
+    Mapping codes and coding for programmed stimulation after IV drug
+    infusion can be added.  The primary code includes pulmonary vein
+    isolation.  Add code 93657 if additional ablation for AFB is done
+    (such as linear atrial ablation) and add 93655 if a separate
+    arrhythmia mechanism is ablated (such as focal atrial
+    tachycardia).
 *** AV node ablation
     It is not clear if electrophysiologic testing and mapping can be
     billed as additional codes to AV node ablation.

@@ -32,7 +32,7 @@ public class AvnAblation implements Procedure {
 
 	@Override
 	public String helpText(Context context) {
-		return context.getString(R.string.ablation_help_text);
+		return context.getString(R.string.av_node_ablation_help_text);
 	}
 
 }
