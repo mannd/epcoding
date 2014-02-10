@@ -9,18 +9,27 @@
     | Dual chamber PPM implant   | 33208 |
     |----------------------------+-------|
 * Details    
-* TODO
-** Reorder secondary codes
+* TODO Thing that need doing
+** DONE Reorder secondary codes
    They should be generally in numeric order, but can also have some
    logical order.  It makes no sense to put the A line code in first,
    even though it comes numerically before the others.
-** Write help texts
+** DONE Write help text
 ** DONE Put Settings in?
    - verbosity setting for coding summary
    - coding analysis warning levels?
    - ? toggle coding analysis
 ** DONE Bugs
    - rotation of screen loses check marks
+** TODO Final Todo list
+*** TODO Fix About screen per Android guidelines
+*** TODO Finish Hints
+*** TODO Finish bad combos
+*** TODO Finish icons
+*** TODO Check codes, run through scenarios
+*** TODO clean up procedure classes
+    - change Procedure to abstract base class
+    - Ablation and Device classes for default behavior
 * Settings screen
   - Settings
     - Code Display
@@ -155,6 +164,9 @@
       in numerical order.  It is the /a la carte/ menu of EP Coding.
       No code analysis is performed in this module.
 ** Hints
+*** Note
+    These are drafts of the Hints and may not match the final
+    versions in the strings.xml.
 *** Ablation Hints
     Catheter ablation procedures are coded with a primary ablation
     code.  This code includes comprehensive electrophysiologic
@@ -193,6 +205,15 @@
     AMA, cannot be combined with the 93654 VT ablation code.
     This is unlike the AFB and SVT ablation codes.  LV pacing and
     recording also cannot be combined with VT ablation.
+*** All Procedures
+    As an alternative to using the procedure oriented choices in EP
+    Coding, the All Procedures allows you to pick any of the codes in
+    any combination.  This may be useful if you are doing something
+    unusual that is not covered in the other procedure lists, or if
+    you are very familiar with how to use the codes and just want to
+    select from the complete list.  There is NO checking of coding in
+    this list!  It is possible to enter combinations of codes that
+    conflict.  As always, with increased freedom comes increased risk.
 * Limitations
   - Code descriptions are paraphrased
   - All information freely available on web
@@ -367,4 +388,16 @@
      Set<String> codeNumbers
 **** Triples
 **** TODO Option for no code analysis in Settings
+* Glossary
+  | Term         | Definition                                         |
+  |--------------+----------------------------------------------------|
+  | List         | The codes associated with a specific procedure     |
+  | Help         | The general Help notes                             |
+  | Hint         | Specific help for specific procedures              |
+  | Code         | An individual CPT code                             |
+  | Coding       | The process of selecting CPT codes for a procedure |
+  | Primary Code | A code necessary for billing a procedure           |
+  | Other Code   | Codes that are commonly used during a procedure    |
+  | Add-on Code  | A code that can't stand alone, per CPT             |
+
      

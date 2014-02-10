@@ -48,11 +48,13 @@ public class ProcedureDetailFragment extends Fragment implements
 	boolean plusShownInSummary;
 	boolean codeDescriptionInSummary;
 	boolean descriptionTruncatedInSummary;
+	boolean codeCheckAllCodes;
 	String codeVerbosity;
 	// shorten description based on screen width?
 
 	private LinearLayout primaryCheckBoxLayout;
 	private LinearLayout secondaryCheckBoxLayout;
+	private TextView primaryCodeTextView;
 	private TextView secondaryCodeTextView;
 
 	private Button summarizeButton;
@@ -151,6 +153,8 @@ public class ProcedureDetailFragment extends Fragment implements
 				.findViewById(R.id.primary_checkbox_layout);
 		secondaryCheckBoxLayout = (LinearLayout) rootView
 				.findViewById(R.id.secondary_checkbox_layout);
+		primaryCodeTextView = (TextView) rootView
+				.findViewById(R.id.primary_code_textView);
 		secondaryCodeTextView = (TextView) rootView
 				.findViewById(R.id.secondary_code_textView);
 
@@ -211,6 +215,11 @@ public class ProcedureDetailFragment extends Fragment implements
 		} else {
 			secondaryCheckBoxLayout.setVisibility(View.GONE);
 			secondaryCodeTextView.setVisibility(View.GONE);
+		}
+
+		if (mItem == allProcedures) {
+			primaryCodeTextView
+					.setText(getString(R.string.all_codes_primary_title));
 		}
 
 		Code[] primaryCodes = procedure.primaryCodes();
@@ -329,7 +338,7 @@ public class ProcedureDetailFragment extends Fragment implements
 				noSecondaryCodes, moduleHasNoSecondaryCodes, context);
 		// no analysis for all procedures module
 		analyzer.setNoAnalysis(codeVerbosity.equals("None")
-				|| mItem == allProcedures);
+				|| (mItem == allProcedures && !codeCheckAllCodes));
 		analyzer.setVerbose(codeVerbosity.equals("Verbose"));
 		return analyzer.analysis();
 	}
@@ -425,6 +434,8 @@ public class ProcedureDetailFragment extends Fragment implements
 				.getBoolean(
 						getString(R.string.truncate_long_descriptions_code_summary_key),
 						false);
+		codeCheckAllCodes = sharedPreferences.getBoolean(
+				getString(R.string.code_check_all_codes_key), false);
 		codeVerbosity = sharedPreferences
 				.getString("code_verbosity", "Verbose");
 	}

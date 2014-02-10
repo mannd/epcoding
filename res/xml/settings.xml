@@ -18,6 +18,11 @@
         android:key="@string/truncate_long_descriptions_code_summary_key"
         android:summary="@string/truncate_code_descriptions_summary"
         android:title="@string/truncate_code_descriptions_label" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/code_check_all_codes_key"
+        android:summary="@string/code_check_all_codes_summary"
+        android:title="@string/code_check_all_codes_label" />
 
     <ListPreference
         android:defaultValue="Verbose"

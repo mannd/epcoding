@@ -16,7 +16,7 @@ public class CodeCheckBox extends CheckBox {
 	public void setCode(Code c) {
 		code = c;
 		// text is automatically set to code description
-		super.setText(c.getDescription());
+		super.setText(c.getUnformattedDescriptionFirst());
 	}
 
 	public Code getCode() {

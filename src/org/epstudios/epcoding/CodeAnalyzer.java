@@ -41,15 +41,18 @@ public class CodeAnalyzer {
 		comboList.add(Arrays.asList("33282", "33284"));
 		// Can't combine different types of EP testing together
 		comboList.add(Arrays.asList("93600", "93619", "93620"));
+		// Don't combine gen replacement with gen removal
+		comboList.add(Arrays.asList("33227", "33233"));
+		comboList.add(Arrays.asList("33228", "33233"));
+		comboList.add(Arrays.asList("33229", "33233"));
+		comboList.add(Arrays.asList("33262", "33241"));
+		comboList.add(Arrays.asList("33263", "33241"));
+		comboList.add(Arrays.asList("33264", "33241"));
+		// multiple PPM generator replacements
+		comboList.add(Arrays.asList("33227", "33228", "33229"));
+		// TODO same for ICD
 		return comboList;
 	}
-
-	// Arrays.asList(this.new Combo("33206",
-	// "33207"), this.new Combo("33206", "33208"), this.new Combo("33207",
-	// "33208"), this.new Combo("33227", "33228"));
-
-	// also need list of codes that can be compared to a single code,
-	// e.g. 76000 should not be used with any other device code
 
 	public CodeAnalyzer(final Code[] codes, final boolean noPrimaryCodes,
 			final boolean noSecondaryCodes,

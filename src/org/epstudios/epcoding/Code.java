@@ -78,4 +78,9 @@ public class Code {
 			return s;
 		return s.substring(0, newLength - 3) + "...";
 	}
+
+	// use this for CodeCheckBox text
+	public String getUnformattedDescriptionFirst() {
+		return shortDescription + " (" + (isAddOn ? "+" : "") + code + ")";
+	}
 }
