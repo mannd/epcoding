@@ -89,18 +89,12 @@ public class CodeAnalyzer {
 			return getMessage(WARNING,
 					R.string.no_code_analysis_performed_message,
 					R.string.empty_message);
-		// TODO fix this
-		// no code checking in All & Misc Codes
-		if (moduleHasNoSecondaryCodes)
-			return getMessage(WARNING,
-					R.string.no_code_analysis_performed_message,
-					R.string.empty_message);
 		// Now the details checks
 		String message = "";
 		if (noPrimaryCodes)
 			message += getMessage(ERROR, R.string.no_primary_codes_message,
 					R.string.no_primary_codes_verbose_message);
-		if (noSecondaryCodes) // already checked moduleHasNoSecondaryCodes
+		if (noSecondaryCodes && !moduleHasNoSecondaryCodes)
 			message += getMessage(WARNING, R.string.no_secondary_codes_message,
 					R.string.no_secondary_codes_verbose_message);
 		if (allAddOnCodes())
@@ -183,16 +177,6 @@ public class CodeAnalyzer {
 						|| codeNumbers.contains("93619") || codeNumbers
 							.contains("93620"));
 	}
-
-	// private String getBadComboCodes(final Set<String> codeNumbers) {
-	// String codes = "";
-	// for (Combo badCombo : badCombos) {
-	// if (codeNumbers.contains(badCombo.getS1())
-	// && codeNumbers.contains(badCombo.getS2()))
-	// codes += badCombo.toString();
-	// }
-	// return codes;
-	// }
 
 	// test all bad combos
 	private String getBadComboCodes(final Set<String> codeNumbers) {
