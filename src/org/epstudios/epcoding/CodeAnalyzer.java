@@ -181,22 +181,30 @@ public class CodeAnalyzer {
 	// test all bad combos
 	private String getBadComboCodes(final Set<String> codeNumbers) {
 		String codes = "";
-		for (List<String> combo : combos)
-			if (hasBadCombo(combo, codeNumbers))
-				codes += combo.toString();
+		for (List<String> combo : combos) {
+			List<String> badCombo = combo;
+			List<String> badCodeList = hasBadCombo(badCombo, codeNumbers);
+			int numCombos = 0;
+			if (badCodeList.size() > 1) {
+				++numCombos;
+				codes += getCodeString(badCodeList)
+						+ (numCombos > 1 ? "\n" : "");
+			}
+		}
 		return codes;
 
 	}
 
-	// test a list of codes to see if > 1 included
-	private boolean hasBadCombo(final List<String> badCodes,
+	// returns list of matching bad codes
+	private List<String> hasBadCombo(final List<String> badCodes,
 			final Set<String> codes) {
-		int count = 0;
+		List<String> badCodeList = new ArrayList<String>();
 		for (String badCode : badCodes) {
-			if (codes.contains(badCode))
-				count++;
+			if (codes.contains(badCode)) {
+				badCodeList.add(badCode);
+			}
 		}
-		return count > 1;
+		return badCodeList;
 	}
 
 	// returns string of codes in this format: "[99999, 99991]"

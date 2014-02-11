@@ -162,7 +162,6 @@
       detail shown in the code analysis dialog.
     - The *All Codes* module just lists every code
       in numerical order.  It is the /a la carte/ menu of EP Coding.
-      No code analysis is performed in this module.
 ** Hints
 *** Note
     These are drafts of the Hints and may not match the final
@@ -399,5 +398,6 @@
   | Primary Code | A code necessary for billing a procedure           |
   | Other Code   | Codes that are commonly used during a procedure    |
   | Add-on Code  | A code that can't stand alone, per CPT             |
+  | Module       | A group of code choices for a procedure            |
 
      
