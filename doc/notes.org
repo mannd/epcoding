@@ -30,11 +30,16 @@
 *** TODO clean up procedure classes
     - change Procedure to abstract base class
     - Ablation and Device classes for default behavior
-** TODO Code Analysis
+** DONE Code Analysis
    Need to generalize by having class with
    - Code numbers
    - warning level
    - verbose message
+** DONE One code not allowed with multiple codes
+   Implemented <2014-02-11 Tue>
+** TODO Don't need no secondary code warnings for all procedures
+   e.g. simple generator changes usually don't need more codes.
+   Should limit these suggestions to ablation codes only.  Implement this.
 * Settings screen
   - Settings
     - Code Display

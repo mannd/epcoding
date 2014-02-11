@@ -51,6 +51,8 @@ public class CodeAnalyzer {
 				.asList("92960", "92961"), DUPLICATE_CARDIOVERSION_ERROR));
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("33206", "33207", "33208"), DEFAULT_COMBO_ERROR));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("33227", "33228", "33229"), DEFAULT_COMBO_ERROR));
 
 		return codeErrors;
 
@@ -64,6 +66,9 @@ public class CodeAnalyzer {
 		List<CodeError> codeErrors = new ArrayList<CodeError>();
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR,
 				mappingCodes, DUPLICATE_MAPPING_ERROR));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("33233", "33227", "33228", "33229"),
+				"don't use gen removal and replacement codes together."));
 
 		return codeErrors;
 	}
@@ -154,10 +159,8 @@ public class CodeAnalyzer {
 			message += getMessage(WARNING,
 					R.string.ep_testing_with_avn_ablation_warning,
 					R.string.ep_testing_with_avn_ablation_verbose_warning);
-		String errorCodes = getErrorCodes(codeNumberSet);
-		if (errorCodes.length() > 0) {
-			message += errorCodes;
-		}
+		message += getErrorCodes(codeNumberSet);
+		message += getErrorCodesFirstSpecial(codeNumberSet);
 		if (message.length() == 0) // no errors!
 			message = getMessage(OK, R.string.no_code_errors_message,
 					R.string.empty_message);
@@ -235,31 +238,35 @@ public class CodeAnalyzer {
 	// other codes. E.g. PPM removal should not be used with any of the 3 PPM
 	// replacement codes. It treats the first member of the code combination
 	// specially, i.e. skips testing if the first number is not present
-	// private String getErrorCodesFirstSpecial(final Set<String> codeNumbers) {
-	// String errorCodes = "";
-	// String warning = "";
-	// CodeError.WarningLevel warningLevel = CodeError.WarningLevel.NONE;
-	// for (CodeError codeError : codeErrors) {
-	// List<String> badCombo = codeError.getCodes();
-	// List<String> badCodeList = hasBadCombo(badCombo, codeNumbers);
-	// int numCombos = 0;
-	// if (badCodeList.size() > 1) {
-	// ++numCombos;
-	// warningLevel = codeError.getWarningLevel();
-	// if (warningLevel == CodeError.WarningLevel.ERROR)
-	// warning = ERROR;
-	// else if (warningLevel == CodeError.WarningLevel.WARNING)
-	// warning = WARNING;
-	// else
-	// warning = OK;
-	// errorCodes += "\n" + warning + getCodeString(badCodeList) + " "
-	// + (verbose ? codeError.getWarningMessage() : "")
-	// + (numCombos > 0 ? "\n" : "");
-	// }
-	// }
-	// return errorCodes;
-	//
-	// }
+	private String getErrorCodesFirstSpecial(final Set<String> codeNumbers) {
+		String errorCodes = "";
+		String warning = "";
+		CodeError.WarningLevel warningLevel = CodeError.WarningLevel.NONE;
+		// first see if first error code is contained in codeNumbers set
+		for (CodeError codeError : specialFirstCodeErrors) {
+			List<String> badCombo = codeError.getCodes();
+			if (codeNumbers.contains(badCombo.get(0))) {
+				List<String> badCodeList = hasBadCombo(badCombo, codeNumbers);
+				int numCombos = 0;
+				if (badCodeList.size() > 1) {
+					++numCombos;
+					warningLevel = codeError.getWarningLevel();
+					if (warningLevel == CodeError.WarningLevel.ERROR)
+						warning = ERROR;
+					else if (warningLevel == CodeError.WarningLevel.WARNING)
+						warning = WARNING;
+					else
+						warning = OK;
+					errorCodes += "\n" + warning + getCodeString(badCodeList)
+							+ " "
+							+ (verbose ? codeError.getWarningMessage() : "")
+							+ (numCombos > 0 ? "\n" : "");
+				}
+			}
+		}
+		return errorCodes;
+
+	}
 
 	// returns list of matching bad codes
 	private List<String> hasBadCombo(final List<String> badCodes,
