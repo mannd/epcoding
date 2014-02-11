@@ -179,6 +179,9 @@ public class CodeAnalyzer {
 	}
 
 	// test all bad combos
+	// TODO should return list of the bad combos, have calling function assemble
+	// together warning code, combo, and verbose statement
+
 	private String getBadComboCodes(final Set<String> codeNumbers) {
 		String codes = "";
 		for (List<String> combo : combos) {
@@ -188,7 +191,7 @@ public class CodeAnalyzer {
 			if (badCodeList.size() > 1) {
 				++numCombos;
 				codes += getCodeString(badCodeList)
-						+ (numCombos > 1 ? "\n" : "");
+						+ (numCombos > 0 ? "\n" : "");
 			}
 		}
 		return codes;

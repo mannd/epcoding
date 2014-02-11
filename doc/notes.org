@@ -30,6 +30,11 @@
 *** TODO clean up procedure classes
     - change Procedure to abstract base class
     - Ablation and Device classes for default behavior
+** TODO Code Analysis
+   Need to generalize by having class with
+   - Code numbers
+   - warning level
+   - verbose message
 * Settings screen
   - Settings
     - Code Display
