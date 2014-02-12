@@ -191,8 +191,7 @@ public class Codes {
 	public final static String[] ppmGeneratorReplacementPrimaryCodeNumbers = {
 			"33227", "33228", "33229" };
 
-	public final static String[] newIcdPrimaryCodeNumbers = { "33240", "33230",
-			"33225" };
+	public final static String[] newIcdPrimaryCodeNumbers = { "33249", "33225" };
 
 	public final static String[] IcdReplacementPrimaryCodeNumbers = { "33262",
 			"33263", "33264" };

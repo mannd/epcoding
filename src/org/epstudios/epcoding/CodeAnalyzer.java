@@ -79,7 +79,7 @@ public class CodeAnalyzer {
 	private final static List<CodeError> createFirstCodeNeedsOtherCodes() {
 		List<CodeError> codeErrors = new ArrayList<CodeError>();
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
-				.asList("33225", "33206", "33207", "33208", "33240", "33230"),
+				.asList("33225", "33206", "33207", "33208", "33249"),
 				"Must use 33225 with new device implant code"));
 		return codeErrors;
 	}
@@ -223,24 +223,12 @@ public class CodeAnalyzer {
 	// if 2 or more codes should not be used together
 	private String getErrorCodes(final Set<String> codeNumbers) {
 		String errorCodes = "";
-		String warning = "";
-		CodeError.WarningLevel warningLevel = CodeError.WarningLevel.NONE;
 		for (CodeError codeError : codeErrors) {
 			List<String> badCombo = codeError.getCodes();
 			List<String> badCodeList = hasBadCombo(badCombo, codeNumbers);
-			int numCombos = 0;
 			if (badCodeList.size() > 1) {
-				++numCombos;
-				warningLevel = codeError.getWarningLevel();
-				if (warningLevel == CodeError.WarningLevel.ERROR)
-					warning = ERROR;
-				else if (warningLevel == CodeError.WarningLevel.WARNING)
-					warning = WARNING;
-				else
-					warning = OK;
-				errorCodes += "\n" + warning + getCodeString(badCodeList) + " "
-						+ (verbose ? codeError.getWarningMessage() : "")
-						+ (numCombos > 0 ? "\n" : "");
+				errorCodes += addToErrorMessage(errorCodes, codeError,
+						badCodeList);
 			}
 		}
 		return errorCodes;
@@ -253,27 +241,14 @@ public class CodeAnalyzer {
 	// specially, i.e. skips testing if the first number is not present
 	private String getErrorCodesFirstSpecial(final Set<String> codeNumbers) {
 		String errorCodes = "";
-		String warning = "";
-		CodeError.WarningLevel warningLevel = CodeError.WarningLevel.NONE;
 		// first see if first error code is contained in codeNumbers set
 		for (CodeError codeError : specialFirstCodeErrors) {
 			List<String> badCombo = codeError.getCodes();
 			if (codeNumbers.contains(badCombo.get(0))) {
 				List<String> badCodeList = hasBadCombo(badCombo, codeNumbers);
-				int numCombos = 0;
 				if (badCodeList.size() > 1) {
-					++numCombos;
-					warningLevel = codeError.getWarningLevel();
-					if (warningLevel == CodeError.WarningLevel.ERROR)
-						warning = ERROR;
-					else if (warningLevel == CodeError.WarningLevel.WARNING)
-						warning = WARNING;
-					else
-						warning = OK;
-					errorCodes += "\n" + warning + getCodeString(badCodeList)
-							+ " "
-							+ (verbose ? codeError.getWarningMessage() : "")
-							+ (numCombos > 0 ? "\n" : "");
+					errorCodes += addToErrorMessage(errorCodes, codeError,
+							badCodeList);
 				}
 			}
 		}
@@ -285,29 +260,37 @@ public class CodeAnalyzer {
 	private String getErrorCodesFirstCodeNeedsOtherCodes(
 			final Set<String> codeNumbers) {
 		String errorCodes = "";
-		String warning = "";
-		CodeError.WarningLevel warningLevel = CodeError.WarningLevel.NONE;
 		for (CodeError codeError : firstCodeNeedsOtherCodes) {
 			List<String> badCombo = codeError.getCodes();
 			if (codeNumbers.contains(badCombo.get(0))) {
 				List<String> badCodeList = hasBadCombo(badCombo, codeNumbers);
-				int numCombos = 0;
 				if (badCodeList.size() == 1) { // oops only first code present
-					warningLevel = codeError.getWarningLevel();
-					if (warningLevel == CodeError.WarningLevel.ERROR)
-						warning = ERROR;
-					else if (warningLevel == CodeError.WarningLevel.WARNING)
-						warning = WARNING;
-					else
-						warning = OK;
-					errorCodes += "\n" + warning + getCodeString(badCodeList)
-							+ " "
-							+ (verbose ? codeError.getWarningMessage() : "")
-							+ (numCombos > 0 ? "\n" : "");
+					errorCodes += addToErrorMessage(errorCodes, codeError,
+							badCodeList);
 				}
 			}
 		}
 		return errorCodes;
+	}
+
+	private String addToErrorMessage(final String message,
+			final CodeError codeError, final List<String> badCodeList) {
+		CodeError.WarningLevel warningLevel = codeError.getWarningLevel();
+		String warning = "";
+		switch (warningLevel) {
+		case NONE:
+			warning = OK;
+			break;
+		case WARNING:
+			warning = WARNING;
+			break;
+		case ERROR:
+		default:
+			warning = ERROR;
+			break;
+		}
+		return "\n" + warning + getCodeString(badCodeList)
+				+ (verbose ? " " + codeError.getWarningMessage() : "") + "\n";
 	}
 
 	// returns list of matching bad codes
@@ -325,12 +308,6 @@ public class CodeAnalyzer {
 	// returns string of codes in this format: "[99999, 99991]"
 	private String getCodeString(final List<String> codeList) {
 		return codeList.toString();
-	}
-
-	private String getCodingErrorMessage(final String threat,
-			final List<String> codeList, final int details) {
-		return getMessageFromStrings(threat, getCodeString(codeList),
-				context.getString(details));
 	}
 
 	private String getMessage(final String threat, final int brief,
