@@ -40,7 +40,7 @@ public class CodeAnalyzer {
 	private final static String DUPLICATE_MAPPING_ERROR = "You shouldn't combine 2D and 3D mapping.";
 	private final static String DUPLICATE_CARDIOVERSION_ERROR = "You can't code for both internal and external cardioversion.";
 
-	// There code errors occur when 2 or more of the codes occur
+	// There code errors occur when any 2 or more of the codes occur
 	private final static List<CodeError> codeErrors = createCodeErrors();
 
 	private final static List<CodeError> createCodeErrors() {
@@ -49,10 +49,15 @@ public class CodeAnalyzer {
 				mappingCodes, DUPLICATE_MAPPING_ERROR));
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("92960", "92961"), DUPLICATE_CARDIOVERSION_ERROR));
+		// don't use mult PPM implant, repl, or use implant and repl together
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
-				.asList("33206", "33207", "33208"), DEFAULT_COMBO_ERROR));
+				.asList("33206", "33207", "33208", "33227", "33228", "33229"),
+				DEFAULT_COMBO_ERROR));
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
-				.asList("33227", "33228", "33229"), DEFAULT_COMBO_ERROR));
+				.asList("33240", "33230", "33231", "33262", "33263", "33264"),
+				DEFAULT_COMBO_ERROR));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("93600", "93619", "93620"), DEFAULT_COMBO_ERROR));
 
 		return codeErrors;
 
@@ -64,11 +69,22 @@ public class CodeAnalyzer {
 
 	private final static List<CodeError> createSpecialFirstCodeErrors() {
 		List<CodeError> codeErrors = new ArrayList<CodeError>();
-		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR,
-				mappingCodes, DUPLICATE_MAPPING_ERROR));
+		codeErrors
+				.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays.asList(
+						"33233", "33227", "33228", "33229", "33213", "33213",
+						"33221"),
+						"Don't use generator removal and insertion or replacement codes together."));
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
-				.asList("33233", "33227", "33228", "33229"),
-				"don't use gen removal and replacement codes together."));
+				.asList("33214", "33227", "33228", "33229"),
+				"Don't PPM upgrade code with generator replacement codes"));
+		codeErrors
+				.add(new CodeError(CodeError.WarningLevel.WARNING, Arrays
+						.asList("93650", "93609", "93613"),
+						"It is not clear if mapping codes can be combined with AV node ablaton."));
+		codeErrors
+				.add(new CodeError(CodeError.WarningLevel.WARNING, Arrays
+						.asList("93650", "93600", "93619", "93620"),
+						"It is unclear if AV node ablation can be combined with EP testing codes."));
 
 		return codeErrors;
 	}
@@ -163,14 +179,6 @@ public class CodeAnalyzer {
 		if (noMappingCodesForAblation(codeNumberList))
 			message += getMessage(WARNING, R.string.no_mapping_codes_message,
 					R.string.no_mapping_codes_verbose_message);
-		if (avnAblationHasMappingCodes(codeNumberSet))
-			message += getMessage(WARNING,
-					R.string.mapping_with_avn_ablation_warning,
-					R.string.mapping_with_avn_ablation_verbose_warning);
-		if (avnAblationHasEpTestingCodes(codeNumberSet))
-			message += getMessage(WARNING,
-					R.string.ep_testing_with_avn_ablation_warning,
-					R.string.ep_testing_with_avn_ablation_verbose_warning);
 		message += getErrorCodes(codeNumberSet);
 		message += getErrorCodesFirstSpecial(codeNumberSet);
 		message += getErrorCodesFirstCodeNeedsOtherCodes(codeNumberSet);

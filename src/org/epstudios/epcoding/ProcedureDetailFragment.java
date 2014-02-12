@@ -323,7 +323,7 @@ public class ProcedureDetailFragment extends Fragment implements
 			}
 		}
 		noSecondaryCodes = primaryCodeCounter == i;
-		if (noSecondaryCodes || mItem == ppmReplacement || mItem == newPpm)
+		if (mItem == ppmReplacement || mItem == newPpm)
 			moduleHasNoSecondaryCodesNeedingChecking = true;
 		message += codeAnalysis(codes, noPrimaryCodes, noSecondaryCodes,
 				moduleHasNoSecondaryCodesNeedingChecking);

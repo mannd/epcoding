@@ -300,14 +300,14 @@
 **** Repair 33218, 33220 (single, dual lead repair)		    :cpt2011:
      - PPM or ICD leads
      - Use with generator replacements
-***** TODO Add to Additional codes for generator change, upgrade
+***** DONE Add to Additional codes for generator change, upgrade
 **** 33226 Repositioning of LV lead				    :cpt2011:
      ? Includes removal, insertion and/or replacement of existing generator
 **** 33227-33229						    :cpt2011:
      - replacement codes
      - Don't report with 33233 (removal)
      - report with 33206-33208 (new systems) and 33234, 33235 (lead
-       removal) for upgrades.
+       removal) for upgrades. ???????
 *** ICD codes
 **** 33240, 33230, 33231					    :cpt2011:
      - 33240 ICD gen only with existing single lead
@@ -438,5 +438,4 @@
   | Add-on Code  | A code that can't stand alone, per CPT             |
   | Module       | A group of code choices for a procedure            |
 
-     
 * TODO License
