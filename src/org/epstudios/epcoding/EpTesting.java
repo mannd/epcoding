@@ -31,7 +31,7 @@ public class EpTesting implements Procedure {
 
 	@Override
 	public String helpText(Context context) {
-		return context.getString(R.string.ablation_help_text);
+		return context.getString(R.string.ep_testing_help_text);
 	}
 
 }

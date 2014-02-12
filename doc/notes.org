@@ -183,6 +183,14 @@
       detail shown in the code analysis dialog.
     - The *All Codes* module just lists every code
       in numerical order.  It is the /a la carte/ menu of EP Coding.
+*** Limitations
+    - EP procedure codes only.
+    - No surgical EP codes (e.g. placement of LV lead via
+      thoracotomy).
+    - Code descriptions are paraphrased.
+    - Code components are not given or incomplete.
+    - No office based or in-patient billing codes.
+    - No device programming codes.
 ** Hints
 *** Note
     These are drafts of the Hints and may not match the final
@@ -225,6 +233,15 @@
     AMA, cannot be combined with the 93654 VT ablation code.
     This is unlike the AFB and SVT ablation codes.  LV pacing and
     recording also cannot be combined with VT ablation.
+*** EP testing
+    EP testing is not coded separately if ablation is performed.
+    Mapping can be added to EP testing codes, as well as LA pacing and
+    recording, programmed stimulation after IV drug, etc.  The two
+    primary codes lists are the most commonly used, other rarely used
+    codes, such as His bundle recording only (93600) are listed in
+    the All Codes module, but probably should be avoided.
+*** New PPM
+    
 *** All Procedures
     As an alternative to using the procedure oriented choices in EP
     Coding, the All Procedures allows you to pick any of the codes in
@@ -407,7 +424,7 @@
      List<Combo> badCombos
      Set<String> codeNumbers
 **** Triples
-**** TODO Option for no code analysis in Settings
+**** DONE Option for no code analysis in Settings
 * Glossary
   | Term         | Definition                                         |
   |--------------+----------------------------------------------------|

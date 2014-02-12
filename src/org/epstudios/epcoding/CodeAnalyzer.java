@@ -38,7 +38,7 @@ public class CodeAnalyzer {
 	// Error messages and warnings
 	private final static String DEFAULT_COMBO_ERROR = "These codes shouldn't be combined.";
 	private final static String DUPLICATE_MAPPING_ERROR = "You shouldn't combine 2D and 3D mapping.";
-	private final static String DUPLICATE_CARDIOVERSION_ERROR = "You can't code for both internal and external cardioversion";
+	private final static String DUPLICATE_CARDIOVERSION_ERROR = "You can't code for both internal and external cardioversion.";
 
 	// There code errors occur when 2 or more of the codes occur
 	private final static List<CodeError> codeErrors = createCodeErrors();

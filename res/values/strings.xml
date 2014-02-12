@@ -44,19 +44,6 @@
     <string name="ep_testing_with_avn_ablation_verbose_warning">It is unclear if EP testing codes can be combined with AV node ablation.</string>
     <string name="bad_combo_codes_verbose_error_message">Codes
     selected can\'t be combined.</string>
-    <string name="duplicate_cardioversion_error_message">You can\'t
-    bill for internal and external cardioversion together.</string>
-    <string name="ablation_help_text">    Catheter ablation procedures are coded with a primary ablation
-    code.  This code includes comprehensive electrophysiologic
-    testing, which should not be coded separately.  However other
-    components, such as mapping, can be coded for AFB and SVT
-    ablations, but not for VT ablations.  EP Coding disables codes
-    that can\'t be combined.  Note that atrial flutter and atrial
-    tachycardia ablation is coded as an SVT ablation.  Also note that
-    for AFB ablation, there are add-on codes for additional ablation
-    besides pulmonary vein isolation for AFB (such as linear atrial
-    ablation, 93657) and ablation of additional arrhythmia mechanisms (such
-    as focal atrial tachycardia, 93655).</string>
     <string name="afb_ablation_help_text">AFB ablation includes comprehensive EP testing, including LA
 	    recording and pacing.  It also includes transseptal
 	    catheterization, therefore these codes cannot be added on.
@@ -73,12 +60,55 @@
 	    combined with the other codes listed.  Note that the SVT ablation
 	    code (93653) is used not just for supraventricular tachycardia,
 	    but for WPW ablation, atrial flutter ablation, atrial tachycardia
-	    ablation, and presumably premature atrial complex ablation.</string>
-    <string name="vt_ablation_help_text">Mapping codes (93609 or 93613), for reasons only known to the
+	    ablation, and presumably premature atrial complex ablation.  If
+	    more than one arrhythmia mechanism is ablated, add code 93655.</string>
+    <string name="vt_ablation_help_text">VT ablation includes comprehensive EP
+        testing.  Mapping codes (93609 or 93613), for reasons only known to the
 	    AMA, cannot be combined with the 93654 VT ablation code.
 	    This is unlike the AFB and SVT ablation codes.  LV pacing and
 	    recording also cannot be combined with VT ablation.</string>
+    <string name="ep_testing_help_text">The most commonly used codes for EP testing is 
+        93620.  EP testing is not coded separately if ablation is performed.
+	    Mapping can be added to EP testing codes, as well as LA pacing and
+	    recording, programmed stimulation after IV drug, etc.  The two
+	    primary codes lists are the most commonly used, other rarely used
+	    codes, such as His bundle recording only (93600) are listed in
+	    the All Codes module, but probably should be avoided.</string>
     <string name="devices_help_text">Temp device procedures help text</string>
+    <string name="new_ppm_help_text">These codes are used for implantation of a pacemaker
+        generator and lead(s).  Use the code that corresponds to the lead(s) put in.
+        Use 33208 and 33225 for implantion of a pacemaker with CRT (i.e. with a
+        coronary sinus lead).  These codes are also used when there is removal of 
+        a prior system (generator and leads) and replacement with new generator and
+        leads.  Do not use these codes for simple generator replacements.</string>
+    <string name="new_icd_help_text">A new single or dual chamber ICD with new leads 
+        is coded with the same code, 33249.  Code 33225 is added to 33249 if an
+        LV/coronary sinus lead is added.  Use 93641 for DFT testing at the time
+        of the implant.  These codes are also used if an ICD system (generator and
+        leads) is removed and replaced with a new generator and leads.  Do not
+        use these codes for simple generator replacement.</string>
+    <string name="icd_replacement_help_text">These codes are used for ICD generator
+        replacement only.  Use the primary code that is specific to the type
+        of generator being replaced.  Do not use these codes for system revisions or
+        upgrades.  A common additional code is 93641 for DFT testing during the
+        procedure.</string>
+    <string name="upgrade_device_help_text">This module contains a grab-bag of codes,
+        and these procedures are definitely the most difficult to code.  If you are
+        just replacing a generator, use the Replace ICD or Replace PPM modules.  If
+        you are upgrading devices, changing from PPMs to ICDs, adding leads,
+        extracting leads, removing generators without replacment, this module
+        should have the codes you need.  The basic prinicple to follow is to
+        use specific codes for what you are removing (leads or generators) and then
+        use codes for new complete systems.  Example - upgrade dual chamber PPM or
+        ICD with CRT, old leads left in place: 33233 (removal of PPM generator only),
+        33249 (insert single or dual chamber ICD with leads), and 33225 (add coronary
+        sinus lead).  However there is a code (33214) to upgrade a single chamber to
+        a dual chamber PPM.  Example - upgrade single chamber PPM to PPM
+        with CRT: 33214 (upgrade single to dual chamber PPM, includes new lead) and
+        33225 (add CS lead).  Finally here is upgrade of single chamber ICD to ICD
+        with CRT: 33249 (Insert new/replacement ICD with single or dual leads), 33225
+        (add CS lead) and 33241 (removal of ICD generator only).  If you are
+        unsure how to code something, check with your coders.</string>
     <string name="all_codes_help_text">As an alternative to using the procedure 
         oriented choices in EP
 	    Coding, the All Codes module allows you to pick any of the codes in
@@ -90,13 +120,18 @@
 	    this list, though this can be turned on in Settings.  It is possible to enter 
 	    combinations of codes that
 	    conflict.  As always, with increased freedom comes increased risk.</string>
-    <string name="other_procedure_help_text">Other procedure help text</string>
+    <string name="other_procedure_help_text">These are miscellaneous EP procedures
+        and their coding is quite straightforard.  Just pick the code(s) you need.</string>
+    <string name="subq_icd_help_text">SubQ ICD codes are new and will probably
+        be changed as the procedure becomes established.  There are no real
+        guidelines yet for using these codes.  These codes are not checked for
+        consistency when you summarize them.</string>
     <string name="afb_ablation_title">AFB Ablation</string>
     <string name="svt_ablation_title">SVT Ablation</string>
     <string name="vt_ablation_title">VT Ablation</string>
     <string name="avn_ablation_title">AV Node Ablation</string>
     <string name="ep_testing_title">EP Testing</string>
-    <string name="ppm_replacement_title">PPM Replacement</string>
+    <string name="ppm_replacement_title">Replace PPM</string>
     <string name="other_procedure_title">Other Procedure</string>
     <string name="all_codes_title">All Codes</string>
     <string name="all_codes_primary_title">All EP Procedure Codes</string>
@@ -122,14 +157,10 @@
     <string name="code_verbosity_key">code_verbosity</string>
     <string name="default_verbosity">Verbose</string>
     <string name="subq_icd_title">SubQ ICD</string>
-    <string name="subq_icd_help_text">SubQ ICD help text</string>
     <string name="new_ppm_title">New PPM</string>
-    <string name="new_ppm_help_text">New PPM help text</string>
     <string name="new_icd_title">New ICD</string>
-    <string name="new_icd_help_text">New ICD help text</string>
-    <string name="icd_replacement_title">ICD Replacement</string>
-    <string name="icd_replacement_help_text">ICD replacement help text</string>
-    <string name="device_upgrade_title">Device Upgrade/Revision</string>
+    <string name="icd_replacement_title">Replace ICD</string>
+    <string name="device_upgrade_title">Upgrade/Revision/Extraction</string>
     <string name="device_upgrade_help_text">Device upgrade help text</string>
 
 </resources>

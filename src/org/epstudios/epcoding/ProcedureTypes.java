@@ -33,8 +33,8 @@ public class ProcedureTypes {
 		addItem(new ProcedureType("4", "EP Testing"));
 		addItem(new ProcedureType("5", "New PPM"));
 		addItem(new ProcedureType("6", "New ICD"));
-		addItem(new ProcedureType("7", "PPM Replace"));
-		addItem(new ProcedureType("8", "ICD Replace"));
+		addItem(new ProcedureType("7", "Replace PPM"));
+		addItem(new ProcedureType("8", "Replace ICD"));
 		addItem(new ProcedureType("9", "Upgrade/Revision/Extraction"));
 		addItem(new ProcedureType("10", "SubQ ICD"));
 		addItem(new ProcedureType("11", "Other Procedure"));

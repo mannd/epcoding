@@ -16,7 +16,7 @@ public class DeviceUpgrade extends IcdDeviceProcedure implements Procedure {
 
 	@Override
 	public String helpText(Context context) {
-		return context.getString(R.string.device_upgrade_help_text);
+		return context.getString(R.string.upgrade_device_help_text);
 	}
 
 }

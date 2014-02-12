@@ -14,4 +14,14 @@ public class IcdReplacement extends IcdDeviceProcedure implements Procedure {
 		return Codes.getCodes(Codes.IcdReplacementPrimaryCodeNumbers);
 	}
 
+	@Override
+	public Code[] secondaryCodes() {
+		return Codes.getCodes(Codes.icdReplacementSecondaryCodeNumbers);
+	}
+
+	@Override
+	public String helpText(Context context) {
+		return context.getString(R.string.icd_replacement_help_text);
+	}
+
 }

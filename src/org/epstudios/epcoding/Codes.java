@@ -199,7 +199,7 @@ public class Codes {
 	public final static String[] deviceUpgradePrimaryCodeNumbers = { "33216",
 			"33217", "33212", "33213", "33214", "33221", "33233", "33240",
 			"33230", "33241", "33231", "33233", "33224", "33225", "33234",
-			"33235", "33244" };
+			"33235", "33244", "33999" };
 
 	public final static String[] ablationSecondaryCodeNumbers = { "93655",
 			"93657", "93609", "93613", "93621", "93622", "93623", "93662",
@@ -215,7 +215,10 @@ public class Codes {
 			"92960", "92961" };
 
 	public final static String[] icdDeviceSecondaryCodeNumbers = { "93641",
-			"33210", "92960", "92961" };
+			"33210", "33999", "92960", "92961" };
+
+	public final static String[] icdReplacementSecondaryCodeNumbers = {
+			"93641", "33210", "92960", "92961" };
 
 	public final static String[] afbAblationDisabledCodeNumbers = { "93621",
 			"93462" };
