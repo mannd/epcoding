@@ -25,11 +25,13 @@
 *** TODO Fix About screen per Android guidelines
 *** TODO Finish Hints
 *** TODO Finish bad combos
+*** TODO Refactor Code Analysis
 *** TODO Finish icons
 *** TODO Check codes, run through scenarios
 *** TODO clean up procedure classes
     - change Procedure to abstract base class
     - Ablation and Device classes for default behavior
+**** Note will probably defer this to later version
 ** DONE Code Analysis
    Need to generalize by having class with
    - Code numbers
@@ -37,9 +39,18 @@
    - verbose message
 ** DONE One code not allowed with multiple codes
    Implemented <2014-02-11 Tue>
-** TODO Don't need no secondary code warnings for all procedures
+** DONE Don't need no secondary code warnings for all procedures
    e.g. simple generator changes usually don't need more codes.
-   Should limit these suggestions to ablation codes only.  Implement this.
+   Should limit these suggestions to ablation codes only.  Implement
+   this.
+   Examples:
+   - New PPM
+   - New ICD, ICD repl -- BUT! may be missing DFT testing
+   - PPM replacement
+   - Device upgrade
+     So will exclude PPM new and replacement from secondary code check
+** DONE One code not allowed without other codes algorithm 
+   <2014-02-12 Wed 14:31>
 * Settings screen
   - Settings
     - Code Display
@@ -411,3 +422,4 @@
   | Module       | A group of code choices for a procedure            |
 
      
+* TODO License

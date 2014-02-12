@@ -296,7 +296,7 @@ public class ProcedureDetailFragment extends Fragment implements
 		int primaryCodeCounter = 0;
 		boolean noPrimaryCodes = true;
 		boolean noSecondaryCodes = true;
-		boolean moduleHasNoSecondaryCodes = false;
+		boolean moduleHasNoSecondaryCodesNeedingChecking = false;
 		int i = 0;
 		for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
 				.entrySet()) {
@@ -310,24 +310,23 @@ public class ProcedureDetailFragment extends Fragment implements
 		}
 		primaryCodeCounter = i;
 		noPrimaryCodes = primaryCodeCounter == 0;
-		// see if there are any secondary codes to begin with
-		if (secondaryCheckBoxMap.size() == 0)
-			moduleHasNoSecondaryCodes = true;
-		else {
-			for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
-					.entrySet()) {
-				if (entry.getValue().isChecked()) {
-					codes[i] = entry.getValue().getCode();
-					codes[i].setPlusShown(plusShownInSummary);
-					codes[i].setDescriptionShown(codeDescriptionInSummary);
-					codes[i].setDescriptionShortened(descriptionTruncatedInSummary);
-					message += codes[i++].getCodeFirstFormatted() + "\n";
-				}
+		// see if there are any secondary codes to begin with,
+		// or if usually no secondary codes selected, e.g. PPM modules
+		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
+				.entrySet()) {
+			if (entry.getValue().isChecked()) {
+				codes[i] = entry.getValue().getCode();
+				codes[i].setPlusShown(plusShownInSummary);
+				codes[i].setDescriptionShown(codeDescriptionInSummary);
+				codes[i].setDescriptionShortened(descriptionTruncatedInSummary);
+				message += codes[i++].getCodeFirstFormatted() + "\n";
 			}
-			noSecondaryCodes = primaryCodeCounter == i;
 		}
+		noSecondaryCodes = primaryCodeCounter == i;
+		if (noSecondaryCodes || mItem == ppmReplacement || mItem == newPpm)
+			moduleHasNoSecondaryCodesNeedingChecking = true;
 		message += codeAnalysis(codes, noPrimaryCodes, noSecondaryCodes,
-				moduleHasNoSecondaryCodes);
+				moduleHasNoSecondaryCodesNeedingChecking);
 		displayMessage(getString(R.string.coding_summary_dialog_label), message);
 	}
 

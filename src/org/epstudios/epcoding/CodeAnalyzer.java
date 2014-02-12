@@ -12,7 +12,7 @@ public class CodeAnalyzer {
 	private final Code[] codes;
 	private final boolean noPrimaryCodes;
 	private final boolean noSecondaryCodes;
-	private final boolean moduleHasNoSecondaryCodes;
+	private final boolean moduleHasNoSecondaryCodesNeedingChecking;
 	private final Context context;
 	private boolean verbose = false;
 	private boolean noAnalysis = false;
@@ -73,6 +73,17 @@ public class CodeAnalyzer {
 		return codeErrors;
 	}
 
+	// use this for error when first code must be added on to other codes
+	private final static List<CodeError> firstCodeNeedsOtherCodes = createFirstCodeNeedsOtherCodes();
+
+	private final static List<CodeError> createFirstCodeNeedsOtherCodes() {
+		List<CodeError> codeErrors = new ArrayList<CodeError>();
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("33225", "33206", "33207", "33208", "33240", "33230"),
+				"Must use 33225 with new device implant code"));
+		return codeErrors;
+	}
+
 	// bad coding combos
 	private final static List<List<String>> combos = createCombos();
 
@@ -101,11 +112,12 @@ public class CodeAnalyzer {
 
 	public CodeAnalyzer(final Code[] codes, final boolean noPrimaryCodes,
 			final boolean noSecondaryCodes,
-			final boolean moduleHasNoSecondaryCodes, final Context context) {
+			final boolean moduleHasNoSecondaryCodesNeedingChecking,
+			final Context context) {
 		this.codes = codes;
 		this.noPrimaryCodes = noPrimaryCodes;
 		this.noSecondaryCodes = noSecondaryCodes;
-		this.moduleHasNoSecondaryCodes = moduleHasNoSecondaryCodes;
+		this.moduleHasNoSecondaryCodesNeedingChecking = moduleHasNoSecondaryCodesNeedingChecking;
 		this.context = context;
 	}
 
@@ -133,7 +145,7 @@ public class CodeAnalyzer {
 		if (noPrimaryCodes)
 			message += getMessage(ERROR, R.string.no_primary_codes_message,
 					R.string.no_primary_codes_verbose_message);
-		if (noSecondaryCodes && !moduleHasNoSecondaryCodes)
+		if (noSecondaryCodes && !moduleHasNoSecondaryCodesNeedingChecking)
 			message += getMessage(WARNING, R.string.no_secondary_codes_message,
 					R.string.no_secondary_codes_verbose_message);
 		if (allAddOnCodes())
@@ -161,6 +173,7 @@ public class CodeAnalyzer {
 					R.string.ep_testing_with_avn_ablation_verbose_warning);
 		message += getErrorCodes(codeNumberSet);
 		message += getErrorCodesFirstSpecial(codeNumberSet);
+		message += getErrorCodesFirstCodeNeedsOtherCodes(codeNumberSet);
 		if (message.length() == 0) // no errors!
 			message = getMessage(OK, R.string.no_code_errors_message,
 					R.string.empty_message);
@@ -265,7 +278,36 @@ public class CodeAnalyzer {
 			}
 		}
 		return errorCodes;
+	}
 
+	// This tests to see if at least one necessary accompanying code is present
+	// if first code is present
+	private String getErrorCodesFirstCodeNeedsOtherCodes(
+			final Set<String> codeNumbers) {
+		String errorCodes = "";
+		String warning = "";
+		CodeError.WarningLevel warningLevel = CodeError.WarningLevel.NONE;
+		for (CodeError codeError : firstCodeNeedsOtherCodes) {
+			List<String> badCombo = codeError.getCodes();
+			if (codeNumbers.contains(badCombo.get(0))) {
+				List<String> badCodeList = hasBadCombo(badCombo, codeNumbers);
+				int numCombos = 0;
+				if (badCodeList.size() == 1) { // oops only first code present
+					warningLevel = codeError.getWarningLevel();
+					if (warningLevel == CodeError.WarningLevel.ERROR)
+						warning = ERROR;
+					else if (warningLevel == CodeError.WarningLevel.WARNING)
+						warning = WARNING;
+					else
+						warning = OK;
+					errorCodes += "\n" + warning + getCodeString(badCodeList)
+							+ " "
+							+ (verbose ? codeError.getWarningMessage() : "")
+							+ (numCombos > 0 ? "\n" : "");
+				}
+			}
+		}
+		return errorCodes;
 	}
 
 	// returns list of matching bad codes
