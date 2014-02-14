@@ -66,8 +66,8 @@ public class Codes {
 		addCode(map, "33216", "Place single lead (A or V, PPM or ICD) only",
 				false);
 		addCode(map, "33217", "Place dual leads (PPM or ICD) only", false);
-		addCode(map, "33218", "Repair of single (PPM or ICD) electrode", false);
-		addCode(map, "33220", "Repair of 2 (PPM or ICD) electrodes", false);
+		addCode(map, "33218", "Repair of one (PPM or ICD) electrode", false);
+		addCode(map, "33220", "Repair of two (PPM or ICD) electrodes", false);
 
 		// Pocket revisions
 		addCode(map, "33222", "PPM pocket revision", false);

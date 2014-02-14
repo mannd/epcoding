@@ -34,4 +34,9 @@ public class EpTesting implements Procedure {
 		return context.getString(R.string.ep_testing_help_text);
 	}
 
+	@Override
+	public boolean doNotWarnForNoSecondaryCodesSelected() {
+		return true;
+	}
+
 }

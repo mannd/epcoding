@@ -36,4 +36,9 @@ public class SubQIcd implements Procedure {
 		return context.getString(R.string.subq_icd_help_text);
 	}
 
+	@Override
+	public boolean doNotWarnForNoSecondaryCodesSelected() {
+		return true;
+	}
+
 }

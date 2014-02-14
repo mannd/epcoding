@@ -37,4 +37,9 @@ public class AllCodes implements Procedure {
 		return context.getString(R.string.all_codes_help_text);
 	}
 
+	@Override
+	public boolean doNotWarnForNoSecondaryCodesSelected() {
+		return true;
+	}
+
 }

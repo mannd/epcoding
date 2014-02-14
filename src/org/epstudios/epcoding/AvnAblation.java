@@ -35,4 +35,9 @@ public class AvnAblation implements Procedure {
 		return context.getString(R.string.av_node_ablation_help_text);
 	}
 
+	@Override
+	public boolean doNotWarnForNoSecondaryCodesSelected() {
+		return false;
+	}
+
 }

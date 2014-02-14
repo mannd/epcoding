@@ -36,4 +36,9 @@ public class OtherProcedure implements Procedure {
 		return context.getString(R.string.other_procedure_help_text);
 	}
 
+	@Override
+	public boolean doNotWarnForNoSecondaryCodesSelected() {
+		return true;
+	}
+
 }

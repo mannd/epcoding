@@ -5,4 +5,9 @@ public class IcdDeviceProcedure extends DeviceProcedure {
 	public Code[] secondaryCodes() {
 		return Codes.getCodes(Codes.icdDeviceSecondaryCodeNumbers);
 	}
+
+	@Override
+	public boolean doNotWarnForNoSecondaryCodesSelected() {
+		return false;
+	}
 }

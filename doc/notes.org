@@ -135,7 +135,7 @@
    - Note I have added (setq org-export-html-postamble nil) in
      ~/.emacs to suppress footer information.
    - Above group of statements in buffer are for formatting the HTML
-** EP Coding Help
+ll Co** EP Coding Help
 *** Who should use EP Coding?
     Physicians who perform cardiac electrophysiology (EP) procedures and
     are required to submit CPT® codes for these procedures.
@@ -181,7 +181,7 @@
       sessions.
     - Click the *Settings* to change the display of codes and level of
       detail shown in the code analysis dialog.
-    - The *All Codes* module just lists every code
+    - The *All EP Codes* module just lists every code
       in numerical order.  It is the /a la carte/ menu of EP Coding.
 *** Limitations
     - EP procedure codes only.
@@ -439,3 +439,10 @@
   | Module       | A group of code choices for a procedure            |
 
 * TODO License
+* Copyright issues
+** Links
+   http://perpetualbeta.com/release/2009/12/why-the-gplderivative-work-debate-doesnt-matter-for-wordpress-themes/
+* References
+** Online
+*** AV node ablation and mapping codes
+    https://www.aapc.com/memberarea/forums/showthread.php?t=19874

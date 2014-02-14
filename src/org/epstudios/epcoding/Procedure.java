@@ -15,4 +15,6 @@ public interface Procedure {
 
 	String helpText(Context context);
 
+	boolean doNotWarnForNoSecondaryCodesSelected();
+
 }

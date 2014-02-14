@@ -73,7 +73,7 @@
 	    recording, programmed stimulation after IV drug, etc.  The two
 	    primary codes lists are the most commonly used, other rarely used
 	    codes, such as His bundle recording only (93600) are listed in
-	    the All Codes module, but probably should be avoided.</string>
+	    the All EP Codes module, but probably should be avoided.</string>
     <string name="devices_help_text">Temp device procedures help text</string>
     <string name="new_ppm_help_text">These codes are used for implantation of a pacemaker
         generator and lead(s).  Use the code that corresponds to the lead(s) put in.
@@ -111,7 +111,7 @@
         unsure how to code something, check with your coders.</string>
     <string name="all_codes_help_text">As an alternative to using the procedure 
         oriented choices in EP
-	    Coding, the All Codes module allows you to pick any of the codes in
+	    Coding, the All EP Codes module allows you to pick any of the codes in
 	    any combination.  This may be useful if you are doing something
 	    unusual that is not covered in the other procedure lists, or if
 	    you are very familiar with how to use the codes and just want to
@@ -133,7 +133,7 @@
     <string name="ep_testing_title">EP Testing</string>
     <string name="ppm_replacement_title">Replace PPM</string>
     <string name="other_procedure_title">Other Procedure</string>
-    <string name="all_codes_title">All Codes</string>
+    <string name="all_codes_title">All EP Codes</string>
     <string name="all_codes_primary_title">All EP Procedure Codes</string>
     <string name="save_code_selection_error_message">First select a procedure</string>
     <string name="no_secondary_codes_error_message">Only additional codes can be saved. This group has only primary codes.</string>
@@ -152,8 +152,8 @@
     <string name="code_check_all_codes_key">code_check_all_codes</string>
     <string name="show_details_code_summary_key">show_details_code_summary</string>
     <string name="truncate_long_descriptions_code_summary_key">truncate_long_descriptions_code_summary</string>
-    <string name="code_check_all_codes_summary">Perform analysis in All Codes module</string>
-    <string name="code_check_all_codes_label">Check codes in All Codes</string>
+    <string name="code_check_all_codes_summary">Perform analysis in All EP Codes module</string>
+    <string name="code_check_all_codes_label">Check codes in All EP Codes</string>
     <string name="code_verbosity_key">code_verbosity</string>
     <string name="default_verbosity">Verbose</string>
     <string name="subq_icd_title">SubQ ICD</string>

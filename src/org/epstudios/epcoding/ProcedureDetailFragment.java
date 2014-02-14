@@ -323,8 +323,10 @@ public class ProcedureDetailFragment extends Fragment implements
 			}
 		}
 		noSecondaryCodes = primaryCodeCounter == i;
-		if (mItem == ppmReplacement || mItem == newPpm)
-			moduleHasNoSecondaryCodesNeedingChecking = true;
+		// if (mItem == ppmReplacement || mItem == newPpm
+		// || mItem == deviceUpgrade)
+		moduleHasNoSecondaryCodesNeedingChecking = procedure
+				.doNotWarnForNoSecondaryCodesSelected();
 		message += codeAnalysis(codes, noPrimaryCodes, noSecondaryCodes,
 				moduleHasNoSecondaryCodesNeedingChecking);
 		displayMessage(getString(R.string.coding_summary_dialog_label), message);

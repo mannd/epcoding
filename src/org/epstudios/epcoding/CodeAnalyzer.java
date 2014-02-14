@@ -14,36 +14,37 @@ public class CodeAnalyzer {
 	private final boolean noSecondaryCodes;
 	private final boolean moduleHasNoSecondaryCodesNeedingChecking;
 	private final Context context;
-	private boolean verbose = false;
+	private boolean verbose = true;
 	private boolean noAnalysis = false;
 
-	// Note unicode doesn't consistently work on different devices.
-	// use ASCII! Maybe will work in iOS?
+	// Note unicode doesn't consistently work on different Android devices.
+	// Use ASCII! Maybe will work in iOS?
 	private final static String WARNING = "! "; // ?? or \u26A0 or ! in triangle
-	private final static String ERROR = "!! "; // \u2620 skull and bones or
-												// \u24CD
+	private final static String ERROR = "!! "; // \u2620 or \u24CD (skull, x)
 	private final static String OK = ""; // \u263A smiley face
 
+	// some special code lists
 	private static final List<String> mappingCodes = Arrays.asList("93609",
 			"93613");
 	private static final Set<String> mappingCodeSet = new HashSet<String>(
 			mappingCodes);
-	// below doesn't include AV node ablation or VT ablation as mapping not
-	// separately billable
+	// Below doesn't include AV node ablation or VT ablation as mapping not
+	// separately billable for those procedures.
 	private static final List<String> ablationCodes = Arrays.asList("93653",
 			"93656");
 	private static final Set<String> ablationCodeSet = new HashSet<String>(
 			ablationCodes);
 
 	// Error messages and warnings
-	private final static String DEFAULT_COMBO_ERROR = "These codes shouldn't be combined.";
+	private final static String DEFAULT_DUPLICATE_ERROR = "These codes shouldn't be combined.";
 	private final static String DUPLICATE_MAPPING_ERROR = "You shouldn't combine 2D and 3D mapping.";
 	private final static String DUPLICATE_CARDIOVERSION_ERROR = "You can't code for both internal and external cardioversion.";
+	private final static String DUPLICATE_ABLATION_CODES_ERROR = "You can't combine primary ablation codes.";
 
-	// There code errors occur when any 2 or more of the codes occur
-	private final static List<CodeError> codeErrors = createCodeErrors();
+	// There code errors occur when any 2 or more of the codes occur.
+	private final static List<CodeError> duplicateCodeErrors = createDuplicateCodeErrors();
 
-	private final static List<CodeError> createCodeErrors() {
+	private final static List<CodeError> createDuplicateCodeErrors() {
 		List<CodeError> codeErrors = new ArrayList<CodeError>();
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR,
 				mappingCodes, DUPLICATE_MAPPING_ERROR));
@@ -52,19 +53,23 @@ public class CodeAnalyzer {
 		// don't use mult PPM implant, repl, or use implant and repl together
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("33206", "33207", "33208", "33227", "33228", "33229"),
-				DEFAULT_COMBO_ERROR));
+				DEFAULT_DUPLICATE_ERROR));
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("33240", "33230", "33231", "33262", "33263", "33264"),
-				DEFAULT_COMBO_ERROR));
+				DEFAULT_DUPLICATE_ERROR));
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
-				.asList("93600", "93619", "93620"), DEFAULT_COMBO_ERROR));
-
+				.asList("93600", "93619", "93620", "93655", "93657"),
+				DEFAULT_DUPLICATE_ERROR));
+		// don't combine primary ablation codes, not sure what to do with
+		// AVN ablation for this...
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("93653", "93654", "93656"),
+				DUPLICATE_ABLATION_CODES_ERROR));
 		return codeErrors;
-
 	}
 
 	// Special first code errors are sets of codes where the first code in
-	// the set should not be included with any of the other codes.
+	// the set should not be used with any of the other codes.
 	private final static List<CodeError> specialFirstCodeErrors = createSpecialFirstCodeErrors();
 
 	private final static List<CodeError> createSpecialFirstCodeErrors() {
@@ -85,7 +90,18 @@ public class CodeAnalyzer {
 				.add(new CodeError(CodeError.WarningLevel.WARNING, Arrays
 						.asList("93650", "93600", "93619", "93620"),
 						"It is unclear if AV node ablation can be combined with EP testing codes."));
-
+		codeErrors
+				.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays.asList(
+						"93656", "93621", "93462"),
+						"Code(s) selected are already included in 93656, AFB Ablation."));
+		codeErrors
+				.add(new CodeError(
+						CodeError.WarningLevel.ERROR,
+						Arrays.asList("93653", "936257"),
+						"AFB Ablation should not be added on to SVT ablation.  Use AFB ablation as the primary code."));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("93654", "93657", "93609", "93613", "93622"),
+				"Code(s) cannot be add to VT Ablation."));
 		return codeErrors;
 	}
 
@@ -98,32 +114,6 @@ public class CodeAnalyzer {
 				.asList("33225", "33206", "33207", "33208", "33249"),
 				"Must use 33225 with new device implant code"));
 		return codeErrors;
-	}
-
-	// bad coding combos
-	private final static List<List<String>> combos = createCombos();
-
-	private final static List<List<String>> createCombos() {
-		List<List<String>> comboList = new ArrayList<List<String>>();
-		// too many cardioversion types
-		comboList.add(Arrays.asList("92960", "92961"));
-		// too many new PPMs
-		comboList.add(Arrays.asList("33206", "33207", "33208"));
-		// no in and out with an ILR
-		comboList.add(Arrays.asList("33282", "33284"));
-		// Can't combine different types of EP testing together
-		comboList.add(Arrays.asList("93600", "93619", "93620"));
-		// Don't combine gen replacement with gen removal
-		comboList.add(Arrays.asList("33227", "33233"));
-		comboList.add(Arrays.asList("33228", "33233"));
-		comboList.add(Arrays.asList("33229", "33233"));
-		comboList.add(Arrays.asList("33262", "33241"));
-		comboList.add(Arrays.asList("33263", "33241"));
-		comboList.add(Arrays.asList("33264", "33241"));
-		// multiple PPM generator replacements
-		comboList.add(Arrays.asList("33227", "33228", "33229"));
-		// TODO same for ICD
-		return comboList;
 	}
 
 	public CodeAnalyzer(final Code[] codes, final boolean noPrimaryCodes,
@@ -146,7 +136,6 @@ public class CodeAnalyzer {
 	}
 
 	public String analysis() {
-		// Note that ERRORs should be tested first, then WARNINGs
 		// quick exit for no codes selected
 		if (noPrimaryCodes && noSecondaryCodes)
 			return getMessage(WARNING, R.string.no_codes_selected_label,
@@ -197,11 +186,6 @@ public class CodeAnalyzer {
 		return allAddOns;
 	}
 
-	private boolean containsCodeNumbers(final List<String> badNumbers,
-			final Set<String> codeNumberSet) {
-		return codeNumberSet.containsAll(badNumbers);
-	}
-
 	private boolean noMappingCodesForAblation(final List<String> codeNumbers) {
 		boolean noMappingCodes = true;
 		boolean hasAblationCodes = false;
@@ -214,24 +198,11 @@ public class CodeAnalyzer {
 		return (hasAblationCodes && noMappingCodes);
 	}
 
-	private boolean avnAblationHasMappingCodes(final Set<String> codeNumbers) {
-		return codeNumbers.contains("93650")
-				&& (codeNumbers.contains("93609") || codeNumbers
-						.contains("93613"));
-	}
-
-	private boolean avnAblationHasEpTestingCodes(final Set<String> codeNumbers) {
-		return codeNumbers.contains("93650")
-				&& (codeNumbers.contains("93600")
-						|| codeNumbers.contains("93619") || codeNumbers
-							.contains("93620"));
-	}
-
 	// This tests for 2 or more codes in a code set and is used
 	// if 2 or more codes should not be used together
 	private String getErrorCodes(final Set<String> codeNumbers) {
 		String errorCodes = "";
-		for (CodeError codeError : codeErrors) {
+		for (CodeError codeError : duplicateCodeErrors) {
 			List<String> badCombo = codeError.getCodes();
 			List<String> badCodeList = hasBadCombo(badCombo, codeNumbers);
 			if (badCodeList.size() > 1) {
@@ -243,9 +214,7 @@ public class CodeAnalyzer {
 	}
 
 	// This tests for errors where a single code should not be used with
-	// multiple
-	// other codes. E.g. PPM removal should not be used with any of the 3 PPM
-	// replacement codes. It treats the first member of the code combination
+	// multiple other codes. E.g. PPM removal should not be used with any of the
 	// specially, i.e. skips testing if the first number is not present
 	private String getErrorCodesFirstSpecial(final Set<String> codeNumbers) {
 		String errorCodes = "";
@@ -297,8 +266,8 @@ public class CodeAnalyzer {
 			warning = ERROR;
 			break;
 		}
-		return "\n" + warning + getCodeString(badCodeList)
-				+ (verbose ? " " + codeError.getWarningMessage() : "") + "\n";
+		return getMessageFromStrings(warning, getCodeString(badCodeList),
+				codeError.getWarningMessage());
 	}
 
 	// returns list of matching bad codes
@@ -326,6 +295,6 @@ public class CodeAnalyzer {
 
 	private String getMessageFromStrings(final String threat,
 			final String brief, final String details) {
-		return "\n" + threat + (verbose ? brief + " " + details : brief) + "\n";
+		return "\n" + threat + brief + (verbose ? " " + details : "") + "\n";
 	}
 }

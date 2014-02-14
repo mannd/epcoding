@@ -19,4 +19,9 @@ public class DeviceProcedure {
 	public String helpText(Context context) {
 		return context.getString(R.string.devices_help_text);
 	}
+
+	public boolean doNotWarnForNoSecondaryCodesSelected() {
+		return true;
+	}
+
 }

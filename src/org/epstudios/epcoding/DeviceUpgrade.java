@@ -19,4 +19,9 @@ public class DeviceUpgrade extends IcdDeviceProcedure implements Procedure {
 		return context.getString(R.string.upgrade_device_help_text);
 	}
 
+	@Override
+	public boolean doNotWarnForNoSecondaryCodesSelected() {
+		return true;
+	}
+
 }
