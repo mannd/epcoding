@@ -60,15 +60,6 @@
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackground"
                 android:text="@string/clear_label" />
-
-            <Button
-                android:id="@+id/help_button"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?android:attr/selectableItemBackground"
-                android:text="@string/help_label" />
         </LinearLayout>
     </LinearLayout>
 

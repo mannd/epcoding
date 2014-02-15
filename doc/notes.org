@@ -135,7 +135,7 @@
    - Note I have added (setq org-export-html-postamble nil) in
      ~/.emacs to suppress footer information.
    - Above group of statements in buffer are for formatting the HTML
-ll Co** EP Coding Help
+** EP Coding Help
 *** Who should use EP Coding?
     Physicians who perform cardiac electrophysiology (EP) procedures and
     are required to submit CPT® codes for these procedures.

@@ -43,6 +43,10 @@
             android:name=".Help"
             android:label="@string/help_title" >
         </activity>
+        <activity
+            android:name=".Hints"
+            android:label="@string/hints_title" >
+        </activity>
     </application>
 
 </manifest>

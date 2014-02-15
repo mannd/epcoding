@@ -59,7 +59,6 @@ public class ProcedureDetailFragment extends Fragment implements
 
 	private Button summarizeButton;
 	private Button clearButton;
-	private Button helpButton;
 
 	private final Map<String, CodeCheckBox> primaryCheckBoxMap = new LinkedHashMap<String, CodeCheckBox>();
 	private final Map<String, CodeCheckBox> secondaryCheckBoxMap = new LinkedHashMap<String, CodeCheckBox>();
@@ -135,9 +134,6 @@ public class ProcedureDetailFragment extends Fragment implements
 			break;
 		case R.id.clear_button:
 			clearEntries();
-			break;
-		case R.id.help_button:
-			help();
 			break;
 		}
 	}
@@ -262,8 +258,6 @@ public class ProcedureDetailFragment extends Fragment implements
 		summarizeButton.setOnClickListener(this);
 		clearButton = (Button) rootView.findViewById(R.id.clear_button);
 		clearButton.setOnClickListener(this);
-		helpButton = (Button) rootView.findViewById(R.id.help_button);
-		helpButton.setOnClickListener(this);
 		return rootView;
 	}
 

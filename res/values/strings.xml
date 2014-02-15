@@ -19,6 +19,7 @@
 		\n\nCopyright \u00a9 2013, 2014 EP Studios, Inc.
 		\nLicensed under GNU GPL v3.</string>
     <string name="help_title">Help</string>
+    <string name="hints_title">Hints</string>
     <string name="primary_codes_label">Primary Code(s)</string>
     <string name="add_on_codes_label">Additional Code(s)</string>
     <string name="coding_summary_label">Summarize</string>
