@@ -113,9 +113,6 @@ public class ProcedureListActivity extends FragmentActivity implements
 		case R.id.settings:
 			startActivity(new Intent(this, Prefs.class));
 			return true;
-		case R.id.hints:
-			startActivity(new Intent(this, Hints.class));
-			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
