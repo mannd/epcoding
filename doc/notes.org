@@ -561,8 +561,19 @@
 
 * TODO License
 * Copyright issues
+** Introduction
+   As CPT® codes are copyrighted by the American Medical Association, it
+   is important to make the case that use of a very small percentage
+   of these codes, with paraphrased descriptions in a mobile app is
+   covered under the Fair Use doctrine of US copyright law.  Note that
+   the AMA [[http://www.ama-assn.org/ama/pub/physician-resources/solutions-managing-your-practice/coding-billing-insurance/cpt/cpt-products-services/licensing/fair-use.page?][does acknowledge]] the possibility of fair use of CPT® codes.
+   Also please note the following: 
+
+   CPT copyright 2012 American Medical Association. All rights
+   reserved.  CPT is a registered trademark of the American Medical
+   Association.
 ** Fair use criteria
-   [[http://en.wikipedia.org/wiki/Fair_use][Four criteria]] are used in determining fair use of copyrighted material:
+   [[http://www.law.cornell.edu/uscode/text/17/107][Four criteria]] are used in determining fair use of copyrighted material:
    - The purpose and character of the use, including whether such use
      is of a commercial natue or is for nonprofit educational purposes.
    - The nature of the copyrighted work.
@@ -570,27 +581,27 @@
      the copyrighted work as a whole.
    - The effect of the use upon the potential market for or value of
      the copyrighted work.
-** Purpose and character of the use
+** The purpose and character of the use, including whether such use is of a commercial natue or is for nonprofit educational purposes.
    EP Coding is intended not for coders, who definitely need the AMA
    documentation, but for physicians who need to document with codes
    (in addition to documentation in their procedure notes) the
-   procedures that they do.  With the advent of EHR (Electronic
-   Health Records) there is frequently a need to enter codes by the
-   physician directly into the system.  This was true of the EPIC EHR
-   that I had experience using.  This is not an easy task.  As the
+   procedures that they do.  With the advent of EHR (Electronic Health
+   Records) there is frequently a need to enter codes by the physician
+   directly into the system.  This is true of the EPIC EHR that I've
+   had experience using.  Entering codes is not an easy task.  As the
    CPT® descriptions are obtuse, at least as presented in EPIC,
    looking up codes by description is difficult if not impossible.
    For example, a search for "PPM" which is a common abbreviation for
-   pacemaker yields 0 hits in EPIC.  Searching for "pacemaker" or
-   "pacer" yields a very long list of hits, but they are all hardware
-   codes for individual pacemaker types and not what is being looked
-   for.  Searching by code, such as the code for dual chamber
-   pacemaker implant, code 33208, yields this:
+   pacemaker yields 0 hits in EPIC.  Searching for "PACEMAKER" or
+   "PACER" yields a very long list of hits, but they are all hardware
+   codes for individual pacemaker types and not procedure codes.
+   Searching by code, such as the code for dual chamber pacemaker
+   implant, code 33208, yields this:
 
    33208 PR INS NEW/RPPLCMT PRM PM W/TRANSV ELTRD ATRIAL&VENT
 
-   Hardly intuitive!  Similarly searching for "ablation" yields over
-   50 choices, many not related to cardiology, and search for "afb"
+   Hardly intuitive!  Similarly searching for "ABLATION" yields over
+   50 choices, many not related to cardiology, and search for "AFB"
    yields "AFB stain" used to diagnose tuberculosis.  The actual code
    for AFB ablation, 93656 yields this:
 
@@ -600,60 +611,60 @@
    to his or her specialty that the physician carries around to help
    remember the codes and enter them in the computer.  This list of
    codes may not be enough however.  One must remember that one can't
-   code transseptal puncture of LA pacing and recording with AFB
+   code transseptal puncture or LA pacing and recording with AFB
    ablation, or that 3D mapping is already included in VT ablation.
-   This sort of information is ideal to be encoded into a mobile app.
+   This sort of information is ideal for encoding into a mobile app.
 
-   As the purpose of the app is to improve physician coding skills
-   and thus enhance the ability of the physician to code accurately
-   and quickly and then turn his or her attention to more pressing
-   matters, the app fulfills its purpose as education and for the
-   benefit of science and the public.  There is no benefit from
-   keeping the physician in the dark regarding these codes.  The
-   physician is not going to buy or carry the whole AMA CPT® code
-   book around, nor should he or she given the very limited number of
-   codes that need to be used in his or her line of practice.
-   Certainly the "cheat sheet" that is commonly used is considered
-   fair use.  The EP Coding app merely is a more intellegent version
-   of that cheat sheet.
+   As the app improves physician coding skills and thus enhances the
+   ability of the physician to code accurately and quickly so he or
+   she can then turn his or her attention to more pressing matters,
+   the app meets the criterion that its purpose is educational and
+   benefits science and the public.  There is no benefit from keeping
+   the physician in the dark regarding these codes.  The physician is
+   not going to buy or carry the whole AMA CPT® code book around, nor
+   should he or she, given the very limited number of codes that need
+   to be used in his or her line of practice.  Certainly an actual
+   written "cheat sheet" that is commonly used is considered fair use.
+   The EP Coding app merely is a more intellegent version of that
+   cheat sheet.
 
-   Regarding the commercial nature of the work, the app is priced at
-   a very low cost (99 US cents) both to help defray the costs of
+   Regarding the commercial nature of the work, the app is priced at a
+   very low cost (99 US cents) both to help defray the costs of
    development and to discourage downloading by those who don't need
-   access to these codes.   EP Studios does generate some income, but
-   has not generated a profit.  Its main purpose is to help me and my
-   colleagues with apps relevant to medicine.
+   access to these codes.  EP Studios does generate some income, but
+   has not generated a profit.  Its main purpose is to help my
+   colleagues by developing apps relevant to practicing medicine.
 
    Thus with these points I believe the app qualifies for "fair use"
    by the first criterion.
-** Nature of the copyrighted work
-   Despite it being essential to the practice of medicine in the
-   United States, the AMA has a copyright on the CPT® codes.  This is
-   despite the fact that the CPT® codes are also the level I codes
+** The nature of the copyrighted work.
+   Despite their absolute necessity for the practice of medicine in
+   the United States, the AMA has a copyright on the CPT® codes.  This
+   is despite the fact that the CPT® codes are also the level I codes
    required by Medicare for all providers to use.  The AMA code books
-   are expensive and license fees are as well.  The amount may be
-   debatable, but there is [[http://patients.about.com/b/2011/01/17/the-ama-and-cpt-codes-getting-picky-and-on-my-case.htm][no doubt the AMA makes a lot of money]] from
-   their codes. The codes are essentially a database, matching code
-   numbers with descriptions, as well as information of what codes
-   cover and what codes can and cannot be used together.  Professional
-   coders definitely need to know all the ins and outs of these codes,
-   however physicians only need a subset of the codes.  The EP Coding
-   app uses some of the numbers and paraphrases the descriptions of
-   the codes.  As such it is not a direct copy, other than of the
-   numbers.  Numbers [[http://ipnotions.com/2007/05/you-can-copyright-number-but-not-as.html][as such]] may not be subject to copyright.  It
-   should also be noted the the CPT® manual is largely a functional
-   and not artistic work, and as such may be [[http://perpetualbeta.com/release/2009/12/why-the-gplderivative-work-debate-doesnt-matter-for-wordpress-themes/][more subject to fair use]]
-   than other less functional works.
-** Amount and substantiality of the portion
-   A Google search for number of CPT codes gives various sites
+   are expensive and license fees are required to use the codes as
+   well.  The amount may be debatable, but there is no doubt [[http://patients.about.com/b/2011/01/17/the-ama-and-cpt-codes-getting-picky-and-on-my-case.htm][the AMA
+   makes a lot of money]] from their codes. The codes are essentially a
+   database, matching code numbers with descriptions, as well as
+   information of what codes cover and what codes can and cannot be
+   used together.  Professional coders definitely need to know all the
+   ins and outs of these codes, however physicians only need to know a
+   subset of the codes.  The EP Coding app uses some of the numbers
+   and paraphrases the descriptions of the codes.  As such it is not a
+   direct copy, other than of the numbers.  Numbers [[http://ipnotions.com/2007/05/you-can-copyright-number-but-not-as.html][as such]] may not be
+   subject to copyright.  It should also be noted the the CPT® manual
+   is largely a functional and not artistic work, and as such may be
+   [[http://perpetualbeta.com/release/2009/12/why-the-gplderivative-work-debate-doesnt-matter-for-wordpress-themes/][more subject to fair use]] than other less functional works.
+** The amount and substantiality of the portion used in relation to the copyrighted work as a whole.
+   A Google search for number of CPT® codes gives various sites
    stating a number from 7800 to 8800.  These figures are unsourced,
-   but there is no doubt the number of CPT codes in in the
+   but there is no doubt the number of CPT® codes in in the
    thousands.  As of <2014-02-16 Sun> there are 73 codes in EP
-   Coding.  Assuming 7800 total codes, this is 73/7800, i.e. 0.9% of
-   the total number of codes.  This is a small number of codes.  Note
+   Coding.  Assuming 7800 total codes, that is 73/7800, i.e. 0.9% of
+   the total number of codes.  This is a small percentage of codes.  Note
    that the codes used in EP Coding are only codes for
-   electrophysiology, but are limited further to only non-surgical
-   codes (i.e. excluding codes utilizing thoracotomy).  In addition
+   electrophysiology and are limited further to only non-surgical
+   codes (i.e. excludes codes utilizing thoracotomy).  In addition
    codes for office visits, hospital visits, and device checks are
    not included.  The text of the descriptions is not copied from the
    AMA manuals, but is a paraphrase.  Thus the amount of text copied
@@ -665,7 +676,11 @@
    "Copyright does not protect facts, ideas, systems, or methods of
    operation, although it may protect the way these things are
    expressed."
-** The effect of the use on the potential market for or value of the copyrighted work.
+
+   In addition, most if not all of the information in this app is
+   readily available online.  For example [[http://www.eplabdigest.com/articles/Changes-Coming-2013-CPT-Codes][this article]] outlines how to
+   code EP procedures.
+** The effect of the use upon the potential market for or value of the copyrighted work.
    EP Coding is intended for physicians, who are not the intended
    audience of the AMA documentation.  That audience is made up of
    professional coders.  EP Coding is more akin to a cheat sheet than
