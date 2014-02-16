@@ -23,15 +23,18 @@
    - rotation of screen loses check marks
 ** TODO Final Todo list
 *** TODO Fix About screen per Android guidelines
+**** ? add version number
+*** TODO Add proper copyright notice for AMA CPT (see blog post)
 *** TODO Finish Hints
 *** TODO Finish bad combos
-*** TODO Refactor Code Analysis
+*** DONE Refactor Code Analysis
 *** TODO Finish icons
 *** TODO Check codes, run through scenarios
 *** TODO clean up procedure classes
     - change Procedure to abstract base class
     - Ablation and Device classes for default behavior
 **** Note will probably defer this to later version
+*** TODO create release check list like EP Mobile
 ** DONE Code Analysis
    Need to generalize by having class with
    - Code numbers
@@ -295,6 +298,13 @@
     - [[VT ablation]]
     - [[AV node ablation]]
     - [[EP testing]]
+    - [[New PPM or ICD]]
+    - [[Replace PPM or ICD]]
+    - [[SubQ ICD]]
+    - [[Upgrade/revision/extraction]]
+    - [[Other procedure]]
+    - [[All EP codes]]
+    - [[Settings]]
 *** Who should use EP Coding?
     Physicians who perform cardiac electrophysiology (EP) procedures
     and are required to submit CPT® codes for these procedures. *EP
@@ -342,6 +352,10 @@
     - If you nearly always add codes to a procedure (e.g. 3D mapping
       with AFB ablation), then save it as a default using the Save
       icon.
+    - *Warnings* (indicated by *!*) point out codes that you may be
+      missing or code combinations that possibly shouldn't be used together.
+    - *Errors* (indicated by *!!*) indicate code combinations that
+      almost certainly are not allowed.
     - Check with your coders or the [[https://commerce.ama-assn.org/store/][AMA documentation]] if you are not
       sure how to code a procedure.
 *** AFB ablation
@@ -366,12 +380,87 @@
     - It is not clear if mapping codes can be combined with AV node ablation.
     - These points may need to be clarified with your coders.
 *** EP testing
-    - Usually use 93620 (EP testing with attempted arrhythmia
+    - Use 93620 (EP testing with attempted arrhythmia
       induction).
     - Don't code with ablation procedures (? exception AV node
       ablation).
     - You can add mapping codes, but don't add ablation codes to EP
       testing.
+*** New PPM or ICD
+    - Use 33206-33208 for new PPM depending on number of leads.
+    - Use 33249 for new single or dual ICD.
+    - Add code 33225 to dual chamber device code for PPM or ICD with CRT.
+    - Add 93641 if you do DFT testing during the ICD implant.
+    - Placing a sub-cutaneous array is probably best coded with 33999
+      (unlisted surgical procedure code).
+*** Replace PPM or ICD
+    - Use 33227-33229 for PPM replacement and 33262-33264 for ICD
+      replacement depending on number of leads.
+    - Do not add generator removal codes to these codes!
+    - Add 93641 if you do DFT testing during the ICD generator replacement.
+*** SubQ ICD
+    - These are emerging technology codes that are temporary and will
+      probably be changed in the next revision of the codes.
+    - SubQ ICD codes are not tested for consistency by the code analyzer.
+*** Upgrade/revision/extraction
+    - This is the most complicated coding area. We will deal with some
+      specific situations.
+    - Note codes are arranged in order matching this help, not in
+      numeric order.
+**** TODO For this module
+     - reaarange codes to match order of help
+     - add missing codes, e.g. pocket revision and lead repair to module.
+**** Lead addition only, no change in generator
+     - Use specific lead placement code, e.g. 33216, place A lead.
+     - Use 33224 to place an LV lead if the CRT generator is already there.
+**** Lead repositioning
+     - Reposition previously implanted single A or V lead: 33215.
+     - Reposition previously implanted LV lead: 33226.
+**** Removal of generator alone
+     - PPM generator removal: 33233.
+     - ICD generator removal: 33241.
+     - Don't use these codes in conjunction with replacement codes.
+**** Removal/extraction of leads
+     - PPM single lead extraction: 33234.
+     - PPM dual lead extraction: 33235.
+     - ICD 1 or 2 leads extracted: 33244.
+     - LV lead extraction has no specific code, probably should use
+       33234 or 33999 (unlisted procedure).
+**** Removal of entire system without replacement
+     Use combination of generator removal and lead removal codes as appropriate.
+**** Upgrade of system
+**** Pocket revision
+     - PPM pocket revision: 33222.
+     - ICD pocket revision: 33223.
+**** Lead repair
+     - One lead repaired: 33218.
+     - Two leads repaired: 33220.
+*** Other procedure
+    - These are miscellaneous EP procedures and coding is straightforward.
+*** All EP codes
+    - Lists all codes in the app in /numeric/ order.
+    - Avoid using this module unless other ones don't cover coding
+      because procedure is unusual or rarely done.
+    - Code analysis may not check every combination of codes selected
+      in this module.
+    - This module can be useful to look up specific code numbers.
+*** Settings
+    - Settings apply to the format of the summary screen and code
+      analysis, not to the main code display screens.
+    - Distinguish add-on codes: Add + in front of add-on only codes,
+      e.g. +99999.
+    - Show descriptions: Add description to code, otherwise shows only
+      code.
+    - Truncate descriptions: Shortens descriptions to help fit on
+      small screens.
+    - Check codes in All EP Codes: Turn on or off code analysis in the
+      all EP codes module.
+    - Code analysis detail
+      - Verbose: Full analysis with full descriptions of warnings and
+        errors.
+      - Brief: Lists offending codes without only brief or no
+        descriptions.
+      - None: No code analysis done.
 * Limitations
   - Code descriptions are paraphrased
   - All information freely available on web
