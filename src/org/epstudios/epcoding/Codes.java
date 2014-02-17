@@ -77,8 +77,8 @@ public class Codes {
 				false);
 		addCode(map, "33224",
 				"Addition of LV lead to preexisting ICD/PPM system", false);
-		addCode(map, "33225",
-				"Insertion of LV lead at time of ICD/PPM insertion", true);
+		addCode(map, "33225", "Implant LV lead at time of ICD/PPM insertion",
+				true);
 		addCode(map, "33226", "Repositioning of previously implanted LV lead",
 				false);
 
@@ -108,11 +108,9 @@ public class Codes {
 		addCode(map, "33249", "New ICD, single or dual, with leads", false);
 
 		// Replacement ICD/CRT
-		addCode(map, "33262", "Replacement of single lead ICD generator only",
-				false);
-		addCode(map, "33263", "Replacement of dual lead ICD generator only",
-				false);
-		addCode(map, "33264", "Replacement of CRT ICD generator only", false);
+		addCode(map, "33262", "Single lead ICD generator replacement", false);
+		addCode(map, "33263", "Dual lead ICD generator replacement", false);
+		addCode(map, "33264", "CRT ICD generator replacement", false);
 
 		// ILR
 		addCode(map, "33282", "Insertion of loop recorder", false);
