@@ -322,6 +322,8 @@
     - Codes are organized as primary codes, at least one of which
       needs to be selected, and additional or optional codes which
       are commonly used with the primary procedure codes.
+    - Codes are organized logically, not necessarily in numeric
+      order, with description given first, followed by code number.
     - Select codes by tapping them.
     - Codes that should not be changed are grayed out.
     - Tap *Summarize* at the bottom of the list to list the codes
@@ -335,7 +337,8 @@
     - Tap *Settings* to change the display of codes and level of
       detail shown in the code analysis.
     - The all EP codes module lists every EP procedure code in
-      numerical order.  It is the /a la carte/ menu of *EP Coding*.
+      numerical order, with code number given first.  It is the /a la
+      carte/ menu of *EP Coding*.
 *** Limitations
     - EP procedure codes only.
     - No surgical EP codes (e.g. LV lead via thoracotomy).
@@ -347,7 +350,9 @@
 *** General hints
     - Set code analysis to verbose.
     - Use the specific procedure modules rather than the all EP codes
-      module.
+      module for coding procedures.
+    - Use the all EP codes module if you need to look up a specific
+      code, as they are listed in numeric order in this module.
     - Don't try to add codes that are disabled in a procedure module.
     - If you nearly always add codes to a procedure (e.g. 3D mapping
       with AFB ablation), then save it as a default using the Save
@@ -401,42 +406,60 @@
 *** SubQ ICD
     - These are emerging technology codes that are temporary and will
       probably be changed in the next revision of the codes.
-    - SubQ ICD codes are not tested for consistency by the code analyzer.
 *** Upgrade/revision/extraction
-    - This is the most complicated coding area. We will deal with some
-      specific situations.
-    - Note codes are arranged in order matching this help, not in
+    - This is the most complicated coding area. We will break this
+      down into some specific situations.
+    - Note codes are arranged in logical groups, not necessarily in
       numeric order.
-**** TODO For this module
-     - reaarange codes to match order of help
-     - add missing codes, e.g. pocket revision and lead repair to module.
 **** Lead addition only, no change in generator
      - Use specific lead placement code, e.g. 33216, place A lead.
      - Use 33224 to place an LV lead if the CRT generator is already there.
 **** Lead repositioning
-     - Reposition previously implanted single A or V lead: 33215.
-     - Reposition previously implanted LV lead: 33226.
+     - Reposition previously implanted single A or V lead: 33215
+     - Reposition previously implanted LV lead: 33226
 **** Removal of generator alone
-     - PPM generator removal: 33233.
-     - ICD generator removal: 33241.
-     - Don't use these codes in conjunction with replacement codes.
+     - PPM generator removal: 33233
+     - ICD generator removal: 33241
+     - Don't use these codes in conjunction with generator-only
+       replacement codes, but do use them with new/replacement system
+       codes for upgrades (see [[Upgrade of system]]).
 **** Removal/extraction of leads
-     - PPM single lead extraction: 33234.
-     - PPM dual lead extraction: 33235.
-     - ICD 1 or 2 leads extracted: 33244.
+     - PPM single lead extraction: 33234
+     - PPM dual lead extraction: 33235
+     - ICD 1 or 2 leads extracted: 33244
      - LV lead extraction has no specific code, probably should use
        33234 or 33999 (unlisted procedure).
 **** Removal of entire system without replacement
-     Use combination of generator removal and lead removal codes as appropriate.
+     - Use combination of generator removal and lead removal codes as
+       appropriate.
+**** New/replacement device
+     - PPM: 33206-33208
+     - ICD: 33249
+     - Plus LV lead: 33225
 **** Upgrade of system
+     - Single chamber to dual chamber PPM (includes new lead, removal
+       of old generator and placement of new generator) : 33214
+     - Other situations: code removal of generator and removal of
+       leads if leads are removed, then code for insertion of new system.
+     - Example: upgrade of single chamber PPM to ICD with CRT.
+       - Code PPM generator removal: 33233
+       - Code single or dual ICD system implant: 33249
+       - Code implant LV lead with new system: 33225
+**** Place generator, existing leads
+     - Single chamber PPM generator: 33212
+     - Dual chamber PPM generator: 33213
+     - Single chamber ICD generator: 33240
+     - Dual chamber ICD generator: 33230
+     - CRT ICD generator: 33231
 **** Pocket revision
-     - PPM pocket revision: 33222.
-     - ICD pocket revision: 33223.
+     - PPM pocket revision: 33222
+     - ICD pocket revision: 33223
 **** Lead repair
-     - One lead repaired: 33218.
-     - Two leads repaired: 33220.
+     - One lead repaired: 33218
+     - Two leads repaired: 33220
 *** Other procedure
-    - These are miscellaneous EP procedures and coding is straightforward.
+    - These are miscellaneous EP procedures.
+    - Fluoroscopy to check for lead integrity: 76000
 *** All EP codes
     - Lists all codes in the app in /numeric/ order.
     - Avoid using this module unless other ones don't cover coding

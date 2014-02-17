@@ -206,6 +206,9 @@ for the JavaScript code in this tag.
       needs to be selected, and additional or optional codes which
       are commonly used with the primary procedure codes.
 </li>
+<li>Codes are organized logically, not necessarily in numeric
+      order, with description given first, followed by code number.
+</li>
 <li>Select codes by tapping them.
 </li>
 <li>Codes that should not be changed are grayed out.
@@ -225,7 +228,7 @@ for the JavaScript code in this tag.
       detail shown in the code analysis.
 </li>
 <li>The all EP codes module lists every EP procedure code in
-      numerical order.  It is the <i>a la carte</i> menu of <b>EP Coding</b>.
+      numerical order, with code number given first.  It is the <i>a la       carte</i> menu of <b>EP Coding</b>.
 </li>
 </ul>
 
@@ -266,7 +269,10 @@ for the JavaScript code in this tag.
 <li>Set code analysis to verbose.
 </li>
 <li>Use the specific procedure modules rather than the all EP codes
-      module.
+      module for coding procedures.
+</li>
+<li>Use the all EP codes module if you need to look up a specific
+      code, as they are listed in numeric order in this module.
 </li>
 <li>Don't try to add codes that are disabled in a procedure module.
 </li>
@@ -441,10 +447,10 @@ for the JavaScript code in this tag.
 <div class="outline-text-2" id="text-15">
 
 <ul>
-<li>This is the most complicated coding area. We will deal with some
-      specific situations.
+<li>This is the most complicated coding area. We will break this
+      down into some specific situations.
 </li>
-<li>Note codes are arranged in order matching this help, not in
+<li>Note codes are arranged in logical groups, not necessarily in
       numeric order.
 </li>
 </ul>
@@ -453,23 +459,8 @@ for the JavaScript code in this tag.
 </div>
 
 <div id="outline-container-15-1" class="outline-3">
-<h3 id="sec-15-1"><span class="todo TODO">TODO</span> For this module</h3>
+<h3 id="sec-15-1">Lead addition only, no change in generator</h3>
 <div class="outline-text-3" id="text-15-1">
-
-<ul>
-<li>reaarange codes to match order of help
-</li>
-<li>add missing codes, e.g. pocket revision and lead repair to module.
-</li>
-</ul>
-
-</div>
-
-</div>
-
-<div id="outline-container-15-2" class="outline-3">
-<h3 id="sec-15-2">Lead addition only, no change in generator</h3>
-<div class="outline-text-3" id="text-15-2">
 
 <ul>
 <li>Use specific lead placement code, e.g. 33216, place A lead.
@@ -482,14 +473,33 @@ for the JavaScript code in this tag.
 
 </div>
 
+<div id="outline-container-15-2" class="outline-3">
+<h3 id="sec-15-2">Lead repositioning</h3>
+<div class="outline-text-3" id="text-15-2">
+
+<ul>
+<li>Reposition previously implanted single A or V lead: 33215
+</li>
+<li>Reposition previously implanted LV lead: 33226
+</li>
+</ul>
+
+</div>
+
+</div>
+
 <div id="outline-container-15-3" class="outline-3">
-<h3 id="sec-15-3">Lead repositioning</h3>
+<h3 id="sec-15-3">Removal of generator alone</h3>
 <div class="outline-text-3" id="text-15-3">
 
 <ul>
-<li>Reposition previously implanted single A or V lead: 33215.
+<li>PPM generator removal: 33233
 </li>
-<li>Reposition previously implanted LV lead: 33226.
+<li>ICD generator removal: 33241
+</li>
+<li>Don't use these codes in conjunction with generator-only
+       replacement codes, but do use them with new/replacement system
+       codes for upgrades (see <a href="#sec-15-7">Upgrade of system</a>).
 </li>
 </ul>
 
@@ -498,32 +508,15 @@ for the JavaScript code in this tag.
 </div>
 
 <div id="outline-container-15-4" class="outline-3">
-<h3 id="sec-15-4">Removal of generator alone</h3>
+<h3 id="sec-15-4">Removal/extraction of leads</h3>
 <div class="outline-text-3" id="text-15-4">
 
 <ul>
-<li>PPM generator removal: 33233.
+<li>PPM single lead extraction: 33234
 </li>
-<li>ICD generator removal: 33241.
+<li>PPM dual lead extraction: 33235
 </li>
-<li>Don't use these codes in conjunction with replacement codes.
-</li>
-</ul>
-
-</div>
-
-</div>
-
-<div id="outline-container-15-5" class="outline-3">
-<h3 id="sec-15-5">Removal/extraction of leads</h3>
-<div class="outline-text-3" id="text-15-5">
-
-<ul>
-<li>PPM single lead extraction: 33234.
-</li>
-<li>PPM dual lead extraction: 33235.
-</li>
-<li>ICD 1 or 2 leads extracted: 33244.
+<li>ICD 1 or 2 leads extracted: 33244
 </li>
 <li>LV lead extraction has no specific code, probably should use
        33234 or 33999 (unlisted procedure).
@@ -534,12 +527,34 @@ for the JavaScript code in this tag.
 
 </div>
 
+<div id="outline-container-15-5" class="outline-3">
+<h3 id="sec-15-5">Removal of entire system without replacement</h3>
+<div class="outline-text-3" id="text-15-5">
+
+<ul>
+<li>Use combination of generator removal and lead removal codes as
+       appropriate.
+</li>
+</ul>
+
+</div>
+
+</div>
+
 <div id="outline-container-15-6" class="outline-3">
-<h3 id="sec-15-6">Removal of entire system without replacement</h3>
+<h3 id="sec-15-6">New/replacement device</h3>
 <div class="outline-text-3" id="text-15-6">
 
-<p>     Use combination of generator removal and lead removal codes as appropriate.
-</p></div>
+<ul>
+<li>PPM: 33206-33208
+</li>
+<li>ICD: 33249
+</li>
+<li>Plus LV lead: 33225
+</li>
+</ul>
+
+</div>
 
 </div>
 
@@ -547,18 +562,44 @@ for the JavaScript code in this tag.
 <h3 id="sec-15-7">Upgrade of system</h3>
 <div class="outline-text-3" id="text-15-7">
 
+<ul>
+<li>Single chamber to dual chamber PPM (includes new lead, removal
+       of old generator and placement of new generator) : 33214
+</li>
+<li>Other situations: code removal of generator and removal of
+       leads if leads are removed, then code for insertion of new system.
+</li>
+<li>Example: upgrade of single chamber PPM to ICD with CRT.
+<ul>
+<li>Code PPM generator removal: 33233
+</li>
+<li>Code single or dual ICD system implant: 33249
+</li>
+<li>Code implant LV lead with new system: 33225
+</li>
+</ul>
+
+</li>
+</ul>
+
 </div>
 
 </div>
 
 <div id="outline-container-15-8" class="outline-3">
-<h3 id="sec-15-8">Pocket revision</h3>
+<h3 id="sec-15-8">Place generator, existing leads</h3>
 <div class="outline-text-3" id="text-15-8">
 
 <ul>
-<li>PPM pocket revision: 33222.
+<li>Single chamber PPM generator: 33212
 </li>
-<li>ICD pocket revision: 33223.
+<li>Dual chamber PPM generator: 33213
+</li>
+<li>Single chamber ICD generator: 33240
+</li>
+<li>Dual chamber ICD generator: 33230
+</li>
+<li>CRT ICD generator: 33231
 </li>
 </ul>
 
@@ -567,13 +608,28 @@ for the JavaScript code in this tag.
 </div>
 
 <div id="outline-container-15-9" class="outline-3">
-<h3 id="sec-15-9">Lead repair</h3>
+<h3 id="sec-15-9">Pocket revision</h3>
 <div class="outline-text-3" id="text-15-9">
 
 <ul>
-<li>One lead repaired: 33218.
+<li>PPM pocket revision: 33222
 </li>
-<li>Two leads repaired: 33220.
+<li>ICD pocket revision: 33223
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-15-10" class="outline-3">
+<h3 id="sec-15-10">Lead repair</h3>
+<div class="outline-text-3" id="text-15-10">
+
+<ul>
+<li>One lead repaired: 33218
+</li>
+<li>Two leads repaired: 33220
 </li>
 </ul>
 
@@ -587,7 +643,9 @@ for the JavaScript code in this tag.
 <div class="outline-text-2" id="text-16">
 
 <ul>
-<li>These are miscellaneous EP procedures and coding is straightforward.
+<li>These are miscellaneous EP procedures.
+</li>
+<li>Fluoroscopy to check for lead integrity: 76000
 </li>
 </ul>
 

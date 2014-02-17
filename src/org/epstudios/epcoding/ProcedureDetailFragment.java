@@ -266,6 +266,7 @@ public class ProcedureDetailFragment extends Fragment implements
 		for (int i = 0; i < codes.length; ++i) {
 			CodeCheckBox codeCheckBox = new CodeCheckBox(context);
 			// codes[i].setPlusShown(plusShownInDisplay);
+			codeCheckBox.setCodeFirst(mItem == allProcedures);
 			codeCheckBox.setCode(codes[i]);
 			codeCheckBoxMap.put(codes[i].getCodeNumber(), codeCheckBox);
 			layout.addView(codeCheckBox);

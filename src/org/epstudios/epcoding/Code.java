@@ -83,4 +83,8 @@ public class Code {
 	public String getUnformattedDescriptionFirst() {
 		return shortDescription + " (" + (isAddOn ? "+" : "") + code + ")";
 	}
+
+	public String getUnformattedNumberFirst() {
+		return "(" + (isAddOn ? "+" : "") + code + ") " + shortDescription;
+	}
 }

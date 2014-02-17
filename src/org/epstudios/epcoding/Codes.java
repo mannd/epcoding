@@ -63,9 +63,9 @@ public class Codes {
 
 		// Leads
 		addCode(map, "33215", "Repositioning of PPM or ICD electrode", false);
-		addCode(map, "33216", "Place single lead (A or V, PPM or ICD) only",
+		addCode(map, "33216", "Implant single lead (A or V, PPM or ICD) only",
 				false);
-		addCode(map, "33217", "Place dual leads (PPM or ICD) only", false);
+		addCode(map, "33217", "Implant dual leads (PPM or ICD) only", false);
 		addCode(map, "33218", "Repair of one (PPM or ICD) electrode", false);
 		addCode(map, "33220", "Repair of two (PPM or ICD) electrodes", false);
 
@@ -87,8 +87,9 @@ public class Codes {
 		addCode(map, "33228", "Dual chamber PPM generator replacement", false);
 		addCode(map, "33229", "CRT PPM generator replacement", false);
 		addCode(map, "33230",
-				"Place dual chamber ICD generator, existing leads", false);
-		addCode(map, "33231", "Place CRT ICD generator, existing leads", false);
+				"Implant dual chamber ICD generator, existing leads", false);
+		addCode(map, "33231", "Implant CRT ICD generator, existing leads",
+				false);
 		addCode(map, "33233", "Removal of PPM generator without replacement",
 				false);
 		addCode(map, "33234", "Removal electrode only single lead PPM system",
@@ -96,7 +97,7 @@ public class Codes {
 		addCode(map, "33235", "Removal electrodes only dual lead PPM system",
 				false);
 		addCode(map, "33240",
-				"Place single chamber ICD generator, existing lead", false);
+				"Implant single chamber ICD generator, existing lead", false);
 		addCode(map, "33241", "Removal of ICD generator without replacement",
 				false);
 		// 33243 is removal of ICD lead by thoracotomy
@@ -196,10 +197,17 @@ public class Codes {
 	public final static String[] IcdReplacementPrimaryCodeNumbers = { "33262",
 			"33263", "33264" };
 
+	// public final static String[] deviceUpgradePrimaryCodeNumbers = { "33216",
+	// "33217", "33215", "33212", "33213", "33214", "33221", "33233",
+	// "33240", "33230", "33241", "33231", "33233", "33224", "33225",
+	// "33234", "33235", "33244", "33218", "33220", "33999", "33222",
+	// "33223" };
+
 	public final static String[] deviceUpgradePrimaryCodeNumbers = { "33216",
-			"33217", "33215", "33216", "33212", "33213", "33214", "33221",
-			"33233", "33240", "33230", "33241", "33231", "33233", "33224",
-			"33225", "33234", "33235", "33244", "33218", "33220", "33999" };
+			"33217", "33224", "33215", "33226", "33233", "33241", "33234",
+			"33235", "33244", "33214", "33206", "33207", "33208", "33249",
+			"33225", "33212", "33213", "33240", "33230", "33231", "33222",
+			"33223", "33218", "33220" };
 
 	public final static String[] ablationSecondaryCodeNumbers = { "93655",
 			"93657", "93609", "93613", "93621", "93622", "93623", "93662",
