@@ -1,25 +1,30 @@
 ## Description
-EP Coding is an [Android](http://www.android.com) application
-that is intended to help practicing cardiac electrophysiologists
-document their procedures and other billable activities by selecting
-proper CPT® codes, based on the latest billing guidelines.  The app is
+EP Coding is an [Android](http://www.android.com) app
+that is intended to help practicing cardiac electrophysiology (EP) doctors
+document and bill their procedures by selecting
+proper CPT® codes, based on the latest coding guidelines.  The app is
 not for professional coders, and does not take into account the coding
-modifiers and different billing specifications of various billing
-agencies.  It is useful for those physicians who need to enter billing
+modifiers and different coding specifications of various billing
+agencies.  It is useful for those physicians who need to enter procedure
 codes directly into EHR systems, such as EPIC, or who just need to
 communicate to the coders what they have done.  Of course all codes
-billed must be documented in procedure notes.  The rules for entering
+billed must also be documented in procedure notes.  The rules for entering
 codes are complex, and the codes themselves are not mnemonic, hence
-this app.  This app currently uses the 2013 codes, but will be updated
+this app.  This app currently uses the 2014 codes, but will be updated
 as coding changes.  We are not liable for any errors in coding that
 might occur from using this app, please see the licensing information below.
 
 EP Coding is open source, and licensed under the 
 [GNU GPL v3 license.](http://www.gnu.org/licenses/gpl.html)
 
-## License
+## Copyright
 Copyright © 2013, 2014 [EP Studios, Inc.](http://www.epstudiossoftware.com)
 
+CPT copyright 2012 American Medical Association. All rights
+reserved. CPT is a registered trademark of the American Medical
+Association.
+
+## License
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
@@ -49,10 +54,11 @@ For these reasons, it is felt that the use of the small subset of
 codes applicable to EP is covered under the
 [Fair Use Doctrine](http://http://en.wikipedia.org/wiki/Fair_use) of
 the Copyright Act and not subjected to the licensing fees imposed by
-the AMA.
+the AMA.  A full discussion of the rationale for fair use of these
+codes is contained on [our website](http://www.epstudiossoftware.com/?p=1313).
 
 ## Author
-David Mann
+David Mann, MD
 
 Email: [mannd@epstudiossoftware.com](mailto:mannd@epstudiossoftware.com)  
 Website: [http://www.epstudiossoftware.com](http://www.epstudiossoftware.com)   
