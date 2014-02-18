@@ -1,3 +1,32 @@
+/*  
+Copyright (C) 2013, 2014 EP Studios, Inc.
+www.epstudiossoftware.com
+
+This file is part of EP Coding.
+
+    EP Coding is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    EP Coding is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with EP Coding.  If not, see <http://www.gnu.org/licenses/>.
+
+    Note also:
+
+    CPT copyright 2012 American Medical Association. All rights
+    reserved. CPT is a registered trademark of the American Medical
+    Association.
+
+    A limited number of CPT codes are used in this program under the Fair Use
+    doctrine of US Copyright Law.  See README.md for more information.
+ */
+
 package org.epstudios.epcoding;
 
 import java.util.LinkedHashMap;
@@ -13,6 +42,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -90,6 +121,7 @@ public class ProcedureDetailFragment extends Fragment implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
 
 		if (getArguments().containsKey(ARG_ITEM_ID)) {
 			String itemID = getArguments().getString(ARG_ITEM_ID);
@@ -99,6 +131,11 @@ public class ProcedureDetailFragment extends Fragment implements
 				mItem = 0; // AFB ablation will be shown
 			}
 		}
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.menu, menu);
 	}
 
 	@Override

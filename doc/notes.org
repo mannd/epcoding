@@ -305,6 +305,7 @@
     - [[Other procedure]]
     - [[All EP codes]]
     - [[Settings]]
+    - [[Glossary]]
 *** Who should use EP Coding?
     Physicians who perform cardiac electrophysiology (EP) procedures
     and are required to submit CPT® codes for these procedures. *EP
@@ -326,14 +327,15 @@
       order, with description given first, followed by code number.
     - Select codes by tapping them.
     - Codes that should not be changed are grayed out.
-    - Tap *Summarize* at the bottom of the list to list the codes
-      selected along with any warnings or errors.
+    - Tap *Summarize* at the bottom of the list to show a dialog with
+      the codes selected along with any warnings or errors.
     - Tap *Clear* to clear the selected codes.
     - Tap the *Save* icon at the top to save your selection of
       additional codes as a default.  If you nearly always select the
       same additional codes (e.g. always do 3D mapping with SVT
       ablation), save the codes and they will already be selected in
-      future sessions.
+      future sessions.  Note that primary code selections are not
+      saved.
     - Tap *Settings* to change the display of codes and level of
       detail shown in the code analysis.
     - The all EP codes module lists every EP procedure code in
@@ -342,6 +344,7 @@
 *** Limitations
     - EP procedure codes only.
     - No surgical EP codes (e.g. LV lead via thoracotomy).
+    - Some rare or obsolete codes are not included.
     - Code descriptions are paraphrased.
     - Code components are not given or incomplete.
     - No office based or in-patient billing codes.
@@ -353,6 +356,8 @@
       module for coding procedures.
     - Use the all EP codes module if you need to look up a specific
       code, as they are listed in numeric order in this module.
+    - There are some rare codes in the all EP codes module that
+      aren't present in the other modules.
     - Don't try to add codes that are disabled in a procedure module.
     - If you nearly always add codes to a procedure (e.g. 3D mapping
       with AFB ablation), then save it as a default using the Save
@@ -402,7 +407,7 @@
     - Use 33227-33229 for PPM replacement and 33262-33264 for ICD
       replacement depending on number of leads.
     - Do not add generator removal codes to these codes!
-    - Add 93641 if you do DFT testing during the ICD generator replacement.
+    - Add 93641 if you do DFT testing during ICD generator replacement.
 *** SubQ ICD
     - These are emerging technology codes that are temporary and will
       probably be changed in the next revision of the codes.
@@ -484,6 +489,17 @@
       - Brief: Lists offending codes without only brief or no
         descriptions.
       - None: No code analysis done.
+*** Glossary
+    - A = atrial
+    - AFB = atrial fibrillation
+    - AFL = atrial flutter
+    - CRT = cardiac resynchronization therapy
+    - ICD = implantable cardioverter defibrillator
+    - PPM = pacemaker
+    - LV = left ventricular
+    - SVT = supraventricular tachycardia
+    - V = ventricular
+    - VT = ventricular tachycardia
 * Limitations
   - Code descriptions are paraphrased
   - All information freely available on web

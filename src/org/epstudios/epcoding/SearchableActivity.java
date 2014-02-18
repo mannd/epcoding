@@ -29,44 +29,23 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
-import android.content.Context;
+import android.app.ListActivity;
+import android.app.SearchManager;
+import android.content.Intent;
+import android.os.Bundle;
 
-public class AvnAblation implements Procedure {
-
-	@Override
-	public String title(Context context) {
-		return context.getString(R.string.avn_ablation_title);
-	}
+public class SearchableActivity extends ListActivity {
 
 	@Override
-	public Code[] primaryCodes() {
-		return Codes.getCodes(Codes.avnAblationPrimaryCodeNumbers);
-	}
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		// setContentView(R.layout.search);
 
-	@Override
-	public boolean disablePrimaryCodes() {
-		return true;
-	}
+		Intent intent = getIntent();
+		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+			String query = intent.getStringExtra(SearchManager.QUERY);
+			System.out.println(query);
+		}
 
-	@Override
-	public Code[] secondaryCodes() {
-		return Codes.getCodes(Codes.avnAblationSecondaryCodeNumbers);
 	}
-
-	@Override
-	public String[] disabledCodeNumbers() {
-		String[] disabledCodeNumbers = {};
-		return disabledCodeNumbers;
-	}
-
-	@Override
-	public String helpText(Context context) {
-		return context.getString(R.string.av_node_ablation_help_text);
-	}
-
-	@Override
-	public boolean doNotWarnForNoSecondaryCodesSelected() {
-		return false;
-	}
-
 }
