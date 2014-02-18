@@ -9,3 +9,836 @@
     | Dual chamber PPM implant   | 33208 |
     |----------------------------+-------|
 * Details    
+* TODO Thing that need doing
+** DONE Reorder secondary codes
+   They should be generally in numeric order, but can also have some
+   logical order.  It makes no sense to put the A line code in first,
+   even though it comes numerically before the others.
+** DONE Write help text
+** DONE Put Settings in?
+   - verbosity setting for coding summary
+   - coding analysis warning levels?
+   - ? toggle coding analysis
+** DONE Bugs
+   - rotation of screen loses check marks
+** TODO Final Todo list
+*** TODO Fix About screen per Android guidelines
+**** ? add version number
+*** TODO Add proper copyright notice for AMA CPT (see blog post)
+*** TODO Finish Hints
+*** TODO Finish bad combos
+*** DONE Refactor Code Analysis
+*** TODO Finish icons
+*** TODO Check codes, run through scenarios
+*** TODO clean up procedure classes
+    - change Procedure to abstract base class
+    - Ablation and Device classes for default behavior
+**** Note will probably defer this to later version
+*** TODO create release check list like EP Mobile
+** DONE Code Analysis
+   Need to generalize by having class with
+   - Code numbers
+   - warning level
+   - verbose message
+** DONE One code not allowed with multiple codes
+   Implemented <2014-02-11 Tue>
+** DONE Don't need no secondary code warnings for all procedures
+   e.g. simple generator changes usually don't need more codes.
+   Should limit these suggestions to ablation codes only.  Implement
+   this.
+   Examples:
+   - New PPM
+   - New ICD, ICD repl -- BUT! may be missing DFT testing
+   - PPM replacement
+   - Device upgrade
+     So will exclude PPM new and replacement from secondary code check
+** DONE One code not allowed without other codes algorithm 
+   <2014-02-12 Wed 14:31>
+* Settings screen
+  - Settings
+    - Code Display
+      - Show + for add-on codes
+      - Allow changing primary codes
+    - Code Summary
+      - Show + for add-on codes
+      - Show code details
+      - Code analysis verbosity
+* Code analysis
+** Errors and warnings
+   - do not report 2D and 3D mapping together
+   - 2D mapping and AV node ablation may not be allowed
+   - Note clear if temp V pacer and AV node ablation can be billed
+     together
+   - Warm if no secondary codes chosen (unlikely AFB ablation done
+     with mapping, eg.)
+   - Warn if EP testing without arrhythmia induction coded
+   - Disallow 93619 and 93620 together
+   - Possibly do check for forbidden combinations in AllCodes
+     (e.g. SVT ablation + additional AFB ablation)
+   - No 76000 with any other device code
+   - For removal and replacement of PPM and leads uses 33233 with
+     33234 or 33235 and 33206-33208
+   - Don't use 33206-33208 with 33227-33229
+   - Don't use 33214 with 33227-33229
+** Verbosity
+*** Brief
+    - Errors
+      - 93609 & 93613
+      - 93619 & 93620
+      - All Addon codes
+      - 93414 & 93621
+    - Warnings
+      - No secondary codes
+      - No primary codes
+      - ? No mapping codes with ablation codes
+*** Verbose
+    - Errors
+      - 93619 & 93620: do not combine 2D and 3D mapping
+      - All Addon codes: you must have some non-addon codes to use
+        addon codes
+    - Warnings
+      - No secondary codes: you may be missing some secondary codes
+      - No mapping codes: most ablation procedures include mapping
+* Help notes
+** Purpose
+   - Only EP!!
+   - Allow easy look-up of commonly used codes
+   - Define common coding scenarios
+   - Demonstrate which codes cannot be combined
+   - Help with code entry by physician in EHR such as EPIC
+   - Meant to help the EP physician do what is required by EHR
+** Excluded
+   - Office codes
+   - Surgical codes
+   - Device interrogation/follow-up codes
+   - Modifiers
+   - Code components
+** Original Help Text
+*** EP Coding Help
+*** Contents
+    - Link 1
+    - Link 2
+    - Link 3
+*** General Help
+**** Who should use EP Coding?
+     Physicians who perform cardiac electrophysiology (EP) procedures and
+     are required to submit CPT® codes for these procedures.
+**** Rationale
+     EHR (Electronic Health Records) put added burdens on physicians to
+     do tasks that in the past were done by ancillary personnel.  These
+     responsibilites often now include proper coding of
+     procedures.  Often physicians are required to enter CPT® codes
+     directly into the computer.  This is difficult given the
+     complexity of the codes and rules controlling them.
+**** EP Coding is for physicians, not coders!
+     Coding procedures nowadays often involves two stages.  Physicians
+     enter codes into the EHR based on what they do during
+     procedures.  Professional coders take the codes, assess if they
+     are supported by proper documentation, add modifiers, and often
+     adjust coding based on whether the patient has Medicare or other
+     insurance.  EP Coding is intended to help the physician do the
+     initial code entry and is not for professional coders!
+**** How does EP Coding help?
+     - Lists relevant CPT® codes for procedures, with succinct descriptions.
+     - Makes clear which codes cannot be combined for specific procedures.
+     - Analyzes selected codes for errors and warnings.
+     - Provides Hints on how to code procedures.
+**** How to use EP Coding
+     - Select a procedure from the list.
+     - Codes are organized as primary codes, at least one of which
+       needs to be selected, and additional or optional codes which
+       are commonly used with the procedure.
+     - Click on the codes that are relevant.
+     - Codes that should not be selected or must be selected are locked.
+     - Click on *Summarize* to summarize and analyze the coding.
+     - If code analysis is selected in *Settings* Warnings and Errors
+       will be listed including the relevant codes in brackets, and, if
+       the analyzer is set to Verbose, some further explanation.
+     - Click the *Clear* button to clear the selected codes.  Codes are
+       also cleared if you return to the procedure list or select
+       another procedure.
+     - Click the *Hints* button for coding hints.
+     - Click the *Save* icon at the top to save your selection of
+       additional codes.  If you nearly always select the same
+       additional codes (e.g. always do 3D mapping with SVT ablation),
+       select the codes and they will already be selected in future
+       sessions.
+     - Click the *Settings* to change the display of codes and level of
+       detail shown in the code analysis dialog.
+     - The *All EP Codes* module just lists every code
+       in numerical order.  It is the /a la carte/ menu of EP Coding.
+**** Limitations
+     - EP procedure codes only.
+     - No surgical EP codes (e.g. placement of LV lead via
+       thoracotomy).
+     - Code descriptions are paraphrased.
+     - Code components are not given or incomplete.
+     - No office based or in-patient billing codes.
+     - No device programming codes.
+*** EP Coding Hints
+**** General
+     - Set Code Analysis to verbose.
+     - Use the specific procedure modules rather than the All EP Codes
+       module.
+     - If you nearly always add codes to a procedure (e.g. 3D mapping
+       with AFB ablation), then save it as a default using the Save
+       button.
+     - Check with your coders or the AMA documentation if you are not
+       sure how to code a procedure.
+**** AFB Ablation
+     - Includes comprehensive EP testing, LA pacing and recording and
+       transseptal puncture.
+     - Mapping code and programmed stimulation after IV drug can be
+       added.
+     - Add 93657 if additional AFB ablation done beyond pulmonary vein
+       isolation.
+     - Add 93655 if separate supraventricular arrhythmia mechanism
+       ablated (e.g. focal atrial tachycardia).
+**** SVT Ablation
+     - Includes comprehensive EP testing.
+     - 
+** Help Text Buffer Options
+#+TITLE:     EP Coding Help
+#+AUTHOR:    David Mann
+#+EMAIL:     mannd@epstudiossoftware.com
+#+DATE:      2014-02-08 Sat
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+#+XSLT:
+** Hints 
+*** Note
+    These are drafts of the Hints and may not match the final
+    versions in the strings.xml.
+*** Ablation Hints
+    Catheter ablation procedures are coded with a primary ablation
+    code.  This code includes comprehensive electrophysiologic
+    testing, which should not be coded separately.  However other
+    components, such as mapping, can be coded for AFB and SVT
+    ablations, but not for VT ablations.  EP Coding disables codes
+    that can\'t be combined.  Note that atrial flutter and atrial
+    tachycardia ablation is coded as an SVT ablation.  Also note that
+    for AFB ablation, there are add-on codes for additional ablation
+    besides pulmonary vein isolation for AFB (such as linear atrial
+    ablation, 93657) and ablation of additional arrhythmia mechanisms (such
+    as focal atrial tachycardia, 93655).
+*** AFB Ablation
+    AFB ablation includes comprehensive EP testing, including LA
+    recording and pacing.  It also includes transseptal
+    catheterization, therefore these codes cannot be added on.
+    Mapping codes and coding for programmed stimulation after IV drug
+    infusion can be added.  The primary code includes pulmonary vein
+    isolation.  Add code 93657 if additional ablation for AFB is done
+    (such as linear atrial ablation) and add 93655 if a separate
+    arrhythmia mechanism is ablated (such as focal atrial
+    tachycardia).
+*** AV node ablation
+    It is not clear if electrophysiologic testing and mapping can be
+    billed as additional codes to AV node ablation.  Often AV node
+    ablation is combined with device implant at the same setting and
+    these codes should be added.
+*** SVT ablation
+    SVT ablation includes comprehensive EP testing, but can be
+    combined with the other codes listed.  Note that the SVT ablation
+    code (93653) is used not just for supraventricular tachycardia,
+    but for WPW ablation, atrial flutter ablation, atrial tachycardia
+    ablation, and presumably premature atrial complex ablation.
+*** VT ablation
+    Mapping codes (93609 or 93613), for reasons only known to the
+    AMA, cannot be combined with the 93654 VT ablation code.
+    This is unlike the AFB and SVT ablation codes.  LV pacing and
+    recording also cannot be combined with VT ablation.
+*** EP testing
+    EP testing is not coded separately if ablation is performed.
+    Mapping can be added to EP testing codes, as well as LA pacing and
+    recording, programmed stimulation after IV drug, etc.  The two
+    primary codes lists are the most commonly used, other rarely used
+    codes, such as His bundle recording only (93600) are listed in
+    the All Codes module, but probably should be avoided.
+*** New PPM
+*** All Procedures
+    As an alternative to using the procedure oriented choices in EP
+    Coding, the All Procedures allows you to pick any of the codes in
+    any combination.  This may be useful if you are doing something
+    unusual that is not covered in the other procedure lists, or if
+    you are very familiar with how to use the codes and just want to
+    select from the complete list.  There is NO checking of coding in
+    this list!  It is possible to enter combinations of codes that
+    conflict.  As always, with increased freedom comes increased risk.
+*** Hints recast as web page
+    As alternative to using Hints button, use Hints menu item above
+    Help.   Use next header to generate web page and save as file "hints.html."
+** Help file creation
+   - use C-c @ to select EP Coding Help headline
+   - [[EP Coding Help]]
+   - C-c C-e export to html, buffer
+   - Save buffer to help.html
+   - import into strings, or use as resource file
+   - export html to assets/help.html
+   - Note I have added (setq org-export-html-postamble nil) in
+     ~/.emacs to suppress footer information.
+   - Above group of statements in buffer are for formatting the HTML
+** Next header is Help text for EP Coding app!!
+** EP Coding Help
+*** Contents
+    - [[Who should use EP Coding?]]
+    - [[How does EP Coding help?]]
+    - [[How to use EP Coding]]
+    - [[Limitations]]
+    - [[General hints]]
+    - [[AFB ablation]]
+    - [[SVT ablation]]
+    - [[VT ablation]]
+    - [[AV node ablation]]
+    - [[EP testing]]
+    - [[New PPM or ICD]]
+    - [[Replace PPM or ICD]]
+    - [[SubQ ICD]]
+    - [[Upgrade/revision/extraction]]
+    - [[Other procedure]]
+    - [[All EP codes]]
+    - [[Settings]]
+    - [[Glossary]]
+*** Who should use EP Coding?
+    Physicians who perform cardiac electrophysiology (EP) procedures
+    and are required to submit CPT® codes for these procedures. *EP
+    Coding* is intended to help EP physicians enter the correct codes
+    in an EHR (Electronic Health Record).  It is not intended for
+    professional coders nor is it a substitute for the
+    [[https://commerce.ama-assn.org/store/][AMA official CPT® documentation]].
+*** How does EP Coding help?
+    - Lists relevant CPT® codes for EP procedures, with succinct descriptions.
+    - Makes clear which codes cannot be combined for specific procedures.
+    - Analyzes selected codes for errors and warnings.
+    - Provides [[General hints][help on how to code procedures]].
+*** How to use EP Coding
+    - Select a procedure from the list by tapping on it.
+    - Codes are organized as primary codes, at least one of which
+      needs to be selected, and additional or optional codes which
+      are commonly used with the primary procedure codes.
+    - Codes are organized logically, not necessarily in numeric
+      order, with description given first, followed by code number.
+    - Select codes by tapping them.
+    - Codes that should not be changed are grayed out.
+    - Tap *Summarize* at the bottom of the list to show a dialog with
+      the codes selected along with any warnings or errors.
+    - Tap *Clear* to clear the selected codes.
+    - Tap the *Save* icon at the top to save your selection of
+      additional codes as a default.  If you nearly always select the
+      same additional codes (e.g. always do 3D mapping with SVT
+      ablation), save the codes and they will already be selected in
+      future sessions.  Note that primary code selections are not
+      saved.
+    - Tap *Settings* to change the display of codes and level of
+      detail shown in the code analysis.
+    - The all EP codes module lists every EP procedure code in
+      numerical order, with code number given first.  It is the /a la
+      carte/ menu of *EP Coding*.
+*** Limitations
+    - EP procedure codes only.
+    - No surgical EP codes (e.g. LV lead via thoracotomy).
+    - Some rare or obsolete codes are not included.
+    - Code descriptions are paraphrased.
+    - Code components are not given or incomplete.
+    - No office based or in-patient billing codes.
+    - No device programming codes.
+    - No coding modifiers are suggested.
+*** General hints
+    - Set code analysis to verbose.
+    - Use the specific procedure modules rather than the all EP codes
+      module for coding procedures.
+    - Use the all EP codes module if you need to look up a specific
+      code, as they are listed in numeric order in this module.
+    - There are some rare codes in the all EP codes module that
+      aren't present in the other modules.
+    - Don't try to add codes that are disabled in a procedure module.
+    - If you nearly always add codes to a procedure (e.g. 3D mapping
+      with AFB ablation), then save it as a default using the Save
+      icon.
+    - *Warnings* (indicated by *!*) point out codes that you may be
+      missing or code combinations that possibly shouldn't be used together.
+    - *Errors* (indicated by *!!*) indicate code combinations that
+      almost certainly are not allowed.
+    - Check with your coders or the [[https://commerce.ama-assn.org/store/][AMA documentation]] if you are not
+      sure how to code a procedure.
+*** AFB ablation
+    - Includes comprehensive EP testing, LA pacing and recording and
+      transseptal puncture.
+    - Add 93657 if additional AFB ablation done beyond pulmonary vein
+      isolation.
+    - Add 93655 if separate supraventicular arrhythmia mechanism
+      ablated (e.g. focal atrial tachycardia).
+*** SVT ablation
+    - Includes comprehensive EP testing.
+    - SVT ablation code is used for any kind of SVT ablation including
+      WPW, focal atrial tachycardia, atrial flutter, and AV nodal
+      reentry.
+*** VT ablation
+    - Includes comprehensive EP testing, LV pacing and recording, and
+      mapping codes.
+    - You can't add mapping codes 93609 or 93613 to VT ablation!
+*** AV node ablation
+    - It is not clear if EP testing codes can be combined with AV
+      node ablation.
+    - It is not clear if mapping codes can be combined with AV node ablation.
+    - These points may need to be clarified with your coders.
+*** EP testing
+    - Use 93620 (EP testing with attempted arrhythmia
+      induction).
+    - Don't code with ablation procedures (? exception AV node
+      ablation).
+    - You can add mapping codes, but don't add ablation codes to EP
+      testing.
+*** New PPM or ICD
+    - Use 33206-33208 for new PPM depending on number of leads.
+    - Use 33249 for new single or dual ICD.
+    - Add code 33225 to dual chamber device code for PPM or ICD with CRT.
+    - Add 93641 if you do DFT testing during the ICD implant.
+    - Placing a sub-cutaneous array is probably best coded with 33999
+      (unlisted surgical procedure code).
+*** Replace PPM or ICD
+    - Use 33227-33229 for PPM replacement and 33262-33264 for ICD
+      replacement depending on number of leads.
+    - Do not add generator removal codes to these codes!
+    - Add 93641 if you do DFT testing during ICD generator replacement.
+*** SubQ ICD
+    - These are emerging technology codes that are temporary and will
+      probably be changed in the next revision of the codes.
+*** Upgrade/revision/extraction
+    - This is the most complicated coding area. We will break this
+      down into some specific situations.
+    - Note codes are arranged in logical groups, not necessarily in
+      numeric order.
+**** Lead addition only, no change in generator
+     - Use specific lead placement code, e.g. 33216, place A lead.
+     - Use 33224 to place an LV lead if the CRT generator is already there.
+**** Lead repositioning
+     - Reposition previously implanted single A or V lead: 33215
+     - Reposition previously implanted LV lead: 33226
+**** Removal of generator alone
+     - PPM generator removal: 33233
+     - ICD generator removal: 33241
+     - Don't use these codes in conjunction with generator-only
+       replacement codes, but do use them with new/replacement system
+       codes for upgrades (see [[Upgrade of system]]).
+**** Removal/extraction of leads
+     - PPM single lead extraction: 33234
+     - PPM dual lead extraction: 33235
+     - ICD 1 or 2 leads extracted: 33244
+     - LV lead extraction has no specific code, probably should use
+       33234 or 33999 (unlisted procedure).
+**** Removal of entire system without replacement
+     - Use combination of generator removal and lead removal codes as
+       appropriate.
+**** New/replacement device
+     - PPM: 33206-33208
+     - ICD: 33249
+     - Plus LV lead: 33225
+**** Upgrade of system
+     - Single chamber to dual chamber PPM (includes new lead, removal
+       of old generator and placement of new generator) : 33214
+     - Other situations: code removal of generator and removal of
+       leads if leads are removed, then code for insertion of new system.
+     - Example: upgrade of single chamber PPM to ICD with CRT.
+       - Code PPM generator removal: 33233
+       - Code single or dual ICD system implant: 33249
+       - Code implant LV lead with new system: 33225
+**** Place generator, existing leads
+     - Single chamber PPM generator: 33212
+     - Dual chamber PPM generator: 33213
+     - Single chamber ICD generator: 33240
+     - Dual chamber ICD generator: 33230
+     - CRT ICD generator: 33231
+**** Pocket revision
+     - PPM pocket revision: 33222
+     - ICD pocket revision: 33223
+**** Lead repair
+     - One lead repaired: 33218
+     - Two leads repaired: 33220
+*** Other procedure
+    - These are miscellaneous EP procedures.
+    - Fluoroscopy to check for lead integrity: 76000
+*** All EP codes
+    - Lists all codes in the app in /numeric/ order.
+    - Avoid using this module unless other ones don't cover coding
+      because procedure is unusual or rarely done.
+    - Code analysis may not check every combination of codes selected
+      in this module.
+    - This module can be useful to look up specific code numbers.
+*** Settings
+    - Settings apply to the format of the summary screen and code
+      analysis, not to the main code display screens.
+    - Distinguish add-on codes: Add + in front of add-on only codes,
+      e.g. +99999.
+    - Show descriptions: Add description to code, otherwise shows only
+      code.
+    - Truncate descriptions: Shortens descriptions to help fit on
+      small screens.
+    - Check codes in All EP Codes: Turn on or off code analysis in the
+      all EP codes module.
+    - Code analysis detail
+      - Verbose: Full analysis with full descriptions of warnings and
+        errors.
+      - Brief: Lists offending codes without only brief or no
+        descriptions.
+      - None: No code analysis done.
+*** Glossary
+    - A = atrial
+    - AFB = atrial fibrillation
+    - AFL = atrial flutter
+    - CRT = cardiac resynchronization therapy
+    - ICD = implantable cardioverter defibrillator
+    - PPM = pacemaker
+    - LV = left ventricular
+    - SVT = supraventricular tachycardia
+    - V = ventricular
+    - VT = ventricular tachycardia
+* Limitations
+  - Code descriptions are paraphrased
+  - All information freely available on web
+  - Not for trained coders
+  - Physician and coder must still be familiar with components and
+    document properly and completely
+* More buttons
+** Generator change
+   - PPM
+     - A lead
+     - V lead
+     - dual chamber
+     - CRT
+** Possible buttons
+   |--------+--------|
+   | PPM    | ICD    |
+   | A lead | V lead |
+   | dual   | CRT    |
+   |--------+--------|
+** Buttons aren't needed, we have separate PPM and ICD modules already
+* Rules and Regulations
+** Bibliography						   
+*** CPT symposium 2011 slides					    :cpt2011:
+*** CPT review 2013 slides 					    :cpt2013:
+*** CPT coding changes 2013				     :cptchanges2013:
+*** EP Lab digest Changes Coming 2012				  :eplab2012:
+*** https://www.aapc.com/memberarea/forums/showthread.php?t=19874     :links:
+** Devices
+*** 93640, 93641 reportable at time of device placement/replacememnt :cpt2011:
+     This is DFT testing.  93640 is for external testing of leads
+     with and analyzer and isn't in Codes.java.	
+*** Use 76000 for fluoro of leads (e.g. Riata)			    :cpt2011:
+*** Use 33224 to insert LV lead alone?				    :cpt2011:
+*** Upgrade single to dual PPM 33214 includes gen removal	    :cpt2011:
+*** Upgrade single to dual ICD 33241 & 33249			    :cpt2011:
+*** Extraction and replacement PPM and leads
+**** codes							    :cpt2011:
+     33223 (remove gen) with 33234 or 33235 (remove 1 or 2 leads) and
+     then 33206-33208 for new generator.  Don't use 33206-33208 with
+     generator replacement codes (33227-33229)
+**** 33212, 33213, 33221 single, dual, multi gen insertion only	    :cpt2011:
+     don't combine insertion with 33233 for removal.  Use 33227-33229
+     (replacement codes) only.
+**** 33214 upgrade single to dual ppm				    :cpt2011:
+     - includes removal of prior generator, with new gen and leads.
+     - Don't report with 33227-33229 (replacement only)
+**** Repair 33218, 33220 (single, dual lead repair)		    :cpt2011:
+     - PPM or ICD leads
+     - Use with generator replacements
+***** DONE Add to Additional codes for generator change, upgrade
+**** 33226 Repositioning of LV lead				    :cpt2011:
+     ? Includes removal, insertion and/or replacement of existing generator
+**** 33227-33229						    :cpt2011:
+     - replacement codes
+     - Don't report with 33233 (removal)
+     - report with 33206-33208 (new systems) and 33234, 33235 (lead
+       removal) for upgrades. ???????
+*** ICD codes
+**** 33240, 33230, 33231					    :cpt2011:
+     - 33240 ICD gen only with existing single lead
+     - 33230 --- with existing dual leads
+     - 33231 --- with existing multi leads
+     - Don't report with generator change out at the same time, use
+       33262-33264 (ICD gen change, single, dual, CRT)
+**** 33241							    :cpt2011:
+     - removal of any kind of ICD generator only
+     - use with 33243 or 33244 (ICD lead removal by thoracotomy - not
+       in EP Coding - or transvenously) and 33249 placement of new ICD
+       with leads (single or dual) for removal and replacement of ICD
+       generator and electrodes.
+**** ICD generator change alone					    :cpt2011:
+     - 33262 single lead generator
+     - 33263 dual lead gen
+     - 33264 multi lead gen
+     - Don't use 33262-33264 with 33241 (i.e. don't bill removal and
+       replacement)
+     - Removal of lead(s) and replacement use 33244 (extraction ICD
+       lead) and 33241 (remove generator) or ICD replacement
+       33262-33264. (e.g. you take out a lead, and downgrade the device)
+     - 33249.  Insert/ replace single, dual ICD system including leads.
+     - For lead removal and replacement use 33241 with 33243 and 33249.
+*** Simplified table						    :cpt2011:
+    |---------------------------+---------------+---------------|
+    | Procedure                 |           PPM |           ICD |
+    | insert 1 lead             |         33216 |         33216 |
+    | insert 2 leads            |         33217 |         33217 |
+    | insert 3 leads            | 33217 & 33224 | 33217 & 33224 |
+    |---------------------------+---------------+---------------|
+    | remove 1 lead             |         33234 |         33244 |
+    | remove 2 leads            |         33235 |         33244 |
+    |---------------------------+---------------+---------------|
+    | gen with existing 1 lead  |         33212 |         33240 |
+    | gen with existing 2 leads |         33213 |         33230 |
+    | gen with existing 3 leads |         33221 |         33231 |
+    |---------------------------+---------------+---------------|
+    | gen replacement 1 lead    |         33227 |         33262 |
+    | gen replacement 2 leads   |         33228 |         33263 |
+    | gen replacement 3 leads   |         33229 |         33264 |
+    |---------------------------+---------------+---------------|
+    | gen removal only          |         33233 |         33241 |
+    |---------------------------+---------------+---------------|
+    | new/repl gen with 1 lead  |   33206/33207 |         33249 |
+    | new/repl gen with 2 leads |         33208 |         33249 |
+    | new/repl gen with 3 leads | 33208 & 33225 | 33249 & 33225 |
+    |---------------------------+---------------+---------------|
+    | upgrade sing to dual sys  |         33214 | 33241 & 33249 |
+    |---------------------------+---------------+---------------|
+    | removal gen               |         33233 |         33241 |
+    | removal leads             |   33234/33235 |         33244 |
+    | CS lead placed            |         33225 |         33225 |
+    |---------------------------+---------------+---------------|
+** EP
+*** Ablation							    :cpt2013:
+    - 93653-93657 (ablations) can't have EP procedure codes reported separately
+    - Note this doesn't include 93650, AV node ablation
+    - Don't report 93621 (LA pacing) with 93656 (afb ablation)
+    - Don't use 93622 (LV pacing) with 93654 (VT ablation)
+*** More ablation					     :cptchanges2013:
+    - AFB ablation includes transseptal puncture (93462) and includes
+      93621 (LA pacing/recording)
+    - Don't report 2D and 3D mapping together
+    - Don't report multiple ablation codes together
+*** More						    :eplab2012:links:
+    - Maybe can't bill IV drug infusion with ablation codes
+    - comment mentions denials for 93650 (AVN ablation) and 93609 (2D
+      mapping), but says nothing in the "book" indicates it is not
+      allowed.  Note on Internet several have asked this question and
+      no definitive answer.  Needs to be a WARNING.
+    - Note that it appears that other EP procedures may be billable
+      with AV node ablation, even His bundle recording.  Needs to be
+      a WARNING
+*** But							     :cptchanges2013:
+    - Latest 2014 parentheticals OK to bill IV drug infusion with
+      ablation codes
+
+** General Help
+*** Surgical codes not included (e.g. epicardial electrodes 33202)
+*** We paraphrase code descriptions
+**** e.g. use CRT system instead of "multi-lead" system
+*** Sources are published on web, seminars, will be on web site
+*** Most of the rules are enforced in the module interface, some in code analysis
+*** Older/Obsolete/little used codes are not included
+** Coding the rules
+*** Patterns
+**** Pairs of mutually exclusive codes
+     e.g. ILR implant and ILR explant, internal and external CDVN
+**** Triples of exclusive codes
+     e.g. PPM with 1 lead, with 2 leads, with multi leads
+**** Specific situations
+     e.g. EP testing with AV node ablation, mapping with AV node ablation.
+*** Indicating rules
+**** Prohibited by module
+     forbidden codes not enabled
+**** Warnings and Errors with Code Analysis
+     mutually exclusive codes
+**** Hints
+     Complex procedures like upgrades, lead replacements
+*** Warning/Error messages
+**** Mutually excluded pairs
+     ! [99999, 99998]
+**** Triples
+***** ? indicate all combinations, or just one
+      a) ! [99999, 99997]
+      b) ! [99999, 99997, 99996]
+      c) ! [99999, 99997] [99997, 99996] [99999, 99996]
+      Best solution probably a to indicate one pair, and b for all three. 
+***** check for 2/3 or 2/4 codes and specific warning
+      e.g. ! [99999, 99998] multiple mutually exclusive EP codes, implant codes.
+*** Coding
+**** Combos (pairs)
+     List<Combo> badCombos
+     Set<String> codeNumbers
+**** Triples
+**** DONE Option for no code analysis in Settings
+* Glossary
+  | Term         | Definition                                         |
+  |--------------+----------------------------------------------------|
+  | List         | The codes associated with a specific procedure     |
+  | Help         | The general Help notes                             |
+  | Hint         | Specific help for specific procedures              |
+  | Code         | An individual CPT code                             |
+  | Coding       | The process of selecting CPT codes for a procedure |
+  | Primary Code | A code necessary for billing a procedure           |
+  | Other Code   | Codes that are commonly used during a procedure    |
+  | Add-on Code  | A code that can't stand alone, per CPT             |
+  | Module       | A group of code choices for a procedure            |
+
+* TODO License
+* Copyright issues
+** Introduction
+   As CPT® codes are copyrighted by the American Medical Association, it
+   is important to make the case that use of a very small percentage
+   of these codes, with paraphrased descriptions in a mobile app is
+   covered under the Fair Use doctrine of US copyright law.  Note that
+   the AMA [[http://www.ama-assn.org/ama/pub/physician-resources/solutions-managing-your-practice/coding-billing-insurance/cpt/cpt-products-services/licensing/fair-use.page?][does acknowledge]] the possibility of fair use of CPT® codes.
+   Also please note the following: 
+
+   CPT copyright 2012 American Medical Association. All rights
+   reserved.  CPT is a registered trademark of the American Medical
+   Association.
+** Fair use criteria
+   [[http://www.law.cornell.edu/uscode/text/17/107][Four criteria]] are used in determining fair use of copyrighted material:
+   - The purpose and character of the use, including whether such use
+     is of a commercial natue or is for nonprofit educational purposes.
+   - The nature of the copyrighted work.
+   - The amount and substantiality of the portion used in relation to
+     the copyrighted work as a whole.
+   - The effect of the use upon the potential market for or value of
+     the copyrighted work.
+** The purpose and character of the use, including whether such use is of a commercial natue or is for nonprofit educational purposes.
+   EP Coding is intended not for coders, who definitely need the AMA
+   documentation, but for physicians who need to document with codes
+   (in addition to documentation in their procedure notes) the
+   procedures that they do.  With the advent of EHR (Electronic Health
+   Records) there is frequently a need to enter codes by the physician
+   directly into the system.  This is true of the EPIC EHR that I've
+   had experience using.  Entering codes is not an easy task.  As the
+   CPT® descriptions are obtuse, at least as presented in EPIC,
+   looking up codes by description is difficult if not impossible.
+   For example, a search for "PPM" which is a common abbreviation for
+   pacemaker yields 0 hits in EPIC.  Searching for "PACEMAKER" or
+   "PACER" yields a very long list of hits, but they are all hardware
+   codes for individual pacemaker types and not procedure codes.
+   Searching by code, such as the code for dual chamber pacemaker
+   implant, code 33208, yields this:
+
+   33208 PR INS NEW/RPPLCMT PRM PM W/TRANSV ELTRD ATRIAL&VENT
+
+   Hardly intuitive!  Similarly searching for "ABLATION" yields over
+   50 choices, many not related to cardiology, and search for "AFB"
+   yields "AFB stain" used to diagnose tuberculosis.  The actual code
+   for AFB ablation, 93656 yields this:
+
+   93656 PR EPHYS EVL TRANSPTL TXATRIAL FIB ISOLAT PULM VEIN
+
+   So there is a need for a "cheat sheet," a list of codes relevant
+   to his or her specialty that the physician carries around to help
+   remember the codes and enter them in the computer.  This list of
+   codes may not be enough however.  One must remember that one can't
+   code transseptal puncture or LA pacing and recording with AFB
+   ablation, or that 3D mapping is already included in VT ablation.
+   This sort of information is ideal for encoding into a mobile app.
+
+   As the app improves physician coding skills and thus enhances the
+   ability of the physician to code accurately and quickly so he or
+   she can then turn his or her attention to more pressing matters,
+   the app meets the criterion that its purpose is educational and
+   benefits science and the public.  There is no benefit from keeping
+   the physician in the dark regarding these codes.  The physician is
+   not going to buy or carry the whole AMA CPT® code book around, nor
+   should he or she, given the very limited number of codes that need
+   to be used in his or her line of practice.  Certainly an actual
+   written "cheat sheet" that is commonly used is considered fair use.
+   The EP Coding app merely is a more intellegent version of that
+   cheat sheet.
+
+   Regarding the commercial nature of the work, the app is priced at a
+   very low cost (99 US cents) both to help defray the costs of
+   development and to discourage downloading by those who don't need
+   access to these codes.  EP Studios does generate some income, but
+   has not generated a profit.  Its main purpose is to help my
+   colleagues by developing apps relevant to practicing medicine.
+
+   Thus with these points I believe the app qualifies for "fair use"
+   by the first criterion.
+** The nature of the copyrighted work.
+   Despite their absolute necessity for the practice of medicine in
+   the United States, the AMA has a copyright on the CPT® codes.  This
+   is despite the fact that the CPT® codes are also the level I codes
+   required by Medicare for all providers to use.  The AMA code books
+   are expensive and license fees are required to use the codes as
+   well.  The amount may be debatable, but there is no doubt [[http://patients.about.com/b/2011/01/17/the-ama-and-cpt-codes-getting-picky-and-on-my-case.htm][the AMA
+   makes a lot of money]] from their codes. The codes are essentially a
+   database, matching code numbers with descriptions, as well as
+   information of what codes cover and what codes can and cannot be
+   used together.  Professional coders definitely need to know all the
+   ins and outs of these codes, however physicians only need to know a
+   subset of the codes.  The EP Coding app uses some of the numbers
+   and paraphrases the descriptions of the codes.  As such it is not a
+   direct copy, other than of the numbers.  Numbers [[http://ipnotions.com/2007/05/you-can-copyright-number-but-not-as.html][as such]] may not be
+   subject to copyright.  It should also be noted the the CPT® manual
+   is largely a functional and not artistic work, and as such may be
+   [[http://perpetualbeta.com/release/2009/12/why-the-gplderivative-work-debate-doesnt-matter-for-wordpress-themes/][more subject to fair use]] than other less functional works.
+** The amount and substantiality of the portion used in relation to the copyrighted work as a whole.
+   A Google search for number of CPT® codes gives various sites
+   stating a number from 7800 to 8800.  These figures are unsourced,
+   but there is no doubt the number of CPT® codes in in the
+   thousands.  As of <2014-02-16 Sun> there are 73 codes in EP
+   Coding.  Assuming 7800 total codes, that is 73/7800, i.e. 0.9% of
+   the total number of codes.  This is a small percentage of codes.  Note
+   that the codes used in EP Coding are only codes for
+   electrophysiology and are limited further to only non-surgical
+   codes (i.e. excludes codes utilizing thoracotomy).  In addition
+   codes for office visits, hospital visits, and device checks are
+   not included.  The text of the descriptions is not copied from the
+   AMA manuals, but is a paraphrase.  Thus the amount of text copied
+   is limited to a small subset of the code numbers.  The ideas
+   associated with these numbers are used, but not copied directly.
+   Note that copyright protects literal text, but not the ideas
+   underlying the text.  Per the [[http://www.copyright.gov/help/faq/faq-protect.html][US Copyright Office]]:
+
+   "Copyright does not protect facts, ideas, systems, or methods of
+   operation, although it may protect the way these things are
+   expressed."
+
+   In addition, most if not all of the information in this app is
+   readily available online.  For example [[http://www.eplabdigest.com/articles/Changes-Coming-2013-CPT-Codes][this article]] outlines how to
+   code EP procedures.
+** The effect of the use upon the potential market for or value of the copyrighted work.
+   EP Coding is intended for physicians, who are not the intended
+   audience of the AMA documentation.  That audience is made up of
+   professional coders.  EP Coding is more akin to a cheat sheet than
+   a work competing with the AMA code book.  Physicians are not
+   likely to purchase the AMA book whether or not they use EP
+   Coding.  Coders cannot substitute EP Coding for the AMA book.
+   Thus there is no real competition between the app and the AMA
+   copyrighted works.
+* References
+** Online
+*** AV node ablation and mapping codes
+    https://www.aapc.com/memberarea/forums/showthread.php?t=19874
+* Preparing new version -- IMPORTANT!
+  - finish version, commit.
+  - git flow release start vx.y
+  - IMPORTANT - update AndroidManifest.xml
+    - increment android:versionCode
+    - change android:versionName
+  - run git log --pretty=oneline and update changes/x.y.z.txt
+  - git add changes/x.y.z.txt
+  - update doc/description.txt
+  - update screenshots - resize them with GIMP to 480 x 800.
+    - Add 7 inch and 10 inch versions
+  - git commit
+  - git flow release finish vx.y
+  - git push --tags origin master
+  - git push origin develop
+  - refresh eclipse epmobile
+  - make/sign epmobile.apk, save it in dev/epmobileapp/later_verisons/
+  - on market.android.com update product details
+  - upload apk, deactivate old one
+  - Tweet It! (after confirming it's on the Market)
+  - DONE!

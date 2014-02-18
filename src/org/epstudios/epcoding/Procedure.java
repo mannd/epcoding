@@ -29,15 +29,21 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
-import android.app.Activity;
-import android.os.Bundle;
+import android.content.Context;
 
-public class About extends Activity {
+public interface Procedure {
+	String title(Context context);
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.about);
+	Code[] primaryCodes();
 
-	}
+	boolean disablePrimaryCodes();
+
+	Code[] secondaryCodes();
+
+	String[] disabledCodeNumbers();
+
+	String helpText(Context context);
+
+	boolean doNotWarnForNoSecondaryCodesSelected();
+
 }

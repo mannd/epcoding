@@ -29,15 +29,28 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
-import android.app.Activity;
-import android.os.Bundle;
+import android.content.Context;
 
-public class About extends Activity {
+public class IcdReplacement extends IcdDeviceProcedure implements Procedure {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.about);
-
+	public String title(Context context) {
+		return context.getString(R.string.icd_replacement_title);
 	}
+
+	@Override
+	public Code[] primaryCodes() {
+		return Codes.getCodes(Codes.IcdReplacementPrimaryCodeNumbers);
+	}
+
+	@Override
+	public Code[] secondaryCodes() {
+		return Codes.getCodes(Codes.icdReplacementSecondaryCodeNumbers);
+	}
+
+	@Override
+	public String helpText(Context context) {
+		return context.getString(R.string.icd_replacement_help_text);
+	}
+
 }

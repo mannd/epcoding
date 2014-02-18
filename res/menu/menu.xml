@@ -1,9 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    <!--
     <item
-        android:id="@+id/about"
-        android:title="@string/about_title">
+        android:id="@+id/search"
+        android:actionViewClass="android.widget.SearchView"
+        android:icon="@android:drawable/ic_menu_search"
+        android:orderInCategory="10"
+        android:showAsAction="ifRoom|collapseActionView"
+        android:title="@string/search_title">
     </item>
+    -->
+
+    <item
+        android:id="@+id/saveCodeSelection"
+        android:icon="@android:drawable/ic_menu_save"
+        android:orderInCategory="20"
+        android:showAsAction="ifRoom"
+        android:title="@string/save_code_selection_title">
+    </item>
+    <!--
+    options below may or may not be implemented in future version
+         <item
+        android:id="@+id/editCodeList"
+        android:icon="@android:drawable/ic_action_edit"
+        android:showAsAction="ifRoom"
+        android:title="@string/edit_code_list_title">
+    </item>
+    -->
+    <!--
+    <item
+        android:id="@+id/settings"
+        android:showAsAction="never"
+        android:title="@string/settings_title">
+    </item>
+    <item
+        android:id="@+id/help"
+        android:showAsAction="never"
+        android:title="@string/help_title">
+    </item>
+    -->
 
 </menu>

@@ -29,15 +29,27 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
-import android.app.Activity;
-import android.os.Bundle;
+import android.content.Context;
 
-public class About extends Activity {
+public class SvtAblation extends AblationProcedure implements Procedure {
+	@Override
+	public String title(Context context) {
+		return context.getString(R.string.svt_ablation_title);
+	}
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.about);
-
+	public Code[] primaryCodes() {
+		return Codes.getCodes(Codes.svtAblationPrimaryCodeNumbers);
 	}
+
+	@Override
+	public String[] disabledCodeNumbers() {
+		return Codes.svtAblationDisabledCodeNumbers;
+	}
+
+	@Override
+	public String helpText(Context context) {
+		return context.getString(R.string.svt_ablation_help_text);
+	}
+
 }

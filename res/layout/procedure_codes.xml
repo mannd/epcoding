@@ -24,7 +24,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/secondary_code_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -32,7 +32,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <LinearLayout
-            android:id="@+id/checkbox_layout"
+            android:id="@+id/secondary_checkbox_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
@@ -60,15 +60,6 @@
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackground"
                 android:text="@string/clear_label" />
-
-            <Button
-                android:id="@+id/info_button"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?android:attr/selectableItemBackground"
-                android:text="@string/info_label" />
         </LinearLayout>
     </LinearLayout>
 

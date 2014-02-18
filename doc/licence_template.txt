@@ -25,19 +25,5 @@ This file is part of EP Coding.
 
     A limited number of CPT codes are used in this program under the Fair Use
     doctrine of US Copyright Law.  See README.md for more information.
- */
+*/
 
-package org.epstudios.epcoding;
-
-import android.app.Activity;
-import android.os.Bundle;
-
-public class About extends Activity {
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.about);
-
-	}
-}

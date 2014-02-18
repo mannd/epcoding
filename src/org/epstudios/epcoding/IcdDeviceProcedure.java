@@ -29,15 +29,14 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
-import android.app.Activity;
-import android.os.Bundle;
-
-public class About extends Activity {
+public class IcdDeviceProcedure extends DeviceProcedure {
+	@Override
+	public Code[] secondaryCodes() {
+		return Codes.getCodes(Codes.icdDeviceSecondaryCodeNumbers);
+	}
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.about);
-
+	public boolean doNotWarnForNoSecondaryCodesSelected() {
+		return false;
 	}
 }

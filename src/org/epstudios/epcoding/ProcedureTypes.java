@@ -1,3 +1,32 @@
+/*  
+Copyright (C) 2013, 2014 EP Studios, Inc.
+www.epstudiossoftware.com
+
+This file is part of EP Coding.
+
+    EP Coding is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    EP Coding is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with EP Coding.  If not, see <http://www.gnu.org/licenses/>.
+
+    Note also:
+
+    CPT copyright 2012 American Medical Association. All rights
+    reserved. CPT is a registered trademark of the American Medical
+    Association.
+
+    A limited number of CPT codes are used in this program under the Fair Use
+    doctrine of US Copyright Law.  See README.md for more information.
+ */
+
 package org.epstudios.epcoding;
 
 import java.util.ArrayList;
@@ -26,18 +55,19 @@ public class ProcedureTypes {
 
 	static {
 		// Add 3 sample items.
-		addItem(new ProcedureType("1", "AFB Ablation"));
-		addItem(new ProcedureType("2", "SVT Ablation"));
-		addItem(new ProcedureType("3", "VT Ablation"));
+		addItem(new ProcedureType("0", "AFB Ablation"));
+		addItem(new ProcedureType("1", "SVT Ablation"));
+		addItem(new ProcedureType("2", "VT Ablation"));
+		addItem(new ProcedureType("3", "AV Node Ablation"));
 		addItem(new ProcedureType("4", "EP Testing"));
-		addItem(new ProcedureType("5", "Pacemakers"));
-		addItem(new ProcedureType("6", "ICDs"));
-		addItem(new ProcedureType("7", "CRT-P"));
-		addItem(new ProcedureType("8", "CRT-D"));
-		addItem(new ProcedureType("9", "Other Procs")); // Cardioversion, Tilt
-														// Table
-		addItem(new ProcedureType("10", "Office Visits"));
-		addItem(new ProcedureType("11", "Hospital Rounds"));
+		addItem(new ProcedureType("5", "New PPM"));
+		addItem(new ProcedureType("6", "New ICD"));
+		addItem(new ProcedureType("7", "Replace PPM"));
+		addItem(new ProcedureType("8", "Replace ICD"));
+		addItem(new ProcedureType("9", "Upgrade/Revision/Extraction"));
+		addItem(new ProcedureType("10", "SubQ ICD"));
+		addItem(new ProcedureType("11", "Other Procedure"));
+		addItem(new ProcedureType("12", "All EP Codes"));
 	}
 
 	private static void addItem(ProcedureType item) {

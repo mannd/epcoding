@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/show_plus_code_summary_key"
+        android:summaryOff="@string/show_add_on_plus_off_summary"
+        android:summaryOn="@string/show_add_on_plus_on_summary"
+        android:title="@string/show_add_on_plus_label" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/show_details_code_summary_key"
+        android:summaryOff="@string/show_code_details_off_summary"
+        android:summaryOn="@string/show_code_details_on_summary"
+        android:title="@string/show_code_details_label" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/truncate_long_descriptions_code_summary_key"
+        android:summary="@string/truncate_code_descriptions_summary"
+        android:title="@string/truncate_code_descriptions_label" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/code_check_all_codes_key"
+        android:summary="@string/code_check_all_codes_summary"
+        android:title="@string/code_check_all_codes_label" />
+
+    <ListPreference
+        android:defaultValue="Verbose"
+        android:entries="@array/verbosity_names"
+        android:entryValues="@array/verbosity_values"
+        android:key="@string/code_verbosity_key"
+        android:title="@string/code_analysis_verbosity_label" />
+
+</PreferenceScreen>

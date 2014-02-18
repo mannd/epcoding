@@ -29,15 +29,45 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
-import android.app.Activity;
-import android.os.Bundle;
+import android.content.Context;
 
-public class About extends Activity {
+public class SubQIcd implements Procedure {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.about);
-
+	public String title(Context context) {
+		return context.getString(R.string.subq_icd_title);
 	}
+
+	@Override
+	public Code[] primaryCodes() {
+		return Codes.getCodes(Codes.subQIcdPrimaryCodeNumbers);
+	}
+
+	@Override
+	public boolean disablePrimaryCodes() {
+		return false;
+	}
+
+	@Override
+	public Code[] secondaryCodes() {
+		Code[] codes = {};
+		return codes;
+	}
+
+	@Override
+	public String[] disabledCodeNumbers() {
+		String[] numbers = {};
+		return numbers;
+	}
+
+	@Override
+	public String helpText(Context context) {
+		return context.getString(R.string.subq_icd_help_text);
+	}
+
+	@Override
+	public boolean doNotWarnForNoSecondaryCodesSelected() {
+		return true;
+	}
+
 }

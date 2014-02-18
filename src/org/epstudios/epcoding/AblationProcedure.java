@@ -29,15 +29,19 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
-import android.app.Activity;
-import android.os.Bundle;
-
-public class About extends Activity {
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.about);
-
+// This partially implements the Procedure interface, only the parts common to 
+// all ablation procedures (secondary codes).
+public class AblationProcedure {
+	public boolean disablePrimaryCodes() {
+		return true;
 	}
+
+	public Code[] secondaryCodes() {
+		return Codes.getAblationSecondaryCodes();
+	}
+
+	public boolean doNotWarnForNoSecondaryCodesSelected() {
+		return false;
+	}
+
 }
