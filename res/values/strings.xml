@@ -3,7 +3,7 @@
 
     <string name="app_name">EP Coding</string>
     <string name="title_procedure_detail">Coding</string>
-    <string name="save_code_selection_title">Save Code Selection</string>
+    <string name="save_code_selection_title">Save</string>
     <string name="settings_title">Settings</string>
     <string name="about_title">About</string>
     <string name="about_label">About EP Coding</string>
@@ -20,10 +20,12 @@
 		\nLicensed under GNU GPL v3.</string>
     <string name="help_title">Help</string>
     <string name="hints_title">Hints</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Search codes</string>
     <string name="primary_codes_label">Primary Code(s)</string>
     <string name="add_on_codes_label">Additional Code(s)</string>
     <string name="coding_summary_label">Summarize</string>
-    <string name="coding_summary_dialog_label">Coding Summary</string>
+    <string name="coding_summary_dialog_label">Summary</string>
     <string name="clear_label">Clear</string>
     <string name="help_label">Hints</string>
     <string name="empty_message"></string>

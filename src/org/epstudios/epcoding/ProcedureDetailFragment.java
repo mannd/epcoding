@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -90,6 +92,7 @@ public class ProcedureDetailFragment extends Fragment implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
 
 		if (getArguments().containsKey(ARG_ITEM_ID)) {
 			String itemID = getArguments().getString(ARG_ITEM_ID);
@@ -99,6 +102,12 @@ public class ProcedureDetailFragment extends Fragment implements
 				mItem = 0; // AFB ablation will be shown
 			}
 		}
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+		inflater.inflate(R.menu.menu, menu);
 	}
 
 	@Override

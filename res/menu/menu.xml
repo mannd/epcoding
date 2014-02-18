@@ -2,8 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:id="@+id/search"
+        android:actionViewClass="android.widget.SearchView"
+        android:icon="@android:drawable/ic_menu_search"
+        android:orderInCategory="10"
+        android:showAsAction="ifRoom|collapseActionView"
+        android:title="@string/search_title">
+    </item>
+    <item
         android:id="@+id/saveCodeSelection"
         android:icon="@android:drawable/ic_menu_save"
+        android:orderInCategory="20"
         android:showAsAction="ifRoom"
         android:title="@string/save_code_selection_title">
     </item>
@@ -16,6 +25,7 @@
         android:title="@string/edit_code_list_title">
     </item>
     -->
+    <!--
     <item
         android:id="@+id/settings"
         android:showAsAction="never"
@@ -26,5 +36,6 @@
         android:showAsAction="never"
         android:title="@string/help_title">
     </item>
+    -->
 
 </menu>
