@@ -192,7 +192,7 @@
        added.
      - Add 93657 if additional AFB ablation done beyond pulmonary vein
        isolation.
-     - Add 93655 if separate supraventicular arrhythmia mechanism
+     - Add 93655 if separate supraventricular arrhythmia mechanism
        ablated (e.g. focal atrial tachycardia).
 **** SVT Ablation
      - Includes comprehensive EP testing.
