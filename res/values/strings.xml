@@ -15,9 +15,11 @@
 		\n\nEmail: mannd@epstudiossoftware.com
 		\nWeb: www.epstudiossoftware.com
 		\nSource: github.com/mannd/epcoding
-		\n\nCPT\u00ae codes are copyright by the AMA
 		\n\nCopyright \u00a9 2013, 2014 EP Studios, Inc.
-		\nLicensed under GNU GPL v3.</string>
+		\nLicensed under GNU GPL v3.
+		\n\nCPT copyright 2012 American Medical Association. All rights
+			reserved. CPT is a registered trademark of the American Medical
+			Association.</string>
     <string name="help_title">Help</string>
     <string name="hints_title">Hints</string>
     <string name="search_title">Search</string>

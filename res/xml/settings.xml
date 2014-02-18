@@ -8,7 +8,7 @@
         android:summaryOn="@string/show_add_on_plus_on_summary"
         android:title="@string/show_add_on_plus_label" />
     <CheckBoxPreference
-        android:defaultValue="false"
+        android:defaultValue="true"
         android:key="@string/show_details_code_summary_key"
         android:summaryOff="@string/show_code_details_off_summary"
         android:summaryOn="@string/show_code_details_on_summary"
