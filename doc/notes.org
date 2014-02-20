@@ -305,7 +305,8 @@
     - [[Other procedure]]
     - [[All EP codes]]
     - [[Settings]]
-    - [[Glossary]]
+    - [[Abbreviations]]
+    - [[Acknowledgements]]
 *** Who should use EP Coding?
     Physicians who perform cardiac electrophysiology (EP) procedures
     and are required to submit CPT® codes for these procedures. *EP
@@ -489,7 +490,7 @@
       - Brief: Lists offending codes without only brief or no
         descriptions.
       - None: No code analysis done.
-*** Glossary
+*** Abbreviations
     - A = atrial
     - AFB = atrial fibrillation
     - AFL = atrial flutter
@@ -500,6 +501,20 @@
     - SVT = supraventricular tachycardia
     - V = ventricular
     - VT = ventricular tachycardia
+*** Acknowledgements
+    - CPT copyright 2012 American Medical Association. All rights
+      reserved. CPT is a registered trademark of the American Medical
+      Association.
+    - A limited number of CPT® codes are used in this app, under the
+      fair use doctrine of the US Copyright Act.  For a discussion of
+      the rationale see [[http://www.epstudiossoftware.com/?p=1313][here]].
+    - The source code for EP Coding is available on GitHub [[https://github.com/mannd/epcoding][here]] and
+      [[https://github.com/mannd/epcoding-ios][here]].
+    - EP Coding source code is open source and is licensed under the
+      [[http://www.apache.org/licenses/LICENSE-2.0.html][Apache License Version 2.0]].
+    - For questions, error reporting or suggestions contact
+      [[mailto:mannd@epstudiossoftware.com][EP Studios]].
+    - Website: [[www.epstudiossoftware.com]]
 * Limitations
   - Code descriptions are paraphrased
   - All information freely available on web
