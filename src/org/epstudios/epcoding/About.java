@@ -31,13 +31,19 @@ package org.epstudios.epcoding;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class About extends Activity {
+	private final static String VERSION = "1.0a1";
+
+	private TextView versionTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.about);
+		versionTextView = (TextView) findViewById(R.id.version);
+		versionTextView.setText("Version " + VERSION);
 
 	}
 }
