@@ -117,7 +117,7 @@ public class CodeAnalyzer {
 						"Don't use generator removal and insertion or replacement codes together."));
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("33214", "33227", "33228", "33229"),
-				"Don't PPM upgrade code with generator replacement codes"));
+				"Don't use PPM upgrade code with generator replacement codes"));
 		codeErrors
 				.add(new CodeError(CodeError.WarningLevel.WARNING, Arrays
 						.asList("93650", "93609", "93613"),
