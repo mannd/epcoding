@@ -132,7 +132,7 @@ public class CodeAnalyzer {
 		codeErrors
 				.add(new CodeError(
 						CodeError.WarningLevel.ERROR,
-						Arrays.asList("93653", "936257"),
+						Arrays.asList("93653", "93657"),
 						"AFB Ablation should not be added on to SVT ablation.  Use AFB ablation as the primary code."));
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("93654", "93657", "93609", "93613", "93622"),
