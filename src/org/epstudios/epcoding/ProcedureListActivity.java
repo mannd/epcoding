@@ -127,8 +127,7 @@ public class ProcedureListActivity extends FragmentActivity implements
 				.findFragmentById(R.id.procedure_detail_container);
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			NavUtils.navigateUpTo(this, new Intent(this,
-					ProcedureListActivity.class));
+			NavUtils.navigateUpFromSameTask(this);
 			return true;
 		case R.id.help:
 			startActivity(new Intent(this, Help.class));
