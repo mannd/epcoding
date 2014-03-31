@@ -376,11 +376,6 @@ public class ProcedureDetailFragment extends Fragment implements
 		return analyzer.analysis();
 	}
 
-	private void help() {
-		String message = procedure.helpText(context);
-		displayMessage(getString(R.string.help_label), message);
-	}
-
 	private void displayMessage(String title, String message) {
 		AlertDialog dialog = new AlertDialog.Builder(context).create();
 		dialog.setMessage(message);

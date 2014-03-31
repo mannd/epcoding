@@ -99,6 +99,9 @@ public class ProcedureDetailActivity extends FragmentActivity {
 		case R.id.settings:
 			startActivity(new Intent(this, Prefs.class));
 			return true;
+		case R.id.wizard:
+			startActivity(new Intent(this, ScreenSlideActivity.class));
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

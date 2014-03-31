@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="app_name">EP Coding</string>
     <string name="title_procedure_detail">Coding</string>
@@ -156,5 +156,12 @@
     <string name="icd_replacement_title">Replace ICD</string>
     <string name="device_upgrade_title">Upgrade/Revision/Extraction</string>
     <string name="device_upgrade_help_text">Device upgrade help text</string>
+    <string name="wizard_test_text">Test text for the Coding Wizard.</string>
+    <string name="title_template_step">Step <xliff:g id="step_number">%1$d</xliff:g>: Lorem
+        Ipsum</string>
+    <string name="action_previous">Previous</string>
+    <string name="action_next">Next</string>
+    <string name="action_finish">Finish</string>
+    <string name="wizard_title">Device Wizard</string>
 
 </resources>
