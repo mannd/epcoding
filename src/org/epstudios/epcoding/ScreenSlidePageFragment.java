@@ -16,11 +16,16 @@
 
 package org.epstudios.epcoding;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -40,6 +45,11 @@ public class ScreenSlidePageFragment extends Fragment {
 
 	private static String[] revisionCodes = { "33215", "33226", "33218",
 			"33220", "33222", "33223" };
+
+	private static String[] removalCodeNumbers = { "33233", "33241" }; // and
+																		// more
+
+	private final Map<String, CodeCheckBox> removalCheckBoxMap = new LinkedHashMap<String, CodeCheckBox>();
 
 	/**
 	 * The fragment's page number, which is set to the argument value for
@@ -75,6 +85,12 @@ public class ScreenSlidePageFragment extends Fragment {
 		int layout = R.layout.fragment_screen_slide_page;
 		ViewGroup rootView = (ViewGroup) inflater.inflate(layout, container,
 				false);
+		LinearLayout checkBoxLayout = (LinearLayout) rootView
+				.findViewById(R.id.removed_hardware);
+		checkBoxLayout.setVisibility(View.GONE);
+		Code[] removalCodes = Codes.getCodes(removalCodeNumbers);
+		createCheckBoxLayoutAndCodeMap(removalCodes, removalCheckBoxMap,
+				checkBoxLayout);
 
 		// Set the title view to show the page number.
 		((TextView) rootView.findViewById(android.R.id.text1))
@@ -99,6 +115,8 @@ public class ScreenSlidePageFragment extends Fragment {
 			break;
 		case 3:
 			headingText.setText(getString(R.string.slide_step4_heading_text));
+			checkBoxLayout.setVisibility(View.VISIBLE);
+
 			break;
 		}
 
@@ -110,5 +128,18 @@ public class ScreenSlidePageFragment extends Fragment {
 	 */
 	public int getPageNumber() {
 		return mPageNumber;
+	}
+
+	private void createCheckBoxLayoutAndCodeMap(Code[] codes,
+			Map<String, CodeCheckBox> codeCheckBoxMap, LinearLayout layout) {
+		Context context = getActivity();
+		for (int i = 0; i < codes.length; ++i) {
+			CodeCheckBox codeCheckBox = new CodeCheckBox(context);
+			// codes[i].setPlusShown(plusShownInDisplay);
+			codeCheckBox.setCodeFirst(true);
+			codeCheckBox.setCode(codes[i]);
+			codeCheckBoxMap.put(codes[i].getCodeNumber(), codeCheckBox);
+			layout.addView(codeCheckBox);
+		}
 	}
 }

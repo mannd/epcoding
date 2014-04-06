@@ -19,8 +19,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <!-- Dummy content. -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,6 +40,13 @@
             android:layout_height="wrap_content"
             android:lineSpacingMultiplier="1.2"
             android:text="@string/wizard_test_text" />
+
+        <LinearLayout
+            android:id="@+id/removed_hardware"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>
