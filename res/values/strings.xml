@@ -157,11 +157,28 @@
     <string name="device_upgrade_title">Upgrade/Revision/Extraction</string>
     <string name="device_upgrade_help_text">Device upgrade help text</string>
     <string name="wizard_test_text">Test text for the Coding Wizard.</string>
-    <string name="title_template_step">Step <xliff:g id="step_number">%1$d</xliff:g>: Lorem
-        Ipsum</string>
+    <string name="title_template_step">Step <xliff:g id="step_number">%1$d</xliff:g>: Device
+        Wizard</string>
     <string name="action_previous">Previous</string>
     <string name="action_next">Next</string>
     <string name="action_finish">Finish</string>
     <string name="wizard_title">Device Wizard</string>
+    <string name="slide_step1_heading_text">Is this a new implant or simple generator
+        replacement? If so exit this wizard by using the back button on your device and
+        go directly to the appropriate module (e.g. New PPM, New ICD, Replace PPM,
+        or Replace ICD). Otherwise go to next step.</string>
+    <string name="slide_step2_heading_text">Is this an upgrade from a single to
+        a dual chamber pacemaker?  If so code 33244 which covers this entire procedure.
+        If you are also adding an LV
+        cardiac vein lead add code +33225. Exit the wizard by using the back button
+        on your device. Otherwise go to the next step.</string>
+    <string name="slide_step3_heading_text">Is this a pocket or lead revision without
+        adding or removing any hardware?  If so use one of the codes below and
+        exit the wizard by using the back button on your device.  Otherwise
+        go on to the next step.</string>
+    <string name="slide_step4_heading_text">OK. We have addressed the simple scenarios.
+        What\'s left are lead lead and generator removals/extractions,
+        and device upgrades. Start off by selecting the what hardware (if any) was
+        removed, and then go to the next step.</string>
 
 </resources>

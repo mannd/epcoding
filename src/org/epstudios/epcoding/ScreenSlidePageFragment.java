@@ -24,61 +24,91 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- * A fragment representing a single step in a wizard. The fragment shows a dummy title indicating
- * the page number, along with some dummy text.
- *
- * <p>This class is used by the {@link CardFlipActivity} and {@link
- * ScreenSlideActivity} samples.</p>
+ * A fragment representing a single step in a wizard. The fragment shows a dummy
+ * title indicating the page number, along with some dummy text.
+ * 
+ * <p>
+ * This class is used by the {@link CardFlipActivity} and
+ * {@link ScreenSlideActivity} samples.
+ * </p>
  */
 public class ScreenSlidePageFragment extends Fragment {
-    /**
-     * The argument key for the page number this fragment represents.
-     */
-    public static final String ARG_PAGE = "page";
+	/**
+	 * The argument key for the page number this fragment represents.
+	 */
+	public static final String ARG_PAGE = "page";
 
-    /**
-     * The fragment's page number, which is set to the argument value for {@link #ARG_PAGE}.
-     */
-    private int mPageNumber;
+	private static String[] revisionCodes = { "33215", "33226", "33218",
+			"33220", "33222", "33223" };
 
-    /**
-     * Factory method for this fragment class. Constructs a new fragment for the given page number.
-     */
-    public static ScreenSlidePageFragment create(int pageNumber) {
-        ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, pageNumber);
-        fragment.setArguments(args);
-        return fragment;
-    }
+	/**
+	 * The fragment's page number, which is set to the argument value for
+	 * {@link #ARG_PAGE}.
+	 */
+	private int mPageNumber;
 
-    public ScreenSlidePageFragment() {
-    }
+	/**
+	 * Factory method for this fragment class. Constructs a new fragment for the
+	 * given page number.
+	 */
+	public static ScreenSlidePageFragment create(int pageNumber) {
+		ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
+		Bundle args = new Bundle();
+		args.putInt(ARG_PAGE, pageNumber);
+		fragment.setArguments(args);
+		return fragment;
+	}
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mPageNumber = getArguments().getInt(ARG_PAGE);
-    }
+	public ScreenSlidePageFragment() {
+	}
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        // Inflate the layout containing a title and body text.
-        ViewGroup rootView = (ViewGroup) inflater
-                .inflate(R.layout.fragment_screen_slide_page, container, false);
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		mPageNumber = getArguments().getInt(ARG_PAGE);
+	}
 
-        // Set the title view to show the page number.
-        ((TextView) rootView.findViewById(android.R.id.text1)).setText(
-                getString(R.string.title_template_step, mPageNumber + 1));
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// select layout based on page number
+		int layout = R.layout.fragment_screen_slide_page;
+		ViewGroup rootView = (ViewGroup) inflater.inflate(layout, container,
+				false);
 
-        return rootView;
-    }
+		// Set the title view to show the page number.
+		((TextView) rootView.findViewById(android.R.id.text1))
+				.setText(getString(R.string.title_template_step,
+						mPageNumber + 1));
+		TextView headingText = (TextView) rootView
+				.findViewById(R.id.slide_help_text);
+		switch (mPageNumber) {
+		case 0:
+			headingText.setText(getString(R.string.slide_step1_heading_text));
+			break;
+		case 1:
+			headingText.setText(getString(R.string.slide_step2_heading_text));
+			break;
+		case 2:
+			Code[] codes = Codes.getCodes(revisionCodes);
+			String text = getString(R.string.slide_step3_heading_text) + "\n\n";
+			for (Code code : codes) {
+				text += code.getUnformattedNumberFirst() + "\n";
+			}
+			headingText.setText(text);
+			break;
+		case 3:
+			headingText.setText(getString(R.string.slide_step4_heading_text));
+			break;
+		}
 
-    /**
-     * Returns the page number represented by this fragment object.
-     */
-    public int getPageNumber() {
-        return mPageNumber;
-    }
+		return rootView;
+	}
+
+	/**
+	 * Returns the page number represented by this fragment object.
+	 */
+	public int getPageNumber() {
+		return mPageNumber;
+	}
 }

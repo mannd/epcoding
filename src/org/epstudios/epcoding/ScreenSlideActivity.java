@@ -18,7 +18,6 @@ package org.epstudios.epcoding;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentActivity;
@@ -114,8 +113,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 			// Navigate "up" the demo structure to the launchpad activity.
 			// See http://developer.android.com/design/patterns/navigation.html
 			// for more.
-			NavUtils.navigateUpTo(this, new Intent(this,
-					ProcedureListActivity.class));
+			NavUtils.navigateUpFromSameTask(this);
 			return true;
 
 		case R.id.action_previous:
