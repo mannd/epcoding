@@ -16,11 +16,9 @@
 
 package org.epstudios.epcoding;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,14 +41,13 @@ public class ScreenSlidePageFragment extends Fragment {
 	 */
 	public static final String ARG_PAGE = "page";
 
-	private static String[] revisionCodes = { "33215", "33226", "33218",
+	private static String[] revisionCodeNumbers = { "33215", "33226", "33218",
 			"33220", "33222", "33223" };
 
 	private static String[] removalCodeNumbers = { "33233", "33241" }; // and
 																		// more
 
-	private final Map<String, CodeCheckBox> removalCheckBoxMap = new LinkedHashMap<String, CodeCheckBox>();
-
+	private Map<String, CodeCheckBox> removalCheckBoxMap;
 	/**
 	 * The fragment's page number, which is set to the argument value for
 	 * {@link #ARG_PAGE}.
@@ -89,9 +86,8 @@ public class ScreenSlidePageFragment extends Fragment {
 				.findViewById(R.id.removed_hardware);
 		checkBoxLayout.setVisibility(View.GONE);
 		Code[] removalCodes = Codes.getCodes(removalCodeNumbers);
-		createCheckBoxLayoutAndCodeMap(removalCodes, removalCheckBoxMap,
-				checkBoxLayout);
-
+		removalCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(
+				removalCodes, checkBoxLayout, getActivity(), true);
 		// Set the title view to show the page number.
 		((TextView) rootView.findViewById(android.R.id.text1))
 				.setText(getString(R.string.title_template_step,
@@ -106,7 +102,7 @@ public class ScreenSlidePageFragment extends Fragment {
 			headingText.setText(getString(R.string.slide_step2_heading_text));
 			break;
 		case 2:
-			Code[] codes = Codes.getCodes(revisionCodes);
+			Code[] codes = Codes.getCodes(revisionCodeNumbers);
 			String text = getString(R.string.slide_step3_heading_text) + "\n\n";
 			for (Code code : codes) {
 				text += code.getUnformattedNumberFirst() + "\n";
@@ -130,16 +126,4 @@ public class ScreenSlidePageFragment extends Fragment {
 		return mPageNumber;
 	}
 
-	private void createCheckBoxLayoutAndCodeMap(Code[] codes,
-			Map<String, CodeCheckBox> codeCheckBoxMap, LinearLayout layout) {
-		Context context = getActivity();
-		for (int i = 0; i < codes.length; ++i) {
-			CodeCheckBox codeCheckBox = new CodeCheckBox(context);
-			// codes[i].setPlusShown(plusShownInDisplay);
-			codeCheckBox.setCodeFirst(true);
-			codeCheckBox.setCode(codes[i]);
-			codeCheckBoxMap.put(codes[i].getCodeNumber(), codeCheckBox);
-			layout.addView(codeCheckBox);
-		}
-	}
 }
