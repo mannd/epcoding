@@ -116,4 +116,9 @@ public class Code {
 	public String getUnformattedNumberFirst() {
 		return "(" + (isAddOn ? "+" : "") + code + ") " + shortDescription;
 	}
+
+	boolean codeContains(String searchString) {
+		return (code.contains(searchString) || shortDescription
+				.contains(searchString));
+	}
 }

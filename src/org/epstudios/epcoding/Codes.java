@@ -300,4 +300,14 @@ public class Codes {
 	public static int allCodesSize() {
 		return allCodes.size();
 	}
+
+	public static String searchCodes(String searchString) {
+		String result = "";
+		for (Map.Entry<String, Code> entry : allCodes.entrySet()) {
+			if (entry.getValue().codeContains(searchString)) {
+				result += entry.getValue().getUnformattedNumberFirst() + "\n";
+			}
+		}
+		return result;
+	}
 }

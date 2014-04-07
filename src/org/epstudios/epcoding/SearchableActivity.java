@@ -33,6 +33,7 @@ import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 public class SearchableActivity extends ListActivity {
 
@@ -44,8 +45,13 @@ public class SearchableActivity extends ListActivity {
 		Intent intent = getIntent();
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 			String query = intent.getStringExtra(SearchManager.QUERY);
-			System.out.println(query);
+			doMySearch(query);
 		}
+
+	}
+
+	private void doMySearch(String query) {
+		Log.d("EPCODING", query);
 
 	}
 }
