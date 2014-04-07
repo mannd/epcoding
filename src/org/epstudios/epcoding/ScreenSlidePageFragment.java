@@ -19,6 +19,7 @@ package org.epstudios.epcoding;
 import java.util.Map;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,10 +45,17 @@ public class ScreenSlidePageFragment extends Fragment {
 	private static String[] revisionCodeNumbers = { "33215", "33226", "33218",
 			"33220", "33222", "33223" };
 
-	private static String[] removalCodeNumbers = { "33233", "33241" }; // and
-																		// more
+	private static String[] removalCodeNumbers = { "33233", "33241", "33234",
+			"33235", "33244" };
+
+	private static String[] addingCodeNumbers = { "33206", "33207", "33208",
+			"33249", "33216", "33217", "33225", "33212", "33213", "33240",
+			"33230", "33231" };
 
 	private Map<String, CodeCheckBox> removalCheckBoxMap;
+	private Map<String, CodeCheckBox> addingCheckBoxMap;
+	private Map<String, CodeCheckBox> finalCheckBoxMap;
+
 	/**
 	 * The fragment's page number, which is set to the argument value for
 	 * {@link #ARG_PAGE}.
@@ -82,12 +90,26 @@ public class ScreenSlidePageFragment extends Fragment {
 		int layout = R.layout.fragment_screen_slide_page;
 		ViewGroup rootView = (ViewGroup) inflater.inflate(layout, container,
 				false);
-		LinearLayout checkBoxLayout = (LinearLayout) rootView
+		LinearLayout removedCheckBoxLayout = (LinearLayout) rootView
 				.findViewById(R.id.removed_hardware);
-		checkBoxLayout.setVisibility(View.GONE);
+		removedCheckBoxLayout.setVisibility(View.GONE);
+		LinearLayout addingCheckBoxLayout = (LinearLayout) rootView
+				.findViewById(R.id.adding_hardware);
+		addingCheckBoxLayout.setVisibility(View.GONE);
+		LinearLayout finalCheckBoxLayout = (LinearLayout) rootView
+				.findViewById(R.id.final_codes);
+		finalCheckBoxLayout.setVisibility(View.GONE);
 		Code[] removalCodes = Codes.getCodes(removalCodeNumbers);
+		Code[] addingCodes = Codes.getCodes(addingCodeNumbers);
+		Code[] finalCodes = Codes
+				.getCodes(Codes.icdReplacementSecondaryCodeNumbers);
+		Context context = getActivity();
 		removalCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(
-				removalCodes, checkBoxLayout, getActivity(), true);
+				removalCodes, removedCheckBoxLayout, context, true);
+		addingCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(
+				addingCodes, addingCheckBoxLayout, context, true);
+		finalCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(finalCodes,
+				finalCheckBoxLayout, context, true);
 		// Set the title view to show the page number.
 		((TextView) rootView.findViewById(android.R.id.text1))
 				.setText(getString(R.string.title_template_step,
@@ -111,8 +133,15 @@ public class ScreenSlidePageFragment extends Fragment {
 			break;
 		case 3:
 			headingText.setText(getString(R.string.slide_step4_heading_text));
-			checkBoxLayout.setVisibility(View.VISIBLE);
-
+			removedCheckBoxLayout.setVisibility(View.VISIBLE);
+			break;
+		case 4:
+			headingText.setText(getString(R.string.slide_step5_heading_text));
+			addingCheckBoxLayout.setVisibility(View.VISIBLE);
+			break;
+		case 5:
+			headingText.setText(getString(R.string.slide_step6_heading_text));
+			finalCheckBoxLayout.setVisibility(View.VISIBLE);
 			break;
 		}
 

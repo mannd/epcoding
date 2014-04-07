@@ -91,6 +91,8 @@ public class ProcedureDetailFragment extends Fragment implements
 	private Button summarizeButton;
 	private Button clearButton;
 
+	// don't try to refactor these using Utilies.createCheckBoxLayoutAndCodeMap,
+	// as then will have to put in many check for null map.
 	private final Map<String, CodeCheckBox> primaryCheckBoxMap = new LinkedHashMap<String, CodeCheckBox>();
 	private final Map<String, CodeCheckBox> secondaryCheckBoxMap = new LinkedHashMap<String, CodeCheckBox>();
 
@@ -355,32 +357,16 @@ public class ProcedureDetailFragment extends Fragment implements
 			}
 		}
 		noSecondaryCodes = primaryCodeCounter == i;
-		// if (mItem == ppmReplacement || mItem == newPpm
-		// || mItem == deviceUpgrade)
 		moduleHasNoSecondaryCodesNeedingChecking = procedure
 				.doNotWarnForNoSecondaryCodesSelected();
-		message += codeAnalysis(codes, noPrimaryCodes, noSecondaryCodes,
-				moduleHasNoSecondaryCodesNeedingChecking);
-		displayMessage(getString(R.string.coding_summary_dialog_label), message);
-	}
-
-	private String codeAnalysis(final Code[] codes,
-			final boolean noPrimaryCodes, final boolean noSecondaryCodes,
-			final boolean moduleHasNoSecondaryCodes) {
-		CodeAnalyzer analyzer = new CodeAnalyzer(codes, noPrimaryCodes,
-				noSecondaryCodes, moduleHasNoSecondaryCodes, context);
-		// no analysis for all procedures module
-		analyzer.setNoAnalysis(codeVerbosity.equals("None")
-				|| (mItem == allProcedures && !codeCheckAllCodes));
-		analyzer.setVerbose(codeVerbosity.equals("Verbose"));
-		return analyzer.analysis();
-	}
-
-	private void displayMessage(String title, String message) {
-		AlertDialog dialog = new AlertDialog.Builder(context).create();
-		dialog.setMessage(message);
-		dialog.setTitle(title);
-		dialog.show();
+		boolean noAnalysis = codeVerbosity.equals("None")
+				|| (mItem == allProcedures && !codeCheckAllCodes);
+		message += Utilities.codeAnalysis(codes, noPrimaryCodes,
+				noSecondaryCodes, moduleHasNoSecondaryCodesNeedingChecking,
+				noAnalysis, codeVerbosity.equals("Verbose"), context);
+		Utilities.displayMessage(
+				getString(R.string.coding_summary_dialog_label), message,
+				context);
 	}
 
 	public void saveCoding() {

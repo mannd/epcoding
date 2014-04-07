@@ -47,6 +47,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/adding_hardware"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/final_codes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

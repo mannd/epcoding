@@ -172,13 +172,19 @@
         If you are also adding an LV
         cardiac vein lead add code +33225. Exit the wizard by using the back button
         on your device. Otherwise go to the next step.</string>
-    <string name="slide_step3_heading_text">Is this a pocket or lead revision without
+    <string name="slide_step3_heading_text">Is this a pocket or lead revision or lead repair without
         adding or removing any hardware?  If so use one of the codes below and
         exit the wizard by using the back button on your device.  Otherwise
         go on to the next step.</string>
     <string name="slide_step4_heading_text">OK. We have addressed the simple scenarios.
-        What\'s left are lead lead and generator removals/extractions,
-        and device upgrades. Start off by selecting the what hardware (if any) was
+        What\'s left are lead and generator removals/extractions,
+        and device upgrades. Start off by selecting what hardware (if any) was
         removed, and then go to the next step.</string>
+    <string name="slide_step5_heading_text">Now if you added any hardware, code what you added.
+        If you added a generator and leads, use the new or replacement system codes (e.g. new single
+        chamber PPM).  If you just added a lead or a generator, code for the specific device(s) you
+        added.  Then go to the next step.</string>
+    <string name="slide_step6_heading_text">Did you do anything else? If so select from the choices
+   	    below. Select Finish to see a summary of your codes.</string>
 
 </resources>
