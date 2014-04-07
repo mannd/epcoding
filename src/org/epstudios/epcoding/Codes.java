@@ -29,9 +29,11 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Codes {
@@ -301,11 +303,11 @@ public class Codes {
 		return allCodes.size();
 	}
 
-	public static String searchCodes(String searchString) {
-		String result = "";
+	public static List<String> searchCodes(String searchString) {
+		List<String> result = new ArrayList<String>();
 		for (Map.Entry<String, Code> entry : allCodes.entrySet()) {
 			if (entry.getValue().codeContains(searchString)) {
-				result += entry.getValue().getUnformattedNumberFirst() + "\n";
+				result.add(entry.getValue().getUnformattedNumberFirst());
 			}
 		}
 		return result;

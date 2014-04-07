@@ -33,14 +33,17 @@ import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class SearchableActivity extends ListActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// setContentView(R.layout.search);
+		setContentView(R.layout.search);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		Intent intent = getIntent();
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -51,7 +54,25 @@ public class SearchableActivity extends ListActivity {
 	}
 
 	private void doMySearch(String query) {
-		Log.d("EPCODING", query);
+		final ListView listView = (ListView) findViewById(android.R.id.list);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, Codes.searchCodes(query));
+		listView.setAdapter(adapter);
 
 	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		// Respond to the action bar's Up/Home button
+		case android.R.id.home:
+			// NavUtils.navigateUpFromSameTask(this);
+			finish();
+			return true;
+
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
+
 }

@@ -29,6 +29,9 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
+import android.annotation.SuppressLint;
+
+@SuppressLint("DefaultLocale")
 public class Code {
 	private final String code;
 	private final String shortDescription;
@@ -117,8 +120,9 @@ public class Code {
 		return "(" + (isAddOn ? "+" : "") + code + ") " + shortDescription;
 	}
 
+	@SuppressLint("DefaultLocale")
 	boolean codeContains(String searchString) {
-		return (code.contains(searchString) || shortDescription
-				.contains(searchString));
+		return (code.contains(searchString) || shortDescription.toLowerCase()
+				.contains(searchString.toLowerCase()));
 	}
 }
