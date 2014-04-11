@@ -18,26 +18,16 @@
     <string name="coding_summary_label">Summarize</string>
     <string name="coding_summary_dialog_label">Summary</string>
     <string name="clear_label">Clear</string>
-    <string name="help_label">Hints</string>
     <string name="empty_message"></string>
     <string name="no_codes_selected_label">No codes selected.</string>
-    <string name="no_code_analysis_warning_message">No code analysis performed.</string>
     <string name="no_primary_codes_message">No primary codes.</string>
     <string name="no_primary_codes_verbose_message">You shouldn\'t just have additional codes.</string>
     <string name="no_secondary_codes_message">No additional codes selected.</string>
     <string name="no_secondary_codes_verbose_message">Be certain there aren\'t other codes that you are overlooking.</string>
     <string name="all_addons_error_message">All codes are add-on codes.</string>
     <string name="all_addons_verbose_error_message">Add-on codes must only be added to regular codes.</string>
-    <string name="duplicate_mapping_codes_verbose_error_message">You shouldn\'t combine 2D and 3D mapping codes.</string>
     <string name="no_mapping_codes_message">No mapping codes for ablation.</string>
     <string name="no_mapping_codes_verbose_message">You should be able to code 2D or 3D mapping for this kind of ablation.</string>
-    <string name="mapping_with_avn_ablation_warning">[93650, 93609, 93613]</string>
-    <string name="mapping_with_avn_ablation_verbose_warning">It is unclear if mapping codes can be included separately with
-        AVN ablation</string>
-    <string name="ep_testing_with_avn_ablation_warning">[93650, 93600, 93619, 93620]</string>
-    <string name="ep_testing_with_avn_ablation_verbose_warning">It is unclear if EP testing codes can be combined with AV node ablation.</string>
-    <string name="bad_combo_codes_verbose_error_message">Codes
-    selected can\'t be combined.</string>
     <string name="afb_ablation_help_text">AFB ablation includes comprehensive EP testing, including LA
 	    recording and pacing.  It also includes transseptal
 	    catheterization, therefore these codes cannot be added on.
@@ -155,7 +145,6 @@
     <string name="new_icd_title">New ICD</string>
     <string name="icd_replacement_title">Replace ICD</string>
     <string name="device_upgrade_title">Upgrade/Revision/Extraction</string>
-    <string name="device_upgrade_help_text">Device upgrade help text</string>
     <string name="wizard_test_text">Test text for the Coding Wizard.</string>
     <string name="title_template_step">Step <xliff:g id="step_number">%1$d</xliff:g>: Device
         Wizard</string>
