@@ -16,6 +16,7 @@
 
 package org.epstudios.epcoding;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import android.app.Fragment;
@@ -153,6 +154,27 @@ public class ScreenSlidePageFragment extends Fragment {
 	 */
 	public int getPageNumber() {
 		return mPageNumber;
+	}
+
+	public ArrayList<Code> getCodes() {
+		ArrayList<Code> codes = new ArrayList<Code>();
+		processCheckedCodes(codes, removalCheckBoxMap);
+		processCheckedCodes(codes, addingCheckBoxMap);
+		processCheckedCodes(codes, finalCheckBoxMap);
+		return codes;
+	}
+
+	public String getTestString() {
+		return "This is a test.";
+	}
+
+	private void processCheckedCodes(ArrayList<Code> codes,
+			Map<String, CodeCheckBox> codeMap) {
+		for (Map.Entry<String, CodeCheckBox> entry : codeMap.entrySet()) {
+			if (entry.getValue().isChecked()) {
+				codes.add(entry.getValue().getCode());
+			}
+		}
 	}
 
 }
