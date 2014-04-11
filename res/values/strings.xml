@@ -168,12 +168,12 @@
         go directly to the appropriate module (e.g. New PPM, New ICD, Replace PPM,
         or Replace ICD). Otherwise go to next step.</string>
     <string name="slide_step2_heading_text">Is this an upgrade from a single to
-        a dual chamber pacemaker?  If so code 33244 which covers this entire procedure.
-        If you are also adding an LV
-        cardiac vein lead add code +33225. Exit the wizard by using the back button
+        a dual chamber pacemaker?  If so use code 33244 which covers this entire procedure.
+        If you are also adding an LV cardiac vein lead add code +33225.
+        Exit the wizard by using the back button
         on your device. Otherwise go to the next step.</string>
-    <string name="slide_step3_heading_text">Is this a pocket or lead revision or lead repair without
-        adding or removing any hardware?  If so use one of the codes below and
+    <string name="slide_step3_heading_text">Is this a lead revision or repair or a pocket revision
+        without adding or removing any hardware?  If so use one of the codes below and
         exit the wizard by using the back button on your device.  Otherwise
         go on to the next step.</string>
     <string name="slide_step4_heading_text">OK. We have addressed the simple scenarios.
