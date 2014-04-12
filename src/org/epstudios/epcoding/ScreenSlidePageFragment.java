@@ -126,6 +126,7 @@ public class ScreenSlidePageFragment extends Fragment {
 						mPageNumber + 1));
 		TextView headingText = (TextView) rootView
 				.findViewById(R.id.slide_help_text);
+		checkChanged();
 		switch (mPageNumber) {
 		case 0:
 			headingText.setText(getString(R.string.slide_step1_heading_text));
@@ -142,17 +143,14 @@ public class ScreenSlidePageFragment extends Fragment {
 			headingText.setText(text);
 			break;
 		case 3:
-			checkChanged(); // make sure codes cleared from before
 			headingText.setText(getString(R.string.slide_step4_heading_text));
 			removedCheckBoxLayout.setVisibility(View.VISIBLE);
 			break;
 		case 4:
-			checkChanged();
 			headingText.setText(getString(R.string.slide_step5_heading_text));
 			addingCheckBoxLayout.setVisibility(View.VISIBLE);
 			break;
 		case 5:
-			checkChanged();
 			headingText.setText(getString(R.string.slide_step6_heading_text));
 			finalCheckBoxLayout.setVisibility(View.VISIBLE);
 			break;
@@ -189,27 +187,6 @@ public class ScreenSlidePageFragment extends Fragment {
 	public int getPageNumber() {
 		return mPageNumber;
 	}
-
-	// public ArrayList<Code> getCodes() {
-	// ArrayList<Code> codes = new ArrayList<Code>();
-	// processCheckedCodes(codes, removalCheckBoxMap);
-	// processCheckedCodes(codes, addingCheckBoxMap);
-	// processCheckedCodes(codes, finalCheckBoxMap);
-	// return codes;
-	// }
-	//
-	// public String getTestString() {
-	// return "This is a test.";
-	// }
-
-	// private void processCheckedCodes(ArrayList<Code> codes,
-	// Map<String, CodeCheckBox> codeMap) {
-	// for (Map.Entry<String, CodeCheckBox> entry : codeMap.entrySet()) {
-	// if (entry.getValue().isChecked()) {
-	// codes.add(entry.getValue().getCode());
-	// }
-	// }
-	// }
 
 	private void addCheckMarkListener(Map<String, CodeCheckBox> codeMap) {
 		for (Map.Entry<String, CodeCheckBox> entry : codeMap.entrySet()) {
