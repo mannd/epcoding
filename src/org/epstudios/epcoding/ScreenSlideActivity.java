@@ -16,9 +16,14 @@
 
 package org.epstudios.epcoding;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
@@ -128,6 +133,9 @@ public class ScreenSlideActivity extends FragmentActivity {
 			// Advance to the next step in the wizard. If there is no next step,
 			// setCurrentItem
 			// will do nothing.
+			if (mPager.getCurrentItem() == NUM_PAGES - 1) {
+				displayResult();
+			}
 			mPager.setCurrentItem(mPager.getCurrentItem() + 1);
 			return true;
 		}
@@ -136,8 +144,45 @@ public class ScreenSlideActivity extends FragmentActivity {
 	}
 
 	private void displayResult() {
-		Log.d("EPCODING", "displaying result");
+		Set<String> codeNumbers = loadCodeNumbers();
+		Log.d("EPCODING", codeNumbers.toString());
+		summarizeCoding(codeNumbers);
 
+	}
+
+	private void summarizeCoding(Set<String> codeNumbers) {
+		String message = "";
+		// we will extract the raw selected codes and shoot them to the code
+		// analyzer, as well as check for no primary or secondary codes
+		Code[] codes = new Code[Codes.allCodesSize()];
+		boolean noPrimaryCodes = false;
+		boolean noSecondaryCodes = false;
+		boolean moduleHasNoSecondaryCodesNeedingChecking = true;
+		String[] codeNumberArray = codeNumbers.toArray(new String[codeNumbers
+				.size()]);
+		Code[] code = new Code[codeNumbers.size()];
+		for (int i = 1; i < code.length; ++i) {
+			codes[i] = Codes.getCode(codeNumberArray[i]);
+			message += codes[i].getCodeFirstFormatted() + "\n";
+		}
+		message += Utilities.codeAnalysis(codes, noPrimaryCodes,
+				noSecondaryCodes, moduleHasNoSecondaryCodesNeedingChecking,
+				false, true, this);
+		Utilities.displayMessage(
+				getString(R.string.coding_summary_dialog_label), message, this);
+	}
+
+	private Set<String> loadCodeNumbers() {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		Set<String> defaultStringSet = new TreeSet<String>();
+		Set<String> codeNumbersChecked = prefs.getStringSet(
+				"wizardremovalcodes", defaultStringSet);
+		codeNumbersChecked.addAll(prefs.getStringSet("wizardaddingcodes",
+				defaultStringSet));
+		codeNumbersChecked.addAll(prefs.getStringSet("wizardfinalcodes",
+				defaultStringSet));
+		return codeNumbersChecked;
 	}
 
 	/**
