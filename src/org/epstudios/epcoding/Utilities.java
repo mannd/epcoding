@@ -34,6 +34,13 @@ public class Utilities {
 		return analyzer.analysis();
 	}
 
+	public static String simpleCodeAnalysis(final Code[] codes, Context context) {
+		CodeAnalyzer analyzer = new CodeAnalyzer(codes, context);
+		analyzer.setVerbose(true); // if you are using the wizard you need
+									// verbose messages.
+		return analyzer.simpleAnalysis();
+	}
+
 	public static void displayMessage(String title, String message,
 			Context context) {
 		AlertDialog dialog = new AlertDialog.Builder(context).create();

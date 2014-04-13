@@ -155,9 +155,6 @@ public class ScreenSlideActivity extends FragmentActivity {
 		String message = "";
 		// we will extract the raw selected codes and shoot them to the code
 		// analyzer, as well as check for no primary or secondary codes
-		boolean noPrimaryCodes = false;
-		boolean noSecondaryCodes = false;
-		boolean moduleHasNoSecondaryCodesNeedingChecking = true;
 		String[] codeNumberArray = codeNumbers.toArray(new String[codeNumbers
 				.size()]);
 		Code[] code = new Code[codeNumbers.size()];
@@ -165,9 +162,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 			code[i] = Codes.getCode(codeNumberArray[i]);
 			message += code[i].getCodeFirstFormatted() + "\n";
 		}
-		message += Utilities.codeAnalysis(code, noPrimaryCodes,
-				noSecondaryCodes, moduleHasNoSecondaryCodesNeedingChecking,
-				false, true, this);
+		message += Utilities.simpleCodeAnalysis(code, this);
 		Utilities.displayMessage(
 				getString(R.string.coding_summary_dialog_label), message, this);
 	}
