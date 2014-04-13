@@ -16,14 +16,20 @@
 
 package org.epstudios.epcoding;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -127,15 +133,56 @@ public class ScreenSlideActivity extends FragmentActivity {
 			// Advance to the next step in the wizard. If there is no next step,
 			// setCurrentItem
 			// will do nothing.
-			mPager.setCurrentItem(mPager.getCurrentItem() + 1);
+			if (mPager.getCurrentItem() == NUM_PAGES - 1) {
+				displayResult();
+			} else {
+				mPager.setCurrentItem(mPager.getCurrentItem() + 1);
+			}
 			return true;
 		}
 
 		return super.onOptionsItemSelected(item);
 	}
 
+	private void displayResult() {
+		Set<String> codeNumbers = loadCodeNumbers();
+		Log.d("EPCODING", codeNumbers.toString());
+		summarizeCoding(codeNumbers);
+
+	}
+
+	private void summarizeCoding(Set<String> codeNumbers) {
+		String message = "";
+		// we will extract the raw selected codes and shoot them to the code
+		// analyzer, as well as check for no primary or secondary codes
+		String[] codeNumberArray = codeNumbers.toArray(new String[codeNumbers
+				.size()]);
+		Code[] code = new Code[codeNumbers.size()];
+		for (int i = 0; i < code.length; ++i) {
+			code[i] = Codes.getCode(codeNumberArray[i]);
+			message += code[i].getCodeFirstFormatted() + "\n";
+		}
+		message += Utilities.simpleCodeAnalysis(code, this);
+		Utilities.displayMessage(
+				getString(R.string.coding_summary_dialog_label), message, this);
+	}
+
+	private Set<String> loadCodeNumbers() {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		Set<String> defaultStringSet = new TreeSet<String>();
+		Set<String> codeNumbersChecked = new TreeSet<String>();
+		codeNumbersChecked.addAll(prefs.getStringSet("wizardremovalcodes",
+				defaultStringSet));
+		codeNumbersChecked.addAll(prefs.getStringSet("wizardaddingcodes",
+				defaultStringSet));
+		codeNumbersChecked.addAll(prefs.getStringSet("wizardfinalcodes",
+				defaultStringSet));
+		return codeNumbersChecked;
+	}
+
 	/**
-	 * A simple pager adapter that represents 5 {@link ScreenSlidePageFragment}
+	 * A simple pager adapter that represents 6 {@link ScreenSlidePageFragment}
 	 * objects, in sequence.
 	 */
 	private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {

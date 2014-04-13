@@ -117,7 +117,8 @@ public class Code {
 	}
 
 	public String getUnformattedNumberFirst() {
-		return "(" + (isAddOn ? "+" : "") + code + ") " + shortDescription;
+		return (isAddOn ? "+" : "") + code + " - " + shortDescription;
+
 	}
 
 	@SuppressLint("DefaultLocale")

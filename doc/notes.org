@@ -852,9 +852,13 @@
       1. Includes leads only, generators only, systems
    6. Finish: go to upgrade page with proper codes selected for fine tuning.
 ** Other additions
-*** TODO Add code for venoplasty
+*** DONE Add code for venoplasty
 *** DONE Add code for dual chamber temporary pacing
     Was already in there.
+*** TODO implement wizard saving data
+    Would write data to shared preferences with creation of each
+    fragment and when checkboxes checked.  Calling activity can then
+    get the data and show it.
 * Preparing new version -- IMPORTANT!
   - finish version, commit.
   - git flow release start vx.y

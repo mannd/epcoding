@@ -162,6 +162,16 @@ public class CodeAnalyzer {
 		this.context = context;
 	}
 
+	// this simpler constructor used with code wizard
+	public CodeAnalyzer(final Code[] codes, final Context context) {
+		this.codes = codes;
+		this.context = context;
+		this.noPrimaryCodes = false;
+		this.noSecondaryCodes = false;
+		this.moduleHasNoSecondaryCodesNeedingChecking = true;
+
+	}
+
 	public void setVerbose(boolean verbose) {
 		this.verbose = verbose;
 	}
@@ -191,8 +201,19 @@ public class CodeAnalyzer {
 		if (allAddOnCodes())
 			message += getMessage(ERROR, R.string.all_addons_error_message,
 					R.string.all_addons_verbose_error_message);
-		// check for forbidden code combos
-		// first make List and Set of code numbers
+		return getCodeAnalysis(message);
+	}
+
+	public String simpleAnalysis() {
+		if (codes.length == 0) {
+			return getMessage(WARNING, R.string.no_codes_selected_label,
+					R.string.empty_message);
+		}
+		String message = "";
+		return getCodeAnalysis(message);
+	}
+
+	private String getCodeAnalysis(String message) {
 		String[] codeNumbers = new String[codes.length];
 		for (int i = 0; i < codes.length; ++i) {
 			if (codes[i] != null)

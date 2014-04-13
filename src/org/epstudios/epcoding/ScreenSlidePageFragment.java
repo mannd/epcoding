@@ -17,13 +17,19 @@
 package org.epstudios.epcoding;
 
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -106,16 +112,20 @@ public class ScreenSlidePageFragment extends Fragment {
 		Context context = getActivity();
 		removalCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(
 				removalCodes, removedCheckBoxLayout, context, true);
+		addCheckMarkListener(removalCheckBoxMap);
 		addingCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(
 				addingCodes, addingCheckBoxLayout, context, true);
+		addCheckMarkListener(addingCheckBoxMap);
 		finalCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(finalCodes,
 				finalCheckBoxLayout, context, true);
+		addCheckMarkListener(finalCheckBoxMap);
 		// Set the title view to show the page number.
 		((TextView) rootView.findViewById(android.R.id.text1))
 				.setText(getString(R.string.title_template_step,
 						mPageNumber + 1));
 		TextView headingText = (TextView) rootView
 				.findViewById(R.id.slide_help_text);
+		checkChanged();
 		switch (mPageNumber) {
 		case 0:
 			headingText.setText(getString(R.string.slide_step1_heading_text));
@@ -145,6 +155,28 @@ public class ScreenSlidePageFragment extends Fragment {
 			break;
 		}
 
+		if (null != savedInstanceState) {
+			// restore state
+			boolean[] removalCodesState = savedInstanceState
+					.getBooleanArray("removal_codes");
+			boolean[] addingCodesState = savedInstanceState
+					.getBooleanArray("adding_codes");
+			boolean[] finalCodesState = savedInstanceState
+					.getBooleanArray("final_codes");
+			int i = 0;
+			for (Map.Entry<String, CodeCheckBox> entry : removalCheckBoxMap
+					.entrySet())
+				entry.getValue().setChecked(removalCodesState[i++]);
+			i = 0;
+			for (Map.Entry<String, CodeCheckBox> entry : addingCheckBoxMap
+					.entrySet())
+				entry.getValue().setChecked(addingCodesState[i++]);
+			i = 0;
+			for (Map.Entry<String, CodeCheckBox> entry : finalCheckBoxMap
+					.entrySet())
+				entry.getValue().setChecked(finalCodesState[i++]);
+		}
+
 		return rootView;
 	}
 
@@ -153,6 +185,81 @@ public class ScreenSlidePageFragment extends Fragment {
 	 */
 	public int getPageNumber() {
 		return mPageNumber;
+	}
+
+	private void addCheckMarkListener(Map<String, CodeCheckBox> codeMap) {
+		for (Map.Entry<String, CodeCheckBox> entry : codeMap.entrySet()) {
+			entry.getValue().setOnCheckedChangeListener(
+					new OnCheckedChangeListener() {
+
+						@Override
+						public void onCheckedChanged(CompoundButton buttonView,
+								boolean isChecked) {
+							// TODO Auto-generated method stub
+							checkChanged();
+						}
+					});
+		}
+	}
+
+	private void checkChanged() {
+		save();
+
+	}
+
+	private void save() {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(getActivity());
+		SharedPreferences.Editor prefsEditor = prefs.edit();
+		switch (mPageNumber) {
+		case 3:
+			prefsEditor.putStringSet("wizardremovalcodes",
+					getCheckBoxSet(removalCheckBoxMap));
+			break;
+		case 4:
+			prefsEditor.putStringSet("wizardaddingcodes",
+					getCheckBoxSet(addingCheckBoxMap));
+			break;
+		case 5:
+			prefsEditor.putStringSet("wizardfinalcodes",
+					getCheckBoxSet(finalCheckBoxMap));
+			break;
+		}
+		prefsEditor.commit();
+	}
+
+	private Set<String> getCheckBoxSet(Map<String, CodeCheckBox> map) {
+		Set<String> checkedCodeNumbers = new TreeSet<String>();
+		for (Map.Entry<String, CodeCheckBox> entry : map.entrySet()) {
+			if (entry.getValue().isChecked())
+				checkedCodeNumbers.add(entry.getValue().getCodeNumber());
+		}
+		return checkedCodeNumbers;
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		super.onSaveInstanceState(savedInstanceState);
+		// store check marks here
+		boolean[] removalCodeState = new boolean[removalCheckBoxMap.size()];
+		int i = 0;
+		for (Map.Entry<String, CodeCheckBox> entry : removalCheckBoxMap
+				.entrySet())
+			removalCodeState[i++] = entry.getValue().isChecked();
+		i = 0;
+		boolean[] addingCodeState = new boolean[addingCheckBoxMap.size()];
+		for (Map.Entry<String, CodeCheckBox> entry : addingCheckBoxMap
+				.entrySet())
+			addingCodeState[i++] = entry.getValue().isChecked();
+		i = 0;
+		boolean[] finalCodeState = new boolean[finalCheckBoxMap.size()];
+		for (Map.Entry<String, CodeCheckBox> entry : finalCheckBoxMap
+				.entrySet())
+			finalCodeState[i++] = entry.getValue().isChecked();
+		savedInstanceState.putBooleanArray("removal_codes", removalCodeState);
+		savedInstanceState.putBooleanArray("adding_codes", addingCodeState);
+		savedInstanceState.putBooleanArray("final_codes", finalCodeState);
+
 	}
 
 }
