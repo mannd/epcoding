@@ -1,0 +1,14 @@
+EP Coding is intended to help practicing cardiac electrophysiology (EP) doctors
+document and bill their procedures by selecting proper CPT® codes, based on the latest coding guidelines.  The app is not for professional coders and only includes codes relevant to EP doctors.  It is useful for those physicians who need to enter procedure codes directly into computerized Electronic Health Record systems or who just need to communicate to their coders what they have done.  The rules for entering codes are complex, and the codes themselves are not mnemonic, hence this app.  This app currently uses the 2014 codes, but will be updated as coding changes.  We are not liable for any errors in coding that might occur from using this app.
+
+Features include:
+- Codes organized by procedure
+- Directed code entry
+- Detailed code analysis
+- Coding summary
+- Save favorite coding patterns
+- Search for codes by number or text
+- Device upgrade wizard
+- Detailed coding help
+
+Categories: Medicine, Medical Apps, Cardiology, Electrophysiology, Arrhythmia. Procedure Coding
