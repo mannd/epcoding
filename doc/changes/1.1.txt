@@ -1,0 +1,9 @@
+EP Coding v1.1 Release Notes
+
+Changes since v1.0
+
+* Added Search capability
+
+* Added Device Wizard to guide user through device upgrades/revisions
+
+* Added/revised a few codes

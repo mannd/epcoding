@@ -9,7 +9,7 @@
     | Dual chamber PPM implant   | 33208 |
     |----------------------------+-------|
 * Details    
-* TODO Thing that need doing
+* DONE Things that need doing
 ** DONE Reorder secondary codes
    They should be generally in numeric order, but can also have some
    logical order.  It makes no sense to put the A line code in first,
@@ -21,20 +21,19 @@
    - ? toggle coding analysis
 ** DONE Bugs
    - rotation of screen loses check marks
-** TODO Final Todo list
-*** TODO Fix About screen per Android guidelines
+** DONE Final Todo list
+*** DONE Fix About screen per Android guidelines
 **** ? add version number
-*** TODO Add proper copyright notice for AMA CPT (see blog post)
-*** TODO Finish Hints
-*** TODO Finish bad combos
+*** DONE Add proper copyright notice for AMA CPT (see blog post)
+*** DONE Finish bad combos
 *** DONE Refactor Code Analysis
-*** TODO Finish icons
-*** TODO Check codes, run through scenarios
-*** TODO clean up procedure classes
+*** DONE Finish icons
+*** DONE Check codes, run through scenarios
+*** DONE clean up procedure classes
     - change Procedure to abstract base class
     - Ablation and Device classes for default behavior
 **** Note will probably defer this to later version
-*** TODO create release check list like EP Mobile
+*** DONE create release check list like EP Mobile
 ** DONE Code Analysis
    Need to generalize by having class with
    - Code numbers
@@ -305,7 +304,8 @@
     - [[Other procedure]]
     - [[All EP codes]]
     - [[Settings]]
-    - [[Glossary]]
+    - [[Abbreviations]]
+    - [[Acknowledgements]]
 *** Who should use EP Coding?
     Physicians who perform cardiac electrophysiology (EP) procedures
     and are required to submit CPT® codes for these procedures. *EP
@@ -336,8 +336,11 @@
       ablation), save the codes and they will already be selected in
       future sessions.  Note that primary code selections are not
       saved.
-    - Tap *Settings* to change the display of codes and level of
-      detail shown in the code analysis.
+    - Search for codes by number or text using the *Search* icon.
+    - Use the *Device Wizard* (icon is a steet sign with curve ahead)
+      to steer you through complex device upgrades and revisions.
+    - Tap *Settings* (icon is a wrench) to change the display of codes
+      and level of detail shown in the code analysis.
     - The all EP codes module lists every EP procedure code in
       numerical order, with code number given first.  It is the /a la
       carte/ menu of *EP Coding*.
@@ -354,6 +357,8 @@
     - Set code analysis to verbose.
     - Use the specific procedure modules rather than the all EP codes
       module for coding procedures.
+    - You may find it easier to use the *Device Wizard* to do device
+      upgrade coding rather than the Upgrade/Revision/Extraction module.
     - Use the all EP codes module if you need to look up a specific
       code, as they are listed in numeric order in this module.
     - There are some rare codes in the all EP codes module that
@@ -413,7 +418,9 @@
       probably be changed in the next revision of the codes.
 *** Upgrade/revision/extraction
     - This is the most complicated coding area. We will break this
-      down into some specific situations.
+      down into some specific situations.  You can also use
+      the *Device Wizard* to lead you through this.  This is the
+      simplest way to do this!
     - Note codes are arranged in logical groups, not necessarily in
       numeric order.
 **** Lead addition only, no change in generator
@@ -489,7 +496,7 @@
       - Brief: Lists offending codes without only brief or no
         descriptions.
       - None: No code analysis done.
-*** Glossary
+*** Abbreviations
     - A = atrial
     - AFB = atrial fibrillation
     - AFL = atrial flutter
@@ -500,6 +507,19 @@
     - SVT = supraventricular tachycardia
     - V = ventricular
     - VT = ventricular tachycardia
+*** Acknowledgements
+    - CPT copyright 2012 American Medical Association. All rights
+      reserved. CPT is a registered trademark of the American Medical
+      Association.
+    - A limited number of CPT® codes are used in this app, under the
+      fair use doctrine of the US Copyright Act.  For a discussion of
+      the rationale see [[http://www.epstudiossoftware.com/?p=1313][here]].
+    - The source code for EP Coding is available on GitHub [[https://github.com/mannd/epcoding][here]].
+    - EP Coding source code is open source and is licensed under the
+      [[https://www.gnu.org/copyleft/gpl.html][GNU General Public License version 3]].
+    - For questions, error reporting or suggestions contact
+      [[mailto:mannd@epstudiossoftware.com][EP Studios]].
+    - Website: [[www.epstudiossoftware.com]]
 * Limitations
   - Code descriptions are paraphrased
   - All information freely available on web
@@ -821,12 +841,38 @@
 ** Online
 *** AV node ablation and mapping codes
     https://www.aapc.com/memberarea/forums/showthread.php?t=19874
+* Version 1.1
+** TODO Wizard
+   Flow diagram for devices
+   1. Is this only a generator change?
+      1. Yes go to generator change page (ICD or PPM)
+      2. No go to next page
+   2. Is this a new implant, with prior hardware?
+      1. Yes, got to new implant page (ICD or PPM)
+      2. No go to next page
+   3. Is this an upgrade of single to dual chamber ICD, +/- LV lead
+      1. Yes go to upgrade page with code(s) selected
+      2. No go to next step
+   4. Hardware removed
+      1. Includes one or two leads, ICD or PPM, LV lead, generators
+   5. Hardware added
+      1. Includes leads only, generators only, systems
+   6. Finish: go to upgrade page with proper codes selected for fine tuning.
+** Other additions
+*** DONE Add code for venoplasty
+*** DONE Add code for dual chamber temporary pacing
+    Was already in there.
+*** TODO implement wizard saving data
+    Would write data to shared preferences with creation of each
+    fragment and when checkboxes checked.  Calling activity can then
+    get the data and show it.
 * Preparing new version -- IMPORTANT!
   - finish version, commit.
   - git flow release start vx.y
   - IMPORTANT - update AndroidManifest.xml
     - increment android:versionCode
     - change android:versionName
+    - change version number in About.java
   - run git log --pretty=oneline and update changes/x.y.z.txt
   - git add changes/x.y.z.txt
   - update doc/description.txt

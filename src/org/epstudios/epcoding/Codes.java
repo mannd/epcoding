@@ -29,9 +29,11 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Codes {
@@ -149,6 +151,7 @@ public class Codes {
 				"Unlisted surgical procedure, e.g. SubQ array lead", false);
 
 		// Misc
+		addCode(map, "35476", "Venous angioplasty", false);
 		addCode(map, "36620", "Arterial line placement", false);
 
 		// note fluoroscopy included in device codes, but this code
@@ -224,12 +227,6 @@ public class Codes {
 	public final static String[] IcdReplacementPrimaryCodeNumbers = { "33262",
 			"33263", "33264" };
 
-	// public final static String[] deviceUpgradePrimaryCodeNumbers = { "33216",
-	// "33217", "33215", "33212", "33213", "33214", "33221", "33233",
-	// "33240", "33230", "33241", "33231", "33233", "33224", "33225",
-	// "33234", "33235", "33244", "33218", "33220", "33999", "33222",
-	// "33223" };
-
 	public final static String[] deviceUpgradePrimaryCodeNumbers = { "33216",
 			"33217", "33224", "33215", "33226", "33233", "33241", "33234",
 			"33235", "33244", "33214", "33206", "33207", "33208", "33249",
@@ -304,5 +301,15 @@ public class Codes {
 
 	public static int allCodesSize() {
 		return allCodes.size();
+	}
+
+	public static List<String> searchCodes(String searchString) {
+		List<String> result = new ArrayList<String>();
+		for (Map.Entry<String, Code> entry : allCodes.entrySet()) {
+			if (entry.getValue().codeContains(searchString)) {
+				result.add(entry.getValue().getUnformattedNumberFirst());
+			}
+		}
+		return result;
 	}
 }

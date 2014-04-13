@@ -117,7 +117,7 @@ public class CodeAnalyzer {
 						"Don't use generator removal and insertion or replacement codes together."));
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("33214", "33227", "33228", "33229"),
-				"Don't PPM upgrade code with generator replacement codes"));
+				"Don't use PPM upgrade code with generator replacement codes"));
 		codeErrors
 				.add(new CodeError(CodeError.WarningLevel.WARNING, Arrays
 						.asList("93650", "93609", "93613"),
@@ -132,7 +132,7 @@ public class CodeAnalyzer {
 		codeErrors
 				.add(new CodeError(
 						CodeError.WarningLevel.ERROR,
-						Arrays.asList("93653", "936257"),
+						Arrays.asList("93653", "93657"),
 						"AFB Ablation should not be added on to SVT ablation.  Use AFB ablation as the primary code."));
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("93654", "93657", "93609", "93613", "93622"),
@@ -160,6 +160,16 @@ public class CodeAnalyzer {
 		this.noSecondaryCodes = noSecondaryCodes;
 		this.moduleHasNoSecondaryCodesNeedingChecking = moduleHasNoSecondaryCodesNeedingChecking;
 		this.context = context;
+	}
+
+	// this simpler constructor used with code wizard
+	public CodeAnalyzer(final Code[] codes, final Context context) {
+		this.codes = codes;
+		this.context = context;
+		this.noPrimaryCodes = false;
+		this.noSecondaryCodes = false;
+		this.moduleHasNoSecondaryCodesNeedingChecking = true;
+
 	}
 
 	public void setVerbose(boolean verbose) {
@@ -191,8 +201,19 @@ public class CodeAnalyzer {
 		if (allAddOnCodes())
 			message += getMessage(ERROR, R.string.all_addons_error_message,
 					R.string.all_addons_verbose_error_message);
-		// check for forbidden code combos
-		// first make List and Set of code numbers
+		return getCodeAnalysis(message);
+	}
+
+	public String simpleAnalysis() {
+		if (codes.length == 0) {
+			return getMessage(WARNING, R.string.no_codes_selected_label,
+					R.string.empty_message);
+		}
+		String message = "";
+		return getCodeAnalysis(message);
+	}
+
+	private String getCodeAnalysis(String message) {
 		String[] codeNumbers = new String[codes.length];
 		for (int i = 0; i < codes.length; ++i) {
 			if (codes[i] != null)

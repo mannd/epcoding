@@ -1,25 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="app_name">EP Coding</string>
     <string name="title_procedure_detail">Coding</string>
     <string name="save_code_selection_title">Save</string>
     <string name="settings_title">Settings</string>
     <string name="about_title">About</string>
-    <string name="about_label">About EP Coding</string>
-    <string name="about_text">EP Coding is designed to help cardiac
-            electrophysiologists use coding to document electrophysiology procedures.
-            These are just guidelines and are not intended to be used by
-            professional coders, nor are the codes selected necessarily the
-            final codes submitted to payers. If you have suggestions or comments, please contact us.
-		\n\nEmail: mannd@epstudiossoftware.com
-		\nWeb: www.epstudiossoftware.com
-		\nSource: github.com/mannd/epcoding
-		\n\nCopyright \u00a9 2013, 2014 EP Studios, Inc.
-		\nLicensed under GNU GPL v3.
-		\n\nCPT copyright 2012 American Medical Association. All rights
-			reserved. CPT is a registered trademark of the American Medical
-			Association.</string>
+    <string name="about_label">EP Coding</string>
+    <string name="about_text">Copyright \u00a9 2013, 2014 EP Studios, Inc.
+		\nAll rights reserved.\n</string>
     <string name="help_title">Help</string>
     <string name="hints_title">Hints</string>
     <string name="search_title">Search</string>
@@ -29,26 +18,16 @@
     <string name="coding_summary_label">Summarize</string>
     <string name="coding_summary_dialog_label">Summary</string>
     <string name="clear_label">Clear</string>
-    <string name="help_label">Hints</string>
     <string name="empty_message"></string>
     <string name="no_codes_selected_label">No codes selected.</string>
-    <string name="no_code_analysis_warning_message">No code analysis performed.</string>
     <string name="no_primary_codes_message">No primary codes.</string>
     <string name="no_primary_codes_verbose_message">You shouldn\'t just have additional codes.</string>
     <string name="no_secondary_codes_message">No additional codes selected.</string>
     <string name="no_secondary_codes_verbose_message">Be certain there aren\'t other codes that you are overlooking.</string>
     <string name="all_addons_error_message">All codes are add-on codes.</string>
     <string name="all_addons_verbose_error_message">Add-on codes must only be added to regular codes.</string>
-    <string name="duplicate_mapping_codes_verbose_error_message">You shouldn\'t combine 2D and 3D mapping codes.</string>
     <string name="no_mapping_codes_message">No mapping codes for ablation.</string>
     <string name="no_mapping_codes_verbose_message">You should be able to code 2D or 3D mapping for this kind of ablation.</string>
-    <string name="mapping_with_avn_ablation_warning">[93650, 93609, 93613]</string>
-    <string name="mapping_with_avn_ablation_verbose_warning">It is unclear if mapping codes can be included separately with
-        AVN ablation</string>
-    <string name="ep_testing_with_avn_ablation_warning">[93650, 93600, 93619, 93620]</string>
-    <string name="ep_testing_with_avn_ablation_verbose_warning">It is unclear if EP testing codes can be combined with AV node ablation.</string>
-    <string name="bad_combo_codes_verbose_error_message">Codes
-    selected can\'t be combined.</string>
     <string name="afb_ablation_help_text">AFB ablation includes comprehensive EP testing, including LA
 	    recording and pacing.  It also includes transseptal
 	    catheterization, therefore these codes cannot be added on.
@@ -166,6 +145,36 @@
     <string name="new_icd_title">New ICD</string>
     <string name="icd_replacement_title">Replace ICD</string>
     <string name="device_upgrade_title">Upgrade/Revision/Extraction</string>
-    <string name="device_upgrade_help_text">Device upgrade help text</string>
+    <string name="wizard_test_text">Test text for the Coding Wizard.</string>
+    <string name="title_template_step">Step <xliff:g id="step_number">%1$d</xliff:g>: Device
+        Wizard</string>
+    <string name="action_previous">Previous</string>
+    <string name="action_next">Next</string>
+    <string name="action_finish">Finish</string>
+    <string name="wizard_title">Device Wizard</string>
+    <string name="slide_step1_heading_text">Is this a new implant or simple generator
+        replacement? If so exit this wizard by using the back button on your device and
+        go directly to the appropriate module (e.g. New PPM, New ICD, Replace PPM,
+        or Replace ICD). Otherwise go to next step.</string>
+    <string name="slide_step2_heading_text">Is this an upgrade from a single to
+        a dual chamber pacemaker?  If so use code 33244 which covers this entire procedure.
+        If you are also adding an LV cardiac vein lead add code +33225.
+        Exit the wizard by using the back button
+        on your device. Otherwise go to the next step.</string>
+    <string name="slide_step3_heading_text">Is this a lead revision or repair or a pocket revision
+        without adding or removing any hardware?  If so use one of the codes below and
+        exit the wizard by using the back button on your device.  Otherwise
+        go on to the next step.</string>
+    <string name="slide_step4_heading_text">OK. We have addressed the simple scenarios.
+        What\'s left are lead and generator removals/extractions,
+        and device upgrades. Start off by selecting what hardware (if any) was
+        removed, and then go to the next step.</string>
+    <string name="slide_step5_heading_text">Now if you added any hardware, code what you added.
+        If you added a generator and leads, use the new or replacement system codes (e.g. new single
+        chamber PPM).  If you just added a lead or a generator, code for the specific device(s) you
+        added.  Then go to the next step.</string>
+    <string name="slide_step6_heading_text">Did you do anything else? If so select from the choices
+   	    below. Select Finish to see a summary of your codes.</string>
+    <string name="no_data_label">No matches found!</string>
 
 </resources>
