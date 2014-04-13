@@ -25,7 +25,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -204,7 +203,6 @@ public class ScreenSlidePageFragment extends Fragment {
 	}
 
 	private void checkChanged() {
-		Log.d("EPCODING", "check mark changed");
 		save();
 
 	}
@@ -213,30 +211,30 @@ public class ScreenSlidePageFragment extends Fragment {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(getActivity());
 		SharedPreferences.Editor prefsEditor = prefs.edit();
-		Set<String> checkedCodeNumbers = new TreeSet<String>();
 		switch (mPageNumber) {
 		case 3:
-			addCheckBoxMap(checkedCodeNumbers, removalCheckBoxMap);
-			prefsEditor.putStringSet("wizardremovalcodes", checkedCodeNumbers);
+			prefsEditor.putStringSet("wizardremovalcodes",
+					getCheckBoxSet(removalCheckBoxMap));
 			break;
 		case 4:
-			addCheckBoxMap(checkedCodeNumbers, addingCheckBoxMap);
-			prefsEditor.putStringSet("wizardaddingcodes", checkedCodeNumbers);
+			prefsEditor.putStringSet("wizardaddingcodes",
+					getCheckBoxSet(addingCheckBoxMap));
 			break;
 		case 5:
-			addCheckBoxMap(checkedCodeNumbers, finalCheckBoxMap);
-			prefsEditor.putStringSet("wizardfinalcodes", checkedCodeNumbers);
+			prefsEditor.putStringSet("wizardfinalcodes",
+					getCheckBoxSet(finalCheckBoxMap));
 			break;
 		}
 		prefsEditor.commit();
 	}
 
-	private void addCheckBoxMap(Set<String> checkedCodeNumbers,
-			Map<String, CodeCheckBox> map) {
+	private Set<String> getCheckBoxSet(Map<String, CodeCheckBox> map) {
+		Set<String> checkedCodeNumbers = new TreeSet<String>();
 		for (Map.Entry<String, CodeCheckBox> entry : map.entrySet()) {
 			if (entry.getValue().isChecked())
 				checkedCodeNumbers.add(entry.getValue().getCodeNumber());
 		}
+		return checkedCodeNumbers;
 	}
 
 	@Override

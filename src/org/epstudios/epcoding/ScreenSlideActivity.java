@@ -135,8 +135,9 @@ public class ScreenSlideActivity extends FragmentActivity {
 			// will do nothing.
 			if (mPager.getCurrentItem() == NUM_PAGES - 1) {
 				displayResult();
+			} else {
+				mPager.setCurrentItem(mPager.getCurrentItem() + 1);
 			}
-			mPager.setCurrentItem(mPager.getCurrentItem() + 1);
 			return true;
 		}
 
@@ -175,8 +176,9 @@ public class ScreenSlideActivity extends FragmentActivity {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
 		Set<String> defaultStringSet = new TreeSet<String>();
-		Set<String> codeNumbersChecked = prefs.getStringSet(
-				"wizardremovalcodes", defaultStringSet);
+		Set<String> codeNumbersChecked = new TreeSet<String>();
+		codeNumbersChecked.addAll(prefs.getStringSet("wizardremovalcodes",
+				defaultStringSet));
 		codeNumbersChecked.addAll(prefs.getStringSet("wizardaddingcodes",
 				defaultStringSet));
 		codeNumbersChecked.addAll(prefs.getStringSet("wizardfinalcodes",
