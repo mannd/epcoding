@@ -19,8 +19,11 @@ package org.epstudios.epcoding;
 import java.util.Set;
 import java.util.TreeSet;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -29,7 +32,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -146,7 +148,6 @@ public class ScreenSlideActivity extends FragmentActivity {
 
 	private void displayResult() {
 		Set<String> codeNumbers = loadCodeNumbers();
-		Log.d("EPCODING", codeNumbers.toString());
 		summarizeCoding(codeNumbers);
 
 	}
@@ -163,8 +164,8 @@ public class ScreenSlideActivity extends FragmentActivity {
 			message += code[i].getCodeFirstFormatted() + "\n";
 		}
 		message += Utilities.simpleCodeAnalysis(code, this);
-		Utilities.displayMessage(
-				getString(R.string.coding_summary_dialog_label), message, this);
+		displayResult(getString(R.string.coding_summary_dialog_label), message,
+				this);
 	}
 
 	private Set<String> loadCodeNumbers() {
@@ -179,6 +180,27 @@ public class ScreenSlideActivity extends FragmentActivity {
 		codeNumbersChecked.addAll(prefs.getStringSet("wizardfinalcodes",
 				defaultStringSet));
 		return codeNumbersChecked;
+	}
+
+	protected void displayResult(String title, String message, Context context) {
+		AlertDialog dialog = new AlertDialog.Builder(context).create();
+		dialog.setMessage(message);
+		dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Exit Wizard",
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						finish();
+					}
+				});
+		dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "Cancel",
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						; // just close dialog
+					}
+				});
+		dialog.setTitle(title);
+		dialog.show();
 	}
 
 	/**

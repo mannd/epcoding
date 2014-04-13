@@ -336,8 +336,11 @@
       ablation), save the codes and they will already be selected in
       future sessions.  Note that primary code selections are not
       saved.
-    - Tap *Settings* to change the display of codes and level of
-      detail shown in the code analysis.
+    - Search for codes by number or text using the *Search* icon.
+    - Use the *Device Wizard* (icon is a steet sign with curve ahead)
+      to steer you through complex device upgrades and revisions.
+    - Tap *Settings* (icon is a wrench) to change the display of codes
+      and level of detail shown in the code analysis.
     - The all EP codes module lists every EP procedure code in
       numerical order, with code number given first.  It is the /a la
       carte/ menu of *EP Coding*.
@@ -354,6 +357,8 @@
     - Set code analysis to verbose.
     - Use the specific procedure modules rather than the all EP codes
       module for coding procedures.
+    - You may find it easier to use the *Device Wizard* to do device
+      upgrade coding rather than the Upgrade/Revision/Extraction module.
     - Use the all EP codes module if you need to look up a specific
       code, as they are listed in numeric order in this module.
     - There are some rare codes in the all EP codes module that
@@ -413,7 +418,9 @@
       probably be changed in the next revision of the codes.
 *** Upgrade/revision/extraction
     - This is the most complicated coding area. We will break this
-      down into some specific situations.
+      down into some specific situations.  You can also use
+      the *Device Wizard* to lead you through this.  This is the
+      simplest way to do this!
     - Note codes are arranged in logical groups, not necessarily in
       numeric order.
 **** Lead addition only, no change in generator
@@ -865,6 +872,7 @@
   - IMPORTANT - update AndroidManifest.xml
     - increment android:versionCode
     - change android:versionName
+    - change version number in About.java
   - run git log --pretty=oneline and update changes/x.y.z.txt
   - git add changes/x.y.z.txt
   - update doc/description.txt
