@@ -157,7 +157,7 @@
         go directly to the appropriate module (e.g. New PPM, New ICD, Replace PPM,
         or Replace ICD). Otherwise go to next step.</string>
     <string name="slide_step2_heading_text">Is this an upgrade from a single to
-        a dual chamber pacemaker?  If so use code 33244 which covers this entire procedure.
+        a dual chamber pacemaker?  If so use code 33214 which covers this entire procedure.
         If you are also adding an LV cardiac vein lead add code +33225.
         Exit the wizard by using the back button
         on your device. Otherwise go to the next step.</string>
