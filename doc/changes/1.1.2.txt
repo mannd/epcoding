@@ -1,0 +1,17 @@
+EP Coding v1.1.2 Release Notes
+
+Changes since v1.1.1
+
+* Fixed erroneous incapatibility of codes 33225 and 33214
+
+Changes since v1.1
+
+* Fixed wrong PPM upgrade code in Device Wizard
+
+Changes since v1.0
+
+* Added Search capability
+
+* Added Device Wizard to guide user through device upgrades/revisions
+
+* Added/revised a few codes
