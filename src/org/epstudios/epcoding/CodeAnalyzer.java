@@ -146,7 +146,7 @@ public class CodeAnalyzer {
 	private final static List<CodeError> createFirstCodeNeedsOtherCodes() {
 		List<CodeError> codeErrors = new ArrayList<CodeError>();
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
-				.asList("33225", "33206", "33207", "33208", "33249"),
+				.asList("33225", "33206", "33207", "33208", "33249", "33214"),
 				"Must use 33225 with new device implant code"));
 		return codeErrors;
 	}

@@ -278,9 +278,7 @@
    - use C-c @ to select EP Coding Help headline
    - [[EP Coding Help]]
    - C-c C-e export to html, buffer
-   - Save buffer to help.html
-   - import into strings, or use as resource file
-   - export html to assets/help.html
+   - Save buffer to help.html in assets directory
    - Note I have added (setq org-export-html-postamble nil) in
      ~/.emacs to suppress footer information.
    - Above group of statements in buffer are for formatting the HTML
