@@ -34,7 +34,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class About extends Activity {
-	private final static String VERSION = "1.1.2";
+	private final static String VERSION = "1.1.3";
 
 	private TextView versionTextView;
 
