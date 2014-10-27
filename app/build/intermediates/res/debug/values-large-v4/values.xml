@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <!-- From: file:/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/values-large/refs.xml -->
-    <eat-comment />
-
-    <item name="activity_procedure_list" type="layout">@layout/activity_procedure_twopane</item>
-
-</resources>
