@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="2" >
+
+    <dataSet config="main" >
+        <source path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/assets" >
+            <file
+                name="help.html"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/assets/help.html" />
+        </source>
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/debug/assets" />
+    </dataSet>
+
+</merger>

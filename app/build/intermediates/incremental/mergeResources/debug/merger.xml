@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger
+    version="2"
+    xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" >
+
+    <dataSet config="main" >
+        <source path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res" >
+            <file
+                name="epcodericon"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/drawable-hdpi/epcodericon.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="epcodericon"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/drawable-mdpi/epcodericon.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="epcodericon"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/drawable-xhdpi/epcodericon.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="epcodericon"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/drawable-xxhdpi/epcodericon.png"
+                qualifiers="xxhdpi-v4"
+                type="drawable" />
+            <file
+                name="epcodericon"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/drawable-xxxhdpi/epcodericon.png"
+                qualifiers="xxxhdpi-v4"
+                type="drawable" />
+            <file
+                name="about"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/layout/about.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_procedure_detail"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/layout/activity_procedure_detail.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_procedure_list"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/layout/activity_procedure_list.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_procedure_twopane"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/layout/activity_procedure_twopane.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_screen_slide"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/layout/activity_screen_slide.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="fragment_screen_slide_page"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/layout/fragment_screen_slide_page.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="procedure_codes"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/layout/procedure_codes.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="search"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/layout/search.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_screen_slide"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/menu/activity_screen_slide.xml"
+                qualifiers=""
+                type="menu" />
+            <file
+                name="helpmenu"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/menu/helpmenu.xml"
+                qualifiers=""
+                type="menu" />
+            <file
+                name="menu"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/menu/menu.xml"
+                qualifiers=""
+                type="menu" />
+            <file
+                name="shortmenu"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/menu/shortmenu.xml"
+                qualifiers=""
+                type="menu" />
+            <file
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/values/arrays.xml"
+                qualifiers="" >
+                <array name="verbosity_values" >
+                    <item>
+Verbose
+                    </item>
+                    <item>
+Brief
+                    </item>
+                    <item>
+None
+                    </item>
+                </array>
+                <array name="verbosity_names" >
+                    <item>
+Verbose
+                    </item>
+                    <item>
+Brief
+                    </item>
+                    <item>
+None
+                    </item>
+                </array>
+            </file>
+            <file
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/values/ids.xml"
+                qualifiers="" >
+                <item
+                    name="action_flip"
+                    type="id"/>
+                <item
+                    name="action_next"
+                    type="id"/>
+            </file>
+            <file
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/values/strings.xml"
+                qualifiers="" >
+                <string name="all_addons_verbose_error_message" >Add-on codes must only be added to regular codes.
+                </string>
+                <string name="action_finish" >Finish
+                </string>
+                <string name="hints_title" >Hints
+                </string>
+                <string name="help_title" >Help
+                </string>
+                <string name="afb_ablation_help_text" >AFB ablation includes comprehensive EP testing, including LA
+	    recording and pacing.  It also includes transseptal
+	    catheterization, therefore these codes cannot be added on.
+	    Mapping codes and coding for programmed stimulation after IV drug infusion can be
+	    added.  The primary code includes pulmonary vein isolation.  Add
+	    code 93657 if additional ablation for AFB is done (such as linear
+	    atrial ablation) and add 93655 if a separate arrhythmia mechanism
+	    is ablated (such as focal atrial tachycardia).
+                </string>
+                <string name="new_ppm_help_text" >These codes are used for implantation of a pacemaker
+        generator and lead(s).  Use the code that corresponds to the lead(s) put in.
+        Use 33208 and 33225 for implantion of a pacemaker with CRT (i.e. with a
+        coronary sinus lead).  These codes are also used when there is removal of 
+        a prior system (generator and leads) and replacement with new generator and
+        leads.  Do not use these codes for simple generator replacements.
+                </string>
+                <string name="new_icd_help_text" >A new single or dual chamber ICD with new leads 
+        is coded with the same code, 33249.  Code 33225 is added to 33249 if an
+        LV/coronary sinus lead is added.  Use 93641 for DFT testing at the time
+        of the implant.  These codes are also used if an ICD system (generator and
+        leads) is removed and replaced with a new generator and leads.  Do not
+        use these codes for simple generator replacement.
+                </string>
+                <string name="device_upgrade_title" >Upgrade/Revision/Extraction
+                </string>
+                <string name="clear_label" >Clear
+                </string>
+                <string name="icd_replacement_help_text" >These codes are used for ICD generator
+        replacement only.  Use the primary code that is specific to the type
+        of generator being replaced.  Do not use these codes for system revisions or
+        upgrades.  A common additional code is 93641 for DFT testing during the
+        procedure.
+                </string>
+                <string name="all_addons_error_message" >All codes are add-on codes.
+                </string>
+                <string name="truncate_long_descriptions_code_summary_key" >truncate_long_descriptions_code_summary
+                </string>
+                <string name="code_check_all_codes_summary" >Perform analysis in All EP Codes module
+                </string>
+                <string name="code_analysis_verbosity_label" >Code analysis detail
+                </string>
+                <string name="action_previous" >Previous
+                </string>
+                <string name="settings_title" >Settings
+                </string>
+                <string name="av_node_ablation_help_text" >It is not clear if electrophysiologic testing and mapping can be
+	    billed as additional codes to AV node ablation.  Often AV node
+	    ablation is combined with device implant at the same setting and
+	    these codes should be added.
+                </string>
+                <string name="show_code_details_label" >Show descriptions
+                </string>
+                <string name="truncate_code_descriptions_summary" >Long descriptions can clutter screen
+                </string>
+                <string name="avn_ablation_title" >AV Node Ablation
+                </string>
+                <string name="no_secondary_codes_verbose_message" >Be certain there aren\'t other codes that you are overlooking.
+                </string>
+                <string name="other_procedure_help_text" >These are miscellaneous EP procedures
+        and their coding is quite straightforard.  Just pick the code(s) you need.
+                </string>
+                <string name="empty_message" ></string>
+                <string name="ep_testing_help_text" >The most commonly used codes for EP testing is 
+        93620.  EP testing is not coded separately if ablation is performed.
+	    Mapping can be added to EP testing codes, as well as LA pacing and
+	    recording, programmed stimulation after IV drug, etc.  The two
+	    primary codes lists are the most commonly used, other rarely used
+	    codes, such as His bundle recording only (93600) are listed in
+	    the All EP Codes module, but probably should be avoided.
+                </string>
+                <string name="subq_icd_title" >SubQ ICD
+                </string>
+                <string name="wizard_title" >Device Wizard
+                </string>
+                <string name="action_next" >Next
+                </string>
+                <string name="no_primary_codes_message" >No primary codes.
+                </string>
+                <string name="no_code_errors_message" >No errors or warnings.
+                </string>
+                <string name="search_hint" >Search codes
+                </string>
+                <string name="ppm_replacement_title" >Replace PPM
+                </string>
+                <string name="show_add_on_plus_label" >Distinguish add-on codes
+                </string>
+                <string name="afb_ablation_title" >AFB Ablation
+                </string>
+                <string name="show_add_on_plus_off_summary" >Add-on codes don\'t have +
+                </string>
+                <string name="primary_codes_label" >Primary Code(s)
+                </string>
+                <string name="add_on_codes_label" >Additional Code(s)
+                </string>
+                <string name="svt_ablation_help_text" >SVT ablation includes comprehensive EP testing, but can be
+	    combined with the other codes listed.  Note that the SVT ablation
+	    code (93653) is used not just for supraventricular tachycardia,
+	    but for WPW ablation, atrial flutter ablation, atrial tachycardia
+	    ablation, and presumably premature atrial complex ablation.  If
+	    more than one arrhythmia mechanism is ablated, add code 93655.
+                </string>
+                <string name="all_codes_help_text" >As an alternative to using the procedure 
+        oriented choices in EP
+	    Coding, the All EP Codes module allows you to pick any of the codes in
+	    any combination.  This may be useful if you are doing something
+	    unusual that is not covered in the other procedure lists, or if
+	    you are very familiar with how to use the codes and just want to
+	    select from the complete list.  The list is ordered by code number.
+	    By default there is NO analysis of coding in
+	    this list, though this can be turned on in Settings.  It is possible to enter 
+	    combinations of codes that
+	    conflict.  As always, with increased freedom comes increased risk.
+                </string>
+                <string name="about_label" >EP Coding
+                </string>
+                <string name="no_secondary_codes_message" >No additional codes selected.
+                </string>
+                <string name="svt_ablation_title" >SVT Ablation
+                </string>
+                <string name="show_code_details_off_summary" >Show codes only
+                </string>
+                <string name="icd_replacement_title" >Replace ICD
+                </string>
+                <string name="title_template_step" >Step 
+<ns1:g id="step_number" >
+%1$d
+                    </ns1:g>: Device
+        Wizard
+                </string>
+                <string name="about_text" >Copyright \u00a9 2013, 2014 EP Studios, Inc.
+		\nAll rights reserved.\n
+                </string>
+                <string name="code_check_all_codes_label" >Check codes in All EP Codes
+                </string>
+                <string name="all_codes_primary_title" >All EP Procedure Codes
+                </string>
+                <string name="truncate_code_descriptions_label" >Truncate descriptions
+                </string>
+                <string name="no_secondary_codes_error_message" >Only additional codes can be saved. This group has only primary codes.
+                </string>
+                <string name="code_verbosity_key" >code_verbosity
+                </string>
+                <string name="code_check_all_codes_key" >code_check_all_codes
+                </string>
+                <string name="show_details_code_summary_key" >show_details_code_summary
+                </string>
+                <string name="default_verbosity" >Verbose
+                </string>
+                <string name="wizard_test_text" >Test text for the Coding Wizard.
+                </string>
+                <string name="slide_step1_heading_text" >Is this a new implant or simple generator
+        replacement? If so exit this wizard by using the back button on your device and
+        go directly to the appropriate module (e.g. New PPM, New ICD, Replace PPM,
+        or Replace ICD). Otherwise go to next step.
+                </string>
+                <string name="upgrade_device_help_text" >This module contains a grab-bag of codes,
+        and these procedures are definitely the most difficult to code.  If you are
+        just replacing a generator, use the Replace ICD or Replace PPM modules.  If
+        you are upgrading devices, changing from PPMs to ICDs, adding leads,
+        extracting leads, removing generators without replacment, this module
+        should have the codes you need.  The basic prinicple to follow is to
+        use specific codes for what you are removing (leads or generators) and then
+        use codes for new complete systems.  Example - upgrade dual chamber PPM or
+        ICD with CRT, old leads left in place: 33233 (removal of PPM generator only),
+        33249 (insert single or dual chamber ICD with leads), and 33225 (add coronary
+        sinus lead).  However there is a code (33214) to upgrade a single chamber to
+        a dual chamber PPM.  Example - upgrade single chamber PPM to PPM
+        with CRT: 33214 (upgrade single to dual chamber PPM, includes new lead) and
+        33225 (add CS lead).  Finally here is upgrade of single chamber ICD to ICD
+        with CRT: 33249 (Insert new/replacement ICD with single or dual leads), 33225
+        (add CS lead) and 33241 (removal of ICD generator only).  If you are
+        unsure how to code something, check with your coders.
+                </string>
+                <string name="coding_summary_label" >Summarize
+                </string>
+                <string name="save_code_selection_error_message" >First select a procedure
+                </string>
+                <string name="no_data_label" >No matches found!
+                </string>
+                <string name="no_primary_codes_verbose_message" >You shouldn\'t just have additional codes.
+                </string>
+                <string name="no_code_analysis_performed_message" >No code analysis performed in this module.
+                </string>
+                <string name="about_title" >About
+                </string>
+                <string name="subq_icd_help_text" >SubQ ICD codes are new and will probably
+        be changed as the procedure becomes established.  There are no real
+        guidelines yet for using these codes.  These codes are not checked for
+        consistency when you summarize them.
+                </string>
+                <string name="no_codes_selected_label" >No codes selected.
+                </string>
+                <string name="no_mapping_codes_verbose_message" >You should be able to code 2D or 3D mapping for this kind of ablation.
+                </string>
+                <string name="devices_help_text" >Temp device procedures help text
+                </string>
+                <string name="other_procedure_title" >Other Procedure
+                </string>
+                <string name="show_add_on_plus_on_summary" >Add-on codes have +
+                </string>
+                <string name="app_name" >EP Coding
+                </string>
+                <string name="all_codes_title" >All EP Codes
+                </string>
+                <string name="vt_ablation_title" >VT Ablation
+                </string>
+                <string name="show_code_details_on_summary" >Show codes and descriptions
+                </string>
+                <string name="coding_summary_dialog_label" >Summary
+                </string>
+                <string name="search_title" >Search
+                </string>
+                <string name="slide_step2_heading_text" >Is this an upgrade from a single to
+        a dual chamber pacemaker?  If so use code 33214 which covers this entire procedure.
+        If you are also adding an LV cardiac vein lead add code +33225.
+        Exit the wizard by using the back button
+        on your device. Otherwise go to the next step.
+                </string>
+                <string name="show_plus_code_summary_key" >show_plus_code_summary
+                </string>
+                <string name="slide_step3_heading_text" >Is this a lead revision or repair or a pocket revision
+        without adding or removing any hardware?  If so use one of the codes below and
+        exit the wizard by using the back button on your device.  Otherwise
+        go on to the next step.
+                </string>
+                <string name="save_code_selection_title" >Save
+                </string>
+                <string name="no_mapping_codes_message" >No mapping codes for ablation.
+                </string>
+                <string name="slide_step5_heading_text" >Now if you added any hardware, code what you added.
+        If you added a generator and leads, use the new or replacement system codes (e.g. new single
+        chamber PPM).  If you just added a lead or a generator, code for the specific device(s) you
+        added.  Then go to the next step.
+                </string>
+                <string name="new_icd_title" >New ICD
+                </string>
+                <string name="vt_ablation_help_text" >VT ablation includes comprehensive EP
+        testing.  Mapping codes (93609 or 93613), for reasons only known to the
+	    AMA, cannot be combined with the 93654 VT ablation code.
+	    This is unlike the AFB and SVT ablation codes.  LV pacing and
+	    recording also cannot be combined with VT ablation.
+                </string>
+                <string name="slide_step4_heading_text" >OK. We have addressed the simple scenarios.
+        What\'s left are lead and generator removals/extractions,
+        and device upgrades. Start off by selecting what hardware (if any) was
+        removed, and then go to the next step.
+                </string>
+                <string name="title_procedure_detail" >Coding
+                </string>
+                <string name="slide_step6_heading_text" >Did you do anything else? If so select from the choices
+   	    below. Select Finish to see a summary of your codes.
+                </string>
+                <string name="ep_testing_title" >EP Testing
+                </string>
+                <string name="new_ppm_title" >New PPM
+                </string>
+            </file>
+            <file
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/values/styles.xml"
+                qualifiers="" >
+
+                <style
+                    name="AppTheme"
+                    parent="AppBaseTheme" >
+
+                    <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+                </style>
+
+                <style
+                    name="AppBaseTheme"
+                    parent="android:Theme.Light" >
+
+                    <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+                    -->
+                </style>
+            </file>
+            <file
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/values-large/refs.xml"
+                qualifiers="large-v4" >
+                <item
+                    name="activity_procedure_list"
+                    type="layout">
+@layout/activity_procedure_twopane
+                </item>
+            </file>
+            <file
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/values-sw600dp/refs.xml"
+                qualifiers="sw600dp-v13" >
+                <item
+                    name="activity_procedure_list"
+                    type="layout">
+@layout/activity_procedure_twopane
+                </item>
+            </file>
+            <file
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/values-v11/styles.xml"
+                qualifiers="v11" >
+
+                <style
+                    name="AppBaseTheme"
+                    parent="android:Theme.Holo.Light" >
+
+                    <!-- API 11 theme customizations can go here. -->
+                </style>
+            </file>
+            <file
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/values-v14/styles.xml"
+                qualifiers="v14" >
+
+                <style
+                    name="AppBaseTheme"
+                    parent="android:Theme.Holo.Light.DarkActionBar" >
+
+                    <!-- API 14 theme customizations can go here. -->
+                </style>
+            </file>
+            <file
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/values-v21/colors.xml"
+                qualifiers="v21" >
+                <color name="primary" >#03a9f4
+                </color>
+                <color name="accent" >#40c4ff
+                </color>
+                <color name="primary_dark" >#0288d1
+                </color>
+            </file>
+            <file
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/values-v21/styles.xml"
+                qualifiers="v21" >
+
+                <style
+                    name="AppBaseTheme"
+                    parent="android:Theme.Material.Light.DarkActionBar" >
+
+                    <!-- Main theme colors -->
+                    <!-- your app's branding color (for the app bar) -->
+                    <item name="android:colorPrimary">
+@color/primary
+                    </item>
+                    <!-- darker variant of colorPrimary (for status bar, contextual app bars) -->
+                    <item name="android:colorPrimaryDark">
+@color/primary_dark
+                    </item>
+                    <!-- theme UI controls like checkboxes and text fields -->
+                    <item name="android:colorAccent">
+@color/accent
+                    </item>
+                </style>
+            </file>
+            <file
+                name="searchable"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/xml/searchable.xml"
+                qualifiers=""
+                type="xml" />
+            <file
+                name="settings"
+                path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/main/res/xml/settings.xml"
+                qualifiers=""
+                type="xml" />
+        </source>
+        <source path="/Users/mannd/AndroidstudioProjects/epcoding/app/build/generated/res/rs/debug" />
+        <source path="/Users/mannd/AndroidstudioProjects/epcoding/app/build/generated/res/generated/debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="/Users/mannd/AndroidstudioProjects/epcoding/app/src/debug/res" />
+    </dataSet>
+
+</merger>
