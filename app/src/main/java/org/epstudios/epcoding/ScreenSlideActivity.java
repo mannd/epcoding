@@ -32,6 +32,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -50,7 +52,7 @@ import android.view.MenuItem;
  * 
  * @see ScreenSlidePageFragment
  */
-public class ScreenSlideActivity extends FragmentActivity {
+public class ScreenSlideActivity extends ActionBarActivity {
 	/**
 	 * The number of pages (wizard steps) to show in this demo.
 	 */
@@ -71,6 +73,10 @@ public class ScreenSlideActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_screen_slide);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+        }
 
 		// Instantiate a ViewPager and a PagerAdapter.
 		mPager = (ViewPager) findViewById(R.id.pager);

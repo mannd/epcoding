@@ -36,6 +36,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -59,7 +61,7 @@ import android.widget.Toast;
  * {@link ProcedureListFragment.Callbacks} interface to listen for item
  * selections.
  */
-public class ProcedureListActivity extends FragmentActivity implements
+public class ProcedureListActivity extends ActionBarActivity implements
 		ProcedureListFragment.Callbacks {
 
 	/**
@@ -72,6 +74,10 @@ public class ProcedureListActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_procedure_list);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+        }
 
 		if (findViewById(R.id.procedure_detail_container) != null) {
 			// The detail container view will be present only in the

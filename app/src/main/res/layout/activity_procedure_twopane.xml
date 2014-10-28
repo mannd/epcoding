@@ -10,6 +10,9 @@
     android:showDividers="middle"
     tools:context=".ProcedureListActivity" >
 
+    <include layout="@layout/toolbar"/>
+
+
     <!--
     This layout is a two-pane layout for the Procedures
     master/detail flow. See res/values-large/refs.xml and
