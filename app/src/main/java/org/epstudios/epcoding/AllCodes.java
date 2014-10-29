@@ -52,7 +52,7 @@ public class AllCodes implements Procedure {
 	public Code[] secondaryCodes() {
 		Code[] codes = {};
 		return codes;
-	}
+    }
 
 	@Override
 	public String[] disabledCodeNumbers() {

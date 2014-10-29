@@ -32,7 +32,7 @@ package org.epstudios.epcoding;
 import android.content.Context;
 import android.widget.CheckBox;
 
-public class CodeCheckBox extends CheckBox {
+class CodeCheckBox extends CheckBox {
 	private Code code;
 	private boolean codeFirst = false;
 

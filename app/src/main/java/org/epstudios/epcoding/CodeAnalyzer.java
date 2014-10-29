@@ -37,7 +37,7 @@ import java.util.Set;
 
 import android.content.Context;
 
-public class CodeAnalyzer {
+class CodeAnalyzer {
 	private final Code[] codes;
 	private final boolean noPrimaryCodes;
 	private final boolean noSecondaryCodes;
@@ -73,7 +73,7 @@ public class CodeAnalyzer {
 	// There code errors occur when any 2 or more of the codes occur.
 	private final static List<CodeError> duplicateCodeErrors = createDuplicateCodeErrors();
 
-	private final static List<CodeError> createDuplicateCodeErrors() {
+	private static List<CodeError> createDuplicateCodeErrors() {
 		List<CodeError> codeErrors = new ArrayList<CodeError>();
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR,
 				mappingCodes, DUPLICATE_MAPPING_ERROR));
@@ -108,7 +108,7 @@ public class CodeAnalyzer {
 	// the set should not be used with any of the other codes.
 	private final static List<CodeError> specialFirstCodeErrors = createSpecialFirstCodeErrors();
 
-	private final static List<CodeError> createSpecialFirstCodeErrors() {
+	private static List<CodeError> createSpecialFirstCodeErrors() {
 		List<CodeError> codeErrors = new ArrayList<CodeError>();
 		codeErrors
 				.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays.asList(
@@ -143,7 +143,7 @@ public class CodeAnalyzer {
 	// use this for error when first code must be added on to other codes
 	private final static List<CodeError> firstCodeNeedsOtherCodes = createFirstCodeNeedsOtherCodes();
 
-	private final static List<CodeError> createFirstCodeNeedsOtherCodes() {
+	private static List<CodeError> createFirstCodeNeedsOtherCodes() {
 		List<CodeError> codeErrors = new ArrayList<CodeError>();
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("33225", "33206", "33207", "33208", "33249", "33214"),
@@ -262,7 +262,7 @@ public class CodeAnalyzer {
 			List<String> badCombo = codeError.getCodes();
 			List<String> badCodeList = hasBadCombo(badCombo, codeNumbers);
 			if (badCodeList.size() > 1) {
-				errorCodes += addToErrorMessage(errorCodes, codeError,
+				errorCodes += addToErrorMessage(codeError,
 						badCodeList);
 			}
 		}
@@ -280,7 +280,7 @@ public class CodeAnalyzer {
 			if (codeNumbers.contains(badCombo.get(0))) {
 				List<String> badCodeList = hasBadCombo(badCombo, codeNumbers);
 				if (badCodeList.size() > 1) {
-					errorCodes += addToErrorMessage(errorCodes, codeError,
+					errorCodes += addToErrorMessage(codeError,
 							badCodeList);
 				}
 			}
@@ -298,7 +298,7 @@ public class CodeAnalyzer {
 			if (codeNumbers.contains(badCombo.get(0))) {
 				List<String> badCodeList = hasBadCombo(badCombo, codeNumbers);
 				if (badCodeList.size() == 1) { // oops only first code present
-					errorCodes += addToErrorMessage(errorCodes, codeError,
+					errorCodes += addToErrorMessage(codeError,
 							badCodeList);
 				}
 			}
@@ -306,8 +306,7 @@ public class CodeAnalyzer {
 		return errorCodes;
 	}
 
-	private String addToErrorMessage(final String message,
-			final CodeError codeError, final List<String> badCodeList) {
+	private String addToErrorMessage(final CodeError codeError, final List<String> badCodeList) {
 		CodeError.WarningLevel warningLevel = codeError.getWarningLevel();
 		String warning = "";
 		switch (warningLevel) {

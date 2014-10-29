@@ -46,12 +46,12 @@ public class ProcedureTypes {
 	/**
 	 * An array of sample (dummy) items.
 	 */
-	public static List<ProcedureType> ITEMS = new ArrayList<ProcedureType>();
+	public static final List<ProcedureType> ITEMS = new ArrayList<ProcedureType>();
 
 	/**
 	 * A map of sample (dummy) items, by ID.
 	 */
-	public static Map<String, ProcedureType> ITEM_MAP = new HashMap<String, ProcedureType>();
+	public static final Map<String, ProcedureType> ITEM_MAP = new HashMap<String, ProcedureType>();
 
 	static {
 		// Add 3 sample items.
@@ -79,8 +79,8 @@ public class ProcedureTypes {
 	 * A dummy item representing a piece of content.
 	 */
 	public static class ProcedureType {
-		public String id;
-		public String content;
+		public final String id;
+		public final String content;
 
 		public ProcedureType(String id, String content) {
 			this.id = id;

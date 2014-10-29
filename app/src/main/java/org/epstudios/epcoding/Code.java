@@ -47,7 +47,7 @@ public class Code {
 		this.isAddOn = isAddOn;
 	}
 
-	public String getCodeNumberWithAddOn() {
+	String getCodeNumberWithAddOn() {
 		return (isAddOn && plusShown ? "+" : "") + code;
 	}
 
@@ -59,7 +59,7 @@ public class Code {
 		return code;
 	}
 
-	public String getShortDescription() {
+	String getShortDescription() {
 		return shortDescription;
 	}
 

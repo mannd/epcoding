@@ -31,7 +31,7 @@ package org.epstudios.epcoding;
 
 import android.content.Context;
 
-public interface Procedure {
+interface Procedure {
 	String title(Context context);
 
 	Code[] primaryCodes();

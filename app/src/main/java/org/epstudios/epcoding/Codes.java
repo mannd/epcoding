@@ -36,11 +36,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Codes {
+class Codes {
 
 	private final static Map<String, Code> allCodes = createMap();
 
-	private final static Map<String, Code> createMap() {
+	private static Map<String, Code> createMap() {
 		Map<String, Code> map = new HashMap<String, Code>();
 		// addCode(map, String codeNumber, String codeName, boolean isAddOn)
 
@@ -243,7 +243,7 @@ public class Codes {
 			"93619", "93620", "93609", "93613", "33207", "33208", "33210",
 			"33249", "33225", "92960", "92961" };
 
-	public final static String[] deviceSecondaryCodeNumbers = { "33210",
+	private final static String[] deviceSecondaryCodeNumbers = { "33210",
 			"33218", "33220", "92960", "92961" };
 
 	public final static String[] upgradeSecondaryCodeNumbers = { "33210",
@@ -263,13 +263,13 @@ public class Codes {
 	public final static String[] epTestingDisabledCodeNumbers = { "93657",
 			"93655" };
 
-	private final static void addCode(Map<String, Code> map, String codeNumber,
+	private static void addCode(Map<String, Code> map, String codeNumber,
 			String name, boolean isAddOn) {
 		map.put(codeNumber, new Code(codeNumber, name, isAddOn));
 
 	}
 
-	public final static Code getCode(String code) {
+	public static Code getCode(String code) {
 		return allCodes.get(code);
 	}
 
