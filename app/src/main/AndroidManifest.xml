@@ -58,10 +58,6 @@
             android:label="@string/help_title" >
         </activity>
         <activity
-            android:name=".Hints"
-            android:label="@string/hints_title" >
-        </activity>
-        <activity
             android:name=".ScreenSlideActivity"
             android:label="@string/wizard_title"
             android:parentActivityName=".ProcedureListActivity"
