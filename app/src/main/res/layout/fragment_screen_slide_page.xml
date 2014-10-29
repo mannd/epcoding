@@ -25,8 +25,6 @@
         android:orientation="vertical"
         android:padding="16dp" >
 
-        <include layout="@layout/toolbar"/>
-
 
         <TextView
             android:id="@android:id/text1"

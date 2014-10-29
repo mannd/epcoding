@@ -74,10 +74,6 @@ public class ProcedureListActivity extends ActionBarActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_procedure_list);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
-        }
 
 		if (findViewById(R.id.procedure_detail_container) != null) {
 			// The detail container view will be present only in the

@@ -6,8 +6,6 @@
     android:paddingLeft="8dp"
     android:paddingRight="8dp" >
 
-    <include layout="@layout/toolbar"/>
-
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
