@@ -74,6 +74,8 @@ public class ProcedureListActivity extends ActionBarActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_procedure_list);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
 		if (findViewById(R.id.procedure_detail_container) != null) {
 			// The detail container view will be present only in the
@@ -125,15 +127,15 @@ public class ProcedureListActivity extends ActionBarActivity implements
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.shortmenu, menu);
 		// Get the SearchView and set the searchable configuration
-		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-		SearchView searchView = (SearchView) menu.findItem(R.id.search)
-				.getActionView();
-		// Assumes current activity is the searchable activity
-		searchView.setSearchableInfo(searchManager
-				.getSearchableInfo(getComponentName()));
-		Log.d("EPCODING", getComponentName().toString());
-		searchView.setIconifiedByDefault(false); // Do not iconify the widget;
-													// expand it by default
+//		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//		SearchView searchView = (SearchView) menu.findItem(R.id.search)
+//				.getActionView();
+//		// Assumes current activity is the searchable activity
+//		searchView.setSearchableInfo(searchManager
+//				.getSearchableInfo(getComponentName()));
+//		Log.d("EPCODING", getComponentName().toString());
+//		searchView.setIconifiedByDefault(false); // Do not iconify the widget;
+//													// expand it by default
 
 		return super.onCreateOptionsMenu(menu);
 	}
