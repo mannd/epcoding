@@ -136,7 +136,7 @@ public class ProcedureListActivity extends ActionBarActivity implements
 //				.getSearchableInfo(getComponentName()));
 //		Log.d("EPCODING", getComponentName().toString());
 //		searchView.setIconifiedByDefault(false); // Do not iconify the widget;
-//													// expand it by default
+													// expand it by default
 
 		return super.onCreateOptionsMenu(menu);
 	}
