@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/toolbar" />
+
+
+    <fragment
     android:id="@+id/procedure_list"
     android:name="org.epstudios.epcoding.ProcedureListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginRight="0dip"
-    android:layout_marginLeft="0dip"
+    android:layout_marginRight="16dip"
+    android:layout_marginLeft="16dip"
 
     tools:context=".ProcedureListActivity"
     tools:layout="@android:layout/list_content">
 
-    <include layout="@layout/toolbar" />
 
 </fragment>
 
+</LinearLayout>
 
 
-    <!--android:layout_marginLeft="16dp"-->
-    <!--android:layout_marginRight="16dp"-->
+

@@ -40,20 +40,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.webkit.WebView;
 
-public class Help extends FragmentActivity {
+public class Help extends ActionBarActivity {
 	private WebView webView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// setContentView(R.layout.help);
+		setContentView(R.layout.help);
 		String url = "file:///android_asset/help.html";
-		webView = new WebView(this);
-		setContentView(webView);
-		// webView = (WebView) findViewById(R.id.help_html_content);
+		//webView = new WebView(this);
+		//setContentView(webView);
+		webView = (WebView) findViewById(R.id.webView);
 		webView.loadUrl(url);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 	}
 
