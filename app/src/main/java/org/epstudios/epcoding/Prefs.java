@@ -31,17 +31,28 @@ package org.epstudios.epcoding;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-public class Prefs extends PreferenceActivity {
+public class Prefs extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        setContentView(R.layout.prefs);
 
-		// Display the fragment as the main content.
-		getFragmentManager().beginTransaction()
-				.replace(android.R.id.content, new SettingsFragment()).commit();
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+        // Display the fragment as the main content.
+//		getFragmentManager().beginTransaction()
+//				.replace(android.R.id.content, new SettingsFragment()).commit();
+        getFragmentManager().beginTransaction()
+                .replace(R.id.content_frame,
+                        new MyPreferenceFragment()).commit();
 
 	}
 
