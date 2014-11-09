@@ -30,6 +30,8 @@ This file is part of EP Coding.
 package org.epstudios.epcoding;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.widget.CheckBox;
 
 public class CodeCheckBox extends CheckBox {
@@ -38,6 +40,7 @@ public class CodeCheckBox extends CheckBox {
 
 	public CodeCheckBox(Context context) {
 		super(context);
+        //set(getResources().getColor(R.color.accent));
 		// TODO Auto-generated constructor stub
 		// default code is error code
 		code = Codes.getCode("99999");
