@@ -43,6 +43,7 @@ public class CodeCheckBox extends CheckBox {
 		code = Codes.getCode("99999");
 	}
 
+
 	public void setCode(Code c) {
 		code = c;
 		// text is automatically set to code description

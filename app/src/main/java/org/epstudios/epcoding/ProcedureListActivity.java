@@ -36,13 +36,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.SearchView;
+import android.support.v7.widget.SearchView;
 import android.widget.Toast;
 
 /**
@@ -128,15 +129,14 @@ public class ProcedureListActivity extends ActionBarActivity implements
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.shortmenu, menu);
 		// Get the SearchView and set the searchable configuration
-//		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//		SearchView searchView = (SearchView) menu.findItem(R.id.search)
-//				.getActionView();
-//		// Assumes current activity is the searchable activity
-//		searchView.setSearchableInfo(searchManager
-//				.getSearchableInfo(getComponentName()));
-//		Log.d("EPCODING", getComponentName().toString());
-//		searchView.setIconifiedByDefault(false); // Do not iconify the widget;
-													// expand it by default
+		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+		// Assumes current activity is the searchable activity
+		searchView.setSearchableInfo(searchManager
+                .getSearchableInfo(getComponentName()));
+		Log.d("EPCODING", getComponentName().toString());
+		searchView.setIconifiedByDefault(false); // Do not iconify the widget;
+												//	expand it by default
 
 		return super.onCreateOptionsMenu(menu);
 	}
