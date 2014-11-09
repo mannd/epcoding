@@ -40,8 +40,6 @@ public class CodeCheckBox extends CheckBox {
 
 	public CodeCheckBox(Context context) {
 		super(context);
-        //set(getResources().getColor(R.color.accent));
-		// TODO Auto-generated constructor stub
 		// default code is error code
 		code = Codes.getCode("99999");
 	}
