@@ -33,6 +33,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class About extends Activity {
 	private final static String VERSION = "1.1.3";
 

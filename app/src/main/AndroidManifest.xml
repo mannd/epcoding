@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="org.epstudios.epcoding"
     android:versionCode="5"
     android:versionName="1.1.3" >
-
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="21" />
 
     <application
         android:allowBackup="true"
@@ -38,7 +35,8 @@
         <activity
             android:name="org.epstudios.epcoding.ProcedureDetailActivity"
             android:label="@string/title_procedure_detail"
-            android:parentActivityName=".ProcedureListActivity" >
+            android:parentActivityName=".ProcedureListActivity"
+            tools:ignore="UnusedAttribute">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ProcedureListActivity" />
@@ -60,14 +58,11 @@
             android:label="@string/help_title" >
         </activity>
         <activity
-            android:name=".Hints"
-            android:label="@string/hints_title" >
-        </activity>
-        <activity
             android:name=".ScreenSlideActivity"
             android:label="@string/wizard_title"
             android:parentActivityName=".ProcedureListActivity"
-            android:uiOptions="splitActionBarWhenNarrow" >
+            android:uiOptions="splitActionBarWhenNarrow"
+            tools:ignore="UnusedAttribute">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ProcedureListActivity" />

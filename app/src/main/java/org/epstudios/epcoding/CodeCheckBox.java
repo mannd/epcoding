@@ -34,7 +34,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.widget.CheckBox;
 
-public class CodeCheckBox extends CheckBox {
+class CodeCheckBox extends CheckBox {
 	private Code code;
 	private boolean codeFirst = false;
 

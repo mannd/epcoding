@@ -57,6 +57,7 @@ import android.widget.Toast;
  * either contained in a {@link ProcedureListActivity} in two-pane mode (on
  * tablets) or a {@link ProcedureDetailActivity} on handsets.
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class ProcedureDetailFragment extends Fragment implements
 		OnClickListener {
 	/**
@@ -76,22 +77,14 @@ public class ProcedureDetailFragment extends Fragment implements
 	// Settings
 	// boolean plusShownInDisplay; // show plus in main display
 	// boolean allowChangingPrimaryCodes;
-	boolean plusShownInSummary;
+    private boolean plusShownInSummary;
 	boolean codeDescriptionInSummary;
-	boolean descriptionTruncatedInSummary;
+	private boolean descriptionTruncatedInSummary;
 	boolean codeCheckAllCodes;
-	String codeVerbosity;
+	private String codeVerbosity;
 	// shorten description based on screen width?
 
-	private LinearLayout primaryCheckBoxLayout;
-	private LinearLayout secondaryCheckBoxLayout;
-	private TextView primaryCodeTextView;
-	private TextView secondaryCodeTextView;
-
-	private Button summarizeButton;
-	private Button clearButton;
-
-	// don't try to refactor these using Utilies.createCheckBoxLayoutAndCodeMap,
+    // don't try to refactor these using Utilies.createCheckBoxLayoutAndCodeMap,
 	// as then will have to put in many check for null map.
 	private final Map<String, CodeCheckBox> primaryCheckBoxMap = new LinkedHashMap<String, CodeCheckBox>();
 	private final Map<String, CodeCheckBox> secondaryCheckBoxMap = new LinkedHashMap<String, CodeCheckBox>();
@@ -184,14 +177,14 @@ public class ProcedureDetailFragment extends Fragment implements
 				false);
 		context = getActivity();
 
-		primaryCheckBoxLayout = (LinearLayout) rootView
-				.findViewById(R.id.primary_checkbox_layout);
-		secondaryCheckBoxLayout = (LinearLayout) rootView
-				.findViewById(R.id.secondary_checkbox_layout);
-		primaryCodeTextView = (TextView) rootView
-				.findViewById(R.id.primary_code_textView);
-		secondaryCodeTextView = (TextView) rootView
-				.findViewById(R.id.secondary_code_textView);
+        LinearLayout primaryCheckBoxLayout = (LinearLayout) rootView
+                .findViewById(R.id.primary_checkbox_layout);
+        LinearLayout secondaryCheckBoxLayout = (LinearLayout) rootView
+                .findViewById(R.id.secondary_checkbox_layout);
+        TextView primaryCodeTextView = (TextView) rootView
+                .findViewById(R.id.primary_code_textView);
+        TextView secondaryCodeTextView = (TextView) rootView
+                .findViewById(R.id.secondary_code_textView);
 
 		loadSettings();
 
@@ -264,7 +257,7 @@ public class ProcedureDetailFragment extends Fragment implements
 			secondaryCheckBoxMap.get(disabledCodeNumbers[i]).disable();
 
 		createCheckBoxLayoutAndCodeMap(primaryCodes, primaryCheckBoxMap,
-				primaryCheckBoxLayout);
+                primaryCheckBoxLayout);
 
 		if (procedure.disablePrimaryCodes()) {
 			// check and disable primary checkboxes for ablation type items
@@ -293,9 +286,9 @@ public class ProcedureDetailFragment extends Fragment implements
 		} else
 			loadCoding();
 		// set up buttons
-		summarizeButton = (Button) rootView.findViewById(R.id.summary_button);
+        Button summarizeButton = (Button) rootView.findViewById(R.id.summary_button);
 		summarizeButton.setOnClickListener(this);
-		clearButton = (Button) rootView.findViewById(R.id.clear_button);
+        Button clearButton = (Button) rootView.findViewById(R.id.clear_button);
 		clearButton.setOnClickListener(this);
 		return rootView;
 	}
@@ -433,7 +426,7 @@ public class ProcedureDetailFragment extends Fragment implements
 
 	}
 
-	public void loadSettings() {
+	void loadSettings() {
 		SharedPreferences sharedPreferences = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		// plusShownInDisplay = sharedPreferences.getBoolean(

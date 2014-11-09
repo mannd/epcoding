@@ -204,7 +204,7 @@ public class ScreenSlideActivity extends ActionBarActivity {
 				new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						; // just close dialog
+                        // just close dialog
 					}
 				});
 		dialog.setTitle(title);

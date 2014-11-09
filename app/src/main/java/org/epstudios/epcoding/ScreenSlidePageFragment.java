@@ -48,13 +48,13 @@ public class ScreenSlidePageFragment extends Fragment {
 	 */
 	public static final String ARG_PAGE = "page";
 
-	private static String[] revisionCodeNumbers = { "33215", "33226", "33218",
+	private static final String[] revisionCodeNumbers = { "33215", "33226", "33218",
 			"33220", "33222", "33223" };
 
-	private static String[] removalCodeNumbers = { "33233", "33241", "33234",
+	private static final String[] removalCodeNumbers = { "33233", "33241", "33234",
 			"33235", "33244" };
 
-	private static String[] addingCodeNumbers = { "33206", "33207", "33208",
+	private static final String[] addingCodeNumbers = { "33206", "33207", "33208",
 			"33249", "33216", "33217", "33225", "33212", "33213", "33240",
 			"33230", "33231" };
 

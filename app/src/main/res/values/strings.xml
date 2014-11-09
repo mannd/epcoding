@@ -18,7 +18,7 @@
     <string name="coding_summary_label">Summarize</string>
     <string name="coding_summary_dialog_label">Summary</string>
     <string name="clear_label">Clear</string>
-    <string name="empty_message"></string>
+    <string name="empty_message"/>
     <string name="no_codes_selected_label">No codes selected.</string>
     <string name="no_primary_codes_message">No primary codes.</string>
     <string name="no_primary_codes_verbose_message">You shouldn\'t just have additional codes.</string>
