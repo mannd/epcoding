@@ -5,30 +5,30 @@
     <item
         android:id="@+id/search"
         app:actionViewClass="android.support.v7.widget.SearchView"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/ic_search_white_36dp"
         android:orderInCategory="10"
         app:showAsAction="ifRoom|collapseActionView"
         android:title="@string/search_title">
     </item>
     <item
         android:id="@+id/wizard"
-        android:icon="@android:drawable/ic_menu_directions"
+        android:icon="@drawable/ic_directions_white_36dp"
         android:orderInCategory="90"
         app:showAsAction="ifRoom"
         android:title="@string/wizard_title">
     </item>
     <item
         android:id="@+id/settings"
-        android:icon="@android:drawable/ic_menu_preferences"
+        android:icon="@drawable/ic_settings_white_36dp"
         android:orderInCategory="100"
         app:showAsAction="ifRoom"
         android:title="@string/settings_title">
     </item>
     <item
         android:id="@+id/help"
-        android:icon="@android:drawable/ic_menu_help"
+        android:icon="@drawable/ic_help_white_36dp"
         android:orderInCategory="9999"
-        app:showAsAction="ifRoom"
+        app:showAsAction="never"
         android:title="@string/help_title">
     </item>
 

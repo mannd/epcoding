@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/saveCodeSelection"
-        android:icon="@android:drawable/ic_menu_save"
+        android:icon="@drawable/ic_save_white_36dp"
         android:orderInCategory="20"
         app:showAsAction="ifRoom"
         android:title="@string/save_code_selection_title">
