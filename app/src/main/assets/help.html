@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>EP Coding Help</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="EP Coding Help"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2014-02-08 Sat"/>
+<meta name="author" content="David Mann"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">EP Coding Help</h1>
+
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">Contents</h2>
+<div class="outline-text-2" id="text-1">
+
+<ul>
+<li><a href="#sec-2">Who should use EP Coding?</a>
+</li>
+<li><a href="#sec-3">How does EP Coding help?</a>
+</li>
+<li><a href="#sec-4">How to use EP Coding</a>
+</li>
+<li><a href="#sec-5">Limitations</a>
+</li>
+<li><a href="#sec-6">General hints</a>
+</li>
+<li><a href="#sec-7">AFB ablation</a>
+</li>
+<li><a href="#sec-8">SVT ablation</a>
+</li>
+<li><a href="#sec-9">VT ablation</a>
+</li>
+<li><a href="#sec-10">AV node ablation</a>
+</li>
+<li><a href="#sec-11">EP testing</a>
+</li>
+<li><a href="#sec-12">New PPM or ICD</a>
+</li>
+<li><a href="#sec-13">Replace PPM or ICD</a>
+</li>
+<li><a href="#sec-14">SubQ ICD</a>
+</li>
+<li><a href="#sec-15">Upgrade/revision/extraction</a>
+</li>
+<li><a href="#sec-16">Other procedure</a>
+</li>
+<li><a href="#sec-17">All EP codes</a>
+</li>
+<li><a href="#sec-18">Settings</a>
+</li>
+<li><a href="#sec-19">Abbreviations</a>
+</li>
+<li><a href="#sec-20">Acknowledgements</a>
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Who should use EP Coding?</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>    Physicians who perform cardiac electrophysiology (EP) procedures
+    and are required to submit CPT® codes for these procedures. <b>EP     Coding</b> is intended to help EP physicians enter the correct codes
+    in an EHR (Electronic Health Record).  It is not intended for
+    professional coders nor is it a substitute for the
+    <a href="https://commerce.ama-assn.org/store/">AMA official CPT® documentation</a>.
+</p></div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">How does EP Coding help?</h2>
+<div class="outline-text-2" id="text-3">
+
+<ul>
+<li>Lists relevant CPT® codes for EP procedures, with succinct descriptions.
+</li>
+<li>Makes clear which codes cannot be combined for specific procedures.
+</li>
+<li>Analyzes selected codes for errors and warnings.
+</li>
+<li>Provides <a href="#sec-6">help on how to code procedures</a>.
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">How to use EP Coding</h2>
+<div class="outline-text-2" id="text-4">
+
+<ul>
+<li>Select a procedure from the list by tapping on it.
+</li>
+<li>Codes are organized as primary codes, at least one of which
+      needs to be selected, and additional or optional codes which
+      are commonly used with the primary procedure codes.
+</li>
+<li>Codes are organized logically, not necessarily in numeric
+      order, with description given first, followed by code number.
+</li>
+<li>Select codes by tapping them.
+</li>
+<li>Codes that should not be changed are grayed out.
+</li>
+<li>Tap <b>Summarize</b> at the bottom of the list to show a dialog with
+      the codes selected along with any warnings or errors.
+</li>
+<li>Tap <b>Clear</b> to clear the selected codes.
+</li>
+<li>Tap the <b>Save</b> icon at the top to save your selection of
+      additional codes as a default.  If you nearly always select the
+      same additional codes (e.g. always do 3D mapping with SVT
+      ablation), save the codes and they will already be selected in
+      future sessions.  Note that primary code selections are not
+      saved.
+</li>
+<li>Search for codes by number or text using the <b>Search</b> icon.
+</li>
+<li>Use the <b>Device Wizard</b> (icon is a street sign with curve ahead)
+      to steer you through complex device upgrades and revisions.
+</li>
+<li>Tap <b>Settings</b> (icon is a wrench) to change the display of codes
+      and level of detail shown in the code analysis.
+</li>
+<li>The all EP codes module lists every EP procedure code in
+      numerical order, with code number given first.  It is the <i>a la       carte</i> menu of <b>EP Coding</b>.
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">Limitations</h2>
+<div class="outline-text-2" id="text-5">
+
+<ul>
+<li>EP procedure codes only.
+</li>
+<li>No surgical EP codes (e.g. LV lead via thoracotomy).
+</li>
+<li>Some rare or obsolete codes are not included.
+</li>
+<li>Code descriptions are paraphrased.
+</li>
+<li>Code components are not given or incomplete.
+</li>
+<li>No office based or in-patient billing codes.
+</li>
+<li>No device programming codes.
+</li>
+<li>No coding modifiers are suggested.
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">General hints</h2>
+<div class="outline-text-2" id="text-6">
+
+<ul>
+<li>Set code analysis to verbose.
+</li>
+<li>Use the specific procedure modules rather than the all EP codes
+      module for coding procedures.
+</li>
+<li>You may find it easier to use the <b>Device Wizard</b> to do device
+      upgrade coding rather than the Upgrade/Revision/Extraction module.
+</li>
+<li>Use the all EP codes module if you need to look up a specific
+      code, as they are listed in numeric order in this module.
+</li>
+<li>There are some rare codes in the all EP codes module that
+      aren't present in the other modules.
+</li>
+<li>Don't try to add codes that are disabled in a procedure module.
+</li>
+<li>If you nearly always add codes to a procedure (e.g. 3D mapping
+      with AFB ablation), then save it as a default using the Save
+      icon.
+</li>
+<li><b>Warnings</b> (indicated by <b>!</b>) point out codes that you may be
+      missing or code combinations that possibly shouldn't be used together.
+</li>
+<li><b>Errors</b> (indicated by <b>!!</b>) indicate code combinations that
+      almost certainly are not allowed.
+</li>
+<li>Check with your coders or the <a href="https://commerce.ama-assn.org/store/">AMA documentation</a> if you are not
+      sure how to code a procedure.
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">AFB ablation</h2>
+<div class="outline-text-2" id="text-7">
+
+<ul>
+<li>Includes comprehensive EP testing, LA pacing and recording and
+      transseptal puncture.
+</li>
+<li>Add 93657 if additional AFB ablation done beyond pulmonary vein
+      isolation.
+</li>
+<li>Add 93655 if separate supraventricular arrhythmia mechanism
+      ablated (e.g. focal atrial tachycardia).
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8">SVT ablation</h2>
+<div class="outline-text-2" id="text-8">
+
+<ul>
+<li>Includes comprehensive EP testing.
+</li>
+<li>SVT ablation code is used for any kind of SVT ablation including
+      WPW, focal atrial tachycardia, atrial flutter, and AV nodal
+      reentry.
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9">VT ablation</h2>
+<div class="outline-text-2" id="text-9">
+
+<ul>
+<li>Includes comprehensive EP testing, LV pacing and recording, and
+      mapping codes.
+</li>
+<li>You can't add mapping codes 93609 or 93613 to VT ablation!
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="sec-10">AV node ablation</h2>
+<div class="outline-text-2" id="text-10">
+
+<ul>
+<li>It is not clear if EP testing codes can be combined with AV
+      node ablation.
+</li>
+<li>It is not clear if mapping codes can be combined with AV node ablation.
+</li>
+<li>These points may need to be clarified with your coders.
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-11" class="outline-2">
+<h2 id="sec-11">EP testing</h2>
+<div class="outline-text-2" id="text-11">
+
+<ul>
+<li>Use 93620 (EP testing with attempted arrhythmia
+      induction).
+</li>
+<li>Don't code with ablation procedures (? exception AV node
+      ablation).
+</li>
+<li>You can add mapping codes, but don't add ablation codes to EP
+      testing.
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-12" class="outline-2">
+<h2 id="sec-12">New PPM or ICD</h2>
+<div class="outline-text-2" id="text-12">
+
+<ul>
+<li>Use 33206-33208 for new PPM depending on number of leads.
+</li>
+<li>Use 33249 for new single or dual ICD.
+</li>
+<li>Add code 33225 to dual chamber device code for PPM or ICD with CRT.
+</li>
+<li>Add 93641 if you do DFT testing during the ICD implant.
+</li>
+<li>Placing a sub-cutaneous array is probably best coded with 33999
+      (unlisted surgical procedure code).
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-13" class="outline-2">
+<h2 id="sec-13">Replace PPM or ICD</h2>
+<div class="outline-text-2" id="text-13">
+
+<ul>
+<li>Use 33227-33229 for PPM replacement and 33262-33264 for ICD
+      replacement depending on number of leads.
+</li>
+<li>Do not add generator removal codes to these codes!
+</li>
+<li>Add 93641 if you do DFT testing during ICD generator replacement.
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-14" class="outline-2">
+<h2 id="sec-14">SubQ ICD</h2>
+<div class="outline-text-2" id="text-14">
+
+<ul>
+<li>These are emerging technology codes that are temporary and will
+      probably be changed in the next revision of the codes.
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-15" class="outline-2">
+<h2 id="sec-15">Upgrade/revision/extraction</h2>
+<div class="outline-text-2" id="text-15">
+
+<ul>
+<li>This is the most complicated coding area. We will break this
+      down into some specific situations.  You can also use
+      the <b>Device Wizard</b> to lead you through this.  This is the
+      simplest way to do this!
+</li>
+<li>Note codes are arranged in logical groups, not necessarily in
+      numeric order.
+</li>
+</ul>
+
+
+</div>
+
+<div id="outline-container-15-1" class="outline-3">
+<h3 id="sec-15-1">Lead addition only, no change in generator</h3>
+<div class="outline-text-3" id="text-15-1">
+
+<ul>
+<li>Use specific lead placement code, e.g. 33216, place A lead.
+</li>
+<li>Use 33224 to place an LV lead if the CRT generator is already there.
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-15-2" class="outline-3">
+<h3 id="sec-15-2">Lead repositioning</h3>
+<div class="outline-text-3" id="text-15-2">
+
+<ul>
+<li>Reposition previously implanted single A or V lead: 33215
+</li>
+<li>Reposition previously implanted LV lead: 33226
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-15-3" class="outline-3">
+<h3 id="sec-15-3">Removal of generator alone</h3>
+<div class="outline-text-3" id="text-15-3">
+
+<ul>
+<li>PPM generator removal: 33233
+</li>
+<li>ICD generator removal: 33241
+</li>
+<li>Don't use these codes in conjunction with generator-only
+       replacement codes, but do use them with new/replacement system
+       codes for upgrades (see <a href="#sec-15-7">Upgrade of system</a>).
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-15-4" class="outline-3">
+<h3 id="sec-15-4">Removal/extraction of leads</h3>
+<div class="outline-text-3" id="text-15-4">
+
+<ul>
+<li>PPM single lead extraction: 33234
+</li>
+<li>PPM dual lead extraction: 33235
+</li>
+<li>ICD 1 or 2 leads extracted: 33244
+</li>
+<li>LV lead extraction has no specific code, probably should use
+       33234 or 33999 (unlisted procedure).
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-15-5" class="outline-3">
+<h3 id="sec-15-5">Removal of entire system without replacement</h3>
+<div class="outline-text-3" id="text-15-5">
+
+<ul>
+<li>Use combination of generator removal and lead removal codes as
+       appropriate.
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-15-6" class="outline-3">
+<h3 id="sec-15-6">New/replacement device</h3>
+<div class="outline-text-3" id="text-15-6">
+
+<ul>
+<li>PPM: 33206-33208
+</li>
+<li>ICD: 33249
+</li>
+<li>Plus LV lead: 33225
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-15-7" class="outline-3">
+<h3 id="sec-15-7">Upgrade of system</h3>
+<div class="outline-text-3" id="text-15-7">
+
+<ul>
+<li>Single chamber to dual chamber PPM (includes new lead, removal
+       of old generator and placement of new generator) : 33214
+</li>
+<li>Other situations: code removal of generator and removal of
+       leads if leads are removed, then code for insertion of new system.
+</li>
+<li>Example: upgrade of single chamber PPM to ICD with CRT.
+<ul>
+<li>Code PPM generator removal: 33233
+</li>
+<li>Code single or dual ICD system implant: 33249
+</li>
+<li>Code implant LV lead with new system: 33225
+</li>
+</ul>
+
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-15-8" class="outline-3">
+<h3 id="sec-15-8">Place generator, existing leads</h3>
+<div class="outline-text-3" id="text-15-8">
+
+<ul>
+<li>Single chamber PPM generator: 33212
+</li>
+<li>Dual chamber PPM generator: 33213
+</li>
+<li>Single chamber ICD generator: 33240
+</li>
+<li>Dual chamber ICD generator: 33230
+</li>
+<li>CRT ICD generator: 33231
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-15-9" class="outline-3">
+<h3 id="sec-15-9">Pocket revision</h3>
+<div class="outline-text-3" id="text-15-9">
+
+<ul>
+<li>PPM pocket revision: 33222
+</li>
+<li>ICD pocket revision: 33223
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-15-10" class="outline-3">
+<h3 id="sec-15-10">Lead repair</h3>
+<div class="outline-text-3" id="text-15-10">
+
+<ul>
+<li>One lead repaired: 33218
+</li>
+<li>Two leads repaired: 33220
+</li>
+</ul>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-16" class="outline-2">
+<h2 id="sec-16">Other procedure</h2>
+<div class="outline-text-2" id="text-16">
+
+<ul>
+<li>These are miscellaneous EP procedures.
+</li>
+<li>Fluoroscopy to check for lead integrity: 76000
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-17" class="outline-2">
+<h2 id="sec-17">All EP codes</h2>
+<div class="outline-text-2" id="text-17">
+
+<ul>
+<li>Lists all codes in the app in <i>numeric</i> order.
+</li>
+<li>Avoid using this module unless other ones don't cover coding
+      because procedure is unusual or rarely done.
+</li>
+<li>Code analysis may not check every combination of codes selected
+      in this module.
+</li>
+<li>This module can be useful to look up specific code numbers.
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-18" class="outline-2">
+<h2 id="sec-18">Settings</h2>
+<div class="outline-text-2" id="text-18">
+
+<ul>
+<li>Settings apply to the format of the summary screen and code
+      analysis, not to the main code display screens.
+</li>
+<li>Distinguish add-on codes: Add + in front of add-on only codes,
+      e.g. +99999.
+</li>
+<li>Show descriptions: Add description to code, otherwise shows only
+      code.
+</li>
+<li>Truncate descriptions: Shortens descriptions to help fit on
+      small screens.
+</li>
+<li>Check codes in All EP Codes: Turn on or off code analysis in the
+      all EP codes module.
+</li>
+<li>Code analysis detail
+<ul>
+<li>Verbose: Full analysis with full descriptions of warnings and
+        errors.
+</li>
+<li>Brief: Lists offending codes without only brief or no
+        descriptions.
+</li>
+<li>None: No code analysis done.
+</li>
+</ul>
+
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-19" class="outline-2">
+<h2 id="sec-19">Abbreviations</h2>
+<div class="outline-text-2" id="text-19">
+
+<ul>
+<li>A = atrial
+</li>
+<li>AFB = atrial fibrillation
+</li>
+<li>AFL = atrial flutter
+</li>
+<li>CRT = cardiac resynchronization therapy
+</li>
+<li>ICD = implantable cardioverter defibrillator
+</li>
+<li>PPM = pacemaker
+</li>
+<li>LV = left ventricular
+</li>
+<li>SVT = supraventricular tachycardia
+</li>
+<li>V = ventricular
+</li>
+<li>VT = ventricular tachycardia
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-20" class="outline-2">
+<h2 id="sec-20">Acknowledgements</h2>
+<div class="outline-text-2" id="text-20">
+
+<ul>
+<li>CPT copyright 2012 American Medical Association. All rights
+      reserved. CPT is a registered trademark of the American Medical
+      Association.
+</li>
+<li>A limited number of CPT® codes are used in this app, under the
+      fair use doctrine of the US Copyright Act.  For a discussion of
+      the rationale see <a href="http://www.epstudiossoftware.com/?p=1313">here</a>.
+</li>
+<li>The source code for EP Coding is available on GitHub <a href="https://github.com/mannd/epcoding">here</a>.
+</li>
+<li>EP Coding source code is open source and is licensed under the
+      <a href="https://www.gnu.org/copyleft/gpl.html">GNU General Public License version 3</a>.
+</li>
+<li>For questions, error reporting or suggestions contact
+      <a href="mailto:mannd@epstudiossoftware.com">EP Studios</a>.
+</li>
+<li>Website: <a href="#www.epstudiossoftware.com">www.epstudiossoftware.com</a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

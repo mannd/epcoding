@@ -23,7 +23,15 @@ local.properties
 # other temp files
 *~
 
+# OSX files
+.DS_Store
+
 # eclipse
 .classpath
 .settings/
 lint.xml
+
+# Android Studio
+.idea
+.gradle
+build/
