@@ -29,11 +29,6 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -51,6 +46,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * A fragment representing a single Procedure detail screen. This fragment is
@@ -84,7 +84,7 @@ public class ProcedureDetailFragment extends Fragment implements
 	private String codeVerbosity;
 	// shorten description based on screen width?
 
-    // don't try to refactor these using Utilies.createCheckBoxLayoutAndCodeMap,
+    // don't try to refactor these using Utilities.createCheckBoxLayoutAndCodeMap,
 	// as then will have to put in many check for null map.
 	private final Map<String, CodeCheckBox> primaryCheckBoxMap = new LinkedHashMap<String, CodeCheckBox>();
 	private final Map<String, CodeCheckBox> secondaryCheckBoxMap = new LinkedHashMap<String, CodeCheckBox>();
@@ -403,7 +403,7 @@ public class ProcedureDetailFragment extends Fragment implements
 		}
 		SharedPreferences.Editor prefsEditor = prefs.edit();
 		prefsEditor.putStringSet(mItemString, checkedCodeNumbers);
-		prefsEditor.commit();
+		prefsEditor.apply();
 	}
 
 	public void loadCoding() {

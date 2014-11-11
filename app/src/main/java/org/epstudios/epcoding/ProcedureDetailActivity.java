@@ -33,14 +33,13 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.support.v7.widget.SearchView;
 
 /**
  * An activity representing a single Procedure detail screen. This activity is
@@ -99,7 +98,7 @@ public class ProcedureDetailActivity extends ActionBarActivity {
 			startActivity(new Intent(this, Help.class));
 			return true;
 		case R.id.saveCodeSelection:
-			if (fragment != null && fragment instanceof ProcedureDetailFragment)
+			if (fragment != null)
 				fragment.saveCoding();
 			return true;
 		case R.id.settings:

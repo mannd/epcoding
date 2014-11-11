@@ -16,10 +16,6 @@
 
 package org.epstudios.epcoding;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-
 import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -33,12 +29,16 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
 /**
  * A fragment representing a single step in a wizard. The fragment shows a dummy
  * title indicating the page number, along with some dummy text.
  * 
  * <p>
- * This class is used by the {@link CardFlipActivity} and
+ * This class is used by the {CardFlipActivity} and
  * {@link ScreenSlideActivity} samples.
  * </p>
  */
@@ -195,7 +195,6 @@ public class ScreenSlidePageFragment extends Fragment {
 						@Override
 						public void onCheckedChanged(CompoundButton buttonView,
 								boolean isChecked) {
-							// TODO Auto-generated method stub
 							checkChanged();
 						}
 					});
@@ -225,7 +224,7 @@ public class ScreenSlidePageFragment extends Fragment {
 					getCheckBoxSet(finalCheckBoxMap));
 			break;
 		}
-		prefsEditor.commit();
+		prefsEditor.apply();
 	}
 
 	private Set<String> getCheckBoxSet(Map<String, CodeCheckBox> map) {

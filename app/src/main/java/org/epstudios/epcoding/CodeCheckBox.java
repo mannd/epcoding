@@ -30,8 +30,6 @@ This file is part of EP Coding.
 package org.epstudios.epcoding;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.widget.CheckBox;
 
 class CodeCheckBox extends CheckBox {

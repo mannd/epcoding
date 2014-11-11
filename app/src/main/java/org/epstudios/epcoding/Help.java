@@ -29,10 +29,8 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -41,7 +39,6 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 
 public class Help extends ActionBarActivity {
-	private WebView webView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +47,7 @@ public class Help extends ActionBarActivity {
 		String url = "file:///android_asset/help.html";
 		//webView = new WebView(this);
 		//setContentView(webView);
-		webView = (WebView) findViewById(R.id.webView);
+		WebView webView = (WebView) findViewById(R.id.webView);
 		webView.loadUrl(url);
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);

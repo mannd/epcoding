@@ -1,11 +1,11 @@
 package org.epstudios.epcoding;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.widget.LinearLayout;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Utilities {
 	public static Map<String, CodeCheckBox> createCheckBoxLayoutAndCodeMap(

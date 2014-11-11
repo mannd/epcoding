@@ -335,7 +335,7 @@
       future sessions.  Note that primary code selections are not
       saved.
     - Search for codes by number or text using the *Search* icon.
-    - Use the *Device Wizard* (icon is a steet sign with curve ahead)
+    - Use the *Device Wizard* (icon is a street sign with curve ahead)
       to steer you through complex device upgrades and revisions.
     - Tap *Settings* (icon is a wrench) to change the display of codes
       and level of detail shown in the code analysis.
@@ -376,7 +376,7 @@
       transseptal puncture.
     - Add 93657 if additional AFB ablation done beyond pulmonary vein
       isolation.
-    - Add 93655 if separate supraventicular arrhythmia mechanism
+    - Add 93655 if separate supraventricular arrhythmia mechanism
       ablated (e.g. focal atrial tachycardia).
 *** SVT ablation
     - Includes comprehensive EP testing.

@@ -39,7 +39,6 @@ public class AllCodes implements Procedure {
 
 	@Override
 	public Code[] primaryCodes() {
-		// TODO Auto-generated method stub
 		return Codes.getCodes(Codes.allCodeNumbersSorted());
 	}
 

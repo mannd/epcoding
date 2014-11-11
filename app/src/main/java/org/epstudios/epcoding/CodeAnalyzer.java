@@ -29,13 +29,13 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import android.content.Context;
 
 class CodeAnalyzer {
 	private final Code[] codes;
@@ -121,7 +121,7 @@ class CodeAnalyzer {
 		codeErrors
 				.add(new CodeError(CodeError.WarningLevel.WARNING, Arrays
 						.asList("93650", "93609", "93613"),
-						"It is not clear if mapping codes can be combined with AV node ablaton."));
+						"It is not clear if mapping codes can be combined with AV node ablation."));
 		codeErrors
 				.add(new CodeError(CodeError.WarningLevel.WARNING, Arrays
 						.asList("93650", "93600", "93619", "93620"),
@@ -308,7 +308,7 @@ class CodeAnalyzer {
 
 	private String addToErrorMessage(final CodeError codeError, final List<String> badCodeList) {
 		CodeError.WarningLevel warningLevel = codeError.getWarningLevel();
-		String warning = "";
+		String warning;
 		switch (warningLevel) {
 		case NONE:
 			warning = OK;

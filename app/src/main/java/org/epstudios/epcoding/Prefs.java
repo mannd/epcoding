@@ -30,7 +30,6 @@ This file is part of EP Coding.
 package org.epstudios.epcoding;
 
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;

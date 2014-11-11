@@ -10,7 +10,6 @@
     <string name="about_text">Copyright \u00a9 2013, 2014 EP Studios, Inc.
 		\nAll rights reserved.\n</string>
     <string name="help_title">Help</string>
-    <string name="hints_title">Hints</string>
     <string name="search_title">Search</string>
     <string name="search_hint">Search codes</string>
     <string name="primary_codes_label">Primary Code(s)</string>
@@ -61,7 +60,7 @@
     <string name="devices_help_text">Temp device procedures help text</string>
     <string name="new_ppm_help_text">These codes are used for implantation of a pacemaker
         generator and lead(s).  Use the code that corresponds to the lead(s) put in.
-        Use 33208 and 33225 for implantion of a pacemaker with CRT (i.e. with a
+        Use 33208 and 33225 for implantation of a pacemaker with CRT (i.e. with a
         coronary sinus lead).  These codes are also used when there is removal of 
         a prior system (generator and leads) and replacement with new generator and
         leads.  Do not use these codes for simple generator replacements.</string>
@@ -80,8 +79,8 @@
         and these procedures are definitely the most difficult to code.  If you are
         just replacing a generator, use the Replace ICD or Replace PPM modules.  If
         you are upgrading devices, changing from PPMs to ICDs, adding leads,
-        extracting leads, removing generators without replacment, this module
-        should have the codes you need.  The basic prinicple to follow is to
+        extracting leads, removing generators without replacement, this module
+        should have the codes you need.  The basic principle to follow is to
         use specific codes for what you are removing (leads or generators) and then
         use codes for new complete systems.  Example - upgrade dual chamber PPM or
         ICD with CRT, old leads left in place: 33233 (removal of PPM generator only),
@@ -105,7 +104,7 @@
 	    combinations of codes that
 	    conflict.  As always, with increased freedom comes increased risk.</string>
     <string name="other_procedure_help_text">These are miscellaneous EP procedures
-        and their coding is quite straightforard.  Just pick the code(s) you need.</string>
+        and their coding is quite straightforward.  Just pick the code(s) you need.</string>
     <string name="subq_icd_help_text">SubQ ICD codes are new and will probably
         be changed as the procedure becomes established.  There are no real
         guidelines yet for using these codes.  These codes are not checked for
@@ -139,7 +138,6 @@
     <string name="code_check_all_codes_summary">Perform analysis in All EP Codes module</string>
     <string name="code_check_all_codes_label">Check codes in All EP Codes</string>
     <string name="code_verbosity_key">code_verbosity</string>
-    <string name="default_verbosity">Verbose</string>
     <string name="subq_icd_title">SubQ ICD</string>
     <string name="new_ppm_title">New PPM</string>
     <string name="new_icd_title">New ICD</string>
