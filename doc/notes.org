@@ -867,7 +867,7 @@
 * Preparing new version -- IMPORTANT!
   - finish version, commit.
   - git flow release start vx.y
-  - IMPORTANT - update AndroidManifest.xml
+  - IMPORTANT - update build.gradle
     - increment android:versionCode
     - change android:versionName
     - change version number in About.java
