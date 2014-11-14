@@ -137,6 +137,9 @@ class CodeAnalyzer {
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("93654", "93657", "93609", "93613", "93622"),
 				"Code(s) cannot be add to VT Ablation."));
+        codeErrors.add(new CodeError(CodeError.WarningLevel.WARNING, Arrays
+                .asList("93623", "93650", "93653", "93654", "93656"),
+                "Recent coding changes may disallow bundling induce post IV drug with ablation."));
 		return codeErrors;
 	}
 
