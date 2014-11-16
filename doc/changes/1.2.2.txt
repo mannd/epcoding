@@ -1,0 +1,5 @@
+EP Coding v1.2.2 Release Notes
+Changes since v1.2.1
+* Fixed regression in Settings (not showing current values)
+Changes since v1.2
+* Added warning when using induce post IV drug with ablations
