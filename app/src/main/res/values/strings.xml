@@ -174,5 +174,7 @@
     <string name="slide_step6_heading_text">Did you do anything else? If so select from the choices
    	    below. Select Finish to see a summary of your codes.</string>
     <string name="no_data_label">No matches found!</string>
+    <string name="default_verbosity">Verbose</string>
+
 
 </resources>
