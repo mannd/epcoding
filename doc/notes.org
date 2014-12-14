@@ -297,7 +297,7 @@
     - [[EP testing]]
     - [[New PPM or ICD]]
     - [[Replace PPM or ICD]]
-    - [[SubQ ICD/Leadless PM]]
+    - [[SubQ ICD/Leadless PPM]]
     - [[Upgrade/revision/extraction]]
     - [[Other procedure]]
     - [[All EP codes]]
@@ -411,9 +411,9 @@
       replacement depending on number of leads.
     - Do not add generator removal codes to these codes!
     - Add 93641 if you do DFT testing during ICD generator replacement.
-*** SubQ ICD/Leadless PM
+*** SubQ ICD/Leadless PPM
    - SubQ ICD has new codes in 2015.
-   - Leadless PM codes are new and are emerging technology codes that are temporary and will probably be changed in the next revision of the codes.
+   - Leadless PPM codes are new and are emerging technology codes that are temporary and will probably be changed in the next revision of the codes.
 *** Upgrade/revision/extraction
     - This is the most complicated coding area. We will break this
       down into some specific situations.  You can also use
@@ -500,7 +500,6 @@
     - AFL = atrial flutter
     - CRT = cardiac resynchronization therapy
     - ICD = implantable cardioverter defibrillator
-    - PM = pacemaker
     - PPM = permanent pacemaker
     - LV = left ventricular
     - SubQ = subcutaneous
