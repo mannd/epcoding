@@ -94,13 +94,11 @@ class CodeAnalyzer {
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("93653", "93654", "93656"),
 				DUPLICATE_ABLATION_CODES_ERROR));
-		// SubQ ICD incompatible codes
+		// SubQ ICD & leadless PPM  incompatible codes
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
-				.asList("0319T", "0320T", "0321T"), DEFAULT_DUPLICATE_ERROR));
+				.asList("33270", "33271"), DEFAULT_DUPLICATE_ERROR));
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
-				.asList("0322T", "0323T"), DEFAULT_DUPLICATE_ERROR));
-		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
-				.asList("0327T", "0328T"), DEFAULT_DUPLICATE_ERROR));
+				.asList("0389T", "0390T"), DEFAULT_DUPLICATE_ERROR));
 		return codeErrors;
 	}
 

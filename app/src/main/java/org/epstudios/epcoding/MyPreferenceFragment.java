@@ -36,11 +36,8 @@ This file is part of EP Coding.
 
  */
 
-import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceFragment;
 
 
 public class MyPreferenceFragment extends PreferenceFragment implements

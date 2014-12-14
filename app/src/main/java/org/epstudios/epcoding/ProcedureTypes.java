@@ -64,7 +64,7 @@ public class ProcedureTypes {
 		addItem(new ProcedureType("7", "Replace PPM"));
 		addItem(new ProcedureType("8", "Replace ICD"));
 		addItem(new ProcedureType("9", "Upgrade/Revision/Extraction"));
-		addItem(new ProcedureType("10", "SubQ ICD"));
+		addItem(new ProcedureType("10", "SubQ ICD/Leadless PPM"));
 		addItem(new ProcedureType("11", "Other Procedure"));
 		addItem(new ProcedureType("12", "All EP Codes"));
 	}

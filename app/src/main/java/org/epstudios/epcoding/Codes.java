@@ -46,23 +46,14 @@ class Codes {
 
 		// Devices ////////////////////////////////////////
 		// SubQ ICD New Codes
-		addCode(map, "0319T",
-				"Implantation of SubQ ICD system (generator + electrode)",
+		addCode(map, "33270",
+				"New or replacement SubQ ICD system, includes testing",
 				false);
-		addCode(map, "0320T", "Insertion of SubQ defibrillator electrode only",
+		addCode(map, "33271", "Insertion of SubQ defibrillator electrode only",
 				false);
-		addCode(map, "0321T",
-				"Insertion of SubQ ICD generator only with existing electrode",
-				false);
-		addCode(map, "0322T", "Removal of SubQ ICD generator only", false);
-		addCode(map, "0323T", "Removal and Replacement of SubQ ICD generator",
-				false);
-		addCode(map, "0324T", "Removal of SubQ ICD electrode", false);
-		addCode(map, "0325T",
-				"Repositioning of SubQ ICD electrode and/or generator", false);
-		addCode(map, "0326T", "EP evaluation of SubQ ICD system", false);
-		addCode(map, "0327T", "Interrogation of SubQ ICD system", false);
-		addCode(map, "0328T", "Programming of SubQ ICD system", false);
+		addCode(map, "33272", "Removal of SubQ ICD electrode", false);
+		addCode(map, "33273",
+				"Repositioning of SubQ ICD electrode", false);
 
 		// Surgical approach - surgical codes not included in EP Coding
 		// addCode(map, "33202",
@@ -72,7 +63,15 @@ class Codes {
 		// "Insert epicardial electrode(s) endoscopically",
 		// false);
 
-		// New PPM with leads
+
+		// Leadless PPM
+		addCode(map, "0387T", "New or replacement leadless PPM", false);
+		addCode(map, "0388T", "Transcatheter removal of leadless PPM", false);
+		addCode(map, "0389T", "Programming evaluation/testing of leadless PPM", false);
+		addCode(map, "0390T", "Peri-procedural device evaluation/testing of leadless PPM", false);
+		addCode(map, "0391T", "Interrogation of leadless PPM", false);
+
+// New PPM with leads
 		addCode(map, "33206", "New or replacement PPM with new A lead", false);
 		addCode(map, "33207", "New or replacement PPM with new V lead", false);
 		addCode(map, "33208", "New or replacement PPM with new A and V leads",
@@ -210,9 +209,8 @@ class Codes {
 	public final static String[] avnAblationPrimaryCodeNumbers = { "93650" };
 	public final static String[] epTestingPrimaryCodeNumbers = { "93619",
 			"93620" };
-	public final static String[] subQIcdPrimaryCodeNumbers = { "0319T",
-			"0320T", "0321T", "0322T", "0323T", "0324T", "0325T", "0326T",
-			"0327T", "0328T" };
+    public final static String[] subQIcdPrimaryCodeNumbers = { "33270", "33271",
+			"33272", "33273", "0387T", "0388T", "0389T", "0390T", "0391T" };
 	public final static String[] otherProcedurePrimaryCodeNumbers = { "33282",
 			"33284", "93660", "92960", "92961", "76000" };
 
