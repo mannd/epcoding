@@ -518,7 +518,7 @@
       [[https://www.gnu.org/copyleft/gpl.html][GNU General Public License version 3]].
     - For questions, error reporting or suggestions contact
       [[mailto:mannd@epstudiossoftware.com][EP Studios]].
-    - Website: [[www.epstudiossoftware.com]]
+    - Website: [[http://www.epstudiossoftware.com][www.epstudiossoftware.com]]
 * Limitations
   - Code descriptions are paraphrased
   - All information freely available on web
