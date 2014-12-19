@@ -1,0 +1,6 @@
+EP Coding v1.3.1 Release Notes
+Changes since v1.3
+* Fixed Android bug causing crashes in Samsung devices running Android 4.2
+Changes since v1.2.2
+* New subcutaneous ICD and leadless pacemaker codes for 2015
+* SubQ ICD module no longer complains about no secondary codes
