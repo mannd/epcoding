@@ -1,0 +1,4 @@
+EP Coding v1.3 Release Notes
+Changes since v1.2.2
+* New subcutaneous ICD and leadless pacemaker codes for 2015
+* SubQ ICD module no longer complains about no secondary codes
