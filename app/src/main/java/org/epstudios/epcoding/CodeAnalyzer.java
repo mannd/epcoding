@@ -55,13 +55,13 @@ class CodeAnalyzer {
 	// some special code lists
 	private static final List<String> mappingCodes = Arrays.asList("93609",
 			"93613");
-	private static final Set<String> mappingCodeSet = new HashSet<String>(
+	private static final Set<String> mappingCodeSet = new HashSet<>(
 			mappingCodes);
 	// Below doesn't include AV node ablation or VT ablation as mapping not
 	// separately billable for those procedures.
 	private static final List<String> ablationCodes = Arrays.asList("93653",
 			"93656");
-	private static final Set<String> ablationCodeSet = new HashSet<String>(
+	private static final Set<String> ablationCodeSet = new HashSet<>(
 			ablationCodes);
 
 	// Error messages and warnings
@@ -74,7 +74,7 @@ class CodeAnalyzer {
 	private final static List<CodeError> duplicateCodeErrors = createDuplicateCodeErrors();
 
 	private static List<CodeError> createDuplicateCodeErrors() {
-		List<CodeError> codeErrors = new ArrayList<CodeError>();
+		List<CodeError> codeErrors = new ArrayList<>();
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR,
 				mappingCodes, DUPLICATE_MAPPING_ERROR));
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
@@ -107,7 +107,7 @@ class CodeAnalyzer {
 	private final static List<CodeError> specialFirstCodeErrors = createSpecialFirstCodeErrors();
 
 	private static List<CodeError> createSpecialFirstCodeErrors() {
-		List<CodeError> codeErrors = new ArrayList<CodeError>();
+		List<CodeError> codeErrors = new ArrayList<>();
 		codeErrors
 				.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays.asList(
 						"33233", "33227", "33228", "33229", "33213", "33213",
@@ -145,7 +145,7 @@ class CodeAnalyzer {
 	private final static List<CodeError> firstCodeNeedsOtherCodes = createFirstCodeNeedsOtherCodes();
 
 	private static List<CodeError> createFirstCodeNeedsOtherCodes() {
-		List<CodeError> codeErrors = new ArrayList<CodeError>();
+		List<CodeError> codeErrors = new ArrayList<>();
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("33225", "33206", "33207", "33208", "33249", "33214"),
 				"Must use 33225 with new device implant code"));
@@ -221,7 +221,7 @@ class CodeAnalyzer {
 				codeNumbers[i] = codes[i].getCodeNumber();
 		}
 		List<String> codeNumberList = Arrays.asList(codeNumbers);
-		Set<String> codeNumberSet = new HashSet<String>(codeNumberList);
+		Set<String> codeNumberSet = new HashSet<>(codeNumberList);
 		if (noMappingCodesForAblation(codeNumberList))
 			message += getMessage(WARNING, R.string.no_mapping_codes_message,
 					R.string.no_mapping_codes_verbose_message);
@@ -329,7 +329,7 @@ class CodeAnalyzer {
 	// returns list of matching bad codes
 	private List<String> hasBadCombo(final List<String> badCodes,
 			final Set<String> codes) {
-		List<String> badCodeList = new ArrayList<String>();
+		List<String> badCodeList = new ArrayList<>();
 		for (String badCode : badCodes) {
 			if (codes.contains(badCode)) {
 				badCodeList.add(badCode);

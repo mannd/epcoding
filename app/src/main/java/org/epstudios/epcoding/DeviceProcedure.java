@@ -31,7 +31,7 @@ package org.epstudios.epcoding;
 
 import android.content.Context;
 
-public class DeviceProcedure {
+class DeviceProcedure {
 	public boolean disablePrimaryCodes() {
 		return false;
 	}
@@ -41,8 +41,7 @@ public class DeviceProcedure {
 	}
 
 	public String[] disabledCodeNumbers() {
-		String[] numbers = {};
-		return numbers;
+        return new String[]{};
 	}
 
 	public String helpText(Context context) {

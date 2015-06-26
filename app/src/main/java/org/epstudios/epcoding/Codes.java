@@ -41,7 +41,7 @@ class Codes {
 	private final static Map<String, Code> allCodes = createMap();
 
 	private static Map<String, Code> createMap() {
-		Map<String, Code> map = new HashMap<String, Code>();
+		Map<String, Code> map = new HashMap<>();
 		// addCode(map, String codeNumber, String codeName, boolean isAddOn)
 
 		// Devices ////////////////////////////////////////
@@ -302,7 +302,7 @@ class Codes {
 	}
 
 	public static List<String> searchCodes(String searchString) {
-		List<String> result = new ArrayList<String>();
+		List<String> result = new ArrayList<>();
 		for (Map.Entry<String, Code> entry : allCodes.entrySet()) {
 			if (entry.getValue().codeContains(searchString)) {
 				result.add(entry.getValue().getUnformattedNumberFirst());

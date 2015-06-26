@@ -73,7 +73,7 @@ public class ProcedureListFragment extends ListFragment {
 		/**
 		 * Callback for when an item has been selected.
 		 */
-		public void onItemSelected(String id);
+		void onItemSelected(String id);
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class ProcedureListFragment extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setListAdapter(new ArrayAdapter<ProcedureTypes.ProcedureType>(
+		setListAdapter(new ArrayAdapter<>(
 				getActivity(), android.R.layout.simple_list_item_activated_1,
 				android.R.id.text1, ProcedureTypes.ITEMS));
 	}

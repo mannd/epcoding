@@ -178,8 +178,8 @@ public class ScreenSlideActivity extends ActionBarActivity {
 	private Set<String> loadCodeNumbers() {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		Set<String> defaultStringSet = new TreeSet<String>();
-		Set<String> codeNumbersChecked = new TreeSet<String>();
+		Set<String> defaultStringSet = new TreeSet<>();
+		Set<String> codeNumbersChecked = new TreeSet<>();
 		codeNumbersChecked.addAll(prefs.getStringSet("wizardremovalcodes",
 				defaultStringSet));
 		codeNumbersChecked.addAll(prefs.getStringSet("wizardaddingcodes",
@@ -189,7 +189,7 @@ public class ScreenSlideActivity extends ActionBarActivity {
 		return codeNumbersChecked;
 	}
 
-	protected void displayResult(String title, String message, Context context) {
+	private void displayResult(String title, String message, Context context) {
 		AlertDialog dialog = new AlertDialog.Builder(context).create();
 		dialog.setMessage(message);
 		dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Exit Wizard",

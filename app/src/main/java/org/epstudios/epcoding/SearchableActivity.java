@@ -59,7 +59,7 @@ public class SearchableActivity extends ActionBarActivity {
 
 	private void doMySearch(String query) {
 		final ListView listView = (ListView) findViewById(android.R.id.list);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+		ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
 				android.R.layout.simple_list_item_1, Codes.searchCodes(query));
 		listView.setAdapter(adapter);
 
