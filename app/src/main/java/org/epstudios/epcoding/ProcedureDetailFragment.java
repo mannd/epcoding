@@ -78,16 +78,16 @@ public class ProcedureDetailFragment extends Fragment implements
 	// boolean plusShownInDisplay; // show plus in main display
 	// boolean allowChangingPrimaryCodes;
     private boolean plusShownInSummary;
-	boolean codeDescriptionInSummary;
+	private boolean codeDescriptionInSummary;
 	private boolean descriptionTruncatedInSummary;
-	boolean codeCheckAllCodes;
+	private boolean codeCheckAllCodes;
 	private String codeVerbosity;
 	// shorten description based on screen width?
 
     // don't try to refactor these using Utilities.createCheckBoxLayoutAndCodeMap,
 	// as then will have to put in many check for null map.
-	private final Map<String, CodeCheckBox> primaryCheckBoxMap = new LinkedHashMap<String, CodeCheckBox>();
-	private final Map<String, CodeCheckBox> secondaryCheckBoxMap = new LinkedHashMap<String, CodeCheckBox>();
+	private final Map<String, CodeCheckBox> primaryCheckBoxMap = new LinkedHashMap<>();
+	private final Map<String, CodeCheckBox> secondaryCheckBoxMap = new LinkedHashMap<>();
 
 	// these correspond with the procedure list order
 	final private int afbAblation = 0;
@@ -278,11 +278,11 @@ public class ProcedureDetailFragment extends Fragment implements
 			int i = 0;
 			for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
 					.entrySet())
-				entry.getValue().setChecked(primaryCodesState[i++]);
+				entry.getValue().setChecked(primaryCodesState != null ? primaryCodesState[i++] : false);
 			i = 0;
 			for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
 					.entrySet())
-				entry.getValue().setChecked(secondaryCodesState[i++]);
+				entry.getValue().setChecked(secondaryCodesState != null ? secondaryCodesState[i++] : false);
 		} else
 			loadCoding();
 		// set up buttons
@@ -320,10 +320,6 @@ public class ProcedureDetailFragment extends Fragment implements
 		// we will extract the raw selected codes and shoot them to the code
 		// analyzer, as well as check for no primary or secondary codes
 		Code[] codes = new Code[Codes.allCodesSize()];
-		int primaryCodeCounter = 0;
-		boolean noPrimaryCodes = true;
-		boolean noSecondaryCodes = true;
-		boolean moduleHasNoSecondaryCodesNeedingChecking = false;
 		int i = 0;
 		for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
 				.entrySet()) {
@@ -335,8 +331,8 @@ public class ProcedureDetailFragment extends Fragment implements
 				message += codes[i++].getCodeFirstFormatted() + "\n";
 			}
 		}
-		primaryCodeCounter = i;
-		noPrimaryCodes = primaryCodeCounter == 0;
+		int primaryCodeCounter = i;
+		boolean noPrimaryCodes = (primaryCodeCounter == 0);
 		// see if there are any secondary codes to begin with,
 		// or if usually no secondary codes selected, e.g. PPM modules
 		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
@@ -349,8 +345,8 @@ public class ProcedureDetailFragment extends Fragment implements
 				message += codes[i++].getCodeFirstFormatted() + "\n";
 			}
 		}
-		noSecondaryCodes = primaryCodeCounter == i;
-		moduleHasNoSecondaryCodesNeedingChecking = procedure
+		boolean noSecondaryCodes = primaryCodeCounter == i;
+		boolean moduleHasNoSecondaryCodesNeedingChecking = procedure
 				.doNotWarnForNoSecondaryCodesSelected();
 		boolean noAnalysis = codeVerbosity.equals("None")
 				|| (mItem == allProcedures && !codeCheckAllCodes);
@@ -395,7 +391,7 @@ public class ProcedureDetailFragment extends Fragment implements
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		String mItemString = String.valueOf(mItem);
-		Set<String> checkedCodeNumbers = new TreeSet<String>();
+		Set<String> checkedCodeNumbers = new TreeSet<>();
 		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
 				.entrySet()) {
 			if (entry.getValue().isChecked())
@@ -406,7 +402,7 @@ public class ProcedureDetailFragment extends Fragment implements
 		prefsEditor.apply();
 	}
 
-	public void loadCoding() {
+	private void loadCoding() {
 		load(context);
 	}
 
@@ -414,7 +410,7 @@ public class ProcedureDetailFragment extends Fragment implements
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		String mItemString = String.valueOf(mItem);
-		Set<String> defaultStringSet = new TreeSet<String>();
+		Set<String> defaultStringSet = new TreeSet<>();
 		Set<String> codeNumbersChecked = prefs.getStringSet(mItemString,
 				defaultStringSet);
 		// String numbers = codeNumbersChecked.toString();
@@ -426,7 +422,7 @@ public class ProcedureDetailFragment extends Fragment implements
 
 	}
 
-	void loadSettings() {
+	private void loadSettings() {
 		SharedPreferences sharedPreferences = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		// plusShownInDisplay = sharedPreferences.getBoolean(

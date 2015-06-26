@@ -46,7 +46,7 @@ public class ScreenSlidePageFragment extends Fragment {
 	/**
 	 * The argument key for the page number this fragment represents.
 	 */
-	public static final String ARG_PAGE = "page";
+	private static final String ARG_PAGE = "page";
 
 	private static final String[] revisionCodeNumbers = { "33215", "33226", "33218",
 			"33220", "33222", "33223" };
@@ -166,15 +166,15 @@ public class ScreenSlidePageFragment extends Fragment {
 			int i = 0;
 			for (Map.Entry<String, CodeCheckBox> entry : removalCheckBoxMap
 					.entrySet())
-				entry.getValue().setChecked(removalCodesState[i++]);
+				entry.getValue().setChecked(removalCodesState != null ? removalCodesState[i++] : false);
 			i = 0;
 			for (Map.Entry<String, CodeCheckBox> entry : addingCheckBoxMap
 					.entrySet())
-				entry.getValue().setChecked(addingCodesState[i++]);
+				entry.getValue().setChecked(addingCodesState != null ? addingCodesState[i++] : false);
 			i = 0;
 			for (Map.Entry<String, CodeCheckBox> entry : finalCheckBoxMap
 					.entrySet())
-				entry.getValue().setChecked(finalCodesState[i++]);
+				entry.getValue().setChecked(finalCodesState != null ? finalCodesState[i++] : false);
 		}
 
 		return rootView;
@@ -228,7 +228,7 @@ public class ScreenSlidePageFragment extends Fragment {
 	}
 
 	private Set<String> getCheckBoxSet(Map<String, CodeCheckBox> map) {
-		Set<String> checkedCodeNumbers = new TreeSet<String>();
+		Set<String> checkedCodeNumbers = new TreeSet<>();
 		for (Map.Entry<String, CodeCheckBox> entry : map.entrySet()) {
 			if (entry.getValue().isChecked())
 				checkedCodeNumbers.add(entry.getValue().getCodeNumber());

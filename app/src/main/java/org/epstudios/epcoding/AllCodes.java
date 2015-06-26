@@ -49,14 +49,12 @@ public class AllCodes implements Procedure {
 
 	@Override
 	public Code[] secondaryCodes() {
-		Code[] codes = {};
-		return codes;
+		return new Code[]{};
     }
 
 	@Override
 	public String[] disabledCodeNumbers() {
-		String[] strings = {};
-		return strings;
+		return new String[]{};
 	}
 
 	@Override

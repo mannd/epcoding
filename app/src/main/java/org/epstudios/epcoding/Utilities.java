@@ -7,11 +7,11 @@ import android.widget.LinearLayout;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class Utilities {
+class Utilities {
 	public static Map<String, CodeCheckBox> createCheckBoxLayoutAndCodeMap(
 			Code[] codes, LinearLayout layout, Context context,
 			boolean showCodeFirst) {
-		Map<String, CodeCheckBox> map = new LinkedHashMap<String, CodeCheckBox>();
+		Map<String, CodeCheckBox> map = new LinkedHashMap<>();
 		for (int i = 0; i < codes.length; ++i) {
 			CodeCheckBox codeCheckBox = new CodeCheckBox(context);
 			codeCheckBox.setCodeFirst(showCodeFirst);

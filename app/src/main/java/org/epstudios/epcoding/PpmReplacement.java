@@ -45,8 +45,7 @@ public class PpmReplacement extends DeviceProcedure implements Procedure {
 
 	@Override
 	public String[] disabledCodeNumbers() {
-		String[] disabledCodeNumbers = {};
-		return disabledCodeNumbers;
+        return new String[]{};
 	}
 
 }

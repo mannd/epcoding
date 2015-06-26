@@ -32,7 +32,7 @@ package org.epstudios.epcoding;
 import java.util.List;
 
 public class CodeError {
-	public static enum WarningLevel {
+	public enum WarningLevel {
 		NONE, WARNING, ERROR
 	}
 
@@ -51,7 +51,7 @@ public class CodeError {
 		return warningLevel;
 	}
 
-	public void setWarningLevel(WarningLevel warningLevel) {
+	private void setWarningLevel(WarningLevel warningLevel) {
 		this.warningLevel = warningLevel;
 	}
 
@@ -59,7 +59,7 @@ public class CodeError {
 		return codes;
 	}
 
-	public void setCodes(List<String> codes) {
+	private void setCodes(List<String> codes) {
 		this.codes = codes;
 	}
 
@@ -67,7 +67,7 @@ public class CodeError {
 		return warningMessage;
 	}
 
-	public void setWarningMessage(String warningMessage) {
+	private void setWarningMessage(String warningMessage) {
 		this.warningMessage = warningMessage;
 	}
 

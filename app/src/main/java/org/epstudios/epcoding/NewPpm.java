@@ -50,8 +50,7 @@ public class NewPpm extends DeviceProcedure implements Procedure {
 
 	@Override
 	public String[] disabledCodeNumbers() {
-		String[] numbers = {};
-		return numbers;
+		return new String[]{};
 	}
 
 }

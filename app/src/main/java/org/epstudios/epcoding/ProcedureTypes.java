@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ProcedureTypes {
+class ProcedureTypes {
 
 	/**
 	 * Helper class for providing sample content for user interfaces created by
@@ -45,12 +45,13 @@ public class ProcedureTypes {
 	/**
 	 * An array of sample (dummy) items.
 	 */
-	public static final List<ProcedureType> ITEMS = new ArrayList<ProcedureType>();
+	public static final List<ProcedureType> ITEMS = new ArrayList<>();
 
 	/**
 	 * A map of sample (dummy) items, by ID.
 	 */
-	public static final Map<String, ProcedureType> ITEM_MAP = new HashMap<String, ProcedureType>();
+	@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+	private static final Map<String, ProcedureType> ITEM_MAP = new HashMap<>();
 
 	static {
 		// Add 3 sample items.

@@ -50,14 +50,12 @@ public class OtherProcedure implements Procedure {
 
 	@Override
 	public Code[] secondaryCodes() {
-		Code[] secondaryCodes = {};
-		return secondaryCodes;
+		return new Code[]{};
 	}
 
 	@Override
 	public String[] disabledCodeNumbers() {
-		String[] disabledCodeNumbers = {};
-		return disabledCodeNumbers;
+		return new String[]{};
 	}
 
 	@Override
