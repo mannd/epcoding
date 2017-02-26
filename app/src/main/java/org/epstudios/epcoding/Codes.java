@@ -71,6 +71,10 @@ class Codes {
 		addCode(map, "0390T", "Peri-procedural device evaluation/testing of leadless PPM", false);
 		addCode(map, "0391T", "Interrogation of leadless PPM", false);
 
+		// hopefully rarely needed!
+		addCode(map, "33010", "Pericardiocentesis", false);
+
+
 // New PPM with leads
 		addCode(map, "33206", "New or replacement PPM with new A lead", false);
 		addCode(map, "33207", "New or replacement PPM with new V lead", false);
@@ -158,8 +162,16 @@ class Codes {
 		addCode(map, "76000", "Fluoroscopic lead evaluation", false);
 		// Ablation and EP testing codes
 
+		// TEE - but only by different MD than performing procedure
+		addCode(map, "93355", "TEE for TEE for guidance of transcatheter intervention, performed by different MD than MD performing intervention.", false);
+
 		// EP Testing and Mapping ///////////////////////
-		addCode(map, "93600", "His bundle recording only", false);
+		addCode(map, "93600", "His bundle recording", false);
+		addCode(map, "93602", "Intra-atrial recording", false);
+		addCode(map, "93603", "Right ventricular recording", false);
+		addCode(map, "93610", "Intra-atrial pacing", false);
+		addCode(map, "93612", "Intraventricular pacing", false);
+		addCode(map, "93618", "Induction of arrhythmia", false);
 
 		addCode(map, "93609", "2D mapping", true);
 		addCode(map, "93613", "3D mapping", true);
@@ -197,8 +209,18 @@ class Codes {
 		addCode(map, "93660", "Tilt table test", false);
 		addCode(map, "93662", "Intracardiac echo", true);
 
+		addCode(map, "93724", "Noninvasive programmed stimulation", false);
+
 		// Unlisted procedure
 		addCode(map, "93799", "Unlisted procedure", false);
+
+		// New sedation codes, 2017
+		addCode(map, "99151", "Moderate sedation, same MD, initial 15 min, pt < 5 y/o", false);
+		addCode(map, "99152", "Moderate sedation, same MD, initial 15 min, pt ≥ 5 y/o", false);
+		addCode(map, "99153", "Moderate sedation, same MD, each additional 15 min", false);
+		addCode(map, "99155", "Moderate sedation, different MD, initial 15 min, pt < 5 y/o", false);
+		addCode(map, "99156", "Moderate sedation, different MD, initial 15 min, pt ≥ 5 y/o", false);
+		addCode(map, "99157", "Moderate sedation, different MD, each additional 15 min", false);
 
 		return Collections.unmodifiableMap(map);
 	}
