@@ -86,9 +86,7 @@ class CodeAnalyzer {
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("33240", "33230", "33231", "33262", "33263", "33264"),
 				DEFAULT_DUPLICATE_ERROR));
-		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
-				.asList("93600", "93619", "93620", "93655", "93657"),
-				DEFAULT_DUPLICATE_ERROR));
+
 		// don't combine primary ablation codes, not sure what to do with
 		// AVN ablation for this...
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
@@ -138,6 +136,9 @@ class CodeAnalyzer {
         codeErrors.add(new CodeError(CodeError.WarningLevel.WARNING, Arrays
                 .asList("93623", "93650", "93653", "93654", "93656"),
                 "Recent coding changes may disallow bundling induce post IV drug with ablation."));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("93600", "93619", "93620", "93655", "93657"),
+				DEFAULT_DUPLICATE_ERROR));
 		return codeErrors;
 	}
 

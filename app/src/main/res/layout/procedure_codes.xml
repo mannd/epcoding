@@ -44,8 +44,17 @@
             android:orientation="horizontal" >
 
             <Button
+                android:id="@+id/sedation_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/sedation_button_label" />
+
+            <Button
                 android:id="@+id/summary_button"
-                style="?android:attr/borderlessButtonStyle"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -54,7 +63,7 @@
 
             <Button
                 android:id="@+id/clear_button"
-                style="?android:attr/borderlessButtonStyle"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

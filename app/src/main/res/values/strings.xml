@@ -175,6 +175,7 @@
    	    below. Select Finish to see a summary of your codes.</string>
     <string name="no_data_label">No matches found!</string>
     <string name="default_verbosity">Verbose</string>
+    <string name="sedation_button_label">Sedation</string>
 
 
 </resources>

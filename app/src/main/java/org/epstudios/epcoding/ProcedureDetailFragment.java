@@ -36,12 +36,17 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.internal.widget.AdapterViewCompat;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -65,6 +70,7 @@ public class ProcedureDetailFragment extends Fragment implements
 	 * represents.
 	 */
 	public static final String ARG_ITEM_ID = "item_id";
+    public static final String EPCODING = "EPCODING";
 
 	/**
 	 * The content this fragment is presenting.
@@ -159,16 +165,20 @@ public class ProcedureDetailFragment extends Fragment implements
 	}
 
 	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.summary_button:
-			summarizeCoding();
-			break;
-		case R.id.clear_button:
-			clearEntries();
-			break;
-		}
-	}
+    public void onClick(View v) {
+        Log.d(EPCODING, "click view");
+        switch (v.getId()) {
+            case R.id.sedation_button:
+                addSedation();
+                break;
+            case R.id.summary_button:
+                summarizeCoding();
+                break;
+            case R.id.clear_button:
+                clearEntries();
+                break;
+        }
+    }
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -286,11 +296,14 @@ public class ProcedureDetailFragment extends Fragment implements
 		} else
 			loadCoding();
 		// set up buttons
+        Button sedationButton = (Button)rootView.findViewById(R.id.sedation_button);
+        sedationButton.setOnClickListener(this);
         Button summarizeButton = (Button) rootView.findViewById(R.id.summary_button);
 		summarizeButton.setOnClickListener(this);
         Button clearButton = (Button) rootView.findViewById(R.id.clear_button);
 		clearButton.setOnClickListener(this);
-		return rootView;
+
+        return rootView;
 	}
 
 	private void createCheckBoxLayoutAndCodeMap(Code[] codes,
@@ -301,9 +314,21 @@ public class ProcedureDetailFragment extends Fragment implements
 			codeCheckBox.setCodeFirst(mItem == allProcedures);
 			codeCheckBox.setCode(codes[i]);
 			codeCheckBoxMap.put(codes[i].getCodeNumber(), codeCheckBox);
+            // add long click listener to open modifier dialog
+            codeCheckBox.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    Log.v(EPCODING, "on long click");
+                    return true;
+                }
+            });
 			layout.addView(codeCheckBox);
 		}
 	}
+
+    private void addSedation() {
+        Log.d(EPCODING, "addSedation");
+    }
 
 	private void clearEntries() {
 		for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
