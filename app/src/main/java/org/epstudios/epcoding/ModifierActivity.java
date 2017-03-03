@@ -42,6 +42,7 @@ public class ModifierActivity extends ActionBarActivity {
 
     private Code code;
     private List<Modifier> modifiers;
+    private CheckBox[] checkBoxes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +60,24 @@ public class ModifierActivity extends ActionBarActivity {
         modifiers = code.getModifiers();
 
         List<Modifier> allModifiers = Modifiers.allModifiersSorted();
-
+        checkBoxes = new CheckBox[allModifiers.size()];
         createCheckBoxLayoutAndModifierMap(allModifiers, checkBoxLayout);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        if (savedInstanceState != null) {
+            boolean[] checkBoxState = savedInstanceState.getBooleanArray("ModifierState");
+            int i = 0;
+            for (CheckBox checkBox : checkBoxes) {
+                checkBox.setChecked(checkBoxState[i++]);
+            }
+        }
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        Log.d("EPCODING", "onCreate");
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -95,20 +106,33 @@ public class ModifierActivity extends ActionBarActivity {
     private void createCheckBoxLayoutAndModifierMap(List<Modifier> modifiers,
                                                     LinearLayout layout) {
 
+        int i = 0;
         for (Modifier modifier : modifiers) {
             CheckBox checkBox = new CheckBox(this);
             checkBox.setText(modifier.modifierDescription());
+            checkBox.setTag(modifier.getNumber());
+            checkBoxes[i++] = checkBox;
             layout.addView(checkBox);
         }
-
-//        for (int i = 0; i < codes.length; ++i) {
-//            CodeCheckBox codeCheckBox = new CodeCheckBox(context);
-//            // codes[i].setPlusShown(plusShownInDisplay);
-//            codeCheckBox.setCodeFirst(mItem == allProcedures);
-//            codeCheckBox.setCode(codes[i]);
-//            codeCheckBoxMap.put(codes[i].getCodeNumber(), codeCheckBox);
-//
-//
-//            layout.addView(codeCheckBox);
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        Log.d("EPCODING", "saveInstanceState");
+        boolean[] checkBoxState = new boolean[checkBoxes.length];
+        for (int i = 0; i < checkBoxes.length; i++) {
+            checkBoxState[i] = checkBoxes[i].isChecked();
+        }
+        savedInstanceState.putBooleanArray("ModifierState", checkBoxState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("EPCODING", "onResume");
+
+    }
+
+
 }
