@@ -111,6 +111,9 @@ public class ProcedureDetailFragment extends Fragment implements
 	final private int otherProcedure = 11;
 	final private int allProcedures = 12;
 
+    // active code number for modifier activity
+    private String activeCodeNumber;
+
 	private Procedure procedure;
 
 	/**
@@ -316,11 +319,17 @@ public class ProcedureDetailFragment extends Fragment implements
 			codeCheckBox.setCode(codes[i]);
 			codeCheckBoxMap.put(codes[i].getCodeNumber(), codeCheckBox);
             // add long click listener to open modifier dialog
+            // TODO: Note that Primary and disabled codes can't be long-clicked
+            // because they are disabled.  This is an Android limitation, though
+            // any code can be long clicked and modified in the all codes module.
+            activeCodeNumber = codes[i].getCodeNumber();
             codeCheckBox.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
                     Log.v(EPCODING, "on long click");
-                    startActivity(new Intent(getActivity(), ModifierActivity.class));
+                    Intent intent = new Intent(getActivity(), ModifierActivity.class);
+                    intent.putExtra("ACTIVE_CODE_NUMBER", activeCodeNumber);
+                    startActivity(intent);
                     return true;
                 }
             });

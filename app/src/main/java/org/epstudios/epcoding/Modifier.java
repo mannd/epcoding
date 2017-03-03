@@ -22,7 +22,7 @@ package org.epstudios.epcoding;
  * along with epcoding.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class Modifier {
+public class Modifier implements Comparable<Modifier> {
     public String getNumber() {
         return number;
     }
@@ -48,5 +48,13 @@ public class Modifier {
         this.number = number;
         this.shortDescription = shortDescription;
         isSelected = false;
+    }
+
+    public String modifierDescription() {
+        return number + " " + shortDescription;
+    }
+
+    public int compareTo(Modifier m) {
+        return number.compareTo(m.number);
     }
 }

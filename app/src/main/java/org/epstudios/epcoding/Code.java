@@ -52,6 +52,11 @@ public class Code {
     }
 
     private int multiplier = 0;
+
+    public List<Modifier> getModifiers() {
+        return modifiers;
+    }
+
     private List<Modifier> modifiers = new ArrayList<>();
 
 

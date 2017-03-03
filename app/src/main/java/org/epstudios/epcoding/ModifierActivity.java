@@ -26,16 +26,41 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 public class ModifierActivity extends ActionBarActivity {
+
+    private Code code;
+    private List<Modifier> modifiers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.modifiers);
+
+        String codeNumber = getIntent().getStringExtra("ACTIVE_CODE_NUMBER");
+        setTitle("Code " + codeNumber);
+
+        LinearLayout checkBoxLayout = (LinearLayout) findViewById(
+                R.id.modifiers_checkbox_layout);
+
+
+        code = Codes.getCode(codeNumber);
+        modifiers = code.getModifiers();
+
+        List<Modifier> allModifiers = Modifiers.allModifiersSorted();
+
+        createCheckBoxLayoutAndModifierMap(allModifiers, checkBoxLayout);
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -65,5 +90,25 @@ public class ModifierActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void createCheckBoxLayoutAndModifierMap(List<Modifier> modifiers,
+                                                    LinearLayout layout) {
+
+        for (Modifier modifier : modifiers) {
+            CheckBox checkBox = new CheckBox(this);
+            checkBox.setText(modifier.modifierDescription());
+            layout.addView(checkBox);
+        }
+
+//        for (int i = 0; i < codes.length; ++i) {
+//            CodeCheckBox codeCheckBox = new CodeCheckBox(context);
+//            // codes[i].setPlusShown(plusShownInDisplay);
+//            codeCheckBox.setCodeFirst(mItem == allProcedures);
+//            codeCheckBox.setCode(codes[i]);
+//            codeCheckBoxMap.put(codes[i].getCodeNumber(), codeCheckBox);
+//
+//
+//            layout.addView(codeCheckBox);
     }
 }
