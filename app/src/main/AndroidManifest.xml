@@ -65,6 +65,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ProcedureListActivity" />
         </activity>
+        <activity
+            android:name=".ModifierActivity"
+            android:label="@string/modifiers_label">
+        </activity>
     </application>
 
 </manifest>

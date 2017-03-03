@@ -176,6 +176,11 @@
     <string name="no_data_label">No matches found!</string>
     <string name="default_verbosity">Verbose</string>
     <string name="sedation_button_label">Sedation</string>
+    <string name="modifiers_label">Modifiers</string>
+    <string name="add_label">Add</string>
+    <string name="save_label">Save</string>
+    <string name="reset_button_label">Reset</string>
+    <string name="cancel_button_label">Cancel</string>
 
 
 </resources>
