@@ -40,6 +40,8 @@ class Codes {
 
 	private final static Map<String, Code> allCodes = createMap();
 
+    private static Map<String, List<Modifier>> defaultModifiers;
+
 	private static Map<String, Code> createMap() {
 		Map<String, Code> map = new HashMap<>();
 		// addCode(map, String codeNumber, String codeName, boolean isAddOn)
@@ -332,4 +334,78 @@ class Codes {
 		}
 		return result;
 	}
+
+	static void clearMultipliers(ArrayList<Code> array) {
+        for (Code code : array) {
+            code.setMultiplier(0);
+        }
+    }
+
+    static void clearModifiers(ArrayList<Code> array) {
+        for (Code code : array) {
+            code.clearModifiers();
+        }
+    }
+
+    static Map<String, List<Modifier>> defaultModifiers() {
+        if (defaultModifiers == null) {
+            defaultModifiers = new HashMap<>();
+            // Modifier 26 alone
+            List<Modifier> modifierList_26 = new ArrayList<>();
+            modifierList_26.add(Modifiers.getModifierForNumber("26"));
+            defaultModifiers.put("93609", modifierList_26);
+            defaultModifiers.put("93620", modifierList_26);
+            defaultModifiers.put("93619", modifierList_26);
+            defaultModifiers.put("93621", modifierList_26);
+            defaultModifiers.put("93622", modifierList_26);
+            defaultModifiers.put("93662", modifierList_26);
+            defaultModifiers.put("76000", modifierList_26);
+            defaultModifiers.put("93641", modifierList_26);
+            defaultModifiers.put("93642", modifierList_26);
+            defaultModifiers.put("93660", modifierList_26);
+            // Modifier 26 and 59
+            List<Modifier> modifierList_26_59 = new ArrayList<>();
+            modifierList_26_59.add(Modifiers.getModifierForNumber("26"));
+            modifierList_26_59.add(Modifiers.getModifierForNumber("59"));
+            defaultModifiers.put("93623", modifierList_26_59);
+            // Modifier Q0
+            List<Modifier> modifierList_Q0 = new ArrayList<>();
+            modifierList_Q0.add(Modifiers.getModifierForNumber("Q0"));
+            defaultModifiers.put("33249", modifierList_Q0);
+            defaultModifiers.put("33262", modifierList_Q0);
+            defaultModifiers.put("33263", modifierList_Q0);
+            defaultModifiers.put("33264", modifierList_Q0);
+            // Modifier 59
+            List<Modifier> modifierList_59 = new ArrayList<>();
+            modifierList_59.add(Modifiers.getModifierForNumber("59"));
+            defaultModifiers.put("33222", modifierList_59);
+            defaultModifiers.put("33223", modifierList_59);
+            defaultModifiers.put("33620", modifierList_59);
+        }
+        return defaultModifiers;
+    }
+
+    public static void clearMultipliersAndModifiers(List<Code> array) {
+        for (Code code : array) {
+            code.setMultiplier(0);
+            code.clearModifiers();
+        }
+    }
+
+    public static void hideMultipliers(List<Code> array, Boolean hide) {
+        for (Code code : array) {
+            code.setHideMultiplier(hide);
+        }
+    }
+
+    public static void loadDefaultModifiers(List<Code> array) {
+        for (Code code : array) {
+            List<Modifier> modifiers = defaultModifiers().get(code.getCodeNumber());
+            if (modifiers != null) {
+                code.addModifiers(modifiers);
+            }
+        }
+    }
+
+    // public static void loadSavedModifiers(List<Code> array) {}
 }

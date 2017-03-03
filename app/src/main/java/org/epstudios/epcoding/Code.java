@@ -41,6 +41,15 @@ public class Code {
     private boolean plusShown = true;
     private boolean descriptionShortened = false;
     private boolean descriptionShown = true;
+
+    public boolean isHideMultiplier() {
+        return hideMultiplier;
+    }
+
+    public void setHideMultiplier(boolean hideMultiplier) {
+        this.hideMultiplier = hideMultiplier;
+    }
+
     private boolean hideMultiplier = false;
 
     public int getMultiplier() {
@@ -152,7 +161,7 @@ public class Code {
 
     // use this for CodeCheckBox text
     public String getUnformattedDescriptionFirst() {
-        return shortDescription + " (" + (isAddOn ? "+" : "") + code + ")";
+        return shortDescription + " (" + unformattedCodeNumber() + ")";
     }
 
     public String getUnformattedNumberFirst() {

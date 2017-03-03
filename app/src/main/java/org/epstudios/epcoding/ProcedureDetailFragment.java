@@ -53,7 +53,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -247,6 +249,12 @@ public class ProcedureDetailFragment extends Fragment implements
 			break;
 		}
 
+        if (mItem != allProcedures) {
+            Codes.loadDefaultModifiers(allPrimaryAndSecondaryCodes());
+        }
+
+        // TODO: load saved modifiers
+
 		getActivity().setTitle(procedure.title(context));
 
 		Code[] secondaryCodes = procedure.secondaryCodes();
@@ -270,7 +278,9 @@ public class ProcedureDetailFragment extends Fragment implements
 		for (int i = 0; i < disabledCodeNumbers.length; ++i)
 			secondaryCheckBoxMap.get(disabledCodeNumbers[i]).disable();
 
-		createCheckBoxLayoutAndCodeMap(primaryCodes, primaryCheckBoxMap,
+
+
+        createCheckBoxLayoutAndCodeMap(primaryCodes, primaryCheckBoxMap,
                 primaryCheckBoxLayout);
 
 		if (procedure.disablePrimaryCodes()) {
@@ -281,6 +291,7 @@ public class ProcedureDetailFragment extends Fragment implements
 				entry.getValue().setChecked(true);
 			}
 		}
+
 
 		// apply saved configurations here
 		if (null != savedInstanceState) {
@@ -335,6 +346,19 @@ public class ProcedureDetailFragment extends Fragment implements
             });
 			layout.addView(codeCheckBox);
 		}
+	}
+
+	private List<Code> allPrimaryAndSecondaryCodes() {
+		List<Code> allCodes = new ArrayList<>();
+		Code[] primaryCodes = procedure.primaryCodes();
+		Code[] secondaryCodes = procedure.secondaryCodes();
+		for (int i = 0; i < primaryCodes.length; i++) {
+			allCodes.add(primaryCodes[i]);
+		}
+		for (int i = 0; i < secondaryCodes.length; i++) {
+			allCodes.add(secondaryCodes[i]);
+		}
+		return allCodes;
 	}
 
     private void addSedation() {

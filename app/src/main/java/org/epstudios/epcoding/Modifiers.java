@@ -60,4 +60,8 @@ public class Modifiers {
         return modifiers;
     }
 
+    public static Modifier getModifierForNumber(String number) {
+        return Modifiers.allModifiers.get(number);
+    }
+
 }

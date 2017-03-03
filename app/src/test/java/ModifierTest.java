@@ -24,6 +24,7 @@ import android.util.Log;
 
 import org.epstudios.epcoding.Code;
 import org.epstudios.epcoding.Modifier;
+import org.epstudios.epcoding.Modifiers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -51,8 +52,13 @@ public class ModifierTest {
         Modifier modifier77 = new Modifier("77", "test modifier 77");
         code.addModifier(modifier77);
         assert code.unformattedCodeNumber().equals("99999-26-99-77");
+        assert code.getUnformattedDescriptionFirst().equals("Test code (99999-26-99-77)");
+    }
 
-
+    @Test
+    public void getModifierForNumberTest() {
+        Modifier m = Modifiers.getModifierForNumber("26");
+        assert m.getNumber().equals("26");
     }
 
 }
