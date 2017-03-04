@@ -43,7 +43,7 @@ public class Modifiers {
         addModifier(map, "59", "Distinct procedural service");
         addModifier(map, "76", "Repeat procedure by same MD");
         addModifier(map, "78", "Return to OR for related procedure during post-op period");
-        addModifier(map, "Q0", "Investigative clinical service (e.g. ICD for primary prevention");addModifier(map, "52", "");
+        addModifier(map, "Q0", "Investigative clinical service (e.g. ICD for primary prevention");
 
         return Collections.unmodifiableMap(map);
     }

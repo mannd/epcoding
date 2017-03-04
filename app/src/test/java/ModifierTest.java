@@ -23,10 +23,14 @@
 import android.util.Log;
 
 import org.epstudios.epcoding.Code;
+import org.epstudios.epcoding.Codes;
 import org.epstudios.epcoding.Modifier;
 import org.epstudios.epcoding.Modifiers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class ModifierTest {
 
@@ -59,6 +63,52 @@ public class ModifierTest {
     public void getModifierForNumberTest() {
         Modifier m = Modifiers.getModifierForNumber("26");
         assert m.getNumber().equals("26");
+    }
+
+    @Test
+    public void getCodeAndModifiersTest() {
+        Code code = new Code("88888", "Test code", false);
+        String[] codeAndModifiers = code.getCodeAndModifiers();
+        assert codeAndModifiers.length == 1;
+        assert codeAndModifiers[0].equals("88888");
+        code.addModifier(new Modifier("XX", "test"));
+        codeAndModifiers = code.getCodeAndModifiers();
+        assert codeAndModifiers.length == 2;
+        assert codeAndModifiers[0].equals("88888");
+        assert codeAndModifiers[1].equals("XX");
+    }
+
+    @Test
+    public void makeCodeAndModifierArrayTest() {
+        String codeNumber = "77777";
+        Set<String> modifiers = new HashSet<>();
+        modifiers.add("AA");
+        modifiers.add("BB");
+        String[] result = Code.makeCodeAndModifierArray(codeNumber, modifiers);
+        assert result.length == 3;
+        assert result[0].equals("77777");
+        assert result[1].equals("AA");
+        assert result[2].equals("BB");
+    }
+
+    @Test
+    public void badCodeNumberTest() {
+        Code code = Codes.getCode("BADBADBAD");
+        assert code == null;
+        code = Codes.getCode("76000");
+        assert code.getCodeNumber().equals("76000");
+    }
+
+    @Test
+    public void setModifiersForCodeTest() {
+        String[] testString = new String[3];
+        testString[0] = "76000";
+        testString[1] = "52";
+        testString[2] = "59";
+        Codes.setModifiersForCode(testString);
+        Code code = Codes.getCode("76000");
+        assert code.unformattedCodeNumber().equals("76000-52-59");
+
     }
 
 }

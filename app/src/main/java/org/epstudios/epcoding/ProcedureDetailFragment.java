@@ -29,6 +29,7 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,6 +38,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.internal.widget.AdapterViewCompat;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -49,6 +51,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -113,16 +116,17 @@ public class ProcedureDetailFragment extends Fragment implements
 	final private int otherProcedure = 11;
 	final private int allProcedures = 12;
 
-    // active code number for modifier activity
-    private String activeCodeNumber;
-
 	private Procedure procedure;
+
+    private LinearLayout primaryCheckBoxLayout;
+    private LinearLayout secondaryCheckBoxLayout;
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
 	 * fragment (e.g. upon screen orientation changes).
 	 */
 	public ProcedureDetailFragment() {
+
 	}
 
 	@Override
@@ -193,9 +197,9 @@ public class ProcedureDetailFragment extends Fragment implements
 				false);
 		context = getActivity();
 
-        LinearLayout primaryCheckBoxLayout = (LinearLayout) rootView
+        primaryCheckBoxLayout = (LinearLayout) rootView
                 .findViewById(R.id.primary_checkbox_layout);
-        LinearLayout secondaryCheckBoxLayout = (LinearLayout) rootView
+        secondaryCheckBoxLayout = (LinearLayout) rootView
                 .findViewById(R.id.secondary_checkbox_layout);
         TextView primaryCodeTextView = (TextView) rootView
                 .findViewById(R.id.primary_code_textView);
@@ -249,11 +253,13 @@ public class ProcedureDetailFragment extends Fragment implements
 			break;
 		}
 
+		Codes.clearMultipliersAndModifiers(allPrimaryAndSecondaryCodes());
         if (mItem != allProcedures) {
             Codes.loadDefaultModifiers(allPrimaryAndSecondaryCodes());
         }
-
         // TODO: load saved modifiers
+        //Codes.loadSavedModifiers(allPrimaryAndSecondaryCodes(), context);
+
 
 		getActivity().setTitle(procedure.title(context));
 
@@ -324,7 +330,7 @@ public class ProcedureDetailFragment extends Fragment implements
 	private void createCheckBoxLayoutAndCodeMap(Code[] codes,
 			Map<String, CodeCheckBox> codeCheckBoxMap, LinearLayout layout) {
 		for (int i = 0; i < codes.length; ++i) {
-			CodeCheckBox codeCheckBox = new CodeCheckBox(context);
+			final CodeCheckBox codeCheckBox = new CodeCheckBox(context);
 			// codes[i].setPlusShown(plusShownInDisplay);
 			codeCheckBox.setCodeFirst(mItem == allProcedures);
 			codeCheckBox.setCode(codes[i]);
@@ -333,20 +339,60 @@ public class ProcedureDetailFragment extends Fragment implements
             // TODO: Note that Primary and disabled codes can't be long-clicked
             // because they are disabled.  This is an Android limitation, though
             // any code can be long clicked and modified in the all codes module.
-            activeCodeNumber = codes[i].getCodeNumber();
             codeCheckBox.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
                     Log.v(EPCODING, "on long click");
+                    Log.v(EPCODING, "Active code number = " + codeCheckBox.getCodeNumber());
                     Intent intent = new Intent(getActivity(), ModifierActivity.class);
-                    intent.putExtra("ACTIVE_CODE_NUMBER", activeCodeNumber);
-                    startActivity(intent);
+                    intent.putExtra("ACTIVE_CODE_NUMBER", codeCheckBox.getCodeNumber());
+                    startActivityForResult(intent, 1);
                     return true;
                 }
             });
 			layout.addView(codeCheckBox);
 		}
 	}
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                String[] result=data.getStringArrayExtra("MODIFIER_RESULT");
+				Log.d(EPCODING, "Result = " + result.length);
+                Code code = Codes.setModifiersForCode(result);
+                if (code != null) {
+                    CodeCheckBox checkBox = getCheckBoxWithCode(code.getCodeNumber());
+                    if (checkBox != null) {
+                        // forces checkbox to redraw itself
+                        // checkBox.invalidate() doesn't work for some reason
+                        checkBox.setCode(code);
+                    }
+                }
+             }
+        }
+    }
+
+    // TODO: apparently all codes module uses primary codes and no secondary, so
+    // both below are needed.  Need to allow allcodes module to display modifiers in its
+    // list, which uses code first.
+    private CodeCheckBox getCheckBoxWithCode(String codeNumber) {
+        String result;
+        for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap.entrySet()) {
+            result = entry.getValue().getCodeNumber();
+            if (result.equals(codeNumber)) {
+                return entry.getValue();
+            }
+        }
+        for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap.entrySet()) {
+            result = entry.getValue().getCodeNumber();
+            if (result.equals(codeNumber)) {
+                return entry.getValue();
+            }
+        }
+        return null;
+     }
 
 	private List<Code> allPrimaryAndSecondaryCodes() {
 		List<Code> allCodes = new ArrayList<>();

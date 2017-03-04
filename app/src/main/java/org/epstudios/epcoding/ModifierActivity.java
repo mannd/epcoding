@@ -22,8 +22,11 @@
 
 package org.epstudios.epcoding;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -31,18 +34,24 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-public class ModifierActivity extends ActionBarActivity {
+public class ModifierActivity extends ActionBarActivity implements View.OnClickListener {
 
     private Code code;
-    private List<Modifier> modifiers;
+    private Set<Modifier> modifierSet;
     private CheckBox[] checkBoxes;
+
+    private final String EPCODING = "EPCODING";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +66,7 @@ public class ModifierActivity extends ActionBarActivity {
 
 
         code = Codes.getCode(codeNumber);
-        modifiers = code.getModifiers();
+        modifierSet = code.getModifierSet();
 
         List<Modifier> allModifiers = Modifiers.allModifiersSorted();
         checkBoxes = new CheckBox[allModifiers.size()];
@@ -74,7 +83,17 @@ public class ModifierActivity extends ActionBarActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Log.d("EPCODING", "onCreate");
+
+        Button cancelButton = (Button)findViewById(R.id.cancel_button);
+        cancelButton.setOnClickListener(this);
+        Button resetButton = (Button)findViewById(R.id.reset_button);
+        resetButton.setOnClickListener(this);
+        Button saveButton = (Button)findViewById(R.id.save_button);
+        saveButton.setOnClickListener(this);
+        Button addButton = (Button)findViewById(R.id.add_button);
+        addButton.setOnClickListener(this);
+
+        Log.d(EPCODING, "onCreate");
     }
 
 
@@ -103,6 +122,29 @@ public class ModifierActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onClick(View v) {
+        Log.d(EPCODING, "click view");
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_CANCELED, returnIntent);
+        switch (v.getId()) {
+            case R.id.cancel_button:
+                // Just go back
+                break;
+            case R.id.reset_button:
+                resetModifiers();
+                break;
+            case R.id.save_button:
+                saveModifiers();
+                break;
+            case R.id.add_button:
+                addModifiers(returnIntent);
+                break;
+        }
+        finish();
+    }
+
+
     private void createCheckBoxLayoutAndModifierMap(List<Modifier> modifiers,
                                                     LinearLayout layout) {
 
@@ -110,7 +152,9 @@ public class ModifierActivity extends ActionBarActivity {
         for (Modifier modifier : modifiers) {
             CheckBox checkBox = new CheckBox(this);
             checkBox.setText(modifier.modifierDescription());
+            // note that tags are preserved with rotation automatically
             checkBox.setTag(modifier.getNumber());
+            checkBox.setChecked(modifierSet.contains(modifier));
             checkBoxes[i++] = checkBox;
             layout.addView(checkBox);
         }
@@ -131,7 +175,36 @@ public class ModifierActivity extends ActionBarActivity {
     public void onResume() {
         super.onResume();
         Log.d("EPCODING", "onResume");
+    }
 
+    private void saveModifiers() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Set<String> selectedNumbers = selectedModifierNumbers();
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putStringSet(code.getCodeNumber(), selectedNumbers);
+        prefsEditor.apply();
+
+    }
+
+    private void resetModifiers() {
+        Codes.resetSavedModifiers(selectedModifierNumbers(), this);
+    }
+
+    private Set<String> selectedModifierNumbers() {
+        Set<String> numbers = new HashSet<>();
+        for (CheckBox checkBox : checkBoxes) {
+            if (checkBox.isChecked()) {
+                numbers.add((String) checkBox.getTag());
+            }
+        }
+        return numbers;
+    }
+
+    private void addModifiers(Intent intent) {
+        Set<String> modifierNumbers = selectedModifierNumbers();
+        intent.putExtra("MODIFIER_RESULT",
+                Code.makeCodeAndModifierArray(code.getCodeNumber(), modifierNumbers));
+        setResult(Activity.RESULT_OK, intent);
     }
 
 

@@ -31,7 +31,9 @@ package org.epstudios.epcoding;
 
 import android.annotation.SuppressLint;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @SuppressLint("DefaultLocale")
 public class Code {
@@ -68,6 +70,11 @@ public class Code {
 
     private List<Modifier> modifiers = new ArrayList<>();
 
+    public Set<Modifier> getModifierSet() {
+        Set<Modifier> set = new HashSet<>();
+        set.addAll(modifiers);
+        return set;
+    }
 
     public Code(String code, String shortDescription, boolean isAddOn) {
         this.code = code;
@@ -213,4 +220,26 @@ public class Code {
         }
         return modString;
     }
+
+    // This converts code and modifiers into something that can be put into a putExtra()
+    public String[] getCodeAndModifiers() {
+        String [] array = new String[modifiers.size() + 1];
+        array[0] = getCodeNumber();
+        for (int i = 0; i < modifiers.size(); i++) {
+            array[i + 1] = modifiers.get(i).getNumber();
+        }
+        return array;
+
+    }
+
+    public static String[] makeCodeAndModifierArray(String codeNumber, Set<String> modifierNumbers) {
+        String[] array = new String[modifierNumbers.size() + 1];
+        array[0] = codeNumber;
+        int i = 1;
+        for (String number : modifierNumbers) {
+            array[i++] = number;
+        }
+        return array;
+    }
+
 }

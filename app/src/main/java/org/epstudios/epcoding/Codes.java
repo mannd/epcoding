@@ -29,14 +29,20 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-class Codes {
+public class Codes {
 
 	private final static Map<String, Code> allCodes = createMap();
 
@@ -407,5 +413,45 @@ class Codes {
         }
     }
 
-    // public static void loadSavedModifiers(List<Code> array) {}
+    public static void loadSavedModifiers(List<Code> array, Context context) {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(context);
+        for (Code code : array) {
+            Set<String> modifierNumbers = prefs.getStringSet(code.getCodeNumber(),
+                    null);
+            if (modifierNumbers != null) {
+                code.clearModifiers();
+                for (String s : modifierNumbers) {
+                    Modifier modifier = Modifiers.getModifierForNumber(s);
+                    code.addModifier(modifier);
+                }
+            }
+        }
+	}
+
+	public static void resetSavedModifiers(Set<String> codeNumbers, Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        for (String codeNumber : codeNumbers) {
+            SharedPreferences.Editor prefsEditor = prefs.edit();
+            prefsEditor.remove(codeNumber);
+            prefsEditor.apply();
+        }
+    }
+
+    // returns code number or null
+    public static Code setModifiersForCode(String[] codeAndModifiers) {
+		if (codeAndModifiers == null || codeAndModifiers.length < 1) {
+			return null;
+		}
+		int length = codeAndModifiers.length;
+		String codeNumber = codeAndModifiers[0];
+		Code code = Codes.getCode(codeNumber);
+		if (code != null) {
+			code.clearModifiers();
+			for (int i = 1; i < length; i++) {
+				code.addModifier(Modifiers.getModifierForNumber(codeAndModifiers[i]));
+			}
+		}
+		return code;
+	}
 }
