@@ -19,4 +19,27 @@
         android:id="@+id/timePicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+    <Button
+        android:id="@+id/cancel_button"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel_button_label" />
+
+    <Button
+        android:id="@+id/calculate_button"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="@string/calculate_sedation_time_button_label" />
+        </LinearLayout>
 </LinearLayout>

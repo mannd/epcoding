@@ -182,7 +182,7 @@
     <string name="reset_button_label">Reset</string>
     <string name="cancel_button_label">Cancel</string>
     <string name="add_sedation_button_label">Add Sedation</string>
-    <string name="calculate_sedation_time_button_label">Calculate Sedation Time</string>
+    <string name="calculate_sedation_time_button_label">Calculate</string>
     <string name="no_sedation_button_label">No Sedation</string>
     <string name="patient_more_than_5_button_label"><![CDATA[Patient > 5 y/o]]></string>
     <string name="sedation_time_label">Sedation Time</string>
