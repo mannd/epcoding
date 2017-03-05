@@ -87,7 +87,9 @@ public class Code {
     }
 
     private String getCodeNumberWithAddOn() {
-        return (isAddOn && plusShown ? "+" : "") + code;
+        // TODO: is change below OK?
+        //return (isAddOn && plusShown ? "+" : "") + code;
+        return unformattedCodeNumber();
     }
 
     public String getCodeNumber() {

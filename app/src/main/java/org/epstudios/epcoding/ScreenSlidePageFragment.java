@@ -16,11 +16,14 @@
 
 package org.epstudios.epcoding;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,9 +32,15 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+
+import static org.epstudios.epcoding.ProcedureDetailFragment.EPCODING;
 
 /**
  * A fragment representing a single step in a wizard. The fragment shows a dummy
@@ -67,6 +76,11 @@ public class ScreenSlidePageFragment extends Fragment {
 	 * {@link #ARG_PAGE}.
 	 */
 	private int mPageNumber;
+	private Context context;
+	private Code[] removalCodes;
+	private Code[] addingCodes;
+	private Code[] finalCodes;
+	List<Code> allCodes;
 
 	/**
 	 * Factory method for this fragment class. Constructs a new fragment for the
@@ -87,6 +101,7 @@ public class ScreenSlidePageFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mPageNumber = getArguments().getInt(ARG_PAGE);
+		context = getActivity();
 	}
 
 	@Override
@@ -105,19 +120,28 @@ public class ScreenSlidePageFragment extends Fragment {
 		LinearLayout finalCheckBoxLayout = (LinearLayout) rootView
 				.findViewById(R.id.final_codes);
 		finalCheckBoxLayout.setVisibility(View.GONE);
-		Code[] removalCodes = Codes.getCodes(removalCodeNumbers);
-		Code[] addingCodes = Codes.getCodes(addingCodeNumbers);
-		Code[] finalCodes = Codes
-				.getCodes(Codes.icdReplacementSecondaryCodeNumbers);
+		removalCodes = Codes.getCodes(removalCodeNumbers);
+		addingCodes = Codes.getCodes(addingCodeNumbers);
+		finalCodes = Codes.getCodes(Codes.icdReplacementSecondaryCodeNumbers);
+
+		allCodes = new ArrayList<>();
+		allCodes.addAll(Arrays.asList(removalCodes));
+		allCodes.addAll(Arrays.asList(addingCodes));
+		allCodes.addAll(Arrays.asList(finalCodes));
+
+		Codes.clearMultipliersAndModifiers(allCodes);
+		Codes.loadDefaultModifiers(allCodes);
+		Codes.loadSavedModifiers(allCodes, context);
+
 		Context context = getActivity();
 		removalCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(
-				removalCodes, removedCheckBoxLayout, context, true);
+				removalCodes, removedCheckBoxLayout, context, true, this);
 		addCheckMarkListener(removalCheckBoxMap);
 		addingCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(
-				addingCodes, addingCheckBoxLayout, context, true);
+				addingCodes, addingCheckBoxLayout, context, true, this);
 		addCheckMarkListener(addingCheckBoxMap);
 		finalCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(finalCodes,
-				finalCheckBoxLayout, context, true);
+				finalCheckBoxLayout, context, true, this);
 		addCheckMarkListener(finalCheckBoxMap);
 		// Set the title view to show the page number.
 		((TextView) rootView.findViewById(android.R.id.text1))
@@ -260,5 +284,69 @@ public class ScreenSlidePageFragment extends Fragment {
 		savedInstanceState.putBooleanArray("final_codes", finalCodeState);
 
 	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		if (requestCode == 1) {
+			if(resultCode == Activity.RESULT_OK){
+				String[] result=data.getStringArrayExtra(ModifierActivity.MODIFIER_RESULT);
+				Log.d(EPCODING, "Result = " + result.length);
+				if (result.length == 1 && result[0].equals(ModifierActivity.RESET_MODIFIERS)) {
+					resetModifiers();
+					resetCodes();
+					return;
+				}
+				Code code = Codes.setModifiersForCode(result);
+				if (code != null) {
+					CodeCheckBox checkBox = getCheckBoxWithCode(code.getCodeNumber());
+					if (checkBox != null) {
+						// forces checkbox to redraw itself
+						// checkBox.invalidate() doesn't work for some reason
+						checkBox.setCode(code);
+					}
+				}
+			}
+		}
+	}
+
+	private void resetModifiers() {
+		Codes.resetSavedModifiers(allCodes, context);
+	}
+
+	private void resetCodes() {
+		Codes.loadDefaultModifiers(allCodes);
+		for (Code code : allCodes) {
+			CodeCheckBox checkBox = getCheckBoxWithCode(code.getCodeNumber());
+			if (checkBox != null) {
+				checkBox.setCode(code);
+			}
+		}
+	}
+
+	private CodeCheckBox getCheckBoxWithCode(String codeNumber) {
+		String result;
+		for (Map.Entry<String, CodeCheckBox> entry : addingCheckBoxMap.entrySet()) {
+			result = entry.getValue().getCodeNumber();
+			if (result.equals(codeNumber)) {
+				return entry.getValue();
+			}
+		}
+		for (Map.Entry<String, CodeCheckBox> entry : removalCheckBoxMap.entrySet()) {
+			result = entry.getValue().getCodeNumber();
+			if (result.equals(codeNumber)) {
+				return entry.getValue();
+			}
+		}
+		for (Map.Entry<String, CodeCheckBox> entry : finalCheckBoxMap.entrySet()) {
+			result = entry.getValue().getCodeNumber();
+			if (result.equals(codeNumber)) {
+				return entry.getValue();
+			}
+		}
+		return null;
+	}
+
+
 
 }

@@ -398,6 +398,13 @@ public class Codes {
         }
     }
 
+    public static void clearMultipliersAndModifiers(Code[] codes) {
+        for (int i = 0; i < codes.length; i++) {
+            codes[i].setMultiplier(0);
+            codes[i].clearModifiers();
+        }
+    }
+
     public static void hideMultipliers(List<Code> array, Boolean hide) {
         for (Code code : array) {
             code.setHideMultiplier(hide);
@@ -406,10 +413,20 @@ public class Codes {
 
     public static void loadDefaultModifiers(List<Code> array) {
         for (Code code : array) {
-            List<Modifier> modifiers = defaultModifiers().get(code.getCodeNumber());
-            if (modifiers != null) {
-                code.addModifiers(modifiers);
-            }
+            loadDefaultModifiersForCode(code);
+        }
+    }
+
+    public static void loadDefaultModifiers(Code[] codes) {
+        for (int i = 0; i < codes.length; i++) {
+            loadDefaultModifiersForCode(codes[i]);
+        }
+    }
+
+    private static void loadDefaultModifiersForCode(Code code) {
+        List<Modifier> modifiers = defaultModifiers().get(code.getCodeNumber());
+        if (modifiers != null) {
+            code.addModifiers(modifiers);
         }
     }
 
@@ -417,26 +434,49 @@ public class Codes {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(context);
         for (Code code : array) {
-            Set<String> modifierNumbers = prefs.getStringSet(code.getCodeNumber(),
-                    null);
-            if (modifierNumbers != null) {
-                code.clearModifiers();
-                for (String s : modifierNumbers) {
-                    Modifier modifier = Modifiers.getModifierForNumber(s);
-                    code.addModifier(modifier);
-                }
+            loadSavedModifiersForCode(code, prefs);
+         }
+	}
+
+	public static void loadSavedModifiers(Code[] codes, Context context) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        for (int i = 0; i < codes.length; i++) {
+            loadSavedModifiersForCode(codes[i], prefs);
+        }
+    }
+
+    private static void loadSavedModifiersForCode(Code code, SharedPreferences prefs) {
+        Set<String> modifierNumbers = prefs.getStringSet(code.getCodeNumber(),
+                null);
+        if (modifierNumbers != null) {
+            code.clearModifiers();
+            for (String s : modifierNumbers) {
+                Modifier modifier = Modifiers.getModifierForNumber(s);
+                code.addModifier(modifier);
             }
         }
-	}
+    }
 
 	public static void resetSavedModifiers(List<Code> codes, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         for (Code code : codes) {
+           resetSavedModifiersForCode(code, prefs);
+        }
+    }
+
+    public static void resetSavedModifiers(Code[] codes, Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        for (int i = 0; i < codes.length; i++) {
+            resetSavedModifiersForCode(codes[i], prefs);
+        }
+    }
+
+    private static void resetSavedModifiersForCode(Code code, SharedPreferences prefs) {
             SharedPreferences.Editor prefsEditor = prefs.edit();
             prefsEditor.remove(code.getCodeNumber());
-            prefsEditor.commit();
+            prefsEditor.apply();
             code.clearModifiers();
-        }
     }
 
     // returns code number or null

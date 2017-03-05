@@ -1,22 +1,40 @@
 package org.epstudios.epcoding;
 
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 class Utilities {
+	private static final String EPCODING = "EPCODING";
+
 	public static Map<String, CodeCheckBox> createCheckBoxLayoutAndCodeMap(
-			Code[] codes, LinearLayout layout, Context context,
-			boolean showCodeFirst) {
+            Code[] codes, LinearLayout layout, Context context,
+            boolean showCodeFirst, final Fragment fragment) {
 		Map<String, CodeCheckBox> map = new LinkedHashMap<>();
 		for (int i = 0; i < codes.length; ++i) {
-			CodeCheckBox codeCheckBox = new CodeCheckBox(context);
+			final CodeCheckBox codeCheckBox = new CodeCheckBox(context);
+            final Context theContext = context;
 			codeCheckBox.setCodeFirst(showCodeFirst);
 			codeCheckBox.setCode(codes[i]);
 			map.put(codes[i].getCodeNumber(), codeCheckBox);
+			codeCheckBox.setOnLongClickListener(new View.OnLongClickListener() {
+				@Override
+				public boolean onLongClick(View view) {
+					Log.v(EPCODING, "on long click");
+					Log.v(EPCODING, "Active code number = " + codeCheckBox.getCodeNumber());
+					Intent intent = new Intent(theContext, ModifierActivity.class);
+					intent.putExtra("ACTIVE_CODE_NUMBER", codeCheckBox.getCodeNumber());
+                    fragment.startActivityForResult(intent, 1);
+                    return true;
+				}
+			});
 			layout.addView(codeCheckBox);
 		}
 		return map;
