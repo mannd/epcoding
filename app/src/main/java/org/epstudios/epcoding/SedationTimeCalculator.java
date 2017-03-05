@@ -12,7 +12,7 @@ import android.view.MenuItem;
  * Copyright (C) 2017 EP Studios, Inc.
  * www.epstudiossoftware.com
  * <p>
- * Created by mannd on 3/4/17.
+ * Created by mannd on 3/5/17.
  * <p>
  * This file is part of epcoding.
  * <p>
@@ -30,14 +30,14 @@ import android.view.MenuItem;
  * along with epcoding.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class Sedation extends BasicActionBarActivity {
+public class SedationTimeCalculator extends BasicActionBarActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sedation);
+        setContentView(R.layout.sedation_time_calculator);
 
-        //setTitle(R.string.sedation_label);
         initToolbar();
     }
 }

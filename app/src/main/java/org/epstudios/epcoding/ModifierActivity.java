@@ -45,7 +45,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class ModifierActivity extends ActionBarActivity implements View.OnClickListener {
+public class ModifierActivity extends BasicActionBarActivity implements View.OnClickListener {
 
     private Code code;
     private Set<Modifier> modifierSet;
@@ -81,10 +81,7 @@ public class ModifierActivity extends ActionBarActivity implements View.OnClickL
                 checkBox.setChecked(checkBoxState[i++]);
             }
         }
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        initToolbar();
 
         Button cancelButton = (Button)findViewById(R.id.cancel_button);
         cancelButton.setOnClickListener(this);
@@ -96,32 +93,6 @@ public class ModifierActivity extends ActionBarActivity implements View.OnClickL
         addButton.setOnClickListener(this);
 
         Log.d(EPCODING, "onCreate");
-    }
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.helpmenu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                // NavUtils.navigateUpFromSameTask(this);
-                finish();
-                return true;
-            case R.id.about:
-                startActivity(new Intent(this, About.class));
-                return true;
-
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -145,7 +116,6 @@ public class ModifierActivity extends ActionBarActivity implements View.OnClickL
         }
         finish();
     }
-
 
     private void createCheckBoxLayoutAndModifierMap(List<Modifier> modifiers,
                                                     LinearLayout layout) {
@@ -213,6 +183,5 @@ public class ModifierActivity extends ActionBarActivity implements View.OnClickL
                 Code.makeCodeAndModifierArray(code.getCodeNumber(), modifierNumbers));
         setResult(Activity.RESULT_OK, intent);
     }
-
 
 }

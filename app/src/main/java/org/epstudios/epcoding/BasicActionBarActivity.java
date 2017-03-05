@@ -1,7 +1,6 @@
 package org.epstudios.epcoding;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -12,7 +11,7 @@ import android.view.MenuItem;
  * Copyright (C) 2017 EP Studios, Inc.
  * www.epstudiossoftware.com
  * <p>
- * Created by mannd on 3/4/17.
+ * Created by mannd on 3/5/17.
  * <p>
  * This file is part of epcoding.
  * <p>
@@ -30,14 +29,36 @@ import android.view.MenuItem;
  * along with epcoding.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class Sedation extends BasicActionBarActivity {
+public class BasicActionBarActivity extends ActionBarActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.sedation);
-
-        //setTitle(R.string.sedation_label);
-        initToolbar();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.helpmenu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                // NavUtils.navigateUpFromSameTask(this);
+                finish();
+                return true;
+            case R.id.about:
+                startActivity(new Intent(this, About.class));
+                return true;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    protected void initToolbar() {
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
 }

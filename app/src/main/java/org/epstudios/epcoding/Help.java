@@ -38,46 +38,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.webkit.WebView;
 
-public class Help extends ActionBarActivity {
+public class Help extends BasicActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.help);
 		String url = "file:///android_asset/help.html";
-		//webView = new WebView(this);
-		//setContentView(webView);
 		WebView webView = (WebView) findViewById(R.id.webView);
 		webView.loadUrl(url);
-
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+		initToolbar();
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.helpmenu, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		// Respond to the action bar's Up/Home button
-		case android.R.id.home:
-			// NavUtils.navigateUpFromSameTask(this);
-			finish();
-			return true;
-		case R.id.about:
-			startActivity(new Intent(this, About.class));
-			return true;
-
-		}
-
-		return super.onOptionsItemSelected(item);
-	}
-
 }
