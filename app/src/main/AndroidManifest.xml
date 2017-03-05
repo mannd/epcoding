@@ -72,6 +72,9 @@
         <activity android:name=".Sedation"
             android:label="@string/sedation_label">
         </activity>
+        <activity android:name=".SedationTimeCalculator"
+            android:label="@string/sedation_time_calculator_label">
+        </activity>
     </application>
 
 </manifest>

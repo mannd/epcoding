@@ -60,117 +60,75 @@ import android.widget.Toast;
  * {@link ProcedureListFragment.Callbacks} interface to listen for item
  * selections.
  */
-public class ProcedureListActivity extends ActionBarActivity implements
-		ProcedureListFragment.Callbacks {
+public class ProcedureListActivity extends ProcedureActionBarActivity implements
+        ProcedureListFragment.Callbacks {
 
-	/**
-	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
-	 * device.
-	 */
-	private boolean mTwoPane;
+    /**
+     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
+     * device.
+     */
+    private boolean mTwoPane;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_procedure_list);
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_procedure_list);
+
+        // can't use initToolbar() here, because don't want back button
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
         if (findViewById(R.id.procedure_detail_container) != null) {
-			// The detail container view will be present only in the
-			// large-screen layouts (res/values-large and
-			// res/values-sw600dp). If this view is present, then the
-			// activity should be in two-pane mode.
-			mTwoPane = true;
+            // The detail container view will be present only in the
+            // large-screen layouts (res/values-large and
+            // res/values-sw600dp). If this view is present, then the
+            // activity should be in two-pane mode.
+            mTwoPane = true;
 
-			// In two-pane mode, list items should be given the
-			// 'activated' state when touched.
-			((ProcedureListFragment) getSupportFragmentManager()
-					.findFragmentById(R.id.procedure_list))
-					.setActivateOnItemClick(true);
-		}
+            // In two-pane mode, list items should be given the
+            // 'activated' state when touched.
+            ((ProcedureListFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.procedure_list))
+                    .setActivateOnItemClick(true);
+        }
 
-	}
+    }
 
-	/**
-	 * Callback method from {@link ProcedureListFragment.Callbacks} indicating
-	 * that the item with the given ID was selected.
-	 */
-	@Override
-	public void onItemSelected(String id) {
-		if (mTwoPane) {
-			// In two-pane mode, show the detail view in this activity by
-			// adding or replacing the detail fragment using a
-			// fragment transaction.
-			Bundle arguments = new Bundle();
-			arguments.putString(ProcedureDetailFragment.ARG_ITEM_ID, id);
-			ProcedureDetailFragment fragment = new ProcedureDetailFragment();
-			fragment.setArguments(arguments);
-			getSupportFragmentManager().beginTransaction()
-					.replace(R.id.procedure_detail_container, fragment)
-					.commit();
+    /**
+     * Callback method from {@link ProcedureListFragment.Callbacks} indicating
+     * that the item with the given ID was selected.
+     */
+    @Override
+    public void onItemSelected(String id) {
+        if (mTwoPane) {
+            // In two-pane mode, show the detail view in this activity by
+            // adding or replacing the detail fragment using a
+            // fragment transaction.
+            Bundle arguments = new Bundle();
+            arguments.putString(ProcedureDetailFragment.ARG_ITEM_ID, id);
+            ProcedureDetailFragment fragment = new ProcedureDetailFragment();
+            fragment.setArguments(arguments);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.procedure_detail_container, fragment)
+                    .commit();
 
-		} else {
-			// In single-pane mode, simply start the detail activity
-			// for the selected item ID.
-			Intent detailIntent = new Intent(this,
-					ProcedureDetailActivity.class);
-			detailIntent.putExtra(ProcedureDetailFragment.ARG_ITEM_ID, id);
-			startActivity(detailIntent);
-		}
-	}
+        } else {
+            // In single-pane mode, simply start the detail activity
+            // for the selected item ID.
+            Intent detailIntent = new Intent(this,
+                    ProcedureDetailActivity.class);
+            detailIntent.putExtra(ProcedureDetailFragment.ARG_ITEM_ID, id);
+            startActivity(detailIntent);
+        }
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.shortmenu, menu);
-		// Get the SearchView and set the searchable configuration
-		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-		// Assumes current activity is the searchable activity
-		searchView.setSearchableInfo(searchManager
-                .getSearchableInfo(getComponentName()));
-		Log.d("EPCODING", getComponentName().toString());
-		searchView.setIconifiedByDefault(false); // Do not iconify the widget;
-												//	expand it by default
-
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		ProcedureDetailFragment fragment = (ProcedureDetailFragment) getSupportFragmentManager()
-				.findFragmentById(R.id.procedure_detail_container);
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			NavUtils.navigateUpFromSameTask(this);
-			return true;
-		case R.id.help:
-			startActivity(new Intent(this, Help.class));
-			return true;
-		case R.id.saveCodeSelection:
-			if (fragment != null)
-				fragment.saveCoding();
-			else
-				saveCodeSelectionErrorMessage();
-			return true;
-		case R.id.settings:
-			startActivity(new Intent(this, Prefs.class));
-			return true;
-		case R.id.wizard:
-			startActivity(new Intent(this, ScreenSlideActivity.class));
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	private void saveCodeSelectionErrorMessage() {
-		Activity activity = this;
-		Toast toast = Toast.makeText(this,
-				activity.getString(R.string.save_code_selection_error_message),
-				Toast.LENGTH_SHORT);
-		toast.show();
-	}
+    private void saveCodeSelectionErrorMessage() {
+        Activity activity = this;
+        Toast toast = Toast.makeText(this,
+                activity.getString(R.string.save_code_selection_error_message),
+                Toast.LENGTH_SHORT);
+        toast.show();
+    }
 
 }

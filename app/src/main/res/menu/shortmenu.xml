@@ -26,9 +26,15 @@
     </item>
     <item
         android:id="@+id/help"
-        android:orderInCategory="9999"
+        android:orderInCategory="999"
         app:showAsAction="never"
         android:title="@string/help_title">
+    </item>
+    <item
+        android:id="@+id/about"
+        android:orderInCategory="9999"
+        app:showAsAction="never"
+        android:title="@string/about_title">
     </item>
 
 </menu>

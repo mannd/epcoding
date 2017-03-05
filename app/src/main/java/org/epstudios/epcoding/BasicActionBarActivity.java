@@ -29,7 +29,7 @@ import android.view.MenuItem;
  * along with epcoding.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class BasicActionBarActivity extends ActionBarActivity {
+public class BasicActionBarActivity extends SimpleActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -53,12 +53,6 @@ public class BasicActionBarActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    protected void initToolbar() {
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 }

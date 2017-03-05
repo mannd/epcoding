@@ -191,6 +191,7 @@
     <string name="finish_date_time_label">Finish Time</string>
     <string name="start_date_time_label">Start Time</string>
     <string name="sedation_label">Sedation</string>
+    <string name="sedation_time_calculator_label">Sedation Time Calculator</string>
 
 
 </resources>

@@ -1,3 +1,8 @@
+package org.epstudios.epcoding;
+
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+
 /**
  * Copyright (C) 2017 EP Studios, Inc.
  * www.epstudiossoftware.com
@@ -20,25 +25,12 @@
  * along with epcoding.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.epstudios.epcoding;
+// just deals with toolbar
+public class SimpleActionBarActivity extends ActionBarActivity {
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-
-
-public class SedationTimeCalculator extends BasicActionBarActivity {
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.sedation_time_calculator);
-
-        initToolbar();
+    protected void initToolbar() {
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }
