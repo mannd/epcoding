@@ -52,6 +52,8 @@ public class ModifierActivity extends ActionBarActivity implements View.OnClickL
     private CheckBox[] checkBoxes;
 
     private final String EPCODING = "EPCODING";
+    public static final String MODIFIER_RESULT = "MODIFIER_RESULT";
+    public static final String RESET_MODIFIERS = "reset";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,11 +134,11 @@ public class ModifierActivity extends ActionBarActivity implements View.OnClickL
                 // Just go back
                 break;
             case R.id.reset_button:
-                resetModifiers();
+                resetModifiers(returnIntent);
                 break;
             case R.id.save_button:
                 saveModifiers();
-                break;
+                // fall-through -- need to add them too so they appear
             case R.id.add_button:
                 addModifiers(returnIntent);
                 break;
@@ -186,8 +188,13 @@ public class ModifierActivity extends ActionBarActivity implements View.OnClickL
 
     }
 
-    private void resetModifiers() {
-        Codes.resetSavedModifiers(selectedModifierNumbers(), this);
+    private void resetModifiers(Intent intent) {
+        // send back special StringSet and have caller reset code
+        String [] resetArray = new String[1];
+        resetArray[0] = RESET_MODIFIERS;
+        intent.putExtra(MODIFIER_RESULT, resetArray);
+        setResult(Activity.RESULT_OK, intent);
+
     }
 
     private Set<String> selectedModifierNumbers() {
@@ -202,7 +209,7 @@ public class ModifierActivity extends ActionBarActivity implements View.OnClickL
 
     private void addModifiers(Intent intent) {
         Set<String> modifierNumbers = selectedModifierNumbers();
-        intent.putExtra("MODIFIER_RESULT",
+        intent.putExtra(MODIFIER_RESULT,
                 Code.makeCodeAndModifierArray(code.getCodeNumber(), modifierNumbers));
         setResult(Activity.RESULT_OK, intent);
     }

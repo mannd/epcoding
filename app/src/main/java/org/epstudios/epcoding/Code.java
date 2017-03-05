@@ -155,24 +155,13 @@ public class Code {
         }
     }
 
-//    - (NSString *)unformattedCodeNumber
-//    {
-//        if (self.multiplier < 1 || self.hideMultiplier) {
-//            return [[NSString alloc] initWithFormat:@"%@%@%@", self.isAddOn ? @"+" : @"", self.number, [self modifierString]];
-//        }
-//        else {
-//            return [[NSString alloc] initWithFormat:@"%@%@%@ x %lu", self.isAddOn ? @"+" : @"", self.number, [self modifierString], (unsigned long)self.multiplier];
-//        }
-//    }
-
-
     // use this for CodeCheckBox text
     public String getUnformattedDescriptionFirst() {
         return shortDescription + " (" + unformattedCodeNumber() + ")";
     }
 
     public String getUnformattedNumberFirst() {
-        return (isAddOn ? "+" : "") + code + " - " + shortDescription;
+        return unformattedCodeNumber() + " - " + shortDescription;
 
     }
 

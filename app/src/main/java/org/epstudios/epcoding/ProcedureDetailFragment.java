@@ -118,9 +118,6 @@ public class ProcedureDetailFragment extends Fragment implements
 
 	private Procedure procedure;
 
-    private LinearLayout primaryCheckBoxLayout;
-    private LinearLayout secondaryCheckBoxLayout;
-
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
 	 * fragment (e.g. upon screen orientation changes).
@@ -197,9 +194,9 @@ public class ProcedureDetailFragment extends Fragment implements
 				false);
 		context = getActivity();
 
-        primaryCheckBoxLayout = (LinearLayout) rootView
+        LinearLayout primaryCheckBoxLayout = (LinearLayout) rootView
                 .findViewById(R.id.primary_checkbox_layout);
-        secondaryCheckBoxLayout = (LinearLayout) rootView
+        LinearLayout secondaryCheckBoxLayout = (LinearLayout) rootView
                 .findViewById(R.id.secondary_checkbox_layout);
         TextView primaryCodeTextView = (TextView) rootView
                 .findViewById(R.id.primary_code_textView);
@@ -257,8 +254,7 @@ public class ProcedureDetailFragment extends Fragment implements
         if (mItem != allProcedures) {
             Codes.loadDefaultModifiers(allPrimaryAndSecondaryCodes());
         }
-        // TODO: load saved modifiers
-        //Codes.loadSavedModifiers(allPrimaryAndSecondaryCodes(), context);
+        Codes.loadSavedModifiers(allPrimaryAndSecondaryCodes(), context);
 
 
 		getActivity().setTitle(procedure.title(context));
@@ -359,8 +355,13 @@ public class ProcedureDetailFragment extends Fragment implements
 
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
-                String[] result=data.getStringArrayExtra("MODIFIER_RESULT");
+                String[] result=data.getStringArrayExtra(ModifierActivity.MODIFIER_RESULT);
 				Log.d(EPCODING, "Result = " + result.length);
+                if (result.length == 1 && result[0].equals(ModifierActivity.RESET_MODIFIERS)) {
+                    resetModifiers();
+                    resetCodes();
+                    return;
+                }
                 Code code = Codes.setModifiersForCode(result);
                 if (code != null) {
                     CodeCheckBox checkBox = getCheckBoxWithCode(code.getCodeNumber());
@@ -371,6 +372,20 @@ public class ProcedureDetailFragment extends Fragment implements
                     }
                 }
              }
+        }
+    }
+
+    private void resetModifiers() {
+        Codes.resetSavedModifiers(allPrimaryAndSecondaryCodes(), context);
+    }
+
+    private void resetCodes() {
+        Codes.loadDefaultModifiers(allPrimaryAndSecondaryCodes());
+        for (Code code : allPrimaryAndSecondaryCodes()) {
+            CodeCheckBox checkBox = getCheckBoxWithCode(code.getCodeNumber());
+            if (checkBox != null) {
+                checkBox.setCode(code);
+            }
         }
     }
 

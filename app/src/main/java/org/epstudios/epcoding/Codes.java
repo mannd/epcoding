@@ -429,12 +429,13 @@ public class Codes {
         }
 	}
 
-	public static void resetSavedModifiers(Set<String> codeNumbers, Context context) {
+	public static void resetSavedModifiers(List<Code> codes, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        for (String codeNumber : codeNumbers) {
+        for (Code code : codes) {
             SharedPreferences.Editor prefsEditor = prefs.edit();
-            prefsEditor.remove(codeNumber);
-            prefsEditor.apply();
+            prefsEditor.remove(code.getCodeNumber());
+            prefsEditor.commit();
+            code.clearModifiers();
         }
     }
 
