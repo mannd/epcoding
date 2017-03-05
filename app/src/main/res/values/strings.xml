@@ -7,7 +7,7 @@
     <string name="settings_title">Settings</string>
     <string name="about_title">About</string>
     <string name="about_label">EP Coding</string>
-    <string name="about_text">Copyright \u00a9 2013, 2014 EP Studios, Inc.
+    <string name="about_text">Copyright \u00a9 2013 - 2017 EP Studios, Inc.
 		\nAll rights reserved.\n</string>
     <string name="help_title">Help</string>
     <string name="search_title">Search</string>
@@ -181,6 +181,16 @@
     <string name="save_label">Save</string>
     <string name="reset_button_label">Reset</string>
     <string name="cancel_button_label">Cancel</string>
+    <string name="add_sedation_button_label">Add Sedation</string>
+    <string name="calculate_sedation_time_button_label">Calculate Sedation Time</string>
+    <string name="no_sedation_button_label">No Sedation</string>
+    <string name="patient_more_than_5_button_label"><![CDATA[Patient > 5 y/o]]></string>
+    <string name="sedation_time_label">Sedation Time</string>
+    <string name="sedation_by_same_md_label">Sedation by Same MD</string>
+    <string name="sedation_time_hint">Sedation time in minutes</string>
+    <string name="finish_date_time_label">Finish Time</string>
+    <string name="start_date_time_label">Start Time</string>
+    <string name="sedation_label">Sedation</string>
 
 
 </resources>

@@ -12,7 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 class Utilities {
-	private static final String EPCODING = "EPCODING";
+	private static final String EPCODING = ProcedureDetailFragment.EPCODING;
 
 	public static Map<String, CodeCheckBox> createCheckBoxLayoutAndCodeMap(
             Code[] codes, LinearLayout layout, Context context,

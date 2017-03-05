@@ -69,6 +69,9 @@
             android:name=".ModifierActivity"
             android:label="@string/modifiers_label">
         </activity>
+        <activity android:name=".Sedation"
+            android:label="@string/sedation_label">
+        </activity>
     </application>
 
 </manifest>

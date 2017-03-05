@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sedation_time_label"
+        android:textAppearance="@android:style/TextAppearance.Material.Headline" />
+
+    <EditText
+        android:id="@+id/sedation_time_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/sedation_time_hint"
+        android:inputType="number" />
+
+    <CheckBox
+        android:id="@+id/same_md_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sedation_by_same_md_label" />
+
+    <CheckBox
+        android:id="@+id/pt_over_5_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/patient_more_than_5_button_label" />
+
+    <Button
+        android:id="@+id/cancel_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel_button_label" />
+
+    <Button
+        android:id="@+id/no_sedation_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_sedation_button_label" />
+
+    <Button
+        android:id="@+id/calculate_sedation_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/calculate_sedation_time_button_label" />
+
+    <Button
+        android:id="@+id/add_sedation_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_sedation_button_label" />
+</LinearLayout>

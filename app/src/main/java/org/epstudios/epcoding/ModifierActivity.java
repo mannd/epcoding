@@ -51,7 +51,7 @@ public class ModifierActivity extends ActionBarActivity implements View.OnClickL
     private Set<Modifier> modifierSet;
     private CheckBox[] checkBoxes;
 
-    private final String EPCODING = "EPCODING";
+    private final String EPCODING = ProcedureDetailFragment.EPCODING;
     public static final String MODIFIER_RESULT = "MODIFIER_RESULT";
     public static final String RESET_MODIFIERS = "reset";
 

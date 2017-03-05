@@ -424,6 +424,9 @@ public class ProcedureDetailFragment extends Fragment implements
 
     private void addSedation() {
         Log.d(EPCODING, "addSedation");
+		Intent intent = new Intent(getActivity(), Sedation.class);
+		startActivity(intent);
+
     }
 
 	private void clearEntries() {
