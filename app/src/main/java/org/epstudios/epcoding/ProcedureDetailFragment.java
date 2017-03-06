@@ -530,10 +530,7 @@ public class ProcedureDetailFragment extends Fragment implements
                 .entrySet()) {
             if (entry.getValue().isChecked()) {
                 codes[i] = entry.getValue().getCode();
-                codes[i].setPlusShown(plusShownInSummary);
-                codes[i].setDescriptionShown(codeDescriptionInSummary);
-                codes[i].setDescriptionShortened(descriptionTruncatedInSummary);
-                message += codes[i++].getCodeFirstFormatted() + "\n";
+                message += getSummaryFromCode(codes[i++]);
             }
         }
         int primaryCodeCounter = i;
@@ -544,11 +541,12 @@ public class ProcedureDetailFragment extends Fragment implements
                 .entrySet()) {
             if (entry.getValue().isChecked()) {
                 codes[i] = entry.getValue().getCode();
-                codes[i].setPlusShown(plusShownInSummary);
-                codes[i].setDescriptionShown(codeDescriptionInSummary);
-                codes[i].setDescriptionShortened(descriptionTruncatedInSummary);
-                message += codes[i++].getCodeFirstFormatted() + "\n";
+                message += getSummaryFromCode(codes[i++]);
             }
+        }
+        for (Code code: sedationCodes) {
+            message += getSummaryFromCode(code);
+
         }
         boolean noSecondaryCodes = primaryCodeCounter == i;
         boolean moduleHasNoSecondaryCodesNeedingChecking = procedure
@@ -561,6 +559,13 @@ public class ProcedureDetailFragment extends Fragment implements
         Utilities.displayMessage(
                 getString(R.string.coding_summary_dialog_label), message,
                 context);
+    }
+
+    private String getSummaryFromCode(Code code) {
+        code.setPlusShown(plusShownInSummary);
+        code.setDescriptionShown(codeDescriptionInSummary);
+        code.setDescriptionShortened(descriptionTruncatedInSummary);
+        return code.getCodeFirstFormatted() + "\n";
     }
 
     public void saveCoding() {

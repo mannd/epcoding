@@ -87,8 +87,6 @@ public class Code {
     }
 
     private String getCodeNumberWithAddOn() {
-        // TODO: is change below OK?
-        //return (isAddOn && plusShown ? "+" : "") + code;
         return unformattedCodeNumber();
     }
 
@@ -149,11 +147,12 @@ public class Code {
     }
 
     public String unformattedCodeNumber() {
+        String plus = plusShown ? "+" : "";
         if (multiplier < 1 || hideMultiplier) {
-            return String.format("%s%s%s", isAddOn ? "+" : "", getCodeNumber(), modifierString());
+            return String.format("%s%s%s", isAddOn ? plus : "", getCodeNumber(), modifierString());
         }
         else {
-            return String.format("%s%s%s x %d", isAddOn ? "+" : "", getCodeNumber(), modifierString(), multiplier);
+            return String.format("%s%s%s x %d", isAddOn ? plus : "", getCodeNumber(), modifierString(), multiplier);
         }
     }
 
