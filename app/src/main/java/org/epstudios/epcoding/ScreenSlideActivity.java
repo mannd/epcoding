@@ -51,7 +51,7 @@ import java.util.TreeSet;
  * 
  * @see ScreenSlidePageFragment
  */
-public class ScreenSlideActivity extends ActionBarActivity {
+public class ScreenSlideActivity extends SimpleActionBarActivity {
 	/**
 	 * The number of pages (wizard steps) to show in this demo.
 	 */
@@ -72,14 +72,8 @@ public class ScreenSlideActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_screen_slide);
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
-
-        // Instantiate a ViewPager and a PagerAdapter.
+		initToolbar();
+		// Instantiate a ViewPager and a PagerAdapter.
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
 		mPager.setAdapter(mPagerAdapter);
