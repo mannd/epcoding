@@ -20,13 +20,8 @@
  * along with epcoding.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import android.os.Debug;
-import android.util.Log;
-
 import org.epstudios.epcoding.Code;
 import org.epstudios.epcoding.Codes;
-import org.epstudios.epcoding.ProcedureDetailFragment;
-import org.epstudios.epcoding.Sedation;
 import org.epstudios.epcoding.SedationCode;
 import org.epstudios.epcoding.SedationStatus;
 import org.junit.Test;

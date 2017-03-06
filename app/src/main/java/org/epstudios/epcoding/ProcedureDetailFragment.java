@@ -38,24 +38,19 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.internal.widget.AdapterViewCompat;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.security.spec.ECParameterSpec;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -70,118 +65,118 @@ import java.util.TreeSet;
  */
 @SuppressWarnings("FieldCanBeLocal")
 public class ProcedureDetailFragment extends Fragment implements
-		OnClickListener {
-	/**
-	 * The fragment argument representing the item ID that this fragment
-	 * represents.
-	 */
-	public static final String ARG_ITEM_ID = "item_id";
+        OnClickListener {
+    /**
+     * The fragment argument representing the item ID that this fragment
+     * represents.
+     */
+    public static final String ARG_ITEM_ID = "item_id";
     public static final String EPCODING = "EPCODING";
 
-	private final int MODIFIER_REQUEST_CODE = 1;
-	private final int SEDATION_REQUEST_CODE = 2;
+    private final int MODIFIER_REQUEST_CODE = 1;
+    private final int SEDATION_REQUEST_CODE = 2;
 
-	/**
-	 * The content this fragment is presenting.
-	 */
-	private int mItem = 0;
+    /**
+     * The content this fragment is presenting.
+     */
+    private int mItem = 0;
 
-	// get context from owning Activity
-	private Context context;
+    // get context from owning Activity
+    private Context context;
 
-	// Settings
-	// boolean plusShownInDisplay; // show plus in main display
-	// boolean allowChangingPrimaryCodes;
+    // Settings
+    // boolean plusShownInDisplay; // show plus in main display
+    // boolean allowChangingPrimaryCodes;
     private boolean plusShownInSummary;
-	private boolean codeDescriptionInSummary;
-	private boolean descriptionTruncatedInSummary;
-	private boolean codeCheckAllCodes;
-	private String codeVerbosity;
-	// shorten description based on screen width?
+    private boolean codeDescriptionInSummary;
+    private boolean descriptionTruncatedInSummary;
+    private boolean codeCheckAllCodes;
+    private String codeVerbosity;
+    // shorten description based on screen width?
 
     // don't try to refactor these using Utilities.createCheckBoxLayoutAndCodeMap,
-	// as then will have to put in many check for null map.
-	private final Map<String, CodeCheckBox> primaryCheckBoxMap = new LinkedHashMap<>();
-	private final Map<String, CodeCheckBox> secondaryCheckBoxMap = new LinkedHashMap<>();
+    // as then will have to put in many check for null map.
+    private final Map<String, CodeCheckBox> primaryCheckBoxMap = new LinkedHashMap<>();
+    private final Map<String, CodeCheckBox> secondaryCheckBoxMap = new LinkedHashMap<>();
 
-	// these correspond with the procedure list order
-	final private int afbAblation = 0;
-	final private int svtAblation = 1;
-	final private int vtAblation = 2;
-	final private int avnAblation = 3;
-	final private int epTesting = 4;
-	final private int newPpm = 5;
-	final private int newIcd = 6;
-	final private int ppmReplacement = 7;
-	final private int icdReplacement = 8;
-	final private int deviceUpgrade = 9;
-	final private int subQIcd = 10;
-	final private int otherProcedure = 11;
-	final private int allProcedures = 12;
+    // these correspond with the procedure list order
+    final private int afbAblation = 0;
+    final private int svtAblation = 1;
+    final private int vtAblation = 2;
+    final private int avnAblation = 3;
+    final private int epTesting = 4;
+    final private int newPpm = 5;
+    final private int newIcd = 6;
+    final private int ppmReplacement = 7;
+    final private int icdReplacement = 8;
+    final private int deviceUpgrade = 9;
+    final private int subQIcd = 10;
+    final private int otherProcedure = 11;
+    final private int allProcedures = 12;
 
-	private Procedure procedure;
+    private Procedure procedure;
 
-	// Sedation stuff
-	private SedationStatus sedationStatus = SedationStatus.Unassigned;
-	private Integer sedationTime = 0;
-	private boolean sameMDPerformsSedation = true;
-	private boolean patientOver5YrsOld = true;
-	private List<Code> sedationCodes = new ArrayList<>();
+    // Sedation stuff
+    private SedationStatus sedationStatus = SedationStatus.Unassigned;
+    private Integer sedationTime = 0;
+    private boolean sameMDPerformsSedation = true;
+    private boolean patientOver5YrsOld = true;
+    private List<Code> sedationCodes = new ArrayList<>();
 
-	/**
-	 * Mandatory empty constructor for the fragment manager to instantiate the
-	 * fragment (e.g. upon screen orientation changes).
-	 */
-	public ProcedureDetailFragment() {
+    /**
+     * Mandatory empty constructor for the fragment manager to instantiate the
+     * fragment (e.g. upon screen orientation changes).
+     */
+    public ProcedureDetailFragment() {
 
-	}
+    }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setHasOptionsMenu(true);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
-		if (getArguments().containsKey(ARG_ITEM_ID)) {
-			String itemID = getArguments().getString(ARG_ITEM_ID);
-			try {
-				mItem = Integer.parseInt(itemID);
-			} catch (NumberFormatException e) {
-				mItem = 0; // AFB ablation will be shown
-			}
-		}
-	}
+        if (getArguments().containsKey(ARG_ITEM_ID)) {
+            String itemID = getArguments().getString(ARG_ITEM_ID);
+            try {
+                mItem = Integer.parseInt(itemID);
+            } catch (NumberFormatException e) {
+                mItem = 0; // AFB ablation will be shown
+            }
+        }
+    }
 
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.menu, menu);
-	}
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu, menu);
+    }
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		loadSettings();
-	}
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadSettings();
+    }
 
-	@Override
-	public void onSaveInstanceState(Bundle savedInstanceState) {
-		super.onSaveInstanceState(savedInstanceState);
-		// store check marks here
-		boolean[] primaryCodeState = new boolean[primaryCheckBoxMap.size()];
-		int i = 0;
-		for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
-				.entrySet())
-			primaryCodeState[i++] = entry.getValue().isChecked();
-		i = 0;
-		boolean[] secondaryCodeState = new boolean[secondaryCheckBoxMap.size()];
-		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
-				.entrySet())
-			secondaryCodeState[i++] = entry.getValue().isChecked();
-		savedInstanceState.putBooleanArray("primary_codes", primaryCodeState);
-		savedInstanceState.putBooleanArray("secondary_codes",
-				secondaryCodeState);
-	}
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        // store check marks here
+        boolean[] primaryCodeState = new boolean[primaryCheckBoxMap.size()];
+        int i = 0;
+        for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
+                .entrySet())
+            primaryCodeState[i++] = entry.getValue().isChecked();
+        i = 0;
+        boolean[] secondaryCodeState = new boolean[secondaryCheckBoxMap.size()];
+        for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
+                .entrySet())
+            secondaryCodeState[i++] = entry.getValue().isChecked();
+        savedInstanceState.putBooleanArray("primary_codes", primaryCodeState);
+        savedInstanceState.putBooleanArray("secondary_codes",
+                secondaryCodeState);
+    }
 
-	@Override
+    @Override
     public void onClick(View v) {
         Log.d(EPCODING, "click view");
         switch (v.getId()) {
@@ -197,12 +192,12 @@ public class ProcedureDetailFragment extends Fragment implements
         }
     }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.procedure_codes, container,
-				false);
-		context = getActivity();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.procedure_codes, container,
+                false);
+        context = getActivity();
 
         LinearLayout primaryCheckBoxLayout = (LinearLayout) rootView
                 .findViewById(R.id.primary_checkbox_layout);
@@ -213,135 +208,134 @@ public class ProcedureDetailFragment extends Fragment implements
         TextView secondaryCodeTextView = (TextView) rootView
                 .findViewById(R.id.secondary_code_textView);
 
-		loadSettings();
+        loadSettings();
 
-		switch (mItem) {
-		case allProcedures:
-			procedure = new AllCodes();
-			break;
-		case afbAblation:
-			procedure = new AfbAblation();
-			break;
-		case svtAblation:
-			procedure = new SvtAblation();
-			break;
-		case vtAblation:
-			procedure = new VtAblation();
-			break;
-		case avnAblation:
-			procedure = new AvnAblation();
-			break;
-		case epTesting:
-			procedure = new EpTesting();
-			break;
-		case newPpm:
-			procedure = new NewPpm();
-			break;
-		case newIcd:
-			procedure = new NewIcd();
-			break;
-		case ppmReplacement:
-			procedure = new PpmReplacement();
-			break;
-		case icdReplacement:
-			procedure = new IcdReplacement();
-			break;
-		case deviceUpgrade:
-			procedure = new DeviceUpgrade();
-			break;
-		case subQIcd:
-			procedure = new SubQIcd();
-			break;
-		case otherProcedure:
-			procedure = new OtherProcedure();
-			break;
-		default:
-			procedure = new AllCodes();
-			break;
-		}
+        switch (mItem) {
+            case allProcedures:
+                procedure = new AllCodes();
+                break;
+            case afbAblation:
+                procedure = new AfbAblation();
+                break;
+            case svtAblation:
+                procedure = new SvtAblation();
+                break;
+            case vtAblation:
+                procedure = new VtAblation();
+                break;
+            case avnAblation:
+                procedure = new AvnAblation();
+                break;
+            case epTesting:
+                procedure = new EpTesting();
+                break;
+            case newPpm:
+                procedure = new NewPpm();
+                break;
+            case newIcd:
+                procedure = new NewIcd();
+                break;
+            case ppmReplacement:
+                procedure = new PpmReplacement();
+                break;
+            case icdReplacement:
+                procedure = new IcdReplacement();
+                break;
+            case deviceUpgrade:
+                procedure = new DeviceUpgrade();
+                break;
+            case subQIcd:
+                procedure = new SubQIcd();
+                break;
+            case otherProcedure:
+                procedure = new OtherProcedure();
+                break;
+            default:
+                procedure = new AllCodes();
+                break;
+        }
 
-		Codes.clearMultipliersAndModifiers(allPrimaryAndSecondaryCodes());
-		Codes.clearMultipliersAndModifiers(sedationCodes);
+        Codes.clearMultipliersAndModifiers(allPrimaryAndSecondaryCodes());
+        Codes.clearMultipliersAndModifiers(sedationCodes);
         if (mItem != allProcedures) {
             Codes.loadDefaultModifiers(allPrimaryAndSecondaryCodes());
         }
         Codes.loadSavedModifiers(allPrimaryAndSecondaryCodes(), context);
 
 
-		getActivity().setTitle(procedure.title(context));
+        getActivity().setTitle(procedure.title(context));
 
-		Code[] secondaryCodes = procedure.secondaryCodes();
+        Code[] secondaryCodes = procedure.secondaryCodes();
 
-		if (secondaryCodes.length > 0) {
-			createCheckBoxLayoutAndCodeMap(secondaryCodes,
-					secondaryCheckBoxMap, secondaryCheckBoxLayout);
-		} else {
-			secondaryCheckBoxLayout.setVisibility(View.GONE);
-			secondaryCodeTextView.setVisibility(View.GONE);
-		}
+        if (secondaryCodes.length > 0) {
+            createCheckBoxLayoutAndCodeMap(secondaryCodes,
+                    secondaryCheckBoxMap, secondaryCheckBoxLayout);
+        } else {
+            secondaryCheckBoxLayout.setVisibility(View.GONE);
+            secondaryCodeTextView.setVisibility(View.GONE);
+        }
 
-		if (mItem == allProcedures) {
-			primaryCodeTextView
-					.setText(getString(R.string.all_codes_primary_title));
-		}
+        if (mItem == allProcedures) {
+            primaryCodeTextView
+                    .setText(getString(R.string.all_codes_primary_title));
+        }
 
-		Code[] primaryCodes = procedure.primaryCodes();
-		String[] disabledCodeNumbers = procedure.disabledCodeNumbers();
+        Code[] primaryCodes = procedure.primaryCodes();
+        String[] disabledCodeNumbers = procedure.disabledCodeNumbers();
 
-		for (int i = 0; i < disabledCodeNumbers.length; ++i)
-			secondaryCheckBoxMap.get(disabledCodeNumbers[i]).disable();
-
+        for (int i = 0; i < disabledCodeNumbers.length; ++i)
+            secondaryCheckBoxMap.get(disabledCodeNumbers[i]).disable();
 
 
         createCheckBoxLayoutAndCodeMap(primaryCodes, primaryCheckBoxMap,
                 primaryCheckBoxLayout);
 
-		if (procedure.disablePrimaryCodes()) {
-			// check and disable primary checkboxes for ablation type items
-			for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
-					.entrySet()) {
-				entry.getValue().setEnabled(false);
-				entry.getValue().setChecked(true);
-			}
-		}
+        if (procedure.disablePrimaryCodes()) {
+            // check and disable primary checkboxes for ablation type items
+            for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
+                    .entrySet()) {
+                entry.getValue().setEnabled(false);
+                entry.getValue().setChecked(true);
+            }
+        }
 
 
-		// apply saved configurations here
-		if (null != savedInstanceState) {
-			// restore state
-			boolean[] primaryCodesState = savedInstanceState
-					.getBooleanArray("primary_codes");
-			boolean[] secondaryCodesState = savedInstanceState
-					.getBooleanArray("secondary_codes");
-			int i = 0;
-			for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
-					.entrySet())
-				entry.getValue().setChecked(primaryCodesState != null ? primaryCodesState[i++] : false);
-			i = 0;
-			for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
-					.entrySet())
-				entry.getValue().setChecked(secondaryCodesState != null ? secondaryCodesState[i++] : false);
-		} else
-			loadCoding();
-		// set up buttons
-        Button sedationButton = (Button)rootView.findViewById(R.id.sedation_button);
+        // apply saved configurations here
+        if (null != savedInstanceState) {
+            // restore state
+            boolean[] primaryCodesState = savedInstanceState
+                    .getBooleanArray("primary_codes");
+            boolean[] secondaryCodesState = savedInstanceState
+                    .getBooleanArray("secondary_codes");
+            int i = 0;
+            for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
+                    .entrySet())
+                entry.getValue().setChecked(primaryCodesState != null ? primaryCodesState[i++] : false);
+            i = 0;
+            for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
+                    .entrySet())
+                entry.getValue().setChecked(secondaryCodesState != null ? secondaryCodesState[i++] : false);
+        } else
+            loadCoding();
+        // set up buttons
+        Button sedationButton = (Button) rootView.findViewById(R.id.sedation_button);
         sedationButton.setOnClickListener(this);
         Button summarizeButton = (Button) rootView.findViewById(R.id.summary_button);
-		summarizeButton.setOnClickListener(this);
+        summarizeButton.setOnClickListener(this);
         Button clearButton = (Button) rootView.findViewById(R.id.clear_button);
-		clearButton.setOnClickListener(this);
+        clearButton.setOnClickListener(this);
 
         return rootView;
-	}
+    }
 
-	private void createCheckBoxLayoutAndCodeMap(Code[] codes,
-			Map<String, CodeCheckBox> codeCheckBoxMap, LinearLayout layout) {
-		for (int i = 0; i < codes.length; ++i) {
-			final CodeCheckBox codeCheckBox = new CodeCheckBox(context);
-			// codes[i].setPlusShown(plusShownInDisplay);
-			codeCheckBox.setCodeFirst(mItem == allProcedures);
-			codeCheckBox.setCode(codes[i]);
-			codeCheckBoxMap.put(codes[i].getCodeNumber(), codeCheckBox);
+    private void createCheckBoxLayoutAndCodeMap(Code[] codes,
+                                                Map<String, CodeCheckBox> codeCheckBoxMap, LinearLayout layout) {
+        for (int i = 0; i < codes.length; ++i) {
+            final CodeCheckBox codeCheckBox = new CodeCheckBox(context);
+            // codes[i].setPlusShown(plusShownInDisplay);
+            codeCheckBox.setCodeFirst(mItem == allProcedures);
+            codeCheckBox.setCode(codes[i]);
+            codeCheckBoxMap.put(codes[i].getCodeNumber(), codeCheckBox);
             // add long click listener to open modifier dialog
             // TODO: Note that Primary and disabled codes can't be long-clicked
             // because they are disabled.  This is an Android limitation, though
@@ -357,17 +351,17 @@ public class ProcedureDetailFragment extends Fragment implements
                     return true;
                 }
             });
-			layout.addView(codeCheckBox);
-		}
-	}
+            layout.addView(codeCheckBox);
+        }
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == MODIFIER_REQUEST_CODE) {
-            if(resultCode == Activity.RESULT_OK){
-                String[] result=data.getStringArrayExtra(ModifierActivity.MODIFIER_RESULT);
-				Log.d(EPCODING, "Result = " + result.length);
+            if (resultCode == Activity.RESULT_OK) {
+                String[] result = data.getStringArrayExtra(ModifierActivity.MODIFIER_RESULT);
+                Log.d(EPCODING, "Result = " + result.length);
                 if (result.length == 1 && result[0].equals(ModifierActivity.RESET_MODIFIERS)) {
                     resetModifiers();
                     resetCodes();
@@ -382,11 +376,31 @@ public class ProcedureDetailFragment extends Fragment implements
                         checkBox.setCode(code);
                     }
                 }
-             }
+            }
         }
         if (requestCode == SEDATION_REQUEST_CODE) {
-			Log.d(EPCODING, "Sedation result return");
-		}
+            if (resultCode == Activity.RESULT_OK) {
+                boolean sameMD = data.getBooleanExtra("SAME_MD", sameMDPerformsSedation);
+                boolean ageOver5 = data.getBooleanExtra("AGE", patientOver5YrsOld);
+                int time = data.getIntExtra("TIME", sedationTime);
+                SedationStatus status = (SedationStatus) data.getSerializableExtra("SEDATION_STATUS");
+                Log.d(EPCODING, "sameMD = " + sameMD);
+                Log.d(EPCODING, "ageOver5 = " + ageOver5);
+                Log.d(EPCODING, "time = " + time);
+                Log.d(EPCODING, "status = " + status);
+                sameMDPerformsSedation = sameMD;
+                patientOver5YrsOld = ageOver5;
+                sedationTime = time;
+                sedationStatus = status;
+                determineSedationCoding();
+            }
+        }
+    }
+
+    private void determineSedationCoding() {
+        sedationCodes.clear();
+        sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation,
+                patientOver5YrsOld));
     }
 
     private void resetModifiers() {
@@ -421,167 +435,216 @@ public class ProcedureDetailFragment extends Fragment implements
             }
         }
         return null;
-     }
+    }
 
-	private List<Code> allPrimaryAndSecondaryCodes() {
-		List<Code> allCodes = new ArrayList<>();
-		Code[] primaryCodes = procedure.primaryCodes();
-		Code[] secondaryCodes = procedure.secondaryCodes();
-		for (int i = 0; i < primaryCodes.length; i++) {
-			allCodes.add(primaryCodes[i]);
-		}
-		for (int i = 0; i < secondaryCodes.length; i++) {
-			allCodes.add(secondaryCodes[i]);
-		}
-		return allCodes;
-	}
+    private List<Code> allPrimaryAndSecondaryCodes() {
+        List<Code> allCodes = new ArrayList<>();
+        Code[] primaryCodes = procedure.primaryCodes();
+        Code[] secondaryCodes = procedure.secondaryCodes();
+        for (int i = 0; i < primaryCodes.length; i++) {
+            allCodes.add(primaryCodes[i]);
+        }
+        for (int i = 0; i < secondaryCodes.length; i++) {
+            allCodes.add(secondaryCodes[i]);
+        }
+        return allCodes;
+    }
 
     private void addSedation() {
         Log.d(EPCODING, "addSedation");
-		Intent intent = new Intent(getActivity(), Sedation.class);
-		intent.putExtra("TIME", (int)sedationTime);
-		intent.putExtra("AGE", patientOver5YrsOld);
-		intent.putExtra("SAME_MD", sameMDPerformsSedation);
-		// ? send sedationStatus
-		startActivityForResult(intent, SEDATION_REQUEST_CODE);
+        showSedationCodeSummary();
 
     }
 
-	private void clearEntries() {
-		for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
-				.entrySet())
-			entry.getValue().clearIfEnabled();
-		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
-				.entrySet())
-			entry.getValue().setChecked(false);
+    private void showSedationCodeSummary() {
+        AlertDialog dialog = new AlertDialog.Builder(context).create();
+        String message;
+        String title = "Edit Sedation Codes";
+        String buttonLabel = "Edit";
+        switch (sedationStatus) {
+            case Unassigned:
+                title = "Add Sedation Codes";
+                buttonLabel = "Add";
+                message = "Sedation coding not yet assigned for this procedure";
+                break;
+            case None:
+                message = "No sedation was used in this procedure.";
+                break;
+            case LessThan10Mins:
+                message = "Sedation time < 10 mins\nNo sedation codes can be assigned.";
+                break;
+            case OtherMDCalculated:
+                message = String.format("Sedation by other MD, using:\n%s",
+                        SedationCode.printSedationCodes(sedationCodes, "\n"));
+                break;
+            case AssignedSameMD:
+                message = String.format("Sedation by same MD, using:\n%s",
+                        SedationCode.printSedationCodes(sedationCodes, "\n"));
+                break;
+            default:
+                message = "Error in sedation coding.";
+                break;
+        }
+        dialog.setMessage(message);
+        dialog.setTitle(title);
+        dialog.setButton(AlertDialog.BUTTON_POSITIVE, buttonLabel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Log.d(EPCODING, "click Add");
+                Intent intent = new Intent(getActivity(), SedationActivity.class);
+                intent.putExtra("TIME", (int) sedationTime);
+                intent.putExtra("AGE", patientOver5YrsOld);
+                intent.putExtra("SAME_MD", sameMDPerformsSedation);
+                intent.putExtra("SEDATION_STATUS", sedationStatus);
+                startActivityForResult(intent, SEDATION_REQUEST_CODE);
 
-	}
+            }
+        });
+        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Log.d(EPCODING, "click cancel");
+            }
+        });
 
-	private void summarizeCoding() {
-		String message = "";
-		// we will extract the raw selected codes and shoot them to the code
-		// analyzer, as well as check for no primary or secondary codes
-		Code[] codes = new Code[Codes.allCodesSize()];
-		int i = 0;
-		for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
-				.entrySet()) {
-			if (entry.getValue().isChecked()) {
-				codes[i] = entry.getValue().getCode();
-				codes[i].setPlusShown(plusShownInSummary);
-				codes[i].setDescriptionShown(codeDescriptionInSummary);
-				codes[i].setDescriptionShortened(descriptionTruncatedInSummary);
-				message += codes[i++].getCodeFirstFormatted() + "\n";
-			}
-		}
-		int primaryCodeCounter = i;
-		boolean noPrimaryCodes = (primaryCodeCounter == 0);
-		// see if there are any secondary codes to begin with,
-		// or if usually no secondary codes selected, e.g. PPM modules
-		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
-				.entrySet()) {
-			if (entry.getValue().isChecked()) {
-				codes[i] = entry.getValue().getCode();
-				codes[i].setPlusShown(plusShownInSummary);
-				codes[i].setDescriptionShown(codeDescriptionInSummary);
-				codes[i].setDescriptionShortened(descriptionTruncatedInSummary);
-				message += codes[i++].getCodeFirstFormatted() + "\n";
-			}
-		}
-		boolean noSecondaryCodes = primaryCodeCounter == i;
-		boolean moduleHasNoSecondaryCodesNeedingChecking = procedure
-				.doNotWarnForNoSecondaryCodesSelected();
-		boolean noAnalysis = codeVerbosity.equals("None")
-				|| (mItem == allProcedures && !codeCheckAllCodes);
-		message += Utilities.codeAnalysis(codes, noPrimaryCodes,
-				noSecondaryCodes, moduleHasNoSecondaryCodesNeedingChecking,
-				noAnalysis, codeVerbosity.equals("Verbose"), context);
-		Utilities.displayMessage(
-				getString(R.string.coding_summary_dialog_label), message,
-				context);
-	}
+        dialog.show();
+    }
 
-	public void saveCoding() {
-		// don't bother if no secondary codes to save
-		if (secondaryCheckBoxMap.isEmpty()) {
-			Toast toast = Toast.makeText(context,
-					getString(R.string.no_secondary_codes_error_message),
-					Toast.LENGTH_SHORT);
-			toast.show();
-			return;
-		}
-		AlertDialog dialog = new AlertDialog.Builder(context).create();
-		String message = "Save these selections as a default?";
-		dialog.setMessage(message);
-		dialog.setTitle("Save Defaults");
-		dialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						save();
-					}
-				});
-		dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-					}
-				});
-		dialog.show();
-	}
+    private void clearEntries() {
+        for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
+                .entrySet())
+            entry.getValue().clearIfEnabled();
+        for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
+                .entrySet())
+            entry.getValue().setChecked(false);
 
-	private void save() {
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(context);
-		String mItemString = String.valueOf(mItem);
-		Set<String> checkedCodeNumbers = new TreeSet<>();
-		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
-				.entrySet()) {
-			if (entry.getValue().isChecked())
-				checkedCodeNumbers.add(entry.getValue().getCodeNumber());
-		}
-		SharedPreferences.Editor prefsEditor = prefs.edit();
-		prefsEditor.putStringSet(mItemString, checkedCodeNumbers);
-		prefsEditor.apply();
-	}
+    }
 
-	private void loadCoding() {
-		load(context);
-	}
+    private void summarizeCoding() {
+        String message = "";
+        // we will extract the raw selected codes and shoot them to the code
+        // analyzer, as well as check for no primary or secondary codes
+        Code[] codes = new Code[Codes.allCodesSize()];
+        int i = 0;
+        for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
+                .entrySet()) {
+            if (entry.getValue().isChecked()) {
+                codes[i] = entry.getValue().getCode();
+                codes[i].setPlusShown(plusShownInSummary);
+                codes[i].setDescriptionShown(codeDescriptionInSummary);
+                codes[i].setDescriptionShortened(descriptionTruncatedInSummary);
+                message += codes[i++].getCodeFirstFormatted() + "\n";
+            }
+        }
+        int primaryCodeCounter = i;
+        boolean noPrimaryCodes = (primaryCodeCounter == 0);
+        // see if there are any secondary codes to begin with,
+        // or if usually no secondary codes selected, e.g. PPM modules
+        for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
+                .entrySet()) {
+            if (entry.getValue().isChecked()) {
+                codes[i] = entry.getValue().getCode();
+                codes[i].setPlusShown(plusShownInSummary);
+                codes[i].setDescriptionShown(codeDescriptionInSummary);
+                codes[i].setDescriptionShortened(descriptionTruncatedInSummary);
+                message += codes[i++].getCodeFirstFormatted() + "\n";
+            }
+        }
+        boolean noSecondaryCodes = primaryCodeCounter == i;
+        boolean moduleHasNoSecondaryCodesNeedingChecking = procedure
+                .doNotWarnForNoSecondaryCodesSelected();
+        boolean noAnalysis = codeVerbosity.equals("None")
+                || (mItem == allProcedures && !codeCheckAllCodes);
+        message += Utilities.codeAnalysis(codes, noPrimaryCodes,
+                noSecondaryCodes, moduleHasNoSecondaryCodesNeedingChecking,
+                noAnalysis, codeVerbosity.equals("Verbose"), context);
+        Utilities.displayMessage(
+                getString(R.string.coding_summary_dialog_label), message,
+                context);
+    }
 
-	private void load(Context context) {
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(context);
-		String mItemString = String.valueOf(mItem);
-		Set<String> defaultStringSet = new TreeSet<>();
-		Set<String> codeNumbersChecked = prefs.getStringSet(mItemString,
-				defaultStringSet);
-		// String numbers = codeNumbersChecked.toString();
-		for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
-				.entrySet()) {
-			if (codeNumbersChecked.contains(entry.getValue().getCodeNumber()))
-				entry.getValue().setChecked(true);
-		}
+    public void saveCoding() {
+        // don't bother if no secondary codes to save
+        if (secondaryCheckBoxMap.isEmpty()) {
+            Toast toast = Toast.makeText(context,
+                    getString(R.string.no_secondary_codes_error_message),
+                    Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+        AlertDialog dialog = new AlertDialog.Builder(context).create();
+        String message = "Save these selections as a default?";
+        dialog.setMessage(message);
+        dialog.setTitle("Save Defaults");
+        dialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        save();
+                    }
+                });
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        dialog.show();
+    }
 
-	}
+    private void save() {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        String mItemString = String.valueOf(mItem);
+        Set<String> checkedCodeNumbers = new TreeSet<>();
+        for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
+                .entrySet()) {
+            if (entry.getValue().isChecked())
+                checkedCodeNumbers.add(entry.getValue().getCodeNumber());
+        }
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putStringSet(mItemString, checkedCodeNumbers);
+        prefsEditor.apply();
+    }
 
-	private void loadSettings() {
-		SharedPreferences sharedPreferences = PreferenceManager
-				.getDefaultSharedPreferences(context);
-		// plusShownInDisplay = sharedPreferences.getBoolean(
-		// "show_plus_code_display", true);
-		// allowChangingPrimaryCodes = sharedPreferences.getBoolean(
-		// "allow_changing_primary_codes", false);
-		plusShownInSummary = sharedPreferences.getBoolean(
-				getString(R.string.show_plus_code_summary_key), true);
-		codeDescriptionInSummary = sharedPreferences.getBoolean(
-				getString(R.string.show_details_code_summary_key), false);
-		descriptionTruncatedInSummary = sharedPreferences
-				.getBoolean(
-						getString(R.string.truncate_long_descriptions_code_summary_key),
-						false);
-		codeCheckAllCodes = sharedPreferences.getBoolean(
-				getString(R.string.code_check_all_codes_key), false);
-		codeVerbosity = sharedPreferences
-				.getString("code_verbosity", "Verbose");
-	}
+    private void loadCoding() {
+        load(context);
+    }
+
+    private void load(Context context) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        String mItemString = String.valueOf(mItem);
+        Set<String> defaultStringSet = new TreeSet<>();
+        Set<String> codeNumbersChecked = prefs.getStringSet(mItemString,
+                defaultStringSet);
+        // String numbers = codeNumbersChecked.toString();
+        for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
+                .entrySet()) {
+            if (codeNumbersChecked.contains(entry.getValue().getCodeNumber()))
+                entry.getValue().setChecked(true);
+        }
+
+    }
+
+    private void loadSettings() {
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        // plusShownInDisplay = sharedPreferences.getBoolean(
+        // "show_plus_code_display", true);
+        // allowChangingPrimaryCodes = sharedPreferences.getBoolean(
+        // "allow_changing_primary_codes", false);
+        plusShownInSummary = sharedPreferences.getBoolean(
+                getString(R.string.show_plus_code_summary_key), true);
+        codeDescriptionInSummary = sharedPreferences.getBoolean(
+                getString(R.string.show_details_code_summary_key), false);
+        descriptionTruncatedInSummary = sharedPreferences
+                .getBoolean(
+                        getString(R.string.truncate_long_descriptions_code_summary_key),
+                        false);
+        codeCheckAllCodes = sharedPreferences.getBoolean(
+                getString(R.string.code_check_all_codes_key), false);
+        codeVerbosity = sharedPreferences
+                .getString("code_verbosity", "Verbose");
+    }
 }
