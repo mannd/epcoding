@@ -1,10 +1,3 @@
-package org.epstudios.epcoding;
-
-import android.content.Context;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Copyright (C) 2017 EP Studios, Inc.
  * www.epstudiossoftware.com
@@ -27,14 +20,15 @@ import java.util.List;
  * along with epcoding.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+package org.epstudios.epcoding;
+
+import android.content.Context;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class SedationCode extends Code {
-    public enum SedationStatus {
-        Unassigned,
-        None,
-        LessThan10Mins,
-        OtherMDCalculated,
-        AssignedSameMD
-    }
+
 
     // These would be better as string resources, but no rationale to translate
     // EP Coding to other languages (CPT coding is American only), so we

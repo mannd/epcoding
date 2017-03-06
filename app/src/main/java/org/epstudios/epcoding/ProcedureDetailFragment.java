@@ -122,7 +122,7 @@ public class ProcedureDetailFragment extends Fragment implements
 	private Procedure procedure;
 
 	// Sedation stuff
-	private SedationCode.SedationStatus sedationStatus = SedationCode.SedationStatus.Unassigned;
+	private SedationStatus sedationStatus = SedationStatus.Unassigned;
 	private Integer sedationTime = 0;
 	private boolean sameMDPerformsSedation = true;
 	private boolean patientOver5YrsOld = true;

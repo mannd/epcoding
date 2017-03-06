@@ -81,49 +81,4 @@ public class ProcedureDetailActivity extends ProcedureActionBarActivity {
         }
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        ProcedureDetailFragment fragment = (ProcedureDetailFragment) getSupportFragmentManager()
-//                .findFragmentById(R.id.procedure_detail_container);
-//        switch (item.getItemId()) {
-//            case android.R.id.home:
-//                NavUtils.navigateUpFromSameTask(this);
-//                return true;
-//            case R.id.help:
-//                startActivity(new Intent(this, Help.class));
-//                return true;
-//            case R.id.saveCodeSelection:
-//                if (fragment != null)
-//                    fragment.saveCoding();
-//                return true;
-//            case R.id.settings:
-//                startActivity(new Intent(this, Prefs.class));
-//                return true;
-//            case R.id.wizard:
-//                startActivity(new Intent(this, ScreenSlideActivity.class));
-//                return true;
-//            case R.id.about:
-//                startActivity(new Intent(this, About.class));
-//                return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.shortmenu, menu);
-//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//        SearchView searchView = (SearchView) menu.findItem(R.id.search)
-//                .getActionView();
-//        // Assumes current activity is the searchable activity
-//        searchView.setSearchableInfo(searchManager
-//                .getSearchableInfo(getComponentName()));
-//        searchView.setIconifiedByDefault(false); // Do not iconify the widget;
-//        // expand it by default
-//
-//        return super.onCreateOptionsMenu(menu);
-//    }
-
 }

@@ -22,6 +22,7 @@
 
 package org.epstudios.epcoding;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -32,8 +33,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 
 public class Sedation extends BasicActionBarActivity implements View.OnClickListener {
+
+    private int sedationTime = 0;
+    private boolean ageOver5 = true;
+    private boolean sameMD = true;
+    private SedationStatus sedationStatus;
+
+    private EditText timeEditText;
+    private CheckBox ageCheckBox;
+    private CheckBox sameMDCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +53,10 @@ public class Sedation extends BasicActionBarActivity implements View.OnClickList
         setContentView(R.layout.sedation);
 
         initToolbar();
+
+        sedationTime = getIntent().getIntExtra("TIME", 0);
+        ageOver5 = getIntent().getBooleanExtra("AGE", true);
+        sameMD = getIntent().getBooleanExtra("SAME_MD", true);
 
         Button calculateTimeButton = (Button)findViewById(R.id.calculate_sedation_button);
         Button cancelButton = (Button)findViewById(R.id.cancel_button);
@@ -51,31 +67,55 @@ public class Sedation extends BasicActionBarActivity implements View.OnClickList
         noSedationButton.setOnClickListener(this);
         addButton.setOnClickListener(this);
 
+        timeEditText = (EditText)findViewById(R.id.sedation_time_edit_text);
+        ageCheckBox = (CheckBox)findViewById(R.id.pt_over_5_checkbox);
+        sameMDCheckBox = (CheckBox)findViewById(R.id.same_md_checkbox);
+
+        timeEditText.setText(Integer.toString(sedationTime));
+        ageCheckBox.setChecked(ageOver5);
+        sameMDCheckBox.setChecked(sameMD);
+
     }
 
     @Override
     public void onClick(View v) {
+        boolean finished = true;
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_CANCELED, returnIntent);
         switch (v.getId()) {
             case R.id.calculate_sedation_button:
+                finished = false;
                 calculateSedationTime();
                 break;
             case R.id.cancel_button:
-                //cancel();
                 break;
             case R.id.no_sedation_button:
-                //noSedation();
+                noSedation(returnIntent);
                 break;
             case R.id.add_button:
                 //addSedation();
                 break;
             default:
-                //cancel();
                 break;
+        }
+        if (finished) {
+            finish();
         }
     }
 
     private void calculateSedationTime() {
         Intent intent = new Intent(this, SedationTimeCalculator.class);
         startActivity(intent);
+    }
+
+//    private SedationStatus determineSedationStatus() {
+//
+//    }
+
+    private void noSedation(Intent intent) {
+        sedationStatus = SedationStatus.None;
+        intent.putExtra("SEDATION_STATUS", sedationStatus);
+        setResult(Activity.RESULT_OK, intent);
+        // showResults();
     }
 }

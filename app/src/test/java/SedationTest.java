@@ -28,7 +28,7 @@ import org.epstudios.epcoding.Codes;
 import org.epstudios.epcoding.ProcedureDetailFragment;
 import org.epstudios.epcoding.Sedation;
 import org.epstudios.epcoding.SedationCode;
-import org.epstudios.epcoding.SedationCode.SedationStatus;
+import org.epstudios.epcoding.SedationStatus;
 import org.junit.Test;
 
 import java.util.ArrayList;
