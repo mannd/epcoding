@@ -24,6 +24,7 @@ import org.epstudios.epcoding.Code;
 import org.epstudios.epcoding.Codes;
 import org.epstudios.epcoding.SedationCode;
 import org.epstudios.epcoding.SedationStatus;
+import org.epstudios.epcoding.SedationTimeCalculator;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -131,5 +132,35 @@ public class SedationTest {
         result = SedationCode.printSedationCodesWithDescription(codes);
         predictedResult = "99152 - Moderate sedation, same MD, initial 15 min, pt ≥ 5 y/o";
         assert result.equals(predictedResult);
+    }
+
+    @Test
+    public void minuteDifferenceTest() {
+        int startHour = 0;
+        int startMinute = 0;
+        int endHour = 0;
+        int endMinute = 0;
+        assert SedationTimeCalculator.minuteDifference(startHour, startMinute,
+                endHour, endMinute) == 0;
+        endMinute = 1;
+        assert SedationTimeCalculator.minuteDifference(startHour, startMinute,
+                endHour, endMinute) == 1;
+        endHour = 1;
+        assert SedationTimeCalculator.minuteDifference(startHour, startMinute,
+                endHour, endMinute) == 61;
+        startHour = 1;
+        assert SedationTimeCalculator.minuteDifference(startHour, startMinute,
+                endHour, endMinute) == 1;
+        startHour = 12;
+        startMinute = 0;
+        endHour = 11;
+        endMinute = 59;
+        assert SedationTimeCalculator.minuteDifference(startHour, startMinute,
+                endHour, endMinute) == 60 * 24 - 1;
+        startMinute = 45;
+        endHour = 13;
+        endMinute = 44;
+        assert SedationTimeCalculator.minuteDifference(startHour, startMinute,
+                endHour, endMinute) == 59;
     }
 }
