@@ -78,6 +78,9 @@ public class ProcedureDetailFragment extends Fragment implements
 	public static final String ARG_ITEM_ID = "item_id";
     public static final String EPCODING = "EPCODING";
 
+	private final int MODIFIER_REQUEST_CODE = 1;
+	private final int SEDATION_REQUEST_CODE = 2;
+
 	/**
 	 * The content this fragment is presenting.
 	 */
@@ -117,6 +120,13 @@ public class ProcedureDetailFragment extends Fragment implements
 	final private int allProcedures = 12;
 
 	private Procedure procedure;
+
+	// Sedation stuff
+	private SedationCode.SedationStatus sedationStatus = SedationCode.SedationStatus.Unassigned;
+	private Integer sedationTime = 0;
+	private boolean sameMDPerformsSedation = true;
+	private boolean patientOver5YrsOld = true;
+	private List<Code> sedationCodes = new ArrayList<>();
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -251,6 +261,7 @@ public class ProcedureDetailFragment extends Fragment implements
 		}
 
 		Codes.clearMultipliersAndModifiers(allPrimaryAndSecondaryCodes());
+		Codes.clearMultipliersAndModifiers(sedationCodes);
         if (mItem != allProcedures) {
             Codes.loadDefaultModifiers(allPrimaryAndSecondaryCodes());
         }
@@ -342,7 +353,7 @@ public class ProcedureDetailFragment extends Fragment implements
                     Log.v(EPCODING, "Active code number = " + codeCheckBox.getCodeNumber());
                     Intent intent = new Intent(getActivity(), ModifierActivity.class);
                     intent.putExtra("ACTIVE_CODE_NUMBER", codeCheckBox.getCodeNumber());
-                    startActivityForResult(intent, 1);
+                    startActivityForResult(intent, MODIFIER_REQUEST_CODE);
                     return true;
                 }
             });
@@ -353,7 +364,7 @@ public class ProcedureDetailFragment extends Fragment implements
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == 1) {
+        if (requestCode == MODIFIER_REQUEST_CODE) {
             if(resultCode == Activity.RESULT_OK){
                 String[] result=data.getStringArrayExtra(ModifierActivity.MODIFIER_RESULT);
 				Log.d(EPCODING, "Result = " + result.length);
@@ -373,6 +384,9 @@ public class ProcedureDetailFragment extends Fragment implements
                 }
              }
         }
+        if (requestCode == SEDATION_REQUEST_CODE) {
+			Log.d(EPCODING, "Sedation result return");
+		}
     }
 
     private void resetModifiers() {
@@ -425,7 +439,11 @@ public class ProcedureDetailFragment extends Fragment implements
     private void addSedation() {
         Log.d(EPCODING, "addSedation");
 		Intent intent = new Intent(getActivity(), Sedation.class);
-		startActivity(intent);
+		intent.putExtra("TIME", (int)sedationTime);
+		intent.putExtra("AGE", patientOver5YrsOld);
+		intent.putExtra("SAME_MD", sameMDPerformsSedation);
+		// ? send sedationStatus
+		startActivityForResult(intent, SEDATION_REQUEST_CODE);
 
     }
 

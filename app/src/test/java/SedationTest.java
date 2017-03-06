@@ -20,8 +20,12 @@
  * along with epcoding.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import android.os.Debug;
+import android.util.Log;
+
 import org.epstudios.epcoding.Code;
 import org.epstudios.epcoding.Codes;
+import org.epstudios.epcoding.ProcedureDetailFragment;
 import org.epstudios.epcoding.Sedation;
 import org.epstudios.epcoding.SedationCode;
 import org.epstudios.epcoding.SedationCode.SedationStatus;
@@ -42,6 +46,7 @@ public class SedationTest {
         assert sedationCodes.size() == 2;
         Code code1 = sedationCodes.get(0);
         Code code2 = sedationCodes.get(1);
+        String test = code2.unformattedCodeNumber();
         assert code1.unformattedCodeNumber().equals("99152");
         assert code2.unformattedCodeNumber().equals("+99153 x 1");
         code2.setHideMultiplier(true);
@@ -67,15 +72,16 @@ public class SedationTest {
         sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5);
         code1 = sedationCodes.get(0);
         code2 = sedationCodes.get(1);
+        String test2 = code2.unformattedCodeNumber();
         assert code1.unformattedCodeNumber().equals("99156");
-        assert code2.unformattedCodeNumber().equals("+99157 x 3");
+        assert code2.unformattedCodeNumber().equals("+99157 x 4");
 
         ptOver5 = false;
         sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5);
         code1 = sedationCodes.get(0);
         code2 = sedationCodes.get(1);
         assert code1.unformattedCodeNumber().equals("99155");
-        assert code2.unformattedCodeNumber().equals("+99157 x 3");
+        assert code2.unformattedCodeNumber().equals("+99157 x 4");
 
         sameMD = true;
         sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5);
@@ -123,12 +129,12 @@ public class SedationTest {
         codes.add(Codes.getCode("99152"));
         codes.add(Codes.getCode("99153"));
         String result = SedationCode.printSedationCodesWithDescription(codes);
-        String predictedResult = "99152 (Moderate sedation, same MD, initial 15 min, pt ≥ 5 y/o)\n+99153 (Moderate sedation, same MD, each additional 15 min)";
+        String predictedResult = "99152 - Moderate sedation, same MD, initial 15 min, pt ≥ 5 y/o\n+99153 - Moderate sedation, same MD, each additional 15 min";
         assert result.equals(predictedResult);
         codes.clear();
         codes.add(Codes.getCode("99152"));
         result = SedationCode.printSedationCodesWithDescription(codes);
-        predictedResult = "99152 (Moderate sedation, same MD, initial 15 min, pt ≥ 5 y/o)";
+        predictedResult = "99152 - Moderate sedation, same MD, initial 15 min, pt ≥ 5 y/o";
         assert result.equals(predictedResult);
     }
 }

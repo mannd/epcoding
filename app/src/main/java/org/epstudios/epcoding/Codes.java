@@ -225,10 +225,10 @@ public class Codes {
 		// New sedation codes, 2017
 		addCode(map, "99151", "Moderate sedation, same MD, initial 15 min, pt < 5 y/o", false);
 		addCode(map, "99152", "Moderate sedation, same MD, initial 15 min, pt ≥ 5 y/o", false);
-		addCode(map, "99153", "Moderate sedation, same MD, each additional 15 min", false);
+		addCode(map, "99153", "Moderate sedation, same MD, each additional 15 min", true);
 		addCode(map, "99155", "Moderate sedation, different MD, initial 15 min, pt < 5 y/o", false);
 		addCode(map, "99156", "Moderate sedation, different MD, initial 15 min, pt ≥ 5 y/o", false);
-		addCode(map, "99157", "Moderate sedation, different MD, each additional 15 min", false);
+		addCode(map, "99157", "Moderate sedation, different MD, each additional 15 min", true);
 
 		return Collections.unmodifiableMap(map);
 	}
