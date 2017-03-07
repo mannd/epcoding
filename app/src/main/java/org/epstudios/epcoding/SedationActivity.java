@@ -109,7 +109,19 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
 
     private void calculateSedationTime() {
         Intent intent = new Intent(this, SedationTimeCalculator.class);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                Integer result = data.getIntExtra("SEDATION_TIME", 0);
+                Log.d("EPCODING", "returned time is " + result);
+                timeEditText.setText(result.toString());
+
+            }
+        }
     }
 
     // assumes data has been extracted from fields already

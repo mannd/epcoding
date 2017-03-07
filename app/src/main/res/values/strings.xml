@@ -192,6 +192,7 @@
     <string name="start_date_time_label">Start Time</string>
     <string name="sedation_label">Sedation</string>
     <string name="sedation_time_calculator_label">Sedation Time Calculator</string>
+    <string name="set_button_label">Set</string>
 
 
 </resources>

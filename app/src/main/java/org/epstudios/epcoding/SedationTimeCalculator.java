@@ -22,6 +22,7 @@
 
 package org.epstudios.epcoding;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -61,31 +62,22 @@ public class SedationTimeCalculator extends BasicActionBarActivity
 
         Button cancelButton = (Button)findViewById(R.id.cancel_button);
         Button calculateButton = (Button)findViewById(R.id.calculate_button);
+        Button setTimeButton = (Button)findViewById(R.id.set_button);
         toggleButton = (ToggleButton)findViewById(R.id.toggleButton);
         timePicker = (TimePicker)findViewById(R.id.timePicker);
+
 
         cancelButton.setOnClickListener(this);
         calculateButton.setOnClickListener(this);
         toggleButton.setOnClickListener(this);
+        setTimeButton.setOnClickListener(this);
 
         startHour = timePicker.getCurrentHour();
         startMinute = timePicker.getCurrentMinute();
         endHour = startHour;
         endMinute = startMinute;
 
-        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker timePicker, int i, int i1) {
-                if (toggleButton.isChecked()) {
-                    startHour = i;
-                    startMinute = i1;
-                }
-                else {
-                    endHour = i;
-                    endMinute = i1;
-                }
-            }
-        });
+        updateToggleButtonTitle();
 
     }
 
@@ -99,7 +91,9 @@ public class SedationTimeCalculator extends BasicActionBarActivity
                 calculate();
                 break;
             case R.id.toggleButton:
-                assessTime();
+                break;
+            case R.id.set_button:
+                setTime();
                 break;
         }
 
@@ -108,7 +102,10 @@ public class SedationTimeCalculator extends BasicActionBarActivity
     private void calculate() {
         int difference = minuteDifference();
         Log.d("EPCODING", "Difference = " + difference);
-
+        Intent intent = new Intent();
+        intent.putExtra("SEDATION_TIME", difference);
+        setResult(Activity.RESULT_OK, intent);
+        finish();
     }
 
     private int minuteDifference() {
@@ -142,5 +139,28 @@ public class SedationTimeCalculator extends BasicActionBarActivity
            timePicker.setCurrentHour(startHour);
            timePicker.setCurrentMinute(startMinute);
        }
+    }
+
+    private void setTime() {
+        if (toggleButton.isChecked()) {
+            endHour = timePicker.getCurrentHour();
+            endMinute = timePicker.getCurrentMinute();
+        }
+        else {
+            startHour = timePicker.getCurrentHour();
+            startMinute = timePicker.getCurrentMinute();
+        }
+        updateToggleButtonTitle();
+    }
+
+    private void updateToggleButtonTitle() {
+        toggleButton.setTextOn(String.format("End Time %d:%d", endHour, endMinute));
+        toggleButton.setTextOff(String.format("Start Time %d:%d", startHour, startMinute));
+        if (toggleButton.isChecked()) {
+            toggleButton.setText(String.format("End Time %d:%d", endHour, endMinute));
+        }
+        else {
+            toggleButton.setText(String.format("Start Time %d:%d", startHour, startMinute));
+        }
     }
 }
