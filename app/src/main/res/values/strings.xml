@@ -185,7 +185,7 @@
     <string name="calculate_sedation_time_button_label">Calculate</string>
     <string name="no_sedation_button_label">No Sedation</string>
     <string name="patient_more_than_5_button_label"><![CDATA[Patient > 5 y/o]]></string>
-    <string name="sedation_time_label">Sedation Time</string>
+    <string name="sedation_time_label">Sedation Time (min)</string>
     <string name="sedation_by_same_md_label">Sedation by Same MD</string>
     <string name="sedation_time_hint">Sedation time in minutes</string>
     <string name="finish_date_time_label">Finish Time</string>

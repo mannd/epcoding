@@ -66,6 +66,8 @@ public class SedationTimeCalculator extends BasicActionBarActivity
         toggleButton = (ToggleButton)findViewById(R.id.toggleButton);
         timePicker = (TimePicker)findViewById(R.id.timePicker);
 
+        timePicker.setIs24HourView(true);
+
 
         cancelButton.setOnClickListener(this);
         calculateButton.setOnClickListener(this);
@@ -128,6 +130,11 @@ public class SedationTimeCalculator extends BasicActionBarActivity
         return difference;
     }
 
+    private String differenceLabel() {
+        String diff = String.format("δ = %d min", minuteDifference());
+        return diff;
+    }
+
     // TODO: time picker is not changing correctly with toggle button
     private void assessTime() {
         Log.d("EPCODING", "isChecked = " + toggleButton.isChecked());
@@ -154,13 +161,13 @@ public class SedationTimeCalculator extends BasicActionBarActivity
     }
 
     private void updateToggleButtonTitle() {
-        toggleButton.setTextOn(String.format("End Time %d:%d", endHour, endMinute));
-        toggleButton.setTextOff(String.format("Start Time %d:%d", startHour, startMinute));
+        toggleButton.setTextOn(String.format("End Time %d:%d %s", endHour, endMinute, differenceLabel()));
+        toggleButton.setTextOff(String.format("Start Time %d:%d %s", startHour, startMinute, differenceLabel()));
         if (toggleButton.isChecked()) {
-            toggleButton.setText(String.format("End Time %d:%d", endHour, endMinute));
+            toggleButton.setText(String.format("End Time %d:%d %s", endHour, endMinute, differenceLabel()));
         }
         else {
-            toggleButton.setText(String.format("Start Time %d:%d", startHour, startMinute));
+            toggleButton.setText(String.format("Start Time %d:%d %s", startHour, startMinute, differenceLabel()));
         }
     }
 }
