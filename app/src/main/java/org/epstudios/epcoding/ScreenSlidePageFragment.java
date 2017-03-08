@@ -322,9 +322,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
 
         if (requestCode == MODIFIER_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-               // Utilities.setModifierData(allCodes, allCheckBoxMapList, data, context);
                 String[] result = data.getStringArrayExtra(ModifierActivity.MODIFIER_RESULT);
-                Log.d(EPCODING, "Result = " + result.length);
                 if (result.length == 1 && result[0].equals(ModifierActivity.RESET_MODIFIERS)) {
                     resetModifiers();
                     resetCodes();
@@ -332,7 +330,8 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                 }
                 Code code = Codes.setModifiersForCode(result);
                 if (code != null) {
-                    CodeCheckBox checkBox = Utilities.getCheckBoxWithCode(code.getCodeNumber(), allCheckBoxMapList);
+                    CodeCheckBox checkBox = Utilities.getCheckBoxWithCode(code.getCodeNumber(),
+                            allCheckBoxMapList);
                     if (checkBox != null) {
                         // forces checkbox to redraw itself
                         // checkBox.invalidate() doesn't work for some reason
@@ -343,15 +342,18 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         }
         if (requestCode == SEDATION_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                Utilities.setSedationData(sameMDPerformsSedation,
-                        patientOver5YrsOld, sedationTime, sedationStatus, sedationCodes, data);
-           }
-        }
-        // TODO: above will be removed by refactoring
-        if (requestCode == SEDATION_REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
+                boolean sameMD = data.getBooleanExtra("SAME_MD", sameMDPerformsSedation);
+                boolean ageOver5 = data.getBooleanExtra("AGE", patientOver5YrsOld);
+                int time = data.getIntExtra("TIME", sedationTime);
+                SedationStatus status = (SedationStatus) data.getSerializableExtra("SEDATION_STATUS");
+                sameMDPerformsSedation = sameMD;
+                patientOver5YrsOld = ageOver5;
+                sedationTime = time;
+                sedationStatus = status;
+                sedationCodes.clear();
+                sedationCodes.addAll(SedationCode.sedationCoding(time, sameMDPerformsSedation, patientOver5YrsOld));
                 saveSedationCoding();
-            }
+           }
         }
     }
 
@@ -370,13 +372,6 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         prefsEditor.putStringSet(WIZARD_SEDATION_CODES, sedationCodesSet);
         prefsEditor.apply();
     }
-
-//    private void determineSedationCoding(List<Code> sedationCodes, int sedationTime, boolean sameMDPerformsSedation,
-//                                         boolean patientOver5YrsOld) {
-//        sedationCodes.clear();
-//        sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation,
-//                patientOver5YrsOld));
-//    }
 
     private void resetModifiers() {
         Utilities.resetModifiers(allCodes, context);
@@ -397,7 +392,6 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
     }
 
     private void addSedation() {
-        Log.d(EPCODING, "addSedation");
         Utilities.showSedationCodeSummary(sedationTime, patientOver5YrsOld,
                 sameMDPerformsSedation, sedationStatus, sedationCodes, this);
 

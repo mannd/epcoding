@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -135,49 +136,6 @@ class Utilities {
         dialog.show();
     }
 
-    private static void determineSedationCoding(List<Code> sedationCodes, final int sedationTime,
-                                                final boolean sameMDPerformsSedation,
-                                                final boolean patientOver5YrsOld) {
-        sedationCodes.clear();
-        sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation,
-                patientOver5YrsOld));
-    }
-
-    public static void setSedationData(boolean sameMDPerformsSedation,
-                                       boolean patientOver5YrsOld,
-                                       int sedationTime,
-                                       SedationStatus sedationStatus,
-                                       List<Code> sedationCodes,
-                                       Intent data) {
-        sameMDPerformsSedation = data.getBooleanExtra(SAME_MD, sameMDPerformsSedation);
-        patientOver5YrsOld = data.getBooleanExtra(AGE, patientOver5YrsOld);
-        sedationTime = data.getIntExtra(TIME, sedationTime);
-        sedationStatus = (SedationStatus) data.getSerializableExtra(SEDATION_STATUS);
-        determineSedationCoding(sedationCodes, sedationTime, sameMDPerformsSedation, patientOver5YrsOld);
-    }
-
-    public static void setModifierData(List<Code> codes,
-                                       List<Map<String, CodeCheckBox>> checkBoxMaps,
-                                       Intent data,
-                                       Context context) {
-        String[] result = data.getStringArrayExtra(ModifierActivity.MODIFIER_RESULT);
-        Log.d(EPCODING, "Result = " + result.length);
-        if (result.length == 1 && result[0].equals(ModifierActivity.RESET_MODIFIERS)) {
-            resetModifiers(codes, context);
-            resetCodes(codes, checkBoxMaps);
-            return;
-        }
-        Code code = Codes.setModifiersForCode(result);
-        if (code != null) {
-            CodeCheckBox checkBox = getCheckBoxWithCode(code.getCodeNumber(), checkBoxMaps);
-            if (checkBox != null) {
-                // forces checkbox to redraw itself
-                // checkBox.invalidate() doesn't work for some reason
-                checkBox.setCode(code);
-            }
-        }
-    }
-
     public static void resetModifiers(List<Code> codes, Context context) {
         Codes.resetSavedModifiers(codes, context);
     }
@@ -193,8 +151,7 @@ class Utilities {
         }
     }
 
-
-    public static CodeCheckBox getCheckBoxWithCode(String codeNumber, List<Map<String, CodeCheckBox>> checkBoxMaps) {
+    public static CodeCheckBox getCheckBoxWithCode(final String codeNumber, final List<Map<String, CodeCheckBox>> checkBoxMaps) {
         String result;
         for (Map<String, CodeCheckBox> map : checkBoxMaps) {
             for (Map.Entry<String, CodeCheckBox> entry : map.entrySet()) {
