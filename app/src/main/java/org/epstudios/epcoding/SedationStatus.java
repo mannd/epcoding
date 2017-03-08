@@ -27,5 +27,14 @@ public enum SedationStatus {
         None,
         LessThan10Mins,
         OtherMDCalculated,
-        AssignedSameMD
+        AssignedSameMD;
+
+        public static SedationStatus stringToSedationStatus(String s) {
+                try {
+                        return valueOf(s);
+                }
+                catch (Exception e) {
+                        return Unassigned;
+                }
+        }
 }

@@ -34,6 +34,7 @@ public final class Constants {
     public final static String WIZARD_AGE = "WIZARD_AGE";
     public final static String WIZARD_SAME_MD = "WIZARD_SAME_MD";
     public final static String WIZARD_SEDATION_CODES = "WIZARD_SEDATION_CODES";
+    public final static String WIZARD_SEDATION_STATUS = "WIZARD_SEDATION_STATUS";
 
     public final static String SAME_MD = "SAME_MD";
     public final static String AGE = "AGE";
@@ -41,5 +42,6 @@ public final class Constants {
     public final static String SEDATION_STATUS = "SEDATION_STATUS";
     public final static String LOAD_MODIFIERS = "LOAD_MODIFIERS";
     public final static String SEDATION_TIME = "SEDATION_TIME";
+    public final static String HAS_SEDATION = "HAS_SEDATION";
     
 }

@@ -44,6 +44,7 @@ import java.util.TreeSet;
 
 import static org.epstudios.epcoding.Constants.AGE;
 import static org.epstudios.epcoding.Constants.EPCODING;
+import static org.epstudios.epcoding.Constants.HAS_SEDATION;
 import static org.epstudios.epcoding.Constants.LOAD_MODIFIERS;
 import static org.epstudios.epcoding.Constants.MODIFIER_REQUEST_CODE;
 import static org.epstudios.epcoding.Constants.SAME_MD;
@@ -53,6 +54,7 @@ import static org.epstudios.epcoding.Constants.TIME;
 import static org.epstudios.epcoding.Constants.WIZARD_AGE;
 import static org.epstudios.epcoding.Constants.WIZARD_SAME_MD;
 import static org.epstudios.epcoding.Constants.WIZARD_SEDATION_CODES;
+import static org.epstudios.epcoding.Constants.WIZARD_SEDATION_STATUS;
 import static org.epstudios.epcoding.Constants.WIZARD_TIME;
 
 /**
@@ -168,6 +170,18 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean(LOAD_MODIFIERS, false);
             editor.apply();
+        }
+
+        // load sedation if it was done already
+        boolean loadSedation = prefs.getBoolean(HAS_SEDATION, false);
+        if (loadSedation) {
+            patientOver5YrsOld = prefs.getBoolean(WIZARD_AGE, true);
+            sameMDPerformsSedation = prefs.getBoolean(WIZARD_SAME_MD, true);
+            sedationTime = prefs.getInt(WIZARD_TIME, 0);
+            sedationStatus = SedationStatus.stringToSedationStatus(prefs.getString(WIZARD_SEDATION_STATUS, ""));
+            sedationCodes.clear();
+            sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation, patientOver5YrsOld));
+
         }
 
         Context context = getActivity();
@@ -374,8 +388,10 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putBoolean(HAS_SEDATION, true);
         prefsEditor.putInt(WIZARD_TIME, sedationTime);
         prefsEditor.putBoolean(WIZARD_SAME_MD, sameMDPerformsSedation);
+        prefsEditor.putString(WIZARD_SEDATION_STATUS, sedationStatus.toString());
         prefsEditor.putBoolean(WIZARD_AGE, patientOver5YrsOld);
         Set<String> sedationCodesSet = new HashSet<>();
         for (Code code : sedationCodes) {
