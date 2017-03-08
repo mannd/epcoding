@@ -30,6 +30,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -55,7 +56,7 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 	/**
 	 * The number of pages (wizard steps) to show in this demo.
 	 */
-	private static final int NUM_PAGES = 6;
+	private static final int NUM_PAGES = 7;
 
 	/**
 	 * The pager widget, which handles animation and allows swiping horizontally

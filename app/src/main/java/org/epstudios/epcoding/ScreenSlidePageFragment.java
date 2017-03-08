@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
@@ -51,7 +52,7 @@ import static org.epstudios.epcoding.ProcedureDetailFragment.EPCODING;
  * {@link ScreenSlideActivity} samples.
  * </p>
  */
-public class ScreenSlidePageFragment extends Fragment {
+public class ScreenSlidePageFragment extends Fragment implements View.OnClickListener {
 	/**
 	 * The argument key for the page number this fragment represents.
 	 */
@@ -81,6 +82,10 @@ public class ScreenSlidePageFragment extends Fragment {
 	private Code[] addingCodes;
 	private Code[] finalCodes;
 	List<Code> allCodes;
+
+	private Button sedationButton;
+	private SedationStatus sedationStatus = SedationStatus.Unassigned;
+	private List<Code> sedationCodes = new ArrayList<>();
 
 	/**
 	 * Factory method for this fragment class. Constructs a new fragment for the
@@ -120,6 +125,11 @@ public class ScreenSlidePageFragment extends Fragment {
 		LinearLayout finalCheckBoxLayout = (LinearLayout) rootView
 				.findViewById(R.id.final_codes);
 		finalCheckBoxLayout.setVisibility(View.GONE);
+
+		sedationButton = (Button)rootView.findViewById(R.id.sedation_button);
+		sedationButton.setOnClickListener(this);
+		sedationButton.setVisibility(View.GONE);
+
 		removalCodes = Codes.getCodes(removalCodeNumbers);
 		addingCodes = Codes.getCodes(addingCodeNumbers);
 		finalCodes = Codes.getCodes(Codes.icdReplacementSecondaryCodeNumbers);
@@ -151,32 +161,36 @@ public class ScreenSlidePageFragment extends Fragment {
 				.findViewById(R.id.slide_help_text);
 		checkChanged();
 		switch (mPageNumber) {
-		case 0:
-			headingText.setText(getString(R.string.slide_step1_heading_text));
-			break;
-		case 1:
-			headingText.setText(getString(R.string.slide_step2_heading_text));
-			break;
-		case 2:
-			Code[] codes = Codes.getCodes(revisionCodeNumbers);
-			String text = getString(R.string.slide_step3_heading_text) + "\n\n";
-			for (Code code : codes) {
-				text += code.getUnformattedNumberFirst() + "\n";
-			}
-			headingText.setText(text);
-			break;
-		case 3:
-			headingText.setText(getString(R.string.slide_step4_heading_text));
-			removedCheckBoxLayout.setVisibility(View.VISIBLE);
-			break;
-		case 4:
-			headingText.setText(getString(R.string.slide_step5_heading_text));
-			addingCheckBoxLayout.setVisibility(View.VISIBLE);
-			break;
-		case 5:
-			headingText.setText(getString(R.string.slide_step6_heading_text));
-			finalCheckBoxLayout.setVisibility(View.VISIBLE);
-			break;
+			case 0:
+				headingText.setText(getString(R.string.slide_step1_heading_text));
+				break;
+			case 1:
+				headingText.setText(getString(R.string.slide_step2_heading_text));
+				break;
+			case 2:
+				headingText.setText(getString(R.string.slide_step2a_heading_text));
+				sedationButton.setVisibility(View.VISIBLE);
+				break;
+			case 3:
+				Code[] codes = Codes.getCodes(revisionCodeNumbers);
+				String text = getString(R.string.slide_step3_heading_text) + "\n\n";
+				for (Code code : codes) {
+					text += code.getUnformattedNumberFirst() + "\n";
+				}
+				headingText.setText(text);
+				break;
+			case 4:
+				headingText.setText(getString(R.string.slide_step4_heading_text));
+				removedCheckBoxLayout.setVisibility(View.VISIBLE);
+				break;
+			case 5:
+				headingText.setText(getString(R.string.slide_step5_heading_text));
+				addingCheckBoxLayout.setVisibility(View.VISIBLE);
+				break;
+			case 6:
+				headingText.setText(getString(R.string.slide_step6_heading_text));
+				finalCheckBoxLayout.setVisibility(View.VISIBLE);
+				break;
 		}
 
 		if (null != savedInstanceState) {
@@ -235,15 +249,15 @@ public class ScreenSlidePageFragment extends Fragment {
 				.getDefaultSharedPreferences(getActivity());
 		SharedPreferences.Editor prefsEditor = prefs.edit();
 		switch (mPageNumber) {
-		case 3:
+		case 4:
 			prefsEditor.putStringSet("wizardremovalcodes",
 					getCheckBoxSet(removalCheckBoxMap));
 			break;
-		case 4:
+		case 5:
 			prefsEditor.putStringSet("wizardaddingcodes",
 					getCheckBoxSet(addingCheckBoxMap));
 			break;
-		case 5:
+		case 6:
 			prefsEditor.putStringSet("wizardfinalcodes",
 					getCheckBoxSet(finalCheckBoxMap));
 			break;
@@ -348,5 +362,13 @@ public class ScreenSlidePageFragment extends Fragment {
 	}
 
 
-
+	@Override
+	public void onClick(View view) {
+		Log.d("EPCODING", "clicked it!");
+		switch(view.getId()) {
+			case R.id.sedation_button:
+				Log.d("EPCODING", "click sedation!");
+				break;
+		}
+	}
 }
