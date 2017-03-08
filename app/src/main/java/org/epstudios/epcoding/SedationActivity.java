@@ -34,6 +34,8 @@ import android.widget.EditText;
 
 import java.util.List;
 
+import static org.epstudios.epcoding.Constants.SEDATION_TIME;
+
 public class SedationActivity extends BasicActionBarActivity implements View.OnClickListener {
 
     private final int SEDATION_CALCULATOR_REQUEST_CODE = 1;
@@ -110,7 +112,7 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == SEDATION_CALCULATOR_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                Integer result = data.getIntExtra("SEDATION_TIME", 0);
+                Integer result = data.getIntExtra(SEDATION_TIME, 0);
                 timeEditText.setText(result.toString());
 
             }

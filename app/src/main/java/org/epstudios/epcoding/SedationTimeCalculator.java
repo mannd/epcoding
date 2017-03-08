@@ -30,6 +30,8 @@ import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
+import static org.epstudios.epcoding.Constants.SEDATION_TIME;
+
 
 public class SedationTimeCalculator extends BasicActionBarActivity
         implements View.OnClickListener {
@@ -96,7 +98,7 @@ public class SedationTimeCalculator extends BasicActionBarActivity
     private void calculate() {
         int difference = minuteDifference();
         Intent intent = new Intent();
-        intent.putExtra("SEDATION_TIME", difference);
+        intent.putExtra(SEDATION_TIME, difference);
         setResult(Activity.RESULT_OK, intent);
         finish();
     }
