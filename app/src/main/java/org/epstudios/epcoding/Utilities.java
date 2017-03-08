@@ -16,6 +16,7 @@ import java.util.Map;
 
 import static org.epstudios.epcoding.Constants.AGE;
 import static org.epstudios.epcoding.Constants.EPCODING;
+import static org.epstudios.epcoding.Constants.MODIFIER_REQUEST_CODE;
 import static org.epstudios.epcoding.Constants.SAME_MD;
 import static org.epstudios.epcoding.Constants.SEDATION_REQUEST_CODE;
 import static org.epstudios.epcoding.Constants.SEDATION_STATUS;
@@ -38,7 +39,7 @@ class Utilities {
                 public boolean onLongClick(View view) {
                     Intent intent = new Intent(theContext, ModifierActivity.class);
                     intent.putExtra("ACTIVE_CODE_NUMBER", codeCheckBox.getCodeNumber());
-                    fragment.startActivityForResult(intent, 1);
+                    fragment.startActivityForResult(intent, MODIFIER_REQUEST_CODE);
                     return true;
                 }
             });

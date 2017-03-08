@@ -34,6 +34,8 @@ import android.view.MenuItem;
 import java.util.Set;
 import java.util.TreeSet;
 
+import static org.epstudios.epcoding.Constants.LOAD_MODIFIERS;
+
 /**
  * Demonstrates a "screen-slide" animation using a {@link ViewPager}. Because
  * {@link ViewPager} automatically plays such an animation when calling
@@ -89,6 +91,11 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 				invalidateOptionsMenu();
 			}
 		});
+		// make first page load modifiers
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putBoolean(LOAD_MODIFIERS, true);
+		editor.apply();
 	}
 
 	@Override
@@ -180,6 +187,7 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 				defaultStringSet));
 		codeNumbersChecked.addAll(prefs.getStringSet("wizardfinalcodes",
 				defaultStringSet));
+		// TODO: load sedation codes here too
 		return codeNumbersChecked;
 	}
 

@@ -58,9 +58,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import static org.epstudios.epcoding.Constants.AGE;
 import static org.epstudios.epcoding.Constants.EPCODING;
 import static org.epstudios.epcoding.Constants.MODIFIER_REQUEST_CODE;
+import static org.epstudios.epcoding.Constants.SAME_MD;
 import static org.epstudios.epcoding.Constants.SEDATION_REQUEST_CODE;
+import static org.epstudios.epcoding.Constants.SEDATION_STATUS;
+import static org.epstudios.epcoding.Constants.TIME;
 
 /**
  * A fragment representing a single Procedure detail screen. This fragment is
@@ -387,10 +391,10 @@ public class ProcedureDetailFragment extends Fragment implements
         }
         if (requestCode == SEDATION_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                sameMDPerformsSedation = data.getBooleanExtra("SAME_MD", sameMDPerformsSedation);
-                patientOver5YrsOld = data.getBooleanExtra("AGE", patientOver5YrsOld);
-                sedationTime = data.getIntExtra("TIME", sedationTime);
-                sedationStatus = (SedationStatus) data.getSerializableExtra("SEDATION_STATUS");
+                sameMDPerformsSedation = data.getBooleanExtra(SAME_MD, sameMDPerformsSedation);
+                patientOver5YrsOld = data.getBooleanExtra(AGE, patientOver5YrsOld);
+                sedationTime = data.getIntExtra(TIME, sedationTime);
+                sedationStatus = (SedationStatus) data.getSerializableExtra(SEDATION_STATUS);
                 sedationCodes.clear();
                 sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation,
                         patientOver5YrsOld));

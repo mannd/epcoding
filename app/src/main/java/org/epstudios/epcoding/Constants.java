@@ -39,5 +39,6 @@ public final class Constants {
     public final static String AGE = "AGE";
     public final static String TIME = "TIME";
     public final static String SEDATION_STATUS = "SEDATION_STATUS";
+    public final static String LOAD_MODIFIERS = "LOAD_MODIFIERS";
     
 }
