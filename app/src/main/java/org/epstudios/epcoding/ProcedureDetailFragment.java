@@ -37,7 +37,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -58,6 +59,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import static org.epstudios.epcoding.Constants.EPCODING;
+import static org.epstudios.epcoding.Constants.MODIFIER_REQUEST_CODE;
+import static org.epstudios.epcoding.Constants.SEDATION_REQUEST_CODE;
 
 /**
  * A fragment representing a single Procedure detail screen. This fragment is
@@ -73,8 +76,8 @@ public class ProcedureDetailFragment extends Fragment implements
      */
     public static final String ARG_ITEM_ID = "item_id";
 
-    private final int MODIFIER_REQUEST_CODE = 1;
-    private final int SEDATION_REQUEST_CODE = 2;
+//    private final int MODIFIER_REQUEST_CODE = 1;
+//    private final int SEDATION_REQUEST_CODE = 2;
 
     /**
      * The content this fragment is presenting.
@@ -98,6 +101,7 @@ public class ProcedureDetailFragment extends Fragment implements
     // as then will have to put in many check for null map.
     private final Map<String, CodeCheckBox> primaryCheckBoxMap = new LinkedHashMap<>();
     private final Map<String, CodeCheckBox> secondaryCheckBoxMap = new LinkedHashMap<>();
+    private final List<Map<String, CodeCheckBox>> allCheckBoxMapList = new ArrayList<>();
 
     // these correspond with the procedure list order
     final private int afbAblation = 0;
@@ -298,6 +302,11 @@ public class ProcedureDetailFragment extends Fragment implements
             }
         }
 
+        allCheckBoxMapList.add(primaryCheckBoxMap);
+        if (secondaryCheckBoxMap != null) {
+            allCheckBoxMapList.add(secondaryCheckBoxMap);
+        }
+
 
         // apply saved configurations here
         if (null != savedInstanceState) {
@@ -396,7 +405,7 @@ public class ProcedureDetailFragment extends Fragment implements
     }
 
     private void resetModifiers() {
-        Codes.resetSavedModifiers(allPrimaryAndSecondaryCodes(), context);
+        Utilities.resetModifiers(allPrimaryAndSecondaryCodes(), context);
     }
 
     private void resetCodes() {
@@ -413,20 +422,7 @@ public class ProcedureDetailFragment extends Fragment implements
     // both below are needed.  Need to allow allcodes module to display modifiers in its
     // list, which uses code first.
     private CodeCheckBox getCheckBoxWithCode(String codeNumber) {
-        String result;
-        for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap.entrySet()) {
-            result = entry.getValue().getCodeNumber();
-            if (result.equals(codeNumber)) {
-                return entry.getValue();
-            }
-        }
-        for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap.entrySet()) {
-            result = entry.getValue().getCodeNumber();
-            if (result.equals(codeNumber)) {
-                return entry.getValue();
-            }
-        }
-        return null;
+        return Utilities.getCheckBoxWithCode(codeNumber, allCheckBoxMapList);
     }
 
     private List<Code> allPrimaryAndSecondaryCodes() {
@@ -444,67 +440,69 @@ public class ProcedureDetailFragment extends Fragment implements
 
     private void addSedation() {
         Log.d(EPCODING, "addSedation");
-        showSedationCodeSummary(sedationTime, patientOver5YrsOld,
-                sameMDPerformsSedation,sedationStatus);
+        Utilities.showSedationCodeSummary(sedationTime, patientOver5YrsOld,
+                sameMDPerformsSedation,sedationStatus, sedationCodes, this);
 
     }
 
-    private void showSedationCodeSummary(final int sedationTime,
-                                         final boolean patientOver5YrsOld,
-                                         final boolean sameMDPerformsSedation,
-                                         final SedationStatus sedationStatus) {
-        AlertDialog dialog = new AlertDialog.Builder(context).create();
-        String message;
-        String title = "Edit Sedation Codes";
-        String buttonLabel = "Edit";
-        switch (sedationStatus) {
-            case Unassigned:
-                title = "Add Sedation Codes";
-                buttonLabel = "Add";
-                message = "Sedation coding not yet assigned for this procedure";
-                break;
-            case None:
-                message = "No sedation was used in this procedure.";
-                break;
-            case LessThan10Mins:
-                message = "Sedation time < 10 mins\nNo sedation codes can be assigned.";
-                break;
-            case OtherMDCalculated:
-                message = String.format("Sedation by other MD, using:\n%s",
-                        SedationCode.printSedationCodes(sedationCodes, "\n"));
-                break;
-            case AssignedSameMD:
-                message = String.format("Sedation by same MD, using:\n%s",
-                        SedationCode.printSedationCodes(sedationCodes, "\n"));
-                break;
-            default:
-                message = "Error in sedation coding.";
-                break;
-        }
-        dialog.setMessage(message);
-        dialog.setTitle(title);
-        dialog.setButton(AlertDialog.BUTTON_POSITIVE, buttonLabel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Log.d(EPCODING, "click Add");
-                Intent intent = new Intent(getActivity(), SedationActivity.class);
-                intent.putExtra("TIME", (int) sedationTime);
-                intent.putExtra("AGE", patientOver5YrsOld);
-                intent.putExtra("SAME_MD", sameMDPerformsSedation);
-                intent.putExtra("SEDATION_STATUS", sedationStatus);
-                startActivityForResult(intent, SEDATION_REQUEST_CODE);
-
-            }
-        });
-        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Log.d(EPCODING, "click cancel");
-            }
-        });
-
-        dialog.show();
-    }
+//    private void showSedationCodeSummary(final int sedationTime,
+//                                         final boolean patientOver5YrsOld,
+//                                         final boolean sameMDPerformsSedation,
+//                                         final SedationStatus sedationStatus,
+//                                         final List<Code> sedationCodes,
+//                                         final Fragment fragment) {
+//        AlertDialog dialog = new AlertDialog.Builder(fragment.getActivity()).create();
+//        String message;
+//        String title = "Edit Sedation Codes";
+//        String buttonLabel = "Edit";
+//        switch (sedationStatus) {
+//            case Unassigned:
+//                title = "Add Sedation Codes";
+//                buttonLabel = "Add";
+//                message = "Sedation coding not yet assigned for this procedure";
+//                break;
+//            case None:
+//                message = "No sedation was used in this procedure.";
+//                break;
+//            case LessThan10Mins:
+//                message = "Sedation time < 10 mins\nNo sedation codes can be assigned.";
+//                break;
+//            case OtherMDCalculated:
+//                message = String.format("Sedation by other MD, using:\n%s",
+//                        SedationCode.printSedationCodes(sedationCodes, "\n"));
+//                break;
+//            case AssignedSameMD:
+//                message = String.format("Sedation by same MD, using:\n%s",
+//                        SedationCode.printSedationCodes(sedationCodes, "\n"));
+//                break;
+//            default:
+//                message = "Error in sedation coding.";
+//                break;
+//        }
+//        dialog.setMessage(message);
+//        dialog.setTitle(title);
+//        dialog.setButton(AlertDialog.BUTTON_POSITIVE, buttonLabel, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                Log.d(EPCODING, "click Add");
+//                Intent intent = new Intent(fragment.getActivity(), SedationActivity.class);
+//                intent.putExtra("TIME", (int) sedationTime);
+//                intent.putExtra("AGE", patientOver5YrsOld);
+//                intent.putExtra("SAME_MD", sameMDPerformsSedation);
+//                intent.putExtra("SEDATION_STATUS", sedationStatus);
+//                fragment.startActivityForResult(intent, SEDATION_REQUEST_CODE);
+//
+//            }
+//        });
+//        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                Log.d(EPCODING, "click cancel");
+//            }
+//        });
+//
+//        dialog.show();
+//    }
 
     private void clearEntries() {
         for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap

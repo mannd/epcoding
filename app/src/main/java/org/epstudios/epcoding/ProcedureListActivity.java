@@ -100,7 +100,7 @@ public class ProcedureListActivity extends ProcedureActionBarActivity implements
             arguments.putString(ProcedureDetailFragment.ARG_ITEM_ID, id);
             ProcedureDetailFragment fragment = new ProcedureDetailFragment();
             fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
+            getFragmentManager().beginTransaction()
                     .replace(R.id.procedure_detail_container, fragment)
                     .commit();
 

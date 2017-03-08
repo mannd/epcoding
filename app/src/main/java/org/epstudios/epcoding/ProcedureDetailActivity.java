@@ -66,7 +66,7 @@ public class ProcedureDetailActivity extends ProcedureActionBarActivity {
                             ProcedureDetailFragment.ARG_ITEM_ID));
             ProcedureDetailFragment fragment = new ProcedureDetailFragment();
             fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
+            getFragmentManager().beginTransaction()
                     .add(R.id.procedure_detail_container, fragment).commit();
         }
     }
