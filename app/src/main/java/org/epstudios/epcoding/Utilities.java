@@ -76,11 +76,11 @@ class Utilities {
     }
 
     public static void showSedationCodeSummary(final int sedationTime,
-                                         final boolean patientOver5YrsOld,
-                                         final boolean sameMDPerformsSedation,
-                                         final SedationStatus sedationStatus,
-                                         final List<Code> sedationCodes,
-                                         final Fragment fragment) {
+                                               final boolean patientOver5YrsOld,
+                                               final boolean sameMDPerformsSedation,
+                                               final SedationStatus sedationStatus,
+                                               final List<Code> sedationCodes,
+                                               final Fragment fragment) {
         final Context context = fragment.getActivity();
         AlertDialog dialog = new AlertDialog.Builder(context).create();
         String message;
@@ -136,8 +136,8 @@ class Utilities {
     }
 
     private static void determineSedationCoding(List<Code> sedationCodes, final int sedationTime,
-                                               final boolean sameMDPerformsSedation,
-                                               final boolean patientOver5YrsOld) {
+                                                final boolean sameMDPerformsSedation,
+                                                final boolean patientOver5YrsOld) {
         sedationCodes.clear();
         sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation,
                 patientOver5YrsOld));
@@ -156,24 +156,27 @@ class Utilities {
         determineSedationCoding(sedationCodes, sedationTime, sameMDPerformsSedation, patientOver5YrsOld);
     }
 
-    public static void setModifierData() {}
-
-//    String[] result = data.getStringArrayExtra(ModifierActivity.MODIFIER_RESULT);
-//                Log.d(EPCODING, "Result = " + result.length);
-//                if (result.length == 1 && result[0].equals(ModifierActivity.RESET_MODIFIERS)) {
-//        resetModifiers();
-//        resetCodes();
-//        return;
-//    }
-//    Code code = Codes.setModifiersForCode(result);
-//                if (code != null) {
-//        CodeCheckBox checkBox = getCheckBoxWithCode(code.getCodeNumber());
-//        if (checkBox != null) {
-//            // forces checkbox to redraw itself
-//            // checkBox.invalidate() doesn't work for some reason
-//            checkBox.setCode(code);
-//        }
-//    }
+    public static void setModifierData(List<Code> codes,
+                                       List<Map<String, CodeCheckBox>> checkBoxMaps,
+                                       Intent data,
+                                       Context context) {
+        String[] result = data.getStringArrayExtra(ModifierActivity.MODIFIER_RESULT);
+        Log.d(EPCODING, "Result = " + result.length);
+        if (result.length == 1 && result[0].equals(ModifierActivity.RESET_MODIFIERS)) {
+            resetModifiers(codes, context);
+            resetCodes(codes, checkBoxMaps);
+            return;
+        }
+        Code code = Codes.setModifiersForCode(result);
+        if (code != null) {
+            CodeCheckBox checkBox = getCheckBoxWithCode(code.getCodeNumber(), checkBoxMaps);
+            if (checkBox != null) {
+                // forces checkbox to redraw itself
+                // checkBox.invalidate() doesn't work for some reason
+                checkBox.setCode(code);
+            }
+        }
+    }
 
     public static void resetModifiers(List<Code> codes, Context context) {
         Codes.resetSavedModifiers(codes, context);
@@ -191,7 +194,7 @@ class Utilities {
     }
 
 
-    public static CodeCheckBox getCheckBoxWithCode(String codeNumber, List<Map<String,CodeCheckBox >> checkBoxMaps) {
+    public static CodeCheckBox getCheckBoxWithCode(String codeNumber, List<Map<String, CodeCheckBox>> checkBoxMaps) {
         String result;
         for (Map<String, CodeCheckBox> map : checkBoxMaps) {
             for (Map.Entry<String, CodeCheckBox> entry : map.entrySet()) {
@@ -203,11 +206,6 @@ class Utilities {
         }
         return null;
     }
-
-
-
-
-
 
 
 }

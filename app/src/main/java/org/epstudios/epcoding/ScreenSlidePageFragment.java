@@ -322,6 +322,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
 
         if (requestCode == MODIFIER_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
+               // Utilities.setModifierData(allCodes, allCheckBoxMapList, data, context);
                 String[] result = data.getStringArrayExtra(ModifierActivity.MODIFIER_RESULT);
                 Log.d(EPCODING, "Result = " + result.length);
                 if (result.length == 1 && result[0].equals(ModifierActivity.RESET_MODIFIERS)) {
