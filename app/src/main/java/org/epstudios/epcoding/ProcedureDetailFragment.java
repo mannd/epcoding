@@ -50,13 +50,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.security.spec.ECParameterSpec;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+
+import static org.epstudios.epcoding.Constants.EPCODING;
 
 /**
  * A fragment representing a single Procedure detail screen. This fragment is
@@ -71,7 +72,6 @@ public class ProcedureDetailFragment extends Fragment implements
      * represents.
      */
     public static final String ARG_ITEM_ID = "item_id";
-    public static final String EPCODING = "EPCODING";
 
     private final int MODIFIER_REQUEST_CODE = 1;
     private final int SEDATION_REQUEST_CODE = 2;
@@ -178,7 +178,6 @@ public class ProcedureDetailFragment extends Fragment implements
 
     @Override
     public void onClick(View v) {
-        Log.d(EPCODING, "click view");
         switch (v.getId()) {
             case R.id.sedation_button:
                 addSedation();
@@ -343,8 +342,6 @@ public class ProcedureDetailFragment extends Fragment implements
             codeCheckBox.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    Log.v(EPCODING, "on long click");
-                    Log.v(EPCODING, "Active code number = " + codeCheckBox.getCodeNumber());
                     Intent intent = new Intent(getActivity(), ModifierActivity.class);
                     intent.putExtra("ACTIVE_CODE_NUMBER", codeCheckBox.getCodeNumber());
                     startActivityForResult(intent, MODIFIER_REQUEST_CODE);
@@ -361,7 +358,6 @@ public class ProcedureDetailFragment extends Fragment implements
         if (requestCode == MODIFIER_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 String[] result = data.getStringArrayExtra(ModifierActivity.MODIFIER_RESULT);
-                Log.d(EPCODING, "Result = " + result.length);
                 if (result.length == 1 && result[0].equals(ModifierActivity.RESET_MODIFIERS)) {
                     resetModifiers();
                     resetCodes();
@@ -384,10 +380,6 @@ public class ProcedureDetailFragment extends Fragment implements
                 boolean ageOver5 = data.getBooleanExtra("AGE", patientOver5YrsOld);
                 int time = data.getIntExtra("TIME", sedationTime);
                 SedationStatus status = (SedationStatus) data.getSerializableExtra("SEDATION_STATUS");
-                Log.d(EPCODING, "sameMD = " + sameMD);
-                Log.d(EPCODING, "ageOver5 = " + ageOver5);
-                Log.d(EPCODING, "time = " + time);
-                Log.d(EPCODING, "status = " + status);
                 sameMDPerformsSedation = sameMD;
                 patientOver5YrsOld = ageOver5;
                 sedationTime = time;
@@ -452,11 +444,15 @@ public class ProcedureDetailFragment extends Fragment implements
 
     private void addSedation() {
         Log.d(EPCODING, "addSedation");
-        showSedationCodeSummary();
+        showSedationCodeSummary(sedationTime, patientOver5YrsOld,
+                sameMDPerformsSedation,sedationStatus);
 
     }
 
-    private void showSedationCodeSummary() {
+    private void showSedationCodeSummary(final int sedationTime,
+                                         final boolean patientOver5YrsOld,
+                                         final boolean sameMDPerformsSedation,
+                                         final SedationStatus sedationStatus) {
         AlertDialog dialog = new AlertDialog.Builder(context).create();
         String message;
         String title = "Edit Sedation Codes";

@@ -22,8 +22,6 @@
 
 package org.epstudios.epcoding;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.List;
 

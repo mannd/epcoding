@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -13,7 +11,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 class Utilities {
-    private static final String EPCODING = ProcedureDetailFragment.EPCODING;
 
     public static Map<String, CodeCheckBox> createCheckBoxLayoutAndCodeMap(
             Code[] codes, LinearLayout layout, Context context,
@@ -28,8 +25,6 @@ class Utilities {
             codeCheckBox.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    Log.v(EPCODING, "on long click");
-                    Log.v(EPCODING, "Active code number = " + codeCheckBox.getCodeNumber());
                     Intent intent = new Intent(theContext, ModifierActivity.class);
                     intent.putExtra("ACTIVE_CODE_NUMBER", codeCheckBox.getCodeNumber());
                     fragment.startActivityForResult(intent, 1);
@@ -69,5 +64,7 @@ class Utilities {
         dialog.setTitle(title);
         dialog.show();
     }
+
+
 
 }

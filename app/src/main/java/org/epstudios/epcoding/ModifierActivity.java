@@ -27,23 +27,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
+
+import static org.epstudios.epcoding.Constants.EPCODING;
 
 public class ModifierActivity extends BasicActionBarActivity implements View.OnClickListener {
 
@@ -51,7 +45,6 @@ public class ModifierActivity extends BasicActionBarActivity implements View.OnC
     private Set<Modifier> modifierSet;
     private CheckBox[] checkBoxes;
 
-    private final String EPCODING = ProcedureDetailFragment.EPCODING;
     public static final String MODIFIER_RESULT = "MODIFIER_RESULT";
     public static final String RESET_MODIFIERS = "reset";
 
@@ -135,7 +128,6 @@ public class ModifierActivity extends BasicActionBarActivity implements View.OnC
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        Log.d("EPCODING", "saveInstanceState");
         boolean[] checkBoxState = new boolean[checkBoxes.length];
         for (int i = 0; i < checkBoxes.length; i++) {
             checkBoxState[i] = checkBoxes[i].isChecked();
@@ -146,7 +138,6 @@ public class ModifierActivity extends BasicActionBarActivity implements View.OnC
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("EPCODING", "onResume");
     }
 
     private void saveModifiers() {

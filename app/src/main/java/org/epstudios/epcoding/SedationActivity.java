@@ -27,20 +27,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
 import java.util.List;
-
-import static org.epstudios.epcoding.ProcedureDetailFragment.EPCODING;
 
 public class SedationActivity extends BasicActionBarActivity implements View.OnClickListener {
 
@@ -119,7 +111,6 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
         if (requestCode == SEDATION_CALCULATOR_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 Integer result = data.getIntExtra("SEDATION_TIME", 0);
-                Log.d("EPCODING", "returned time is " + result);
                 timeEditText.setText(result.toString());
 
             }
@@ -205,7 +196,6 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
         dialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Log.d(EPCODING, "click OK");
                 putSedationData(theIntent);
                 finish();
             }
@@ -213,7 +203,6 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
         dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Log.d(EPCODING, "click cancel");
                 // make finished false
             }
         });

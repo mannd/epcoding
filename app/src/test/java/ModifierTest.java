@@ -20,14 +20,11 @@
  * along with epcoding.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import android.util.Log;
-
 import org.epstudios.epcoding.Code;
 import org.epstudios.epcoding.Codes;
 import org.epstudios.epcoding.Modifier;
 import org.epstudios.epcoding.Modifiers;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.util.HashSet;
 import java.util.Set;

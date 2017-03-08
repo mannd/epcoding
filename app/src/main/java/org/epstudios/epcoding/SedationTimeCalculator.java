@@ -25,18 +25,10 @@ package org.epstudios.epcoding;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
-
-import java.sql.Time;
 
 
 public class SedationTimeCalculator extends BasicActionBarActivity
@@ -103,7 +95,6 @@ public class SedationTimeCalculator extends BasicActionBarActivity
 
     private void calculate() {
         int difference = minuteDifference();
-        Log.d("EPCODING", "Difference = " + difference);
         Intent intent = new Intent();
         intent.putExtra("SEDATION_TIME", difference);
         setResult(Activity.RESULT_OK, intent);
@@ -135,9 +126,7 @@ public class SedationTimeCalculator extends BasicActionBarActivity
         return diff;
     }
 
-    // TODO: time picker is not changing correctly with toggle button
     private void assessTime() {
-        Log.d("EPCODING", "isChecked = " + toggleButton.isChecked());
        if (toggleButton.isChecked()) {
            timePicker.setCurrentHour(endHour);
            timePicker.setCurrentMinute(endMinute);

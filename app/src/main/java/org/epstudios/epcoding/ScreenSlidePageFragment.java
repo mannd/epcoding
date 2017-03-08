@@ -35,13 +35,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static org.epstudios.epcoding.ProcedureDetailFragment.EPCODING;
+import static org.epstudios.epcoding.Constants.EPCODING;
 
 /**
  * A fragment representing a single step in a wizard. The fragment shows a dummy
@@ -364,10 +363,8 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
 
 	@Override
 	public void onClick(View view) {
-		Log.d("EPCODING", "clicked it!");
 		switch(view.getId()) {
 			case R.id.sedation_button:
-				Log.d("EPCODING", "click sedation!");
 				break;
 		}
 	}
