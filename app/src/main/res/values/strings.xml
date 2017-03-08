@@ -158,11 +158,13 @@
         a dual chamber pacemaker?  If so use code 33214 which covers this entire procedure.
         If you are also adding an LV cardiac vein lead add code +33225.
         Exit the wizard by using the back button
-        on your device. Otherwise go to the next step.</string>
+        on your device and select codes from the Upgrade/Revision/Extraction module.
+        Otherwise go to the next step.</string>
     <string name="slide_step3_heading_text">Is this a lead revision or repair or a pocket revision
         without adding or removing any hardware?  If so use one of the codes below and
         exit the wizard by using the back button on your device.  Otherwise
         go on to the next step.</string>
+    <string name="slide_step3a_heading_text">So we don\'t forget, add sedation coding now.</string>
     <string name="slide_step4_heading_text">OK. We have addressed the simple scenarios.
         What\'s left are lead and generator removals/extractions,
         and device upgrades. Start off by selecting what hardware (if any) was

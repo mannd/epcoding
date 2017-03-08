@@ -44,6 +44,8 @@ import static org.epstudios.epcoding.ProcedureDetailFragment.EPCODING;
 
 public class SedationActivity extends BasicActionBarActivity implements View.OnClickListener {
 
+    private final int SEDATION_CALCULATOR_REQUEST_CODE = 1;
+
     private int sedationTime = 0;
     private boolean ageOver5 = true;
     private boolean sameMD = true;
@@ -109,12 +111,12 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
 
     private void calculateSedationTime() {
         Intent intent = new Intent(this, SedationTimeCalculator.class);
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, SEDATION_CALCULATOR_REQUEST_CODE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1) {
+        if (requestCode == SEDATION_CALCULATOR_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 Integer result = data.getIntExtra("SEDATION_TIME", 0);
                 Log.d("EPCODING", "returned time is " + result);

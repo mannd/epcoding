@@ -555,7 +555,8 @@ public class ProcedureDetailFragment extends Fragment implements
                 || (mItem == allProcedures && !codeCheckAllCodes);
         message += Utilities.codeAnalysis(codes, noPrimaryCodes,
                 noSecondaryCodes, moduleHasNoSecondaryCodesNeedingChecking,
-                noAnalysis, codeVerbosity.equals("Verbose"), context);
+                noAnalysis, codeVerbosity.equals("Verbose"),
+                sedationStatus, context);
         Utilities.displayMessage(
                 getString(R.string.coding_summary_dialog_label), message,
                 context);

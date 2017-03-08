@@ -164,7 +164,9 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 			code[i] = Codes.getCode(codeNumberArray[i]);
 			message += code[i].getCodeFirstFormatted() + "\n";
 		}
-		message += Utilities.simpleCodeAnalysis(code, this);
+		// TODO: substitute real sedation status
+		SedationStatus status = SedationStatus.Unassigned;
+		message += Utilities.simpleCodeAnalysis(code, status, this);
 		displayResult(getString(R.string.coding_summary_dialog_label), message,
 				this);
 	}

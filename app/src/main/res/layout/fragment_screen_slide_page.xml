@@ -26,6 +26,8 @@
         android:padding="16dp" >
 
 
+
+
         <TextView
             android:id="@android:id/text1"
             style="?android:textAppearanceLarge"
@@ -41,6 +43,13 @@
             android:layout_height="wrap_content"
             android:lineSpacingMultiplier="1.2"
             android:text="@string/wizard_test_text" />
+
+        <Button
+            android:id="@+id/sedation_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="Sedation" />
 
         <LinearLayout
             android:id="@+id/removed_hardware"

@@ -42,6 +42,7 @@ class CodeAnalyzer {
 	private final boolean noPrimaryCodes;
 	private final boolean noSecondaryCodes;
 	private final boolean moduleHasNoSecondaryCodesNeedingChecking;
+	private final SedationStatus sedationStatus;
 	private final Context context;
 	private boolean verbose = true;
 	private boolean noAnalysis = false;
@@ -133,12 +134,29 @@ class CodeAnalyzer {
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("93654", "93657", "93609", "93613", "93622"),
 				"Code(s) cannot be add to VT Ablation."));
-        codeErrors.add(new CodeError(CodeError.WarningLevel.WARNING, Arrays
-                .asList("93623", "93650", "93653", "93654", "93656"),
-                "Recent coding changes may disallow bundling induce post IV drug with ablation."));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.WARNING, Arrays
+				.asList("93623", "93650", "93653", "93654", "93656"),
+				"Recent coding changes may disallow bundling induce post IV drug with ablation."));
+		// don't combine raw EP study codes with comprehensive codes or ablation codes
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("93600", "93619", "93620", "93655", "93657"),
 				DEFAULT_DUPLICATE_ERROR));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("93602", "93619", "93620", "93655", "93657"),
+				DEFAULT_DUPLICATE_ERROR));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("93603", "93619", "93620", "93655", "93657"),
+				DEFAULT_DUPLICATE_ERROR));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("93610", "93619", "93620", "93655", "93657"),
+				DEFAULT_DUPLICATE_ERROR));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("93612", "93619", "93620", "93655", "93657"),
+				DEFAULT_DUPLICATE_ERROR));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("93618", "93619", "93620", "93655", "93657"),
+				DEFAULT_DUPLICATE_ERROR));
+
 		return codeErrors;
 	}
 
@@ -154,24 +172,26 @@ class CodeAnalyzer {
 	}
 
 	public CodeAnalyzer(final Code[] codes, final boolean noPrimaryCodes,
-			final boolean noSecondaryCodes,
-			final boolean moduleHasNoSecondaryCodesNeedingChecking,
-			final Context context) {
+						final boolean noSecondaryCodes,
+						final boolean moduleHasNoSecondaryCodesNeedingChecking,
+						final SedationStatus status,
+						final Context context) {
 		this.codes = codes;
 		this.noPrimaryCodes = noPrimaryCodes;
 		this.noSecondaryCodes = noSecondaryCodes;
 		this.moduleHasNoSecondaryCodesNeedingChecking = moduleHasNoSecondaryCodesNeedingChecking;
+		this.sedationStatus = status;
 		this.context = context;
 	}
 
 	// this simpler constructor used with code wizard
-	public CodeAnalyzer(final Code[] codes, final Context context) {
+	public CodeAnalyzer(final Code[] codes, final SedationStatus status, final Context context) {
 		this.codes = codes;
 		this.context = context;
 		this.noPrimaryCodes = false;
 		this.noSecondaryCodes = false;
 		this.moduleHasNoSecondaryCodesNeedingChecking = true;
-
+		this.sedationStatus = status;
 	}
 
 	public void setVerbose(boolean verbose) {
@@ -353,5 +373,20 @@ class CodeAnalyzer {
 	private String getMessageFromStrings(final String threat,
 			final String brief, final String details) {
 		return "\n" + threat + brief + (verbose ? " " + details : "") + "\n";
+	}
+
+	private List<CodeError>evaluateModifiers() {
+		List<CodeError> array = new ArrayList<>();
+		boolean q0ModifierFound = false;
+		for (Code code : codes) {
+			for (Modifier modifier : code.getModifiers()) {
+				if (modifier.getNumber().equals("Q0")) {
+					array.add(new CodeError(CodeError.WarningLevel.WARNING,
+							null, "Add Q0 modifier to ICD implant or generator replacement codes"
+					+ " if indication is primary prevention."));
+				}
+			}
+		}
+		return array;
 	}
 }
