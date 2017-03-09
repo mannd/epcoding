@@ -32,6 +32,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -172,12 +175,13 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 		// analyzer, as well as check for no primary or secondary codes
 		String[] codeNumberArray = codeNumbers.toArray(new String[codeNumbers
 				.size()]);
-		Code[] code = new Code[codeNumbers.size()];
-		for (int i = 0; i < code.length; ++i) {
-			code[i] = Codes.getCode(codeNumberArray[i]);
-			message += code[i].getCodeFirstFormatted() + "\n";
+		Code[] codes = new Code[codeNumbers.size()];
+		for (int i = 0; i < codes.length; ++i) {
+			codes[i] = Codes.getCode(codeNumberArray[i]);
+			message += codes[i].getCodeFirstFormatted() + "\n";
 		}
-		// TODO: substitute real sedation status
+		List<Code> allCodes = new ArrayList<>();
+		allCodes.addAll(Arrays.asList(codes));
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		boolean hasSedation = prefs.getBoolean(HAS_SEDATION, false);
 		boolean sameMD;
@@ -185,14 +189,18 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 		int sedationTime = 0;
 		SedationStatus sedationStatus = SedationStatus.Unassigned;
 		if (hasSedation) {
-			Log.d(EPCODING, "Has sedation.");
-			// TODO: probably have to send all these to analyzer
 			sameMD = prefs.getBoolean(WIZARD_SAME_MD, true);
 			ageOver5 = prefs.getBoolean(WIZARD_AGE, true);
 			sedationTime = prefs.getInt(WIZARD_TIME, 0);
 			sedationStatus = SedationStatus.stringToSedationStatus(prefs.getString(WIZARD_SEDATION_STATUS, ""));
+			List<Code> sedationCodes = SedationCode.sedationCoding(sedationTime, sameMD, ageOver5);
+			// TODO: this doesn't send actual sedation codes to analzyer, but maybe we need to?
+			for (Code code : sedationCodes) {
+				message += code.getCodeFirstDescription() + "\n";
+			}
+			allCodes.addAll(sedationCodes);
 		}
-		message += Utilities.simpleCodeAnalysis(code, sedationStatus, this);
+		message += Utilities.simpleCodeAnalysis(allCodes, sedationStatus, this);
 		displayResult(getString(R.string.coding_summary_dialog_label), message,
 				this);
 	}

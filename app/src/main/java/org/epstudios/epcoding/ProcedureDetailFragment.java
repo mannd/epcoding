@@ -52,6 +52,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -474,12 +475,15 @@ public class ProcedureDetailFragment extends Fragment implements
             message += getSummaryFromCode(code);
 
         }
+        List<Code> allCodes = new ArrayList<>();
+        allCodes.addAll(Arrays.asList(codes));
+        allCodes.addAll(sedationCodes);
         boolean noSecondaryCodes = primaryCodeCounter == i;
         boolean moduleHasNoSecondaryCodesNeedingChecking = procedure
                 .doNotWarnForNoSecondaryCodesSelected();
         boolean noAnalysis = codeVerbosity.equals("None")
                 || (mItem == allProcedures && !codeCheckAllCodes);
-        message += Utilities.codeAnalysis(codes, noPrimaryCodes,
+        message += Utilities.codeAnalysis(allCodes, noPrimaryCodes,
                 noSecondaryCodes, moduleHasNoSecondaryCodesNeedingChecking,
                 noAnalysis, codeVerbosity.equals("Verbose"),
                 sedationStatus, context);

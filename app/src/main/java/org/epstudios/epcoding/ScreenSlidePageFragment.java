@@ -242,6 +242,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
 
         if (null != savedInstanceState) {
             // restore state
+            Log.d(EPCODING, "restore state");
             boolean[] removalCodesState = savedInstanceState
                     .getBooleanArray("removal_codes");
             boolean[] addingCodesState = savedInstanceState
@@ -260,6 +261,12 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
             for (Map.Entry<String, CodeCheckBox> entry : finalCheckBoxMap
                     .entrySet())
                 entry.getValue().setChecked(finalCodesState != null ? finalCodesState[i++] : false);
+
+            patientOver5YrsOld = savedInstanceState.getBoolean("sedation_age");
+            sameMDPerformsSedation = savedInstanceState.getBoolean("sedation_same_md");
+            sedationTime = savedInstanceState.getInt("sedation_time");
+            sedationStatus = SedationStatus.stringToSedationStatus(savedInstanceState.getString("sedation_status"));
+            // TODO: need to restore sedation codes too
         }
 
         return rootView;
@@ -344,6 +351,10 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         savedInstanceState.putBooleanArray("removal_codes", removalCodeState);
         savedInstanceState.putBooleanArray("adding_codes", addingCodeState);
         savedInstanceState.putBooleanArray("final_codes", finalCodeState);
+        savedInstanceState.putBoolean("sedation_same_md", sameMDPerformsSedation);
+        savedInstanceState.putBoolean("sedation_age", patientOver5YrsOld);
+        savedInstanceState.putInt("sedation_time", sedationTime);
+        savedInstanceState.putString("sedation_status", sedationStatus.toString());
 
     }
 

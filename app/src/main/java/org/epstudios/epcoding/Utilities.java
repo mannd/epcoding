@@ -61,7 +61,28 @@ class Utilities {
         return analyzer.analysis();
     }
 
+    public static String codeAnalysis(final List<Code> codes,
+                                      final boolean noPrimaryCodes, final boolean noSecondaryCodes,
+                                      final boolean moduleHasNoSecondaryCodes, boolean noAnalysis,
+                                      boolean verbose, SedationStatus sedationStatus,
+                                      Context context) {
+        CodeAnalyzer analyzer = new CodeAnalyzer(codes, noPrimaryCodes,
+                noSecondaryCodes, moduleHasNoSecondaryCodes, sedationStatus, context);
+        // no analysis for all procedures module
+        analyzer.setNoAnalysis(noAnalysis);
+        analyzer.setVerbose(verbose);
+        return analyzer.analysis();
+    }
+
     public static String simpleCodeAnalysis(final Code[] codes, SedationStatus sedationStatus,
+                                            Context context) {
+        CodeAnalyzer analyzer = new CodeAnalyzer(codes, sedationStatus, context);
+        analyzer.setVerbose(true); // if you are using the wizard you need
+        // verbose messages.
+        return analyzer.simpleAnalysis();
+    }
+
+    public static String simpleCodeAnalysis(final List<Code> codes, SedationStatus sedationStatus,
                                             Context context) {
         CodeAnalyzer analyzer = new CodeAnalyzer(codes, sedationStatus, context);
         analyzer.setVerbose(true); // if you are using the wizard you need

@@ -184,9 +184,31 @@ class CodeAnalyzer {
 		this.context = context;
 	}
 
+	public CodeAnalyzer(final List<Code> codes, final boolean noPrimaryCodes,
+						final boolean noSecondaryCodes,
+						final boolean moduleHasNoSecondaryCodesNeedingChecking,
+						final SedationStatus status,
+						final Context context) {
+		this.codes = codes.toArray(new Code[codes.size()]);
+		this.noPrimaryCodes = noPrimaryCodes;
+		this.noSecondaryCodes = noSecondaryCodes;
+		this.moduleHasNoSecondaryCodesNeedingChecking = moduleHasNoSecondaryCodesNeedingChecking;
+		this.sedationStatus = status;
+		this.context = context;
+	}
+
 	// this simpler constructor used with code wizard
 	public CodeAnalyzer(final Code[] codes, final SedationStatus status, final Context context) {
 		this.codes = codes;
+		this.context = context;
+		this.noPrimaryCodes = false;
+		this.noSecondaryCodes = false;
+		this.moduleHasNoSecondaryCodesNeedingChecking = true;
+		this.sedationStatus = status;
+	}
+
+	public CodeAnalyzer(final List<Code> codes, final SedationStatus status, final Context context) {
+		this.codes = codes.toArray(new Code[codes.size()]);
 		this.context = context;
 		this.noPrimaryCodes = false;
 		this.noSecondaryCodes = false;
