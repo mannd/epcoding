@@ -43,5 +43,10 @@ public final class Constants {
     public final static String LOAD_MODIFIERS = "LOAD_MODIFIERS";
     public final static String SEDATION_TIME = "SEDATION_TIME";
     public final static String HAS_SEDATION = "HAS_SEDATION";
+
+    public final static String BUNDLE_SEDATION_SAME_MD = "sedation_same_md";
+    public final static String BUNDLE_SEDATION_AGE = "sedation_age";
+    public final static String BUNDLE_SEDATION_TIME = "sedation_time";
+    public final static String BUNDLE_SEDATION_STATUS = "sedation_status";
     
 }

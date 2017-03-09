@@ -60,6 +60,10 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import static org.epstudios.epcoding.Constants.AGE;
+import static org.epstudios.epcoding.Constants.BUNDLE_SEDATION_AGE;
+import static org.epstudios.epcoding.Constants.BUNDLE_SEDATION_SAME_MD;
+import static org.epstudios.epcoding.Constants.BUNDLE_SEDATION_STATUS;
+import static org.epstudios.epcoding.Constants.BUNDLE_SEDATION_TIME;
 import static org.epstudios.epcoding.Constants.EPCODING;
 import static org.epstudios.epcoding.Constants.MODIFIER_REQUEST_CODE;
 import static org.epstudios.epcoding.Constants.SAME_MD;
@@ -185,6 +189,13 @@ public class ProcedureDetailFragment extends Fragment implements
         savedInstanceState.putBooleanArray("primary_codes", primaryCodeState);
         savedInstanceState.putBooleanArray("secondary_codes",
                 secondaryCodeState);
+
+        savedInstanceState.putBoolean(BUNDLE_SEDATION_SAME_MD, sameMDPerformsSedation);
+        savedInstanceState.putBoolean(BUNDLE_SEDATION_AGE, patientOver5YrsOld);
+        savedInstanceState.putInt(BUNDLE_SEDATION_TIME, sedationTime);
+        savedInstanceState.putString(BUNDLE_SEDATION_STATUS, sedationStatus.toString());
+
+
     }
 
     @Override
@@ -330,6 +341,12 @@ public class ProcedureDetailFragment extends Fragment implements
             for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
                     .entrySet())
                 entry.getValue().setChecked(secondaryCodesState != null ? secondaryCodesState[i++] : false);
+            patientOver5YrsOld = savedInstanceState.getBoolean(BUNDLE_SEDATION_AGE);
+            sameMDPerformsSedation = savedInstanceState.getBoolean(BUNDLE_SEDATION_SAME_MD);
+            sedationTime = savedInstanceState.getInt(BUNDLE_SEDATION_TIME);
+            sedationStatus = SedationStatus.stringToSedationStatus(savedInstanceState.getString(BUNDLE_SEDATION_STATUS));
+            sedationCodes.clear();
+            sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation, patientOver5YrsOld));
         } else
             loadCoding();
         // set up buttons

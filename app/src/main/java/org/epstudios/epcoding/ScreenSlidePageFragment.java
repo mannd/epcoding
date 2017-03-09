@@ -43,6 +43,10 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import static org.epstudios.epcoding.Constants.AGE;
+import static org.epstudios.epcoding.Constants.BUNDLE_SEDATION_AGE;
+import static org.epstudios.epcoding.Constants.BUNDLE_SEDATION_SAME_MD;
+import static org.epstudios.epcoding.Constants.BUNDLE_SEDATION_STATUS;
+import static org.epstudios.epcoding.Constants.BUNDLE_SEDATION_TIME;
 import static org.epstudios.epcoding.Constants.EPCODING;
 import static org.epstudios.epcoding.Constants.HAS_SEDATION;
 import static org.epstudios.epcoding.Constants.LOAD_MODIFIERS;
@@ -57,15 +61,6 @@ import static org.epstudios.epcoding.Constants.WIZARD_SEDATION_CODES;
 import static org.epstudios.epcoding.Constants.WIZARD_SEDATION_STATUS;
 import static org.epstudios.epcoding.Constants.WIZARD_TIME;
 
-/**
- * A fragment representing a single step in a wizard. The fragment shows a dummy
- * title indicating the page number, along with some dummy text.
- * <p>
- * <p>
- * This class is used by the {CardFlipActivity} and
- * {@link ScreenSlideActivity} samples.
- * </p>
- */
 public class ScreenSlidePageFragment extends Fragment implements View.OnClickListener {
     /**
      * The argument key for the page number this fragment represents.
@@ -262,11 +257,13 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                     .entrySet())
                 entry.getValue().setChecked(finalCodesState != null ? finalCodesState[i++] : false);
 
-            patientOver5YrsOld = savedInstanceState.getBoolean("sedation_age");
-            sameMDPerformsSedation = savedInstanceState.getBoolean("sedation_same_md");
-            sedationTime = savedInstanceState.getInt("sedation_time");
-            sedationStatus = SedationStatus.stringToSedationStatus(savedInstanceState.getString("sedation_status"));
+            patientOver5YrsOld = savedInstanceState.getBoolean(BUNDLE_SEDATION_AGE);
+            sameMDPerformsSedation = savedInstanceState.getBoolean(BUNDLE_SEDATION_SAME_MD);
+            sedationTime = savedInstanceState.getInt(BUNDLE_SEDATION_TIME);
+            sedationStatus = SedationStatus.stringToSedationStatus(savedInstanceState.getString(BUNDLE_SEDATION_STATUS));
             // TODO: need to restore sedation codes too
+            sedationCodes.clear();
+            sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation, patientOver5YrsOld));
         }
 
         return rootView;
@@ -351,10 +348,10 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         savedInstanceState.putBooleanArray("removal_codes", removalCodeState);
         savedInstanceState.putBooleanArray("adding_codes", addingCodeState);
         savedInstanceState.putBooleanArray("final_codes", finalCodeState);
-        savedInstanceState.putBoolean("sedation_same_md", sameMDPerformsSedation);
-        savedInstanceState.putBoolean("sedation_age", patientOver5YrsOld);
-        savedInstanceState.putInt("sedation_time", sedationTime);
-        savedInstanceState.putString("sedation_status", sedationStatus.toString());
+        savedInstanceState.putBoolean(BUNDLE_SEDATION_SAME_MD, sameMDPerformsSedation);
+        savedInstanceState.putBoolean(BUNDLE_SEDATION_AGE, patientOver5YrsOld);
+        savedInstanceState.putInt(BUNDLE_SEDATION_TIME, sedationTime);
+        savedInstanceState.putString(BUNDLE_SEDATION_STATUS, sedationStatus.toString());
 
     }
 
