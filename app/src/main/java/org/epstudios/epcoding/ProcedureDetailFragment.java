@@ -195,6 +195,12 @@ public class ProcedureDetailFragment extends Fragment implements
         savedInstanceState.putInt(BUNDLE_SEDATION_TIME, sedationTime);
         savedInstanceState.putString(BUNDLE_SEDATION_STATUS, sedationStatus.toString());
 
+        // save modifiers for each code
+        for (Code code : allPrimaryAndSecondaryCodes()) {
+            String[] modifierNumbers = code.getModifierNumberArray();
+            savedInstanceState.putStringArray(code.getCodeNumber(), modifierNumbers);
+        }
+
 
     }
 
@@ -346,9 +352,23 @@ public class ProcedureDetailFragment extends Fragment implements
             sedationTime = savedInstanceState.getInt(BUNDLE_SEDATION_TIME);
             sedationStatus = SedationStatus.stringToSedationStatus(savedInstanceState.getString(BUNDLE_SEDATION_STATUS));
             sedationCodes.clear();
-            sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation, patientOver5YrsOld));
-        } else
+            sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation, patientOver5YrsOld,
+                    sedationStatus));
+
+            // load modifiers
+            for (Code code : allPrimaryAndSecondaryCodes()) {
+                String[] modifierNumbers = savedInstanceState.getStringArray(code.getCodeNumber());
+                code.clearModifiers();
+                for (i = 0; i < modifierNumbers.length; i++) {
+                    code.addModifier(Modifiers.getModifierForNumber(modifierNumbers[i]));
+                }
+                // redraw code checkboxes
+                redrawCheckBox(code);
+            }
+        } else {
+            // This loads saved coding patterns
             loadCoding();
+        }
         // set up buttons
         Button sedationButton = (Button) rootView.findViewById(R.id.sedation_button);
         sedationButton.setOnClickListener(this);
@@ -358,6 +378,15 @@ public class ProcedureDetailFragment extends Fragment implements
         clearButton.setOnClickListener(this);
 
         return rootView;
+    }
+
+    private void redrawCheckBox(Code code) {
+        CodeCheckBox checkBox = getCheckBoxWithCode(code.getCodeNumber());
+        if (checkBox != null) {
+            // forces checkbox to redraw itself
+            // checkBox.invalidate() doesn't work for some reason
+            checkBox.setCode(code);
+        }
     }
 
     private void createCheckBoxLayoutAndCodeMap(Code[] codes,
@@ -398,12 +427,7 @@ public class ProcedureDetailFragment extends Fragment implements
                 }
                 Code code = Codes.setModifiersForCode(result);
                 if (code != null) {
-                    CodeCheckBox checkBox = getCheckBoxWithCode(code.getCodeNumber());
-                    if (checkBox != null) {
-                        // forces checkbox to redraw itself
-                        // checkBox.invalidate() doesn't work for some reason
-                        checkBox.setCode(code);
-                    }
+                    redrawCheckBox(code);
                 }
             }
         }
@@ -415,7 +439,7 @@ public class ProcedureDetailFragment extends Fragment implements
                 sedationStatus = (SedationStatus) data.getSerializableExtra(SEDATION_STATUS);
                 sedationCodes.clear();
                 sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation,
-                        patientOver5YrsOld));
+                        patientOver5YrsOld, sedationStatus));
             }
         }
     }

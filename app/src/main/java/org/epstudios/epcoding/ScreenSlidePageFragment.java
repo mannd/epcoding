@@ -118,7 +118,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.d(EPCODING, "onCreate screenSlidePageFragment");
+        Log.d(EPCODING, "ScreenSlidePageFragment onCreate");
         super.onCreate(savedInstanceState);
         mPageNumber = getArguments().getInt(ARG_PAGE);
         context = getActivity();
@@ -127,7 +127,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d(EPCODING, "onCreateView screenSlidePageFragment");
+        Log.d(EPCODING, "ScreenSlidePageFragment onCreateView");
         // select layout based on page number
         int layout = R.layout.fragment_screen_slide_page;
         ViewGroup rootView = (ViewGroup) inflater.inflate(layout, container,
@@ -167,16 +167,21 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
             editor.apply();
         }
 
-        // load sedation if it was done already
+        // Use default sedation, unless sedation already set
+        sedationCodes.clear();
+        sedationStatus = SedationStatus.Unassigned;
+        patientOver5YrsOld = true;
+        sameMDPerformsSedation = true;
+        sedationTime = 0;
         boolean loadSedation = prefs.getBoolean(HAS_SEDATION, false);
         if (loadSedation) {
+            Log.d(EPCODING, "ScreenSlidePageFragment loading sedation");
             patientOver5YrsOld = prefs.getBoolean(WIZARD_AGE, true);
             sameMDPerformsSedation = prefs.getBoolean(WIZARD_SAME_MD, true);
             sedationTime = prefs.getInt(WIZARD_TIME, 0);
             sedationStatus = SedationStatus.stringToSedationStatus(prefs.getString(WIZARD_SEDATION_STATUS, ""));
-            sedationCodes.clear();
-            sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation, patientOver5YrsOld));
-
+            sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation,
+                    patientOver5YrsOld, sedationStatus));
         }
 
         Context context = getActivity();
@@ -237,7 +242,8 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
 
         if (null != savedInstanceState) {
             // restore state
-            Log.d(EPCODING, "restore state");
+            Log.d(EPCODING, "ScreenSlidePageFragment restore state from bundle Page "
+                    + getPageNumber());
             boolean[] removalCodesState = savedInstanceState
                     .getBooleanArray("removal_codes");
             boolean[] addingCodesState = savedInstanceState
@@ -261,9 +267,11 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
             sameMDPerformsSedation = savedInstanceState.getBoolean(BUNDLE_SEDATION_SAME_MD);
             sedationTime = savedInstanceState.getInt(BUNDLE_SEDATION_TIME);
             sedationStatus = SedationStatus.stringToSedationStatus(savedInstanceState.getString(BUNDLE_SEDATION_STATUS));
-            // TODO: need to restore sedation codes too
             sedationCodes.clear();
-            sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation, patientOver5YrsOld));
+            sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation, patientOver5YrsOld,
+                sedationStatus));
+            // FIXME: try this
+            saveSedationCoding();
         }
 
         return rootView;
@@ -325,10 +333,10 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         return checkedCodeNumbers;
     }
 
-
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
+        Log.d(EPCODING, "ScreenSlidePageFragment onSaveInstanceState page " + getPageNumber());
         // store check marks here
         boolean[] removalCodeState = new boolean[removalCheckBoxMap.size()];
         int i = 0;
@@ -385,7 +393,8 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                 sedationTime = data.getIntExtra(TIME, sedationTime);
                 sedationStatus = (SedationStatus) data.getSerializableExtra(SEDATION_STATUS);
                 sedationCodes.clear();
-                sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation, patientOver5YrsOld));
+                sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation,
+                        patientOver5YrsOld, sedationStatus));
                 saveSedationCoding();
            }
         }
@@ -393,6 +402,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
 
     // save all the sedation stuff to prefs so activity can pull them out for analysis
     private void saveSedationCoding() {
+        Log.d(EPCODING, "Save Sedation Coding");
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor prefsEditor = prefs.edit();

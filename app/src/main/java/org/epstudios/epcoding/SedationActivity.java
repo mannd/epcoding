@@ -122,15 +122,16 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
     // assumes data has been extracted from fields already
     // also assumes not called if sedationStatus == None
     private SedationStatus determineSedationStatus() {
-        if (sedationTime < 10) {
-            return SedationStatus.LessThan10Mins;
-        }
-        if (!sameMD) {
-            return SedationStatus.OtherMDCalculated;
-        }
-        else {
-            return SedationStatus.AssignedSameMD;
-        }
+        return SedationStatus.determineSedationStatus(sedationTime, sameMD);
+//        if (sedationTime < 10) {
+//            return SedationStatus.LessThan10Mins;
+//        }
+//        if (!sameMD) {
+//            return SedationStatus.OtherMDCalculated;
+//        }
+//        else {
+//            return SedationStatus.AssignedSameMD;
+//        }
     }
 
     private void noSedation(Intent intent) {
@@ -168,7 +169,7 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
 
     private void showResults(Intent intent) {
         List<Code> sedationCodes = SedationCode.sedationCoding(sedationTime, sameMD,
-                ageOver5);
+                ageOver5, sedationStatus);
         AlertDialog dialog = new AlertDialog.Builder(this).create();
         String message;
         String title = "Sedation Coding";

@@ -55,8 +55,13 @@ public class SedationCode extends Code {
         sedationCodes = new ArrayList<>();
     }
 
-    public static List<Code> sedationCoding(Integer sedationTime, boolean sameMD, boolean patientOver5) {
+    public static List<Code> sedationCoding(Integer sedationTime, boolean sameMD,
+                                            boolean patientOver5,
+                                            SedationStatus status) {
         List<Code> codes = new ArrayList<>();
+        if (SedationStatus.hasNoSedationCodes(status)) {
+            return codes;
+        }
         if (sedationTime >= 10) {
             if (sameMD) {
                 if (patientOver5) {

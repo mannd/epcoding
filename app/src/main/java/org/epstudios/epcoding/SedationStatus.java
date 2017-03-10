@@ -22,6 +22,8 @@
 
 package org.epstudios.epcoding;
 
+import java.util.EnumSet;
+
 public enum SedationStatus {
         Unassigned,
         None,
@@ -35,6 +37,27 @@ public enum SedationStatus {
                 }
                 catch (Exception e) {
                         return Unassigned;
+                }
+        }
+
+        public static boolean hasSedationCodes(SedationStatus status) {
+                return EnumSet.of(OtherMDCalculated, AssignedSameMD).contains(status);
+        }
+
+        public static boolean hasNoSedationCodes(SedationStatus status) {
+                return !hasSedationCodes(status);
+        }
+
+        public static SedationStatus determineSedationStatus(int sedationTime,
+                                                             boolean sameMD) {
+                if (sedationTime < 10) {
+                        return SedationStatus.LessThan10Mins;
+                }
+                if (!sameMD) {
+                        return SedationStatus.OtherMDCalculated;
+                }
+                else {
+                        return SedationStatus.AssignedSameMD;
                 }
         }
 }

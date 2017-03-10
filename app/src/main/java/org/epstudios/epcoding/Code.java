@@ -77,6 +77,14 @@ public class Code {
         return set;
     }
 
+    public String[] getModifierNumberArray() {
+        String [] array = new String[modifiers.size()];
+        for (int i = 0; i < modifiers.size(); i++) {
+            array[i] = modifiers.get(i).getNumber();
+        }
+        return array;
+    }
+
     public Code(String code, String shortDescription, boolean isAddOn) {
         this.code = code;
         this.shortDescription = shortDescription;

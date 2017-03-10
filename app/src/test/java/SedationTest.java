@@ -38,7 +38,8 @@ public class SedationTest {
         Integer time = 23;
         boolean sameMD = true;
         boolean ptOver5 = true;
-        List<Code> sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5);
+        List<Code> sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5,
+                SedationStatus.determineSedationStatus(time, sameMD));
         assert sedationCodes.size() == 2;
         Code code1 = sedationCodes.get(0);
         Code code2 = sedationCodes.get(1);
@@ -51,21 +52,24 @@ public class SedationTest {
         assert code2.unformattedCodeNumber().equals("+99153 x 1");
 
         time = 55;
-        sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5);
+        sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5,
+                SedationStatus.determineSedationStatus(time, sameMD));
         code1 = sedationCodes.get(0);
         code2 = sedationCodes.get(1);
         assert code1.unformattedCodeNumber().equals("99152");
         assert code2.unformattedCodeNumber().equals("+99153 x 3");
 
         time = 70;
-        sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5);
+        sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5,
+                SedationStatus.determineSedationStatus(time, sameMD));
         code1 = sedationCodes.get(0);
         code2 = sedationCodes.get(1);
         assert code1.unformattedCodeNumber().equals("99152");
         assert code2.unformattedCodeNumber().equals("+99153 x 4");
 
         sameMD = false;
-        sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5);
+        sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5,
+                SedationStatus.determineSedationStatus(time, sameMD));
         code1 = sedationCodes.get(0);
         code2 = sedationCodes.get(1);
         String test2 = code2.unformattedCodeNumber();
@@ -73,27 +77,32 @@ public class SedationTest {
         assert code2.unformattedCodeNumber().equals("+99157 x 4");
 
         ptOver5 = false;
-        sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5);
+        sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5,
+                SedationStatus.determineSedationStatus(time, sameMD));
         code1 = sedationCodes.get(0);
         code2 = sedationCodes.get(1);
         assert code1.unformattedCodeNumber().equals("99155");
         assert code2.unformattedCodeNumber().equals("+99157 x 4");
 
         sameMD = true;
-        sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5);
+        sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5,
+                SedationStatus.determineSedationStatus(time, sameMD));
         code1 = sedationCodes.get(0);
         code2 = sedationCodes.get(1);
         assert code1.unformattedCodeNumber().equals("99151");
         assert code2.unformattedCodeNumber().equals("+99153 x 4");
 
         time = 0;
-        sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5);
+        sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5,
+                SedationStatus.determineSedationStatus(time, sameMD));
         assert sedationCodes.size() == 0;
         time = 22;
-        sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5);
+        sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5,
+                SedationStatus.determineSedationStatus(time, sameMD));
         assert sedationCodes.size() == 1;
         time = 23;
-        sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5);
+        sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5,
+                SedationStatus.determineSedationStatus(time, sameMD));
         assert sedationCodes.size() == 2;
     }
 
@@ -107,10 +116,11 @@ public class SedationTest {
         codes.add(code2);
         String detail = SedationCode.sedationDetail(codes, status);
         assert detail.equals(SedationCode.UNASSIGNED_SEDATION_STRING);
-        codes = SedationCode.sedationCoding(23, true, true);
-        detail = SedationCode.sedationDetail(codes, SedationStatus.AssignedSameMD);
+        status = SedationStatus.AssignedSameMD;
+        codes = SedationCode.sedationCoding(23, true, true, status);
+        detail = SedationCode.sedationDetail(codes, status);
         assert detail.equals("99152, +99153 x 1");
-        codes = SedationCode.sedationCoding(23, false, true);
+        codes = SedationCode.sedationCoding(23, false, true, SedationStatus.OtherMDCalculated);
         detail = SedationCode.sedationDetail(codes, SedationStatus.OtherMDCalculated);
         assert detail.equals(String.format(SedationCode.OTHER_MD_CALCULATED_TIME_STRING, "99156, +99157 x 1"));
         detail = SedationCode.sedationDetail(codes, SedationStatus.None);

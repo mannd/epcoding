@@ -108,4 +108,21 @@ public class ModifierTest {
 
     }
 
+    @Test
+    public  void modifiersToStringArrayTest() {
+        Code code = new Code("99999", "test", false);
+        // no modifiers
+        String[] array = code.getModifierNumberArray();
+        assert array.length == 0;
+        code.addModifier(new Modifier("XX", "test modifier 1"));
+        code.addModifier(new Modifier("YY", "test modifier 2"));
+        array = code.getModifierNumberArray();
+        assert array.length == 2;
+        assert array[0].equals("XX");
+        assert array[1].equals("YY");
+        code.clearModifiers();
+        array = code.getModifierNumberArray();
+        assert array.length == 0;
+    }
+
 }

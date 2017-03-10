@@ -41,6 +41,7 @@ import java.util.TreeSet;
 import static org.epstudios.epcoding.Constants.EPCODING;
 import static org.epstudios.epcoding.Constants.HAS_SEDATION;
 import static org.epstudios.epcoding.Constants.LOAD_MODIFIERS;
+import static org.epstudios.epcoding.Constants.SEDATION_STATUS;
 import static org.epstudios.epcoding.Constants.WIZARD_AGE;
 import static org.epstudios.epcoding.Constants.WIZARD_SAME_MD;
 import static org.epstudios.epcoding.Constants.WIZARD_SEDATION_STATUS;
@@ -78,6 +79,8 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 	 */
 	private PagerAdapter mPagerAdapter;
 
+	private boolean hasSedation;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -105,8 +108,23 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putBoolean(LOAD_MODIFIERS, true);
-		editor.putBoolean(HAS_SEDATION, false);
+		hasSedation = false;
+		if (savedInstanceState != null) {
+			hasSedation = savedInstanceState.getBoolean(HAS_SEDATION, false);
+		}
+		editor.putBoolean(HAS_SEDATION, hasSedation);
+		// try removing old prefs to prevent them from hanging onß
+		// TODO: this doesn' work either, because rotation takes out sedation on results.
+		// still doesn't work
+		editor.remove(WIZARD_SEDATION_STATUS);
+		editor.remove(WIZARD_TIME);
+		editor.remove(WIZARD_SAME_MD);
+		editor.remove(WIZARD_AGE);
 		editor.apply();
+		Log.d(EPCODING, "ScreenSlideActivity onCreate");
+
+
+
 	}
 
 	@Override
@@ -188,18 +206,19 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 		boolean ageOver5;
 		int sedationTime = 0;
 		SedationStatus sedationStatus = SedationStatus.Unassigned;
-		if (hasSedation) {
+		//if (hasSedation) {
 			sameMD = prefs.getBoolean(WIZARD_SAME_MD, true);
 			ageOver5 = prefs.getBoolean(WIZARD_AGE, true);
 			sedationTime = prefs.getInt(WIZARD_TIME, 0);
 			sedationStatus = SedationStatus.stringToSedationStatus(prefs.getString(WIZARD_SEDATION_STATUS, ""));
-			List<Code> sedationCodes = SedationCode.sedationCoding(sedationTime, sameMD, ageOver5);
+			List<Code> sedationCodes = SedationCode.sedationCoding(sedationTime, sameMD, ageOver5,
+				sedationStatus);
 			// TODO: this doesn't send actual sedation codes to analzyer, but maybe we need to?
 			for (Code code : sedationCodes) {
 				message += code.getCodeFirstDescription() + "\n";
 			}
 			allCodes.addAll(sedationCodes);
-		}
+		//}
 		message += Utilities.simpleCodeAnalysis(allCodes, sedationStatus, this);
 		displayResult(getString(R.string.coding_summary_dialog_label), message,
 				this);
@@ -259,5 +278,13 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 		public int getCount() {
 			return NUM_PAGES;
 		}
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle bundle) {
+		super.onSaveInstanceState(bundle);
+		Log.d(EPCODING, "ScreenSlideActiviy onSaveInstanceState");
+		bundle.putBoolean(HAS_SEDATION, hasSedation);
+
 	}
 }
