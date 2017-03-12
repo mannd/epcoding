@@ -187,6 +187,13 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 		}
 		else {
 			Codes.resetTempAddedModifiers(allCodes, this);
+			// remove old selections when starting wizard
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+			SharedPreferences.Editor editor = prefs.edit();
+			editor.remove("wizardremovalcodes");
+			editor.remove("wizardaddingcodes");
+			editor.remove("wizardfinalcodes");
+			editor.apply();
 		}
 	}
 
@@ -246,65 +253,48 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 
 	private void displayResult() {
 		// FIXME: below
-		Set<String> codeNumbers = new TreeSet<>();
-		//Set<String> codeNumbers = loadCodeNumbers();
+		Set<String> codeNumbers = loadCodeNumbers();
 		summarizeCoding(codeNumbers);
-
 	}
 
 	private void summarizeCoding(Set<String> codeNumbers) {
 		String message = "";
-		//FIXME: below
-		message = "Temporary test result message";
-//		// we will extract the raw selected codes and shoot them to the code
-//		// analyzer, as well as check for no primary or secondary codes
-//		String[] codeNumberArray = codeNumbers.toArray(new String[codeNumbers
-//				.size()]);
-//		Code[] codes = new Code[codeNumbers.size()];
-//		for (int i = 0; i < codes.length; ++i) {
-//			codes[i] = Codes.getCode(codeNumberArray[i]);
-//			message += codes[i].getCodeFirstFormatted() + "\n";
-//		}
-//		List<Code> allCodes = new ArrayList<>();
-//		allCodes.addAll(Arrays.asList(codes));
-//		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-//		boolean hasSedation = prefs.getBoolean(HAS_SEDATION, false);
-//		boolean sameMD;
-//		boolean ageOver5;
-//		int sedationTime = 0;
-//		SedationStatus sedationStatus = SedationStatus.Unassigned;
-//		//if (hasSedation) {
-//			sameMD = prefs.getBoolean(WIZARD_SAME_MD, true);
-//			ageOver5 = prefs.getBoolean(WIZARD_AGE, true);
-//			sedationTime = prefs.getInt(WIZARD_TIME, 0);
-//			sedationStatus = SedationStatus.stringToSedationStatus(prefs.getString(WIZARD_SEDATION_STATUS, ""));
-//			List<Code> sedationCodes = SedationCode.sedationCoding(sedationTime, sameMD, ageOver5,
-//				sedationStatus);
-//			// TODO: this doesn't send actual sedation codes to analzyer, but maybe we need to?
-//			for (Code code : sedationCodes) {
-//				message += code.getCodeFirstDescription() + "\n";
-//			}
-//			allCodes.addAll(sedationCodes);
-//		//}
-//		message += Utilities.simpleCodeAnalysis(allCodes, sedationStatus, this);
+		// we will extract the raw selected codes and shoot them to the code
+		// analyzer, as well as check for no primary or secondary codes
+		String[] codeNumberArray = codeNumbers.toArray(new String[codeNumbers
+				.size()]);
+		Code[] codes = new Code[codeNumbers.size()];
+		for (int i = 0; i < codes.length; ++i) {
+			codes[i] = Codes.getCode(codeNumberArray[i]);
+			message += codes[i].getCodeFirstFormatted() + "\n";
+		}
+		List<Code> allCodes = new ArrayList<>();
+		allCodes.addAll(Arrays.asList(codes));
+		sedationCodes = SedationCode.sedationCoding(sedationTime, sameMD,
+				ageOver5, sedationStatus);
+		for (Code code : sedationCodes) {
+			message += code.getCodeFirstFormatted() + "\n";
+		}
+		allCodes.addAll(sedationCodes);
+		message += Utilities.simpleCodeAnalysis(allCodes, sedationStatus, this);
 		displayResult(getString(R.string.coding_summary_dialog_label), message,
 				this);
 	}
 
-//	private Set<String> loadCodeNumbers() {
-//		SharedPreferences prefs = PreferenceManager
-//				.getDefaultSharedPreferences(this);
-//		Set<String> defaultStringSet = new TreeSet<>();
-//		Set<String> codeNumbersChecked = new TreeSet<>();
-//		codeNumbersChecked.addAll(prefs.getStringSet("wizardremovalcodes",
-//				defaultStringSet));
-//		codeNumbersChecked.addAll(prefs.getStringSet("wizardaddingcodes",
-//				defaultStringSet));
-//		codeNumbersChecked.addAll(prefs.getStringSet("wizardfinalcodes",
-//				defaultStringSet));
-//		// TODO: load sedation codes here too
-//		return codeNumbersChecked;
-//	}
+	// does not load sedation codes
+	private Set<String> loadCodeNumbers() {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		Set<String> defaultStringSet = new TreeSet<>();
+		Set<String> codeNumbersChecked = new TreeSet<>();
+		codeNumbersChecked.addAll(prefs.getStringSet("wizardremovalcodes",
+				defaultStringSet));
+		codeNumbersChecked.addAll(prefs.getStringSet("wizardaddingcodes",
+				defaultStringSet));
+		codeNumbersChecked.addAll(prefs.getStringSet("wizardfinalcodes",
+				defaultStringSet));
+		return codeNumbersChecked;
+	}
 
 	private void displayResult(String title, String message, Context context) {
 		AlertDialog dialog = new AlertDialog.Builder(context).create();

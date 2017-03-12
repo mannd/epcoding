@@ -282,7 +282,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
     }
 
     private void checkChanged() {
-        //save();
+        save();
     }
 
     private void save() {
