@@ -437,6 +437,15 @@ public class Codes {
          }
 	}
 
+	public static void loadTempAddedModifers(List<Code> array, Context context) {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(context);
+		for (Code code : array) {
+			loadTempAddedModifiersForCode(code, prefs);
+		}
+	}
+
+
 	public static void loadSavedModifiers(Code[] codes, Context context) {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
@@ -457,6 +466,19 @@ public class Codes {
         }
     }
 
+	private static void loadTempAddedModifiersForCode(Code code, SharedPreferences prefs) {
+		Set<String> modifierNumbers = prefs.getStringSet("TEMP" + code.getCodeNumber(),
+				null);
+		if (modifierNumbers != null) {
+			code.clearModifiers();
+			for (String s : modifierNumbers) {
+				Modifier modifier = Modifiers.getModifierForNumber(s);
+				code.addModifier(modifier);
+			}
+		}
+	}
+
+
 	public static void resetSavedModifiers(List<Code> codes, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         for (Code code : codes) {
@@ -470,6 +492,20 @@ public class Codes {
             resetSavedModifiersForCode(codes[i], prefs);
         }
     }
+
+    public static void resetTempAddedModifiers(List<Code> codes, Context context) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		for (Code code : codes) {
+			resetTempAddedModifiersForCode(code, prefs);
+		}
+	}
+
+	private static void resetTempAddedModifiersForCode(Code code, SharedPreferences prefs) {
+		SharedPreferences.Editor prefsEditor = prefs.edit();
+		prefsEditor.remove("TEMP" + code.getCodeNumber());
+		prefsEditor.apply();
+		code.clearModifiers();
+	}
 
     private static void resetSavedModifiersForCode(Code code, SharedPreferences prefs) {
             SharedPreferences.Editor prefsEditor = prefs.edit();

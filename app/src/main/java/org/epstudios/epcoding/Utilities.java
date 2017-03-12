@@ -24,6 +24,7 @@ import static org.epstudios.epcoding.Constants.TIME;
 
 class Utilities {
 
+    // TODO: refactor this to pass to modifier activity whether to tempADD modifiers
     public static Map<String, CodeCheckBox> createCheckBoxLayoutAndCodeMap(
             Code[] codes, LinearLayout layout, Context context,
             boolean showCodeFirst, final Fragment fragment) {

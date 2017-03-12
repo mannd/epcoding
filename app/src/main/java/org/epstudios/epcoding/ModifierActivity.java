@@ -41,6 +41,13 @@ import static org.epstudios.epcoding.Constants.EPCODING;
 
 public class ModifierActivity extends BasicActionBarActivity implements View.OnClickListener {
 
+    // TODO: set false for testing wizard, should be false in Procedures
+    private boolean saveAddedModifiersToPrefs = true;
+
+    public void setSaveAddModifiersToPrefs(boolean value) {
+        saveAddedModifiersToPrefs = value;
+    }
+
     private Code code;
     private Set<Modifier> modifierSet;
     private CheckBox[] checkBoxes;
@@ -173,6 +180,16 @@ public class ModifierActivity extends BasicActionBarActivity implements View.OnC
         intent.putExtra(MODIFIER_RESULT,
                 Code.makeCodeAndModifierArray(code.getCodeNumber(), modifierNumbers));
         setResult(Activity.RESULT_OK, intent);
+        if (saveAddedModifiersToPrefs) {
+            saveAddedModifiersToPrefs(modifierNumbers);
+        }
+    }
+
+    private void saveAddedModifiersToPrefs(Set<String> modifierNumbers) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putStringSet("TEMP" + code.getCodeNumber(), modifierNumbers);
+        prefsEditor.apply();
     }
 
 }

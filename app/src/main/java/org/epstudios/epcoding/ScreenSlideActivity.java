@@ -63,6 +63,7 @@ import static org.epstudios.epcoding.Constants.WIZARD_TIME;
  * @see ScreenSlidePageFragment
  */
 public class ScreenSlideActivity extends SimpleActionBarActivity {
+
 	/**
 	 * The number of pages (wizard steps) to show in this demo.
 	 */
@@ -79,6 +80,16 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 	 */
 	private PagerAdapter mPagerAdapter;
 
+	private static final String[] revisionCodeNumbers = {"33215", "33226", "33218",
+			"33220", "33222", "33223"};
+
+	private static final String[] removalCodeNumbers = {"33233", "33241", "33234",
+			"33235", "33244"};
+
+	private static final String[] addingCodeNumbers = {"33206", "33207", "33208",
+			"33249", "33216", "33217", "33225", "33212", "33213", "33240",
+			"33230", "33231"};
+
 	public void setCodes(List<Code> codes) {
 		this.codes = codes;
 	}
@@ -91,6 +102,10 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 
 	private boolean sameMD = true;
 	private boolean ageOver5 = true;
+	private int sedationTime = 0;
+	private SedationStatus sedationStatus = SedationStatus.Unassigned;
+	private List<Code> sedationCodes = new ArrayList<>();
+
 
 	public boolean isSameMD() {
 		return sameMD;
@@ -124,9 +139,6 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 		this.sedationStatus = sedationStatus;
 	}
 
-	private int sedationTime = 0;
-	private SedationStatus sedationStatus = SedationStatus.Unassigned;
-	private List<Code> sedationCodes = new ArrayList<>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -149,10 +161,19 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 				// but for simplicity, the activity provides the actions in this
 				// sample.
 				invalidateOptionsMenu();
-				Log.d(EPCODING, "Page changed.");
 
 			}
 		});
+
+		Code[] removalCodes = Codes.getCodes(removalCodeNumbers);
+		Code [] addingCodes = Codes.getCodes(addingCodeNumbers);
+		Code [] finalCodes = Codes.getCodes(Codes.icdReplacementSecondaryCodeNumbers);
+
+		List<Code> allCodes = new ArrayList<>();
+		allCodes.addAll(Arrays.asList(removalCodes));
+		allCodes.addAll(Arrays.asList(addingCodes));
+		allCodes.addAll(Arrays.asList(finalCodes));
+
 
 		if (savedInstanceState != null) {
 			sedationTime = savedInstanceState.getInt(WIZARD_TIME, sedationTime);
@@ -164,8 +185,9 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 			sedationCodes.addAll(SedationCode.sedationCoding(sedationTime,
 					sameMD, ageOver5, sedationStatus));
 		}
-
-		Log.d(EPCODING, "ScreenSlideActivity onCreate");
+		else {
+			Codes.resetTempAddedModifiers(allCodes, this);
+		}
 	}
 
 	@Override
@@ -328,7 +350,6 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 	@Override
 	public void onSaveInstanceState(Bundle bundle) {
 		super.onSaveInstanceState(bundle);
-		Log.d(EPCODING, "ScreenSlideActiviy onSaveInstanceState");
 		bundle.putBoolean(WIZARD_SAME_MD, sameMD);
 		bundle.putBoolean(WIZARD_AGE, ageOver5);
 		bundle.putInt(WIZARD_TIME, sedationTime);
