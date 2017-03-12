@@ -48,5 +48,10 @@ public final class Constants {
     public final static String BUNDLE_SEDATION_AGE = "sedation_age";
     public final static String BUNDLE_SEDATION_TIME = "sedation_time";
     public final static String BUNDLE_SEDATION_STATUS = "sedation_status";
-    
+
+    public static final String TEMP = "TEMP";
+    public static final String ACTIVE_CODE_NUMBER = "ACTIVE_CODE_NUMBER";
+    public static final String SAVE_TEMP_ADDED_MODIFIERS = "SAVE_TEMP_ADDED_MODIFIERS";
+    public static final String MODIFIER_RESULT = "MODIFIER_RESULT";
+    public static final String RESET_MODIFIERS = "reset";
 }

@@ -18,7 +18,6 @@ package org.epstudios.epcoding;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,7 +28,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
@@ -37,7 +35,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +48,6 @@ import static org.epstudios.epcoding.Constants.BUNDLE_SEDATION_STATUS;
 import static org.epstudios.epcoding.Constants.BUNDLE_SEDATION_TIME;
 import static org.epstudios.epcoding.Constants.EPCODING;
 import static org.epstudios.epcoding.Constants.HAS_SEDATION;
-import static org.epstudios.epcoding.Constants.LOAD_MODIFIERS;
 import static org.epstudios.epcoding.Constants.MODIFIER_REQUEST_CODE;
 import static org.epstudios.epcoding.Constants.SAME_MD;
 import static org.epstudios.epcoding.Constants.SEDATION_REQUEST_CODE;
@@ -174,13 +170,13 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         sedationTime = parent.getSedationTime();
 
         removalCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(
-                removalCodes, removedCheckBoxLayout, context, true, this);
+                removalCodes, removedCheckBoxLayout, context, true, true, this);
         addCheckMarkListener(removalCheckBoxMap);
         addingCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(
-                addingCodes, addingCheckBoxLayout, context, true, this);
+                addingCodes, addingCheckBoxLayout, context, true, true, this);
         addCheckMarkListener(addingCheckBoxMap);
         finalCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(finalCodes,
-                finalCheckBoxLayout, context, true, this);
+                finalCheckBoxLayout, context, true, true, this);
         addCheckMarkListener(finalCheckBoxMap);
 
         allCheckBoxMapList = new ArrayList<>();
@@ -259,34 +255,6 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
             sedationCodes.clear();
             sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation, patientOver5YrsOld,
                     sedationStatus));
-
-            // reload modifiers
-//            Code[] pageCodes = null;
-//            switch (mPageNumber) {
-//                case 4:
-//                    pageCodes = removalCodes;
-//                    break;
-//                case 5:
-//                    pageCodes = addingCodes;
-//                    break;
-//                case 6:
-//                    pageCodes = finalCodes;
-//                    break;
-//                default:
-//                    break;
-//            }
-//            if (pageCodes != null) {
-//                for (Code code : pageCodes) {
-//                    String[] modifierNumbers = savedInstanceState.getStringArray(code.getCodeNumber());
-//                    if (modifierNumbers.length > 0) {
-//                        code.clearModifiers();
-//                        for (int j = 0; j < modifierNumbers.length; j++) {
-//                            code.addModifier(Modifiers.getModifierForNumber(modifierNumbers[j]));
-//                            redrawCheckBox(code);
-//                        }
-//                    }
-//                }
-//            }
         }
 
         return rootView;
@@ -384,14 +352,6 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         savedInstanceState.putBoolean(BUNDLE_SEDATION_AGE, patientOver5YrsOld);
         savedInstanceState.putInt(BUNDLE_SEDATION_TIME, sedationTime);
         savedInstanceState.putString(BUNDLE_SEDATION_STATUS, sedationStatus.toString());
-
-        // save modifiers
-//        if (pageCodes != null) {
-//            for (Code code : pageCodes) {
-//                String[] modifierNumbers = code.getModifierNumberArray();
-//                savedInstanceState.putStringArray(code.getCodeNumber(), modifierNumbers);
-//            }
-//        }
     }
 
     @Override
@@ -399,8 +359,8 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         Log.d(EPCODING, "onActivityResult called");
         if (requestCode == MODIFIER_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                String[] result = data.getStringArrayExtra(ModifierActivity.MODIFIER_RESULT);
-                if (result.length == 1 && result[0].equals(ModifierActivity.RESET_MODIFIERS)) {
+                String[] result = data.getStringArrayExtra(Constants.MODIFIER_RESULT);
+                if (result.length == 1 && result[0].equals(Constants.RESET_MODIFIERS)) {
                     resetModifiers();
                     resetCodes();
                     return;

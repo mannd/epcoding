@@ -14,10 +14,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.epstudios.epcoding.Constants.ACTIVE_CODE_NUMBER;
 import static org.epstudios.epcoding.Constants.AGE;
 import static org.epstudios.epcoding.Constants.EPCODING;
 import static org.epstudios.epcoding.Constants.MODIFIER_REQUEST_CODE;
 import static org.epstudios.epcoding.Constants.SAME_MD;
+import static org.epstudios.epcoding.Constants.SAVE_TEMP_ADDED_MODIFIERS;
 import static org.epstudios.epcoding.Constants.SEDATION_REQUEST_CODE;
 import static org.epstudios.epcoding.Constants.SEDATION_STATUS;
 import static org.epstudios.epcoding.Constants.TIME;
@@ -27,7 +29,7 @@ class Utilities {
     // TODO: refactor this to pass to modifier activity whether to tempADD modifiers
     public static Map<String, CodeCheckBox> createCheckBoxLayoutAndCodeMap(
             Code[] codes, LinearLayout layout, Context context,
-            boolean showCodeFirst, final Fragment fragment) {
+            boolean showCodeFirst, final boolean saveTempAddedModifiers, final Fragment fragment) {
         Map<String, CodeCheckBox> map = new LinkedHashMap<>();
         for (int i = 0; i < codes.length; ++i) {
             final CodeCheckBox codeCheckBox = new CodeCheckBox(context);
@@ -39,7 +41,10 @@ class Utilities {
                 @Override
                 public boolean onLongClick(View view) {
                     Intent intent = new Intent(theContext, ModifierActivity.class);
-                    intent.putExtra("ACTIVE_CODE_NUMBER", codeCheckBox.getCodeNumber());
+                    intent.putExtra(ACTIVE_CODE_NUMBER, codeCheckBox.getCodeNumber());
+                    if (saveTempAddedModifiers) {
+                        intent.putExtra(SAVE_TEMP_ADDED_MODIFIERS, saveTempAddedModifiers);
+                    }
                     fragment.startActivityForResult(intent, MODIFIER_REQUEST_CODE);
                     return true;
                 }

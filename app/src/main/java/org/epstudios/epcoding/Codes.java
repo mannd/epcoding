@@ -467,7 +467,7 @@ public class Codes {
     }
 
 	private static void loadTempAddedModifiersForCode(Code code, SharedPreferences prefs) {
-		Set<String> modifierNumbers = prefs.getStringSet("TEMP" + code.getCodeNumber(),
+		Set<String> modifierNumbers = prefs.getStringSet(Constants.TEMP + code.getCodeNumber(),
 				null);
 		if (modifierNumbers != null) {
 			code.clearModifiers();
@@ -501,20 +501,21 @@ public class Codes {
 	}
 
 	private static void resetTempAddedModifiersForCode(Code code, SharedPreferences prefs) {
+		resetModifiersForCode(code, prefs, Constants.TEMP + code.getCodeNumber());
+	}
+
+    private static void resetSavedModifiersForCode(Code code, SharedPreferences prefs) {
+		resetModifiersForCode(code, prefs, code.getCodeNumber());
+    }
+
+	private static void resetModifiersForCode(Code code, SharedPreferences prefs, String codeNumber) {
 		SharedPreferences.Editor prefsEditor = prefs.edit();
-		prefsEditor.remove("TEMP" + code.getCodeNumber());
+		prefsEditor.remove(codeNumber);
 		prefsEditor.apply();
 		code.clearModifiers();
 	}
 
-    private static void resetSavedModifiersForCode(Code code, SharedPreferences prefs) {
-            SharedPreferences.Editor prefsEditor = prefs.edit();
-            prefsEditor.remove(code.getCodeNumber());
-            prefsEditor.apply();
-            code.clearModifiers();
-    }
-
-    // returns code number or null
+	// returns code number or null
     public static Code setModifiersForCode(String[] codeAndModifiers) {
 		if (codeAndModifiers == null || codeAndModifiers.length < 1) {
 			return null;

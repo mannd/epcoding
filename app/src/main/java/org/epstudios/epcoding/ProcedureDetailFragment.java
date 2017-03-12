@@ -38,7 +38,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -419,8 +418,8 @@ public class ProcedureDetailFragment extends Fragment implements
 
         if (requestCode == MODIFIER_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                String[] result = data.getStringArrayExtra(ModifierActivity.MODIFIER_RESULT);
-                if (result.length == 1 && result[0].equals(ModifierActivity.RESET_MODIFIERS)) {
+                String[] result = data.getStringArrayExtra(Constants.MODIFIER_RESULT);
+                if (result.length == 1 && result[0].equals(Constants.RESET_MODIFIERS)) {
                     resetModifiers();
                     resetCodes();
                     return;

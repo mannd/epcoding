@@ -166,8 +166,8 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 		});
 
 		Code[] removalCodes = Codes.getCodes(removalCodeNumbers);
-		Code [] addingCodes = Codes.getCodes(addingCodeNumbers);
-		Code [] finalCodes = Codes.getCodes(Codes.icdReplacementSecondaryCodeNumbers);
+		Code[] addingCodes = Codes.getCodes(addingCodeNumbers);
+		Code[] finalCodes = Codes.getCodes(Codes.icdReplacementSecondaryCodeNumbers);
 
 		List<Code> allCodes = new ArrayList<>();
 		allCodes.addAll(Arrays.asList(removalCodes));

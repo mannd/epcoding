@@ -44,24 +44,20 @@ public class ModifierActivity extends BasicActionBarActivity implements View.OnC
     // TODO: set false for testing wizard, should be false in Procedures
     private boolean saveAddedModifiersToPrefs = true;
 
-    public void setSaveAddModifiersToPrefs(boolean value) {
-        saveAddedModifiersToPrefs = value;
-    }
-
     private Code code;
     private Set<Modifier> modifierSet;
     private CheckBox[] checkBoxes;
-
-    public static final String MODIFIER_RESULT = "MODIFIER_RESULT";
-    public static final String RESET_MODIFIERS = "reset";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.modifiers);
 
-        String codeNumber = getIntent().getStringExtra("ACTIVE_CODE_NUMBER");
+        String codeNumber = getIntent().getStringExtra(Constants.ACTIVE_CODE_NUMBER);
         setTitle("Code " + codeNumber);
+
+        saveAddedModifiersToPrefs = getIntent().getBooleanExtra(Constants.SAVE_TEMP_ADDED_MODIFIERS,
+                false);
 
         LinearLayout checkBoxLayout = (LinearLayout) findViewById(
                 R.id.modifiers_checkbox_layout);
@@ -159,8 +155,8 @@ public class ModifierActivity extends BasicActionBarActivity implements View.OnC
     private void resetModifiers(Intent intent) {
         // send back special StringSet and have caller reset code
         String [] resetArray = new String[1];
-        resetArray[0] = RESET_MODIFIERS;
-        intent.putExtra(MODIFIER_RESULT, resetArray);
+        resetArray[0] = Constants.RESET_MODIFIERS;
+        intent.putExtra(Constants.MODIFIER_RESULT, resetArray);
         setResult(Activity.RESULT_OK, intent);
 
     }
@@ -177,7 +173,7 @@ public class ModifierActivity extends BasicActionBarActivity implements View.OnC
 
     private void addModifiers(Intent intent) {
         Set<String> modifierNumbers = selectedModifierNumbers();
-        intent.putExtra(MODIFIER_RESULT,
+        intent.putExtra(Constants.MODIFIER_RESULT,
                 Code.makeCodeAndModifierArray(code.getCodeNumber(), modifierNumbers));
         setResult(Activity.RESULT_OK, intent);
         if (saveAddedModifiersToPrefs) {
