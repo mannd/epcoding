@@ -18,6 +18,7 @@ package org.epstudios.epcoding;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,6 +29,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
@@ -88,6 +90,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
      */
     private int mPageNumber;
     private Context context;
+    private ScreenSlideActivity parent;
     private Code[] removalCodes;
     private Code[] addingCodes;
     private Code[] finalCodes;
@@ -106,6 +109,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
      * given page number.
      */
     public static ScreenSlidePageFragment create(int pageNumber) {
+        Log.d(EPCODING, "Create page " + pageNumber);
         ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, pageNumber);
@@ -118,16 +122,18 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.d(EPCODING, "ScreenSlidePageFragment onCreate");
         super.onCreate(savedInstanceState);
         mPageNumber = getArguments().getInt(ARG_PAGE);
         context = getActivity();
+        parent = (ScreenSlideActivity)context;
+        Log.d(EPCODING, "ScreenSlidePageFragment onCreate page " + mPageNumber);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d(EPCODING, "ScreenSlidePageFragment onCreateView");
+        Log.d(EPCODING, "ScreenSlidePageFragment onCreateView page " + mPageNumber);
         // select layout based on page number
         int layout = R.layout.fragment_screen_slide_page;
         ViewGroup rootView = (ViewGroup) inflater.inflate(layout, container,
@@ -155,36 +161,18 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         allCodes.addAll(Arrays.asList(addingCodes));
         allCodes.addAll(Arrays.asList(finalCodes));
 
-        // clear and load preferences if this is first time loading
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        boolean loadModifiers = prefs.getBoolean(LOAD_MODIFIERS, true);
-        if (loadModifiers) {
-            Codes.clearMultipliersAndModifiers(allCodes);
-            Codes.loadDefaultModifiers(allCodes);
-            Codes.loadSavedModifiers(allCodes, context);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean(LOAD_MODIFIERS, false);
-            editor.apply();
-        }
+        Codes.clearMultipliersAndModifiers(allCodes);
+        Codes.loadDefaultModifiers(allCodes);
+        Codes.loadSavedModifiers(allCodes, context);
+
 
         // Use default sedation, unless sedation already set
         sedationCodes.clear();
-        sedationStatus = SedationStatus.Unassigned;
-        patientOver5YrsOld = true;
-        sameMDPerformsSedation = true;
-        sedationTime = 0;
-        boolean loadSedation = prefs.getBoolean(HAS_SEDATION, false);
-        if (loadSedation) {
-            Log.d(EPCODING, "ScreenSlidePageFragment loading sedation");
-            patientOver5YrsOld = prefs.getBoolean(WIZARD_AGE, true);
-            sameMDPerformsSedation = prefs.getBoolean(WIZARD_SAME_MD, true);
-            sedationTime = prefs.getInt(WIZARD_TIME, 0);
-            sedationStatus = SedationStatus.stringToSedationStatus(prefs.getString(WIZARD_SEDATION_STATUS, ""));
-            sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation,
-                    patientOver5YrsOld, sedationStatus));
-        }
+        sedationStatus = parent.getSedationStatus();
+        patientOver5YrsOld = parent.isAgeOver5();
+        sameMDPerformsSedation = parent.isSameMD();
+        sedationTime = parent.getSedationTime();
 
-        Context context = getActivity();
         removalCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(
                 removalCodes, removedCheckBoxLayout, context, true, this);
         addCheckMarkListener(removalCheckBoxMap);
@@ -206,7 +194,8 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                         mPageNumber + 1));
         TextView headingText = (TextView) rootView
                 .findViewById(R.id.slide_help_text);
-        checkChanged();
+        // FIXME: changed
+        //checkChanged();
         switch (mPageNumber) {
             case 0:
                 headingText.setText(getString(R.string.slide_step1_heading_text));
@@ -270,8 +259,19 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
             sedationCodes.clear();
             sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation, patientOver5YrsOld,
                 sedationStatus));
-            // FIXME: try this
-            saveSedationCoding();
+
+            // reload modifiers
+            for (Map<String, CodeCheckBox> map : allCheckBoxMapList) {
+                for (Map.Entry<String, CodeCheckBox> entry : map.entrySet()) {
+                    Code code = entry.getValue().getCode();
+                    String[] modifierNumbers = savedInstanceState.getStringArray(code.getCodeNumber());
+                    code.clearModifiers();
+                    for (int j = 0; j < modifierNumbers.length; j++) {
+                        code.addModifier(Modifiers.getModifierForNumber(modifierNumbers[j]));
+                    }
+                    redrawCheckBox(code);
+                }
+            }
         }
 
         return rootView;
@@ -299,8 +299,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
     }
 
     private void checkChanged() {
-        save();
-
+        //save();
     }
 
     private void save() {
@@ -361,11 +360,19 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         savedInstanceState.putInt(BUNDLE_SEDATION_TIME, sedationTime);
         savedInstanceState.putString(BUNDLE_SEDATION_STATUS, sedationStatus.toString());
 
+        // save modifiers
+        for (Map<String, CodeCheckBox> map : allCheckBoxMapList) {
+            for (Map.Entry<String, CodeCheckBox> entry : map.entrySet()) {
+                Code code = entry.getValue().getCode();
+                String[] modifierNumbers = code.getModifierNumberArray();
+                savedInstanceState.putStringArray(code.getCodeNumber(), modifierNumbers);
+            }
+        }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        Log.d(EPCODING, "onActivityResult called");
         if (requestCode == MODIFIER_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 String[] result = data.getStringArrayExtra(ModifierActivity.MODIFIER_RESULT);
@@ -376,13 +383,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                 }
                 Code code = Codes.setModifiersForCode(result);
                 if (code != null) {
-                    CodeCheckBox checkBox = Utilities.getCheckBoxWithCode(code.getCodeNumber(),
-                            allCheckBoxMapList);
-                    if (checkBox != null) {
-                        // forces checkbox to redraw itself
-                        // checkBox.invalidate() doesn't work for some reason
-                        checkBox.setCode(code);
-                    }
+                    redrawCheckBox(code);
                 }
             }
         }
@@ -395,8 +396,22 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                 sedationCodes.clear();
                 sedationCodes.addAll(SedationCode.sedationCoding(sedationTime, sameMDPerformsSedation,
                         patientOver5YrsOld, sedationStatus));
-                saveSedationCoding();
+                // send results to parent activity
+                parent.setSedationStatus(sedationStatus);
+                parent.setSedationTime(sedationTime);
+                parent.setAgeOver5(patientOver5YrsOld);
+                parent.setSameMD(sameMDPerformsSedation);
            }
+        }
+    }
+
+    private void redrawCheckBox(Code code) {
+        CodeCheckBox checkBox = Utilities.getCheckBoxWithCode(code.getCodeNumber(),
+                allCheckBoxMapList);
+        if (checkBox != null) {
+            // forces checkbox to redraw itself
+            // checkBox.invalidate() doesn't work for some reason
+            checkBox.setCode(code);
         }
     }
 
@@ -446,4 +461,5 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                 sameMDPerformsSedation, sedationStatus, sedationCodes, this);
 
     }
+
 }

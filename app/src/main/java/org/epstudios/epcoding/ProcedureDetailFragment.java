@@ -143,7 +143,6 @@ public class ProcedureDetailFragment extends Fragment implements
      * fragment (e.g. upon screen orientation changes).
      */
     public ProcedureDetailFragment() {
-
     }
 
     @Override
@@ -413,6 +412,7 @@ public class ProcedureDetailFragment extends Fragment implements
             layout.addView(codeCheckBox);
         }
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

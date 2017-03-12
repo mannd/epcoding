@@ -79,7 +79,54 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 	 */
 	private PagerAdapter mPagerAdapter;
 
-	private boolean hasSedation;
+	public void setCodes(List<Code> codes) {
+		this.codes = codes;
+	}
+
+	public List<Code> getCodes() {
+		return codes;
+	}
+
+	private List<Code> codes;
+
+	private boolean sameMD = true;
+	private boolean ageOver5 = true;
+
+	public boolean isSameMD() {
+		return sameMD;
+	}
+
+	public void setSameMD(boolean sameMD) {
+		this.sameMD = sameMD;
+	}
+
+	public boolean isAgeOver5() {
+		return ageOver5;
+	}
+
+	public void setAgeOver5(boolean ageOver5) {
+		this.ageOver5 = ageOver5;
+	}
+
+	public int getSedationTime() {
+		return sedationTime;
+	}
+
+	public void setSedationTime(int sedationTime) {
+		this.sedationTime = sedationTime;
+	}
+
+	public SedationStatus getSedationStatus() {
+		return sedationStatus;
+	}
+
+	public void setSedationStatus(SedationStatus sedationStatus) {
+		this.sedationStatus = sedationStatus;
+	}
+
+	private int sedationTime = 0;
+	private SedationStatus sedationStatus = SedationStatus.Unassigned;
+	private List<Code> sedationCodes = new ArrayList<>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,29 +149,23 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 				// but for simplicity, the activity provides the actions in this
 				// sample.
 				invalidateOptionsMenu();
+				Log.d(EPCODING, "Page changed.");
+
 			}
 		});
-		// make first page load modifiers
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		SharedPreferences.Editor editor = prefs.edit();
-		editor.putBoolean(LOAD_MODIFIERS, true);
-		hasSedation = false;
+
 		if (savedInstanceState != null) {
-			hasSedation = savedInstanceState.getBoolean(HAS_SEDATION, false);
+			sedationTime = savedInstanceState.getInt(WIZARD_TIME, sedationTime);
+			sedationStatus = SedationStatus.stringToSedationStatus(
+					savedInstanceState.getString(WIZARD_SEDATION_STATUS));
+			sameMD = savedInstanceState.getBoolean(WIZARD_SAME_MD, sameMD);
+			ageOver5 = savedInstanceState.getBoolean(WIZARD_AGE, ageOver5);
+			sedationCodes.clear();
+			sedationCodes.addAll(SedationCode.sedationCoding(sedationTime,
+					sameMD, ageOver5, sedationStatus));
 		}
-		editor.putBoolean(HAS_SEDATION, hasSedation);
-		// try removing old prefs to prevent them from hanging onß
-		// TODO: this doesn' work either, because rotation takes out sedation on results.
-		// still doesn't work
-		editor.remove(WIZARD_SEDATION_STATUS);
-		editor.remove(WIZARD_TIME);
-		editor.remove(WIZARD_SAME_MD);
-		editor.remove(WIZARD_AGE);
-		editor.apply();
+
 		Log.d(EPCODING, "ScreenSlideActivity onCreate");
-
-
-
 	}
 
 	@Override
@@ -182,62 +223,66 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 	}
 
 	private void displayResult() {
-		Set<String> codeNumbers = loadCodeNumbers();
+		// FIXME: below
+		Set<String> codeNumbers = new TreeSet<>();
+		//Set<String> codeNumbers = loadCodeNumbers();
 		summarizeCoding(codeNumbers);
 
 	}
 
 	private void summarizeCoding(Set<String> codeNumbers) {
 		String message = "";
-		// we will extract the raw selected codes and shoot them to the code
-		// analyzer, as well as check for no primary or secondary codes
-		String[] codeNumberArray = codeNumbers.toArray(new String[codeNumbers
-				.size()]);
-		Code[] codes = new Code[codeNumbers.size()];
-		for (int i = 0; i < codes.length; ++i) {
-			codes[i] = Codes.getCode(codeNumberArray[i]);
-			message += codes[i].getCodeFirstFormatted() + "\n";
-		}
-		List<Code> allCodes = new ArrayList<>();
-		allCodes.addAll(Arrays.asList(codes));
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		boolean hasSedation = prefs.getBoolean(HAS_SEDATION, false);
-		boolean sameMD;
-		boolean ageOver5;
-		int sedationTime = 0;
-		SedationStatus sedationStatus = SedationStatus.Unassigned;
-		//if (hasSedation) {
-			sameMD = prefs.getBoolean(WIZARD_SAME_MD, true);
-			ageOver5 = prefs.getBoolean(WIZARD_AGE, true);
-			sedationTime = prefs.getInt(WIZARD_TIME, 0);
-			sedationStatus = SedationStatus.stringToSedationStatus(prefs.getString(WIZARD_SEDATION_STATUS, ""));
-			List<Code> sedationCodes = SedationCode.sedationCoding(sedationTime, sameMD, ageOver5,
-				sedationStatus);
-			// TODO: this doesn't send actual sedation codes to analzyer, but maybe we need to?
-			for (Code code : sedationCodes) {
-				message += code.getCodeFirstDescription() + "\n";
-			}
-			allCodes.addAll(sedationCodes);
-		//}
-		message += Utilities.simpleCodeAnalysis(allCodes, sedationStatus, this);
+		//FIXME: below
+		message = "Temporary test result message";
+//		// we will extract the raw selected codes and shoot them to the code
+//		// analyzer, as well as check for no primary or secondary codes
+//		String[] codeNumberArray = codeNumbers.toArray(new String[codeNumbers
+//				.size()]);
+//		Code[] codes = new Code[codeNumbers.size()];
+//		for (int i = 0; i < codes.length; ++i) {
+//			codes[i] = Codes.getCode(codeNumberArray[i]);
+//			message += codes[i].getCodeFirstFormatted() + "\n";
+//		}
+//		List<Code> allCodes = new ArrayList<>();
+//		allCodes.addAll(Arrays.asList(codes));
+//		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+//		boolean hasSedation = prefs.getBoolean(HAS_SEDATION, false);
+//		boolean sameMD;
+//		boolean ageOver5;
+//		int sedationTime = 0;
+//		SedationStatus sedationStatus = SedationStatus.Unassigned;
+//		//if (hasSedation) {
+//			sameMD = prefs.getBoolean(WIZARD_SAME_MD, true);
+//			ageOver5 = prefs.getBoolean(WIZARD_AGE, true);
+//			sedationTime = prefs.getInt(WIZARD_TIME, 0);
+//			sedationStatus = SedationStatus.stringToSedationStatus(prefs.getString(WIZARD_SEDATION_STATUS, ""));
+//			List<Code> sedationCodes = SedationCode.sedationCoding(sedationTime, sameMD, ageOver5,
+//				sedationStatus);
+//			// TODO: this doesn't send actual sedation codes to analzyer, but maybe we need to?
+//			for (Code code : sedationCodes) {
+//				message += code.getCodeFirstDescription() + "\n";
+//			}
+//			allCodes.addAll(sedationCodes);
+//		//}
+//		message += Utilities.simpleCodeAnalysis(allCodes, sedationStatus, this);
 		displayResult(getString(R.string.coding_summary_dialog_label), message,
 				this);
 	}
 
-	private Set<String> loadCodeNumbers() {
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		Set<String> defaultStringSet = new TreeSet<>();
-		Set<String> codeNumbersChecked = new TreeSet<>();
-		codeNumbersChecked.addAll(prefs.getStringSet("wizardremovalcodes",
-				defaultStringSet));
-		codeNumbersChecked.addAll(prefs.getStringSet("wizardaddingcodes",
-				defaultStringSet));
-		codeNumbersChecked.addAll(prefs.getStringSet("wizardfinalcodes",
-				defaultStringSet));
-		// TODO: load sedation codes here too
-		return codeNumbersChecked;
-	}
+//	private Set<String> loadCodeNumbers() {
+//		SharedPreferences prefs = PreferenceManager
+//				.getDefaultSharedPreferences(this);
+//		Set<String> defaultStringSet = new TreeSet<>();
+//		Set<String> codeNumbersChecked = new TreeSet<>();
+//		codeNumbersChecked.addAll(prefs.getStringSet("wizardremovalcodes",
+//				defaultStringSet));
+//		codeNumbersChecked.addAll(prefs.getStringSet("wizardaddingcodes",
+//				defaultStringSet));
+//		codeNumbersChecked.addAll(prefs.getStringSet("wizardfinalcodes",
+//				defaultStringSet));
+//		// TODO: load sedation codes here too
+//		return codeNumbersChecked;
+//	}
 
 	private void displayResult(String title, String message, Context context) {
 		AlertDialog dialog = new AlertDialog.Builder(context).create();
@@ -261,7 +306,7 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 	}
 
 	/**
-	 * A simple pager adapter that represents 6 {@link ScreenSlidePageFragment}
+	 * A simple pager adapter that represents 7 {@link ScreenSlidePageFragment}
 	 * objects, in sequence.
 	 */
 	private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
@@ -284,7 +329,10 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 	public void onSaveInstanceState(Bundle bundle) {
 		super.onSaveInstanceState(bundle);
 		Log.d(EPCODING, "ScreenSlideActiviy onSaveInstanceState");
-		bundle.putBoolean(HAS_SEDATION, hasSedation);
+		bundle.putBoolean(WIZARD_SAME_MD, sameMD);
+		bundle.putBoolean(WIZARD_AGE, ageOver5);
+		bundle.putInt(WIZARD_TIME, sedationTime);
+		bundle.putString(WIZARD_SEDATION_STATUS, sedationStatus.toString());
 
 	}
 }
