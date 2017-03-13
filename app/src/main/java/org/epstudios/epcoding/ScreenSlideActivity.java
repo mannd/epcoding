@@ -96,16 +96,6 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 			"33249", "33216", "33217", "33225", "33212", "33213", "33240",
 			"33230", "33231"};
 
-	public void setCodes(List<Code> codes) {
-		this.codes = codes;
-	}
-
-	public List<Code> getCodes() {
-		return codes;
-	}
-
-	private List<Code> codes;
-
 	private boolean sameMD = true;
 	private boolean ageOver5 = true;
 	private int sedationTime = 0;

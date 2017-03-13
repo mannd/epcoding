@@ -48,10 +48,6 @@ public enum SedationStatus {
                 return !canHaveSedationCodes(status);
         }
 
-        public static boolean sedationWithoutWarning(SedationStatus status) {
-                return EnumSet.of(None, LessThan10Mins, AssignedSameMD).contains(status);
-        }
-
         public static SedationStatus determineSedationStatus(int sedationTime,
                                                              boolean sameMD) {
                 if (sedationTime < 10) {

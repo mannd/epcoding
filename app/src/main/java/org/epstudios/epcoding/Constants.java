@@ -22,7 +22,7 @@ package org.epstudios.epcoding;
  * along with epcoding.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public final class Constants {
+final class Constants {
 
     // for tagging Log statements
     public final static String EPCODING = "EPCODING";
@@ -33,16 +33,13 @@ public final class Constants {
     public final static String WIZARD_TIME = "WIZARD_TIME";
     public final static String WIZARD_AGE = "WIZARD_AGE";
     public final static String WIZARD_SAME_MD = "WIZARD_SAME_MD";
-    public final static String WIZARD_SEDATION_CODES = "WIZARD_SEDATION_CODES";
     public final static String WIZARD_SEDATION_STATUS = "WIZARD_SEDATION_STATUS";
 
     public final static String SAME_MD = "SAME_MD";
     public final static String AGE = "AGE";
     public final static String TIME = "TIME";
     public final static String SEDATION_STATUS = "SEDATION_STATUS";
-    public final static String LOAD_MODIFIERS = "LOAD_MODIFIERS";
     public final static String SEDATION_TIME = "SEDATION_TIME";
-    public final static String HAS_SEDATION = "HAS_SEDATION";
 
     public final static String BUNDLE_SEDATION_SAME_MD = "sedation_same_md";
     public final static String BUNDLE_SEDATION_AGE = "sedation_age";

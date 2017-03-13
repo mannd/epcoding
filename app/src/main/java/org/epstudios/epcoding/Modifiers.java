@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class Modifiers {
 
-    public final static Map<String, Modifier> allModifiers = createMap();
+    private final static Map<String, Modifier> allModifiers = createMap();
 
     private static Map<String, Modifier> createMap() {
         Map<String, Modifier> map = new HashMap<>();
@@ -53,8 +53,8 @@ public class Modifiers {
 
     }
 
-    public final static List<Modifier> allModifiersSorted() {
-        List<Modifier> modifiers = new ArrayList<Modifier>(allModifiers.values());
+    public static List<Modifier> allModifiersSorted() {
+        List<Modifier> modifiers = new ArrayList<>(allModifiers.values());
         Collections.sort(modifiers);
         return modifiers;
     }

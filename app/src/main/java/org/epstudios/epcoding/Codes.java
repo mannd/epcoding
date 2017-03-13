@@ -352,7 +352,7 @@ public class Codes {
         }
     }
 
-    static Map<String, List<Modifier>> defaultModifiers() {
+    private static Map<String, List<Modifier>> defaultModifiers() {
         if (defaultModifiers == null) {
             defaultModifiers = new HashMap<>();
             // Modifier 26 alone
@@ -398,10 +398,10 @@ public class Codes {
     }
 
     public static void clearMultipliersAndModifiers(Code[] codes) {
-        for (int i = 0; i < codes.length; i++) {
-            codes[i].setMultiplier(0);
-            codes[i].clearModifiers();
-        }
+		for (Code code : codes) {
+			code.setMultiplier(0);
+			code.clearModifiers();
+		}
     }
 
     public static void hideMultipliers(List<Code> array, Boolean hide) {
@@ -417,9 +417,9 @@ public class Codes {
     }
 
     public static void loadDefaultModifiers(Code[] codes) {
-        for (int i = 0; i < codes.length; i++) {
-            loadDefaultModifiersForCode(codes[i]);
-        }
+		for (Code code : codes) {
+			loadDefaultModifiersForCode(code);
+		}
     }
 
     private static void loadDefaultModifiersForCode(Code code) {
@@ -437,7 +437,7 @@ public class Codes {
          }
 	}
 
-	public static void loadTempAddedModifers(List<Code> array, Context context) {
+	public static void loadTempAddedModifiers(List<Code> array, Context context) {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		for (Code code : array) {
@@ -449,9 +449,9 @@ public class Codes {
 	public static void loadSavedModifiers(Code[] codes, Context context) {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
-        for (int i = 0; i < codes.length; i++) {
-            loadSavedModifiersForCode(codes[i], prefs);
-        }
+		for (Code code : codes) {
+			loadSavedModifiersForCode(code, prefs);
+		}
     }
 
     private static void loadSavedModifiersForCode(Code code, SharedPreferences prefs) {
@@ -488,9 +488,9 @@ public class Codes {
 
     public static void resetSavedModifiers(Code[] codes, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        for (int i = 0; i < codes.length; i++) {
-            resetSavedModifiersForCode(codes[i], prefs);
-        }
+		for (Code code : codes) {
+			resetSavedModifiersForCode(code, prefs);
+		}
     }
 
     public static void resetTempAddedModifiers(List<Code> codes, Context context) {

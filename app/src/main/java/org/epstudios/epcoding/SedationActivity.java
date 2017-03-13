@@ -33,6 +33,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import java.util.List;
+import java.util.Locale;
 
 import static org.epstudios.epcoding.Constants.SEDATION_TIME;
 
@@ -74,7 +75,7 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
         ageCheckBox = (CheckBox)findViewById(R.id.pt_over_5_checkbox);
         sameMDCheckBox = (CheckBox)findViewById(R.id.same_md_checkbox);
 
-        timeEditText.setText(Integer.toString(sedationTime));
+        timeEditText.setText(String.format(Locale.getDefault(), Integer.toString(sedationTime)));
         ageCheckBox.setChecked(ageOver5);
         sameMDCheckBox.setChecked(sameMD);
 
@@ -113,7 +114,7 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
         if (requestCode == SEDATION_CALCULATOR_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 Integer result = data.getIntExtra(SEDATION_TIME, 0);
-                timeEditText.setText(result.toString());
+                timeEditText.setText(String.format(Locale.getDefault(), result.toString()));
 
             }
         }
@@ -123,15 +124,6 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
     // also assumes not called if sedationStatus == None
     private SedationStatus determineSedationStatus() {
         return SedationStatus.determineSedationStatus(sedationTime, sameMD);
-//        if (sedationTime < 10) {
-//            return SedationStatus.LessThan10Mins;
-//        }
-//        if (!sameMD) {
-//            return SedationStatus.OtherMDCalculated;
-//        }
-//        else {
-//            return SedationStatus.AssignedSameMD;
-//        }
     }
 
     private void noSedation(Intent intent) {

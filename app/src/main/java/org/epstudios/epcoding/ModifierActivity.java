@@ -73,7 +73,7 @@ public class ModifierActivity extends BasicActionBarActivity implements View.OnC
             boolean[] checkBoxState = savedInstanceState.getBooleanArray("ModifierState");
             int i = 0;
             for (CheckBox checkBox : checkBoxes) {
-                checkBox.setChecked(checkBoxState[i++]);
+                checkBox.setChecked(checkBoxState != null ? checkBoxState[i++] : false);
             }
         }
         initToolbar();

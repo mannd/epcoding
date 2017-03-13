@@ -23,21 +23,21 @@ class Utilities {
 
     public static Map<String, CodeCheckBox> createCheckBoxLayoutAndCodeMap(
             Code[] codes, LinearLayout layout, Context context,
-            boolean showCodeFirst, final boolean saveTempAddedModifiers, final Fragment fragment) {
+            final Fragment fragment) {
         Map<String, CodeCheckBox> map = new LinkedHashMap<>();
-        for (int i = 0; i < codes.length; ++i) {
+        for (Code code : codes) {
             final CodeCheckBox codeCheckBox = new CodeCheckBox(context);
             final Context theContext = context;
-            codeCheckBox.setCodeFirst(showCodeFirst);
-            codeCheckBox.setCode(codes[i]);
-            map.put(codes[i].getCodeNumber(), codeCheckBox);
+            codeCheckBox.setCodeFirst(true);
+            codeCheckBox.setCode(code);
+            map.put(code.getCodeNumber(), codeCheckBox);
             codeCheckBox.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
                     Intent intent = new Intent(theContext, ModifierActivity.class);
                     intent.putExtra(ACTIVE_CODE_NUMBER, codeCheckBox.getCodeNumber());
-                    if (saveTempAddedModifiers) {
-                        intent.putExtra(SAVE_TEMP_ADDED_MODIFIERS, saveTempAddedModifiers);
+                    if (true) {
+                        intent.putExtra(SAVE_TEMP_ADDED_MODIFIERS, true);
                     }
                     fragment.startActivityForResult(intent, MODIFIER_REQUEST_CODE);
                     return true;
@@ -119,7 +119,7 @@ class Utilities {
             public void onClick(DialogInterface dialogInterface, int i) {
                 Log.d(EPCODING, "click Add");
                 Intent intent = new Intent(context, SedationActivity.class);
-                intent.putExtra("TIME", (int) sedationTime);
+                intent.putExtra("TIME", sedationTime);
                 intent.putExtra("AGE", patientOver5YrsOld);
                 intent.putExtra("SAME_MD", sameMDPerformsSedation);
                 intent.putExtra("SEDATION_STATUS", sedationStatus);

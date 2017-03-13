@@ -46,7 +46,6 @@ public class MyPreferenceFragment extends PreferenceFragment implements
     private String verbosityKey;
     private String showDescriptionsKey;
     private String truncateDescriptionsKey;
-    private String useUnicodeSymbolsKey;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -57,7 +56,6 @@ public class MyPreferenceFragment extends PreferenceFragment implements
                 R.string.show_details_code_summary_key);
         truncateDescriptionsKey = getActivity().getString(
                 R.string.truncate_long_descriptions_code_summary_key);
-        useUnicodeSymbolsKey = getActivity().getString(R.string.use_unicode_symbols_key);
         addPreferencesFromResource(R.xml.settings);
         Preference codeVerbosity = findPreference(verbosityKey);
         codeVerbosity.setSummary(getPreferenceScreen().getSharedPreferences()

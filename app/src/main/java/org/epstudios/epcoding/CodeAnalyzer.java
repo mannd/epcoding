@@ -30,15 +30,12 @@ This file is part of EP Coding.
 package org.epstudios.epcoding;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static org.epstudios.epcoding.Constants.EPCODING;
 
 class CodeAnalyzer {
 	private final Code[] codes;
@@ -200,20 +197,6 @@ class CodeAnalyzer {
 		}
 	}
 
-	public CodeAnalyzer(final Code[] codes, final boolean noPrimaryCodes,
-						final boolean noSecondaryCodes,
-						final boolean moduleHasNoSecondaryCodesNeedingChecking,
-						final SedationStatus status,
-						boolean useUnicodeSymbols, final Context context) {
-		this.codes = codes;
-		this.noPrimaryCodes = noPrimaryCodes;
-		this.noSecondaryCodes = noSecondaryCodes;
-		this.moduleHasNoSecondaryCodesNeedingChecking = moduleHasNoSecondaryCodesNeedingChecking;
-		this.sedationStatus = status;
-		this.context = context;
-		setUpErrorSymbols(useUnicodeSymbols);
-	}
-
 	public CodeAnalyzer(final List<Code> codes, final boolean noPrimaryCodes,
 						final boolean noSecondaryCodes,
 						final boolean moduleHasNoSecondaryCodesNeedingChecking,
@@ -225,17 +208,6 @@ class CodeAnalyzer {
 		this.moduleHasNoSecondaryCodesNeedingChecking = moduleHasNoSecondaryCodesNeedingChecking;
 		this.sedationStatus = status;
 		this.context = context;
-		setUpErrorSymbols(useUnicodeSymbols);
-	}
-
-	// this simpler constructor used with code wizard
-	public CodeAnalyzer(final Code[] codes, final SedationStatus status, boolean useUnicodeSymbols, final Context context) {
-		this.codes = codes;
-		this.context = context;
-		this.noPrimaryCodes = false;
-		this.noSecondaryCodes = false;
-		this.moduleHasNoSecondaryCodesNeedingChecking = true;
-		this.sedationStatus = status;
 		setUpErrorSymbols(useUnicodeSymbols);
 	}
 
@@ -314,8 +286,8 @@ class CodeAnalyzer {
 
 	private boolean allAddOnCodes() {
 		boolean allAddOns = true;
-		for (int i = 0; i < codes.length; ++i) {
-			if (codes[i] != null && !codes[i].isAddOn())
+		for (Code code : codes) {
+			if (code != null && !code.isAddOn())
 				allAddOns = false;
 		}
 		return allAddOns;
@@ -491,7 +463,7 @@ class CodeAnalyzer {
 				CodeError error = new CodeError(CodeError.WarningLevel.WARNING,
 						null, "Raw sedation codes selected." +
 						"  Sedation codes may be inconsistent.  Further analysis" +
-						" of sedaton codes will not be performed.");
+						" of sedation codes will not be performed.");
 				message = addToErrorMessage(error, badCodeNumbers);
 			}
 		}
@@ -516,7 +488,7 @@ class CodeAnalyzer {
 	}
 
 	private String evaluateSedationStatus(Set<String> codeNumbers) {
-		String message = "";
+		String message;
 		message = rawSedationCodesUsedError(codeNumbers);
 		// no further sedation analysis if raw sedation codes used
 		if (message.length() > 0) {

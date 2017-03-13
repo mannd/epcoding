@@ -35,7 +35,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -47,17 +46,11 @@ import static org.epstudios.epcoding.Constants.BUNDLE_SEDATION_SAME_MD;
 import static org.epstudios.epcoding.Constants.BUNDLE_SEDATION_STATUS;
 import static org.epstudios.epcoding.Constants.BUNDLE_SEDATION_TIME;
 import static org.epstudios.epcoding.Constants.EPCODING;
-import static org.epstudios.epcoding.Constants.HAS_SEDATION;
 import static org.epstudios.epcoding.Constants.MODIFIER_REQUEST_CODE;
 import static org.epstudios.epcoding.Constants.SAME_MD;
 import static org.epstudios.epcoding.Constants.SEDATION_REQUEST_CODE;
 import static org.epstudios.epcoding.Constants.SEDATION_STATUS;
 import static org.epstudios.epcoding.Constants.TIME;
-import static org.epstudios.epcoding.Constants.WIZARD_AGE;
-import static org.epstudios.epcoding.Constants.WIZARD_SAME_MD;
-import static org.epstudios.epcoding.Constants.WIZARD_SEDATION_CODES;
-import static org.epstudios.epcoding.Constants.WIZARD_SEDATION_STATUS;
-import static org.epstudios.epcoding.Constants.WIZARD_TIME;
 
 public class ScreenSlidePageFragment extends Fragment implements View.OnClickListener {
     /**
@@ -88,14 +81,9 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
     private int mPageNumber;
     private Context context;
     private ScreenSlideActivity parent;
-    private Code[] revisionCodes;
-    private Code[] removalCodes;
-    private Code[] addingCodes;
-    private Code[] finalCodes;
 
-    List<Code> allCodes;
+    private List<Code> allCodes;
 
-    private Button sedationButton;
     private SedationStatus sedationStatus = SedationStatus.Unassigned;
     private List<Code> sedationCodes = new ArrayList<>();
     private int sedationTime = 0;
@@ -148,14 +136,14 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                 .findViewById(R.id.final_codes);
         finalCheckBoxLayout.setVisibility(View.GONE);
 
-        sedationButton = (Button) rootView.findViewById(R.id.sedation_button);
+        Button sedationButton = (Button) rootView.findViewById(R.id.sedation_button);
         sedationButton.setOnClickListener(this);
         sedationButton.setVisibility(View.GONE);
 
-        revisionCodes = Codes.getCodes(revisionCodeNumbers);
-        removalCodes = Codes.getCodes(removalCodeNumbers);
-        addingCodes = Codes.getCodes(addingCodeNumbers);
-        finalCodes = Codes.getCodes(Codes.icdReplacementSecondaryCodeNumbers);
+        Code[] revisionCodes = Codes.getCodes(revisionCodeNumbers);
+        Code[] removalCodes = Codes.getCodes(removalCodeNumbers);
+        Code [] addingCodes = Codes.getCodes(addingCodeNumbers);
+        Code [] finalCodes = Codes.getCodes(Codes.icdReplacementSecondaryCodeNumbers);
 
         allCodes = new ArrayList<>();
         allCodes.addAll(Arrays.asList(revisionCodes));
@@ -166,7 +154,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         Codes.clearMultipliersAndModifiers(allCodes);
         Codes.loadDefaultModifiers(allCodes);
         Codes.loadSavedModifiers(allCodes, context);
-        Codes.loadTempAddedModifers(allCodes, context);
+        Codes.loadTempAddedModifiers(allCodes, context);
 
 
         // Use default sedation, unless sedation already set
@@ -177,16 +165,16 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         sedationTime = parent.getSedationTime();
 
         revisionCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(
-                revisionCodes, revisionCheckBoxLayout, context, true, true, this);
+                revisionCodes, revisionCheckBoxLayout, context, this);
         addCheckMarkListener(revisionCheckBoxMap);
         removalCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(
-                removalCodes, removedCheckBoxLayout, context, true, true, this);
+                removalCodes, removedCheckBoxLayout, context, this);
         addCheckMarkListener(removalCheckBoxMap);
         addingCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(
-                addingCodes, addingCheckBoxLayout, context, true, true, this);
+                addingCodes, addingCheckBoxLayout, context, this);
         addCheckMarkListener(addingCheckBoxMap);
         finalCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(finalCodes,
-                finalCheckBoxLayout, context, true, true, this);
+                finalCheckBoxLayout, context, this);
         addCheckMarkListener(finalCheckBoxMap);
 
         allCheckBoxMapList = new ArrayList<>();
@@ -244,19 +232,19 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                     .getBooleanArray("final_codes");
             int i = 0;
             for (Map.Entry<String, CodeCheckBox> entry : revisionCheckBoxMap.entrySet())
-                entry.getValue().setChecked(revisionCodesState != null ? revisionCodesState[i++] : false);
+                entry.getValue().setChecked(revisionCodesState != null && revisionCodesState[i++]);
             i = 0;
             for (Map.Entry<String, CodeCheckBox> entry : removalCheckBoxMap
                     .entrySet())
-                entry.getValue().setChecked(removalCodesState != null ? removalCodesState[i++] : false);
+                entry.getValue().setChecked(removalCodesState != null && removalCodesState[i++]);
             i = 0;
             for (Map.Entry<String, CodeCheckBox> entry : addingCheckBoxMap
                     .entrySet())
-                entry.getValue().setChecked(addingCodesState != null ? addingCodesState[i++] : false);
+                entry.getValue().setChecked(addingCodesState != null && addingCodesState[i++]);
             i = 0;
             for (Map.Entry<String, CodeCheckBox> entry : finalCheckBoxMap
                     .entrySet())
-                entry.getValue().setChecked(finalCodesState != null ? finalCodesState[i++] : false);
+                entry.getValue().setChecked(finalCodesState != null && finalCodesState[i++]);
 
             patientOver5YrsOld = savedInstanceState.getBoolean(BUNDLE_SEDATION_AGE);
             sameMDPerformsSedation = savedInstanceState.getBoolean(BUNDLE_SEDATION_SAME_MD);
@@ -273,7 +261,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
     /**
      * Returns the page number represented by this fragment object.
      */
-    public int getPageNumber() {
+    private int getPageNumber() {
         return mPageNumber;
     }
 
@@ -419,25 +407,6 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         }
     }
 
-    // save all the sedation stuff to prefs so activity can pull them out for analysis
-    private void saveSedationCoding() {
-        Log.d(EPCODING, "Save Sedation Coding");
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(getActivity());
-        SharedPreferences.Editor prefsEditor = prefs.edit();
-        prefsEditor.putBoolean(HAS_SEDATION, true);
-        prefsEditor.putInt(WIZARD_TIME, sedationTime);
-        prefsEditor.putBoolean(WIZARD_SAME_MD, sameMDPerformsSedation);
-        prefsEditor.putString(WIZARD_SEDATION_STATUS, sedationStatus.toString());
-        prefsEditor.putBoolean(WIZARD_AGE, patientOver5YrsOld);
-        Set<String> sedationCodesSet = new HashSet<>();
-        for (Code code : sedationCodes) {
-            sedationCodesSet.add(code.getCodeNumber());
-        }
-        prefsEditor.putStringSet(WIZARD_SEDATION_CODES, sedationCodesSet);
-        prefsEditor.apply();
-    }
-
     private void resetModifiers() {
         Utilities.resetModifiers(allCodes, context);
     }
@@ -445,10 +414,6 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
 
     private void resetCodes() {
         Utilities.resetCodes(allCodes, allCheckBoxMapList);
-    }
-
-    private CodeCheckBox getCheckBoxWithCode(String codeNumber) {
-        return Utilities.getCheckBoxWithCode(codeNumber, allCheckBoxMapList);
     }
 
     @Override

@@ -28,7 +28,7 @@ import android.support.v7.widget.Toolbar;
 // just deals with toolbar
 public class SimpleActionBarActivity extends ActionBarActivity {
 
-    protected void initToolbar() {
+    void initToolbar() {
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

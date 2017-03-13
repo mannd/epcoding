@@ -34,6 +34,7 @@ import android.annotation.SuppressLint;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @SuppressLint("DefaultLocale")
@@ -145,14 +146,14 @@ public class Code {
     }
 
     private String getFormattedDescription() {
-        return descriptionShortened ? truncateString(shortDescription, 24)
+        return descriptionShortened ? truncateString(shortDescription)
                 : shortDescription;
     }
 
-    private String truncateString(final String s, final int newLength) {
-        if (newLength > s.length())
+    private String truncateString(final String s) {
+        if (24 > s.length())
             return s;
-        return s.substring(0, newLength - 3) + "...";
+        return s.substring(0, 24 - 3) + "...";
     }
 
     public String unformattedCodeNumber() {
@@ -184,13 +185,13 @@ public class Code {
     public void addModifier(Modifier modifier) {
         // don't duplicate modifiers
         for (Modifier m : modifiers) {
-            if (m.getNumber() == modifier.getNumber()) {
+            if (Objects.equals(m.getNumber(), modifier.getNumber())) {
                 return;
             }
         }
         // Modifier 26 is a "pricing modifier" and must have first position in modifiers.
         // There are other such modifiers, but none in the small subset of modifiers used here.
-        if (modifier.getNumber() == "26") {
+        if (Objects.equals(modifier.getNumber(), "26")) {
             modifiers.add(0, modifier);
         }
         else {

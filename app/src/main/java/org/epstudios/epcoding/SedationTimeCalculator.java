@@ -30,15 +30,16 @@ import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
+import java.util.Locale;
+
 import static org.epstudios.epcoding.Constants.SEDATION_TIME;
 
 
 public class SedationTimeCalculator extends BasicActionBarActivity
         implements View.OnClickListener {
 
-    final static int MINS_IN_DAY = 60 * 24;
+    private final static int MINS_IN_DAY = 60 * 24;
 
-    private int time = 0;
     private int startHour;
     private int startMinute;
     private int endHour;
@@ -124,19 +125,7 @@ public class SedationTimeCalculator extends BasicActionBarActivity
     }
 
     private String differenceLabel() {
-        String diff = String.format("δ = %d min", minuteDifference());
-        return diff;
-    }
-
-    private void assessTime() {
-       if (toggleButton.isChecked()) {
-           timePicker.setCurrentHour(endHour);
-           timePicker.setCurrentMinute(endMinute);
-       }
-       else {
-           timePicker.setCurrentHour(startHour);
-           timePicker.setCurrentMinute(startMinute);
-       }
+        return String.format(Locale.getDefault(), "δ = %d min", minuteDifference());
     }
 
     private void setTime() {
@@ -152,13 +141,13 @@ public class SedationTimeCalculator extends BasicActionBarActivity
     }
 
     private void updateToggleButtonTitle() {
-        toggleButton.setTextOn(String.format("End Time %d:%d %s", endHour, endMinute, differenceLabel()));
-        toggleButton.setTextOff(String.format("Start Time %d:%d %s", startHour, startMinute, differenceLabel()));
+        toggleButton.setTextOn(String.format(Locale.getDefault(), "End Time %d:%d %s", endHour, endMinute, differenceLabel()));
+        toggleButton.setTextOff(String.format(Locale.getDefault(), "Start Time %d:%d %s", startHour, startMinute, differenceLabel()));
         if (toggleButton.isChecked()) {
-            toggleButton.setText(String.format("End Time %d:%d %s", endHour, endMinute, differenceLabel()));
+            toggleButton.setText(String.format(Locale.getDefault(), "End Time %d:%d %s", endHour, endMinute, differenceLabel()));
         }
         else {
-            toggleButton.setText(String.format("Start Time %d:%d %s", startHour, startMinute, differenceLabel()));
+            toggleButton.setText(String.format(Locale.getDefault(), "Start Time %d:%d %s", startHour, startMinute, differenceLabel()));
         }
     }
 }

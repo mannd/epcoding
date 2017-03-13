@@ -1,5 +1,7 @@
 package org.epstudios.epcoding;
 
+import android.support.annotation.NonNull;
+
 /**
  * Copyright (C) 2017 EP Studios, Inc.
  * www.epstudiossoftware.com
@@ -34,27 +36,17 @@ public class Modifier implements Comparable<Modifier> {
     private final String number;
     private final String shortDescription;
 
-    public boolean isSelected() {
-        return isSelected;
-    }
-
-    public void setSelected(boolean selected) {
-        isSelected = selected;
-    }
-
-    private boolean isSelected;
 
     public Modifier(String number, String shortDescription) {
         this.number = number;
         this.shortDescription = shortDescription;
-        isSelected = false;
     }
 
     public String modifierDescription() {
         return number + " " + shortDescription;
     }
 
-    public int compareTo(Modifier m) {
+    public int compareTo(@NonNull Modifier m) {
         return number.compareTo(m.number);
     }
 }

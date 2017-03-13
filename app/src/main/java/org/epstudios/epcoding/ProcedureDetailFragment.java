@@ -52,6 +52,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -311,8 +312,8 @@ public class ProcedureDetailFragment extends Fragment implements
         Code[] primaryCodes = procedure.primaryCodes();
         String[] disabledCodeNumbers = procedure.disabledCodeNumbers();
 
-        for (int i = 0; i < disabledCodeNumbers.length; ++i)
-            secondaryCheckBoxMap.get(disabledCodeNumbers[i]).disable();
+        for (String disabledCodeNumber : disabledCodeNumbers)
+            secondaryCheckBoxMap.get(disabledCodeNumber).disable();
 
 
         createCheckBoxLayoutAndCodeMap(primaryCodes, primaryCheckBoxMap,
@@ -328,9 +329,7 @@ public class ProcedureDetailFragment extends Fragment implements
         }
 
         allCheckBoxMapList.add(primaryCheckBoxMap);
-        if (secondaryCheckBoxMap != null) {
-            allCheckBoxMapList.add(secondaryCheckBoxMap);
-        }
+        allCheckBoxMapList.add(secondaryCheckBoxMap);
 
 
         // apply saved configurations here
@@ -343,11 +342,11 @@ public class ProcedureDetailFragment extends Fragment implements
             int i = 0;
             for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
                     .entrySet())
-                entry.getValue().setChecked(primaryCodesState != null ? primaryCodesState[i++] : false);
+                entry.getValue().setChecked(primaryCodesState != null && primaryCodesState[i++]);
             i = 0;
             for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
                     .entrySet())
-                entry.getValue().setChecked(secondaryCodesState != null ? secondaryCodesState[i++] : false);
+                entry.getValue().setChecked(secondaryCodesState != null && secondaryCodesState[i++]);
             patientOver5YrsOld = savedInstanceState.getBoolean(BUNDLE_SEDATION_AGE);
             sameMDPerformsSedation = savedInstanceState.getBoolean(BUNDLE_SEDATION_SAME_MD);
             sedationTime = savedInstanceState.getInt(BUNDLE_SEDATION_TIME);
@@ -360,7 +359,7 @@ public class ProcedureDetailFragment extends Fragment implements
             for (Code code : allPrimaryAndSecondaryCodes()) {
                 String[] modifierNumbers = savedInstanceState.getStringArray(code.getCodeNumber());
                 code.clearModifiers();
-                for (i = 0; i < modifierNumbers.length; i++) {
+                for (i = 0; i < (modifierNumbers != null ? modifierNumbers.length : 0); i++) {
                     code.addModifier(Modifiers.getModifierForNumber(modifierNumbers[i]));
                 }
                 // redraw code checkboxes
@@ -392,12 +391,12 @@ public class ProcedureDetailFragment extends Fragment implements
 
     private void createCheckBoxLayoutAndCodeMap(Code[] codes,
                                                 Map<String, CodeCheckBox> codeCheckBoxMap, LinearLayout layout) {
-        for (int i = 0; i < codes.length; ++i) {
+        for (Code code : codes) {
             final CodeCheckBox codeCheckBox = new CodeCheckBox(context);
             // codes[i].setPlusShown(plusShownInDisplay);
             codeCheckBox.setCodeFirst(mItem == allProcedures);
-            codeCheckBox.setCode(codes[i]);
-            codeCheckBoxMap.put(codes[i].getCodeNumber(), codeCheckBox);
+            codeCheckBox.setCode(code);
+            codeCheckBoxMap.put(code.getCodeNumber(), codeCheckBox);
             // add long click listener to open modifier dialog
             // because they are disabled.  This is an Android limitation, though
             // any code can be long clicked and modified in the all codes module.
@@ -463,12 +462,8 @@ public class ProcedureDetailFragment extends Fragment implements
             allPrimaryAndSecondaryCodes = new ArrayList<>();
             Code[] primaryCodes = procedure.primaryCodes();
             Code[] secondaryCodes = procedure.secondaryCodes();
-            for (int i = 0; i < primaryCodes.length; i++) {
-                allPrimaryAndSecondaryCodes.add(primaryCodes[i]);
-            }
-            for (int i = 0; i < secondaryCodes.length; i++) {
-                allPrimaryAndSecondaryCodes.add(secondaryCodes[i]);
-            }
+            Collections.addAll(allPrimaryAndSecondaryCodes, primaryCodes);
+            Collections.addAll(allPrimaryAndSecondaryCodes, secondaryCodes);
         }
         return allPrimaryAndSecondaryCodes;
     }

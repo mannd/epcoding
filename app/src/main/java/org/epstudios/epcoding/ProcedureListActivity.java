@@ -114,12 +114,4 @@ public class ProcedureListActivity extends ProcedureActionBarActivity implements
         }
     }
 
-    private void saveCodeSelectionErrorMessage() {
-        Activity activity = this;
-        Toast toast = Toast.makeText(this,
-                activity.getString(R.string.save_code_selection_error_message),
-                Toast.LENGTH_SHORT);
-        toast.show();
-    }
-
 }

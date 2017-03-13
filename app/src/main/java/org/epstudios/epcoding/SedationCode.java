@@ -47,12 +47,10 @@ public class SedationCode extends Code {
     }
 
     private SedationStatus sedationStatus;
-    private List<Code> sedationCodes;
 
     public SedationCode(String code, String shortDescription, boolean isAddOn) {
         super(code, shortDescription, isAddOn);
         sedationStatus = SedationStatus.Unassigned;
-        sedationCodes = new ArrayList<>();
     }
 
     public static List<Code> sedationCoding(Integer sedationTime, boolean sameMD,
@@ -91,7 +89,7 @@ public class SedationCode extends Code {
         return codes;
     }
 
-    public static Integer codeMultiplier(Integer time) {
+    private static Integer codeMultiplier(Integer time) {
         if (time <= 22)
             return 0;
         double multiplier = (time - 15) / 15.0;

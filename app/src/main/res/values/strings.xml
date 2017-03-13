@@ -206,6 +206,7 @@
     <string name="use_unicode_symbols_summary">Not all devices support unicode fonts</string>
     <string name="use_unicode_symbols_label">Use unicode error symbols</string>
     <string name="verbose_label">Verbose</string>
+    <string name="version">Version %s</string>
 
 
 </resources>
