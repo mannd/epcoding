@@ -277,6 +277,7 @@ class CodeAnalyzer {
 		message += getErrorCodes(codeNumberSet);
 		message += getErrorCodesFirstSpecial(codeNumberSet);
 		message += getErrorCodesFirstCodeNeedsOtherCodes(codeNumberSet);
+		message += evaluateModifiers(codeNumberSet);
 		message += evaluateSedationStatus(codeNumberSet);
 		if (message.length() == 0) // no errors!
 			message = getMessage(OK, R.string.no_code_errors_message,
@@ -404,19 +405,50 @@ class CodeAnalyzer {
 		return "\n" + threat + brief + (verbose ? " " + details : "") + "\n";
 	}
 
-	private List<CodeError> evaluateModifiers() {
-		List<CodeError> array = new ArrayList<>();
+
+	// Add Q0 modifier to ICD implant or generator replacement codes"
+	//				+ " if indication is primary prevention
+	private String evaluateModifiers(Set<String> codeNumbers) {
+		String message = "";
 		boolean q0ModifierFound = false;
-		for (Code code : codes) {
+		List<String> badCodeList = new ArrayList<>();
+		for (String number : codeNumbers) {
+			Code code = Codes.getCode(number);
+			if (code == null) {
+				continue;
+			}
 			for (Modifier modifier : code.getModifiers()) {
 				if (modifier.getNumber().equals("Q0")) {
-					array.add(new CodeError(CodeError.WarningLevel.WARNING,
-							null, "Add Q0 modifier to ICD implant or generator replacement codes"
-					+ " if indication is primary prevention."));
+					badCodeList.add(code.getCodeNumber());
+					q0ModifierFound = true;
+				}
+				if (badCodeList.size() > 0) {
+					CodeError error = new CodeError(CodeError.WarningLevel.NONE,
+							null, "Q0 modifier indicates primary prevention ICD.  " +
+					"Remove Q0 modifier for other ICD indications.");
+					message = addToErrorMessage(error, badCodeList);
 				}
 			}
 		}
-		return array;
+		if (!q0ModifierFound) {
+			Set<String> icdCodeNumberSet = new HashSet<>();
+			icdCodeNumberSet.add("33249");
+			icdCodeNumberSet.add("33262");
+			icdCodeNumberSet.add("33263");
+			icdCodeNumberSet.add("33264");
+			for (String codeNumber : codeNumbers) {
+				if (icdCodeNumberSet.contains(codeNumber)) {
+					badCodeList.add(codeNumber);
+				}
+				if (badCodeList.size() > 0) {
+					CodeError error = new CodeError(CodeError.WarningLevel.NONE,
+							null, "Add Q0 modifier to ICD implant or generator replacement codes " +
+					"if indication is primary prevention");
+					message = addToErrorMessage(error, badCodeList);
+				}
+			}
+		}
+		return message;
 	}
 
 	private String rawSedationCodesUsedError(final Set<String> codeNumbers) {
