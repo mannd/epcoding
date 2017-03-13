@@ -491,7 +491,10 @@ public class ProcedureDetailFragment extends Fragment implements
         String message = "";
         // we will extract the raw selected codes and shoot them to the code
         // analyzer, as well as check for no primary or secondary codes
-        Code[] codes = new Code[Codes.allCodesSize()];
+        int size = primaryCheckBoxMap.size() + secondaryCheckBoxMap.size() + sedationCodes.size();
+        Log.d(EPCODING, "number of codes = " + size);
+        //Code[] codes = new Code[Codes.allCodesSize()];
+        Code[] codes = new Code[size];
         int i = 0;
         for (Map.Entry<String, CodeCheckBox> entry : primaryCheckBoxMap
                 .entrySet()) {

@@ -49,9 +49,10 @@ class CodeAnalyzer {
 
 	// Note unicode doesn't consistently work on different Android devices.
 	// Use ASCII! Maybe will work in iOS?
-	private final static String WARNING = "! "; // ?? or \u26A0 or ! in triangle
-	private final static String ERROR = "!! "; // \u2620 or \u24CD (skull, x)
-	private final static String OK = ""; // \u263A smiley face
+	// TODO: test unicode on all android devices
+	private final static String WARNING = "\u26A0 "; // ?? or \u26A0 or ! in triangle
+	private final static String ERROR = "\u2620 "; // \u2620 or \u24CD (skull, x)
+	private final static String OK = "\u263A"; // \u263A smiley face
 
 	// some special code lists
 	private static final List<String> mappingCodes = Arrays.asList("93609",
@@ -64,6 +65,11 @@ class CodeAnalyzer {
 			"93656");
 	private static final Set<String> ablationCodeSet = new HashSet<>(
 			ablationCodes);
+
+	private static final List<String> sedationCodes = Arrays.asList("99151", "99152",
+		"99153", "99155", "99156", "99157");
+	private static final Set<String> sedationCodeSet = new HashSet<>(sedationCodes);
+
 
 	// Error messages and warnings
 	private final static String DEFAULT_DUPLICATE_ERROR = "These codes shouldn't be combined.";
@@ -259,7 +265,7 @@ class CodeAnalyzer {
 
 	private String getCodeAnalysis(String message) {
 		String[] codeNumbers = new String[codes.length];
-		for (int i = 0; i < codes.length; ++i) {
+		for (int i = 0; i < codes.length; i++) {
 			if (codes[i] != null)
 				codeNumbers[i] = codes[i].getCodeNumber();
 		}
@@ -271,6 +277,7 @@ class CodeAnalyzer {
 		message += getErrorCodes(codeNumberSet);
 		message += getErrorCodesFirstSpecial(codeNumberSet);
 		message += getErrorCodesFirstCodeNeedsOtherCodes(codeNumberSet);
+		message += evaluateSedationStatus(codeNumberSet);
 		if (message.length() == 0) // no errors!
 			message = getMessage(OK, R.string.no_code_errors_message,
 					R.string.empty_message);
@@ -397,7 +404,7 @@ class CodeAnalyzer {
 		return "\n" + threat + brief + (verbose ? " " + details : "") + "\n";
 	}
 
-	private List<CodeError>evaluateModifiers() {
+	private List<CodeError> evaluateModifiers() {
 		List<CodeError> array = new ArrayList<>();
 		boolean q0ModifierFound = false;
 		for (Code code : codes) {
@@ -411,4 +418,73 @@ class CodeAnalyzer {
 		}
 		return array;
 	}
+
+	private String rawSedationCodesUsedError(final Set<String> codeNumbers) {
+		String message = "";
+		List<String> badCodeNumbers = new ArrayList<>();
+		if (rawSedationCodesUsed(codeNumbers)) {
+			for (String number : codeNumbers) {
+				if (sedationCodeSet.contains(number)) {
+					badCodeNumbers.add(number);
+				}
+			}
+			if (badCodeNumbers.size() > 0) {
+				CodeError error = new CodeError(CodeError.WarningLevel.WARNING,
+						null, "Raw sedation codes selected." +
+						"  Sedation codes may be inconsistent.  Further analysis" +
+						" of sedaton codes will not be performed.");
+				message = addToErrorMessage(error, badCodeNumbers);
+			}
+		}
+		return message;
+	}
+
+	private boolean rawSedationCodesUsed(Set<String> codeNumbers) {
+		// We'll use a different logic from iOS version:
+		// if sedationStatus is incompatible with sedation codes
+		// , and yet there are sedation codes...
+		if (SedationStatus.canHaveSedationCodes(sedationStatus)) {
+			return false;
+		}
+		boolean rawCodesUsed = false;
+		for (String codeNumber : codeNumbers) {
+			if (sedationCodeSet.contains(codeNumber)) {
+				rawCodesUsed = true;
+				break;
+			}
+		}
+		return rawCodesUsed;
+	}
+
+	private String evaluateSedationStatus(Set<String> codeNumbers) {
+		String message = "";
+		message = rawSedationCodesUsedError(codeNumbers);
+		// no further sedation analysis if raw sedation codes used
+		if (message.length() > 0) {
+			return message;
+		}
+		switch (sedationStatus) {
+			case Unassigned:
+				message = getMessage(WARNING, R.string.unassigned_sedation_message,
+						R.string.unassigned_sedation_verbose_message);
+				break;
+			case None:
+				message = getMessage(OK, R.string.no_sedation_used_message, R.string.empty_message);
+				break;
+			case LessThan10Mins:
+				message = getMessage(OK, R.string.short_sedation_time_message, R.string.empty_message);
+				break;
+			case OtherMDCalculated:
+				message = getMessage(WARNING, R.string.sedation_other_md_message,
+						R.string.sedation_other_md_verbose_message);
+				break;
+			case AssignedSameMD:
+				break;
+			default:
+				break;
+		}
+		return message;
+	}
+
+
 }

@@ -40,12 +40,12 @@ public enum SedationStatus {
                 }
         }
 
-        public static boolean hasSedationCodes(SedationStatus status) {
+        public static boolean canHaveSedationCodes(SedationStatus status) {
                 return EnumSet.of(OtherMDCalculated, AssignedSameMD).contains(status);
         }
 
-        public static boolean hasNoSedationCodes(SedationStatus status) {
-                return !hasSedationCodes(status);
+        public static boolean cannotHaveSedationCodes(SedationStatus status) {
+                return !canHaveSedationCodes(status);
         }
 
         public static SedationStatus determineSedationStatus(int sedationTime,

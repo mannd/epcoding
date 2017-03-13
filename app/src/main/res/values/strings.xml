@@ -27,6 +27,13 @@
     <string name="all_addons_verbose_error_message">Add-on codes must only be added to regular codes.</string>
     <string name="no_mapping_codes_message">No mapping codes for ablation.</string>
     <string name="no_mapping_codes_verbose_message">You should be able to code 2D or 3D mapping for this kind of ablation.</string>
+    <string name="unassigned_sedation_message">No sedation codes.</string>
+    <string name="unassigned_sedation_verbose_message">Did you supervise sedation? Sedation codes
+    are no longer bundled with the procedure codes.</string>
+    <string name="no_sedation_used_message">Procedure was performed without sedation</string>
+    <string name="short_sedation_time_message">No sedation codes as sedation time was &lt; 10 minutes.</string>
+    <string name="sedation_other_md_message">Sedation performed by other MD</string>
+    <string name="sedation_other_md_verbose_message">Procedural MD should not submit sedation coding. Sedation coding must be submitted by other MD</string>
     <string name="afb_ablation_help_text">AFB ablation includes comprehensive EP testing, including LA
 	    recording and pacing.  It also includes transseptal
 	    catheterization, therefore these codes cannot be added on.

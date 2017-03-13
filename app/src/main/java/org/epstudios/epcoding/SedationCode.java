@@ -59,7 +59,7 @@ public class SedationCode extends Code {
                                             boolean patientOver5,
                                             SedationStatus status) {
         List<Code> codes = new ArrayList<>();
-        if (SedationStatus.hasNoSedationCodes(status)) {
+        if (SedationStatus.cannotHaveSedationCodes(status)) {
             return codes;
         }
         if (sedationTime >= 10) {
