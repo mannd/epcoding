@@ -263,12 +263,10 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 	}
 
 	private void displayResult() {
-		// FIXME: below
 		Set<String> codeNumbers = loadCodeNumbers();
 		summarizeCoding(codeNumbers);
 	}
 
-	// TODO: need to have preferences here too
 	private void summarizeCoding(Set<String> codeNumbers) {
 		String message = "";
 		// we will extract the raw selected codes and shoot them to the code

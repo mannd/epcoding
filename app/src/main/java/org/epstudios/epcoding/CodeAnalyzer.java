@@ -51,14 +51,12 @@ class CodeAnalyzer {
 	private boolean noAnalysis = false;
 
 	// Note unicode doesn't consistently work on different Android devices.
-	// Use ASCII! Maybe will work in iOS?
-	// TODO: test unicode on all android devices
 	private static String WARNING = "! "; // ?? or \u26A0 or ! in triangle
 	private static String ERROR = "!! "; // \u2620 or \u24CD (skull, x)
 	private static String OK = ""; // \u263A smiley face
-	private final static String UNICODE_WARNING = "\uD83D\uDE16";	//"\u26A0";
+	private final static String UNICODE_WARNING = "\uD83D\uDE16";
 	private final static String UNICODE_ERROR = "\uD83D\uDE31";
-	private final static String UNICODE_OK = "\uD83D\uDE00";		//"\u263A";
+	private final static String UNICODE_OK = "\uD83D\uDE00";
 	private final static String ASCII_WARNING = "! ";
 	private final static String ASCII_ERROR = "!! ";
 	private final static String ASCII_OK = "";
@@ -112,7 +110,10 @@ class CodeAnalyzer {
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("33270", "33271"), DEFAULT_DUPLICATE_ERROR));
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
-				.asList("0389T", "0390T"), DEFAULT_DUPLICATE_ERROR));
+				.asList("0389T", "0390T", "0391T"), DEFAULT_DUPLICATE_ERROR));
+		// don't use one lead and 2 lead revision together
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR,
+				Arrays.asList("33218", "33220"), DEFAULT_DUPLICATE_ERROR));
 		return codeErrors;
 	}
 
@@ -305,9 +306,9 @@ class CodeAnalyzer {
 		message += getErrorCodesFirstCodeNeedsOtherCodes(codeNumberSet);
 		message += evaluateModifiers(codeNumberSet);
 		message += evaluateSedationStatus(codeNumberSet);
-		if (message.length() == 0) // no errors!
-			message = getMessage(OK, R.string.no_code_errors_message,
-					R.string.empty_message);
+		if (message.length() == 0) {
+			message = getMessage(OK, R.string.no_code_errors_message, R.string.empty_message);
+		}
 		return message;
 	}
 

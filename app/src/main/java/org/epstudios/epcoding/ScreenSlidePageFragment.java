@@ -201,8 +201,6 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                         mPageNumber + 1));
         TextView headingText = (TextView) rootView
                 .findViewById(R.id.slide_help_text);
-        // FIXME: changed
-        //checkChanged();
         switch (mPageNumber) {
             case 0:
                 headingText.setText(getString(R.string.slide_step1_heading_text));

@@ -41,8 +41,7 @@ import static org.epstudios.epcoding.Constants.EPCODING;
 
 public class ModifierActivity extends BasicActionBarActivity implements View.OnClickListener {
 
-    // TODO: set false for testing wizard, should be false in Procedures
-    private boolean saveAddedModifiersToPrefs = true;
+    private boolean saveAddedModifiersToPrefs;
 
     private Code code;
     private Set<Modifier> modifierSet;

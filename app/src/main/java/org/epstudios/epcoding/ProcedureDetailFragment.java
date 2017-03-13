@@ -58,6 +58,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import static org.epstudios.epcoding.Constants.ACTIVE_CODE_NUMBER;
 import static org.epstudios.epcoding.Constants.AGE;
 import static org.epstudios.epcoding.Constants.BUNDLE_SEDATION_AGE;
 import static org.epstudios.epcoding.Constants.BUNDLE_SEDATION_SAME_MD;
@@ -66,6 +67,7 @@ import static org.epstudios.epcoding.Constants.BUNDLE_SEDATION_TIME;
 import static org.epstudios.epcoding.Constants.EPCODING;
 import static org.epstudios.epcoding.Constants.MODIFIER_REQUEST_CODE;
 import static org.epstudios.epcoding.Constants.SAME_MD;
+import static org.epstudios.epcoding.Constants.SAVE_TEMP_ADDED_MODIFIERS;
 import static org.epstudios.epcoding.Constants.SEDATION_REQUEST_CODE;
 import static org.epstudios.epcoding.Constants.SEDATION_STATUS;
 import static org.epstudios.epcoding.Constants.TIME;
@@ -397,14 +399,14 @@ public class ProcedureDetailFragment extends Fragment implements
             codeCheckBox.setCode(codes[i]);
             codeCheckBoxMap.put(codes[i].getCodeNumber(), codeCheckBox);
             // add long click listener to open modifier dialog
-            // TODO: Note that Primary and disabled codes can't be long-clicked
             // because they are disabled.  This is an Android limitation, though
             // any code can be long clicked and modified in the all codes module.
             codeCheckBox.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
                     Intent intent = new Intent(getActivity(), ModifierActivity.class);
-                    intent.putExtra("ACTIVE_CODE_NUMBER", codeCheckBox.getCodeNumber());
+                    intent.putExtra(ACTIVE_CODE_NUMBER, codeCheckBox.getCodeNumber());
+                    intent.putExtra(SAVE_TEMP_ADDED_MODIFIERS, false);
                     startActivityForResult(intent, MODIFIER_REQUEST_CODE);
                     return true;
                 }
