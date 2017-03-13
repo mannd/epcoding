@@ -23,11 +23,17 @@
         android:key="@string/code_check_all_codes_key"
         android:summary="@string/code_check_all_codes_summary"
         android:title="@string/code_check_all_codes_label" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/use_unicode_symbols_key"
+        android:summary="@string/use_unicode_symbols_summary"
+        android:title="@string/use_unicode_symbols_label" />
+
 
     <ListPreference
-        android:defaultValue="Verbose"
         android:entries="@array/verbosity_names"
         android:entryValues="@array/verbosity_values"
+        android:defaultValue="@string/verbose_label"
         android:key="@string/code_verbosity_key"
         android:title="@string/code_analysis_verbosity_label" />
 

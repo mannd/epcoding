@@ -30,12 +30,15 @@ This file is part of EP Coding.
 package org.epstudios.epcoding;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static org.epstudios.epcoding.Constants.EPCODING;
 
 class CodeAnalyzer {
 	private final Code[] codes;
@@ -50,9 +53,17 @@ class CodeAnalyzer {
 	// Note unicode doesn't consistently work on different Android devices.
 	// Use ASCII! Maybe will work in iOS?
 	// TODO: test unicode on all android devices
-	private final static String WARNING = "\u26A0 "; // ?? or \u26A0 or ! in triangle
-	private final static String ERROR = "\u2620 "; // \u2620 or \u24CD (skull, x)
-	private final static String OK = "\u263A"; // \u263A smiley face
+	private static String WARNING = "! "; // ?? or \u26A0 or ! in triangle
+	private static String ERROR = "!! "; // \u2620 or \u24CD (skull, x)
+	private static String OK = ""; // \u263A smiley face
+	private final static String UNICODE_WARNING = "\u26A0";
+	private final static String UNICODE_ERROR = "\u24CD";
+	private final static String UNICODE_OK = "\u263A";
+	private final static String ASCII_WARNING = "! ";
+	private final static String ASCII_ERROR = "!! ";
+	private final static String ASCII_OK = "";
+
+	boolean useUnicode = true;
 
 	// some special code lists
 	private static final List<String> mappingCodes = Arrays.asList("93609",
@@ -177,6 +188,19 @@ class CodeAnalyzer {
 		return codeErrors;
 	}
 
+	private void setUpErrorSymbols(boolean useUnicode) {
+		if (useUnicode) {
+			WARNING = UNICODE_WARNING;
+			ERROR = UNICODE_ERROR;
+			OK = UNICODE_OK;
+		}
+		else {
+			WARNING = ASCII_WARNING;
+			ERROR = ASCII_ERROR;
+			OK = ASCII_OK;
+		}
+	}
+
 	public CodeAnalyzer(final Code[] codes, final boolean noPrimaryCodes,
 						final boolean noSecondaryCodes,
 						final boolean moduleHasNoSecondaryCodesNeedingChecking,
@@ -188,6 +212,7 @@ class CodeAnalyzer {
 		this.moduleHasNoSecondaryCodesNeedingChecking = moduleHasNoSecondaryCodesNeedingChecking;
 		this.sedationStatus = status;
 		this.context = context;
+		setUpErrorSymbols(useUnicode);
 	}
 
 	public CodeAnalyzer(final List<Code> codes, final boolean noPrimaryCodes,
@@ -201,6 +226,7 @@ class CodeAnalyzer {
 		this.moduleHasNoSecondaryCodesNeedingChecking = moduleHasNoSecondaryCodesNeedingChecking;
 		this.sedationStatus = status;
 		this.context = context;
+		setUpErrorSymbols(useUnicode);
 	}
 
 	// this simpler constructor used with code wizard
@@ -211,6 +237,7 @@ class CodeAnalyzer {
 		this.noSecondaryCodes = false;
 		this.moduleHasNoSecondaryCodesNeedingChecking = true;
 		this.sedationStatus = status;
+		setUpErrorSymbols(useUnicode);
 	}
 
 	public CodeAnalyzer(final List<Code> codes, final SedationStatus status, final Context context) {
@@ -220,6 +247,7 @@ class CodeAnalyzer {
 		this.noSecondaryCodes = false;
 		this.moduleHasNoSecondaryCodesNeedingChecking = true;
 		this.sedationStatus = status;
+		setUpErrorSymbols(useUnicode);
 	}
 
 	public void setVerbose(boolean verbose) {

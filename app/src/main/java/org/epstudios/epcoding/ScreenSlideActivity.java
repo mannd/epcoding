@@ -80,6 +80,17 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 	 */
 	private PagerAdapter mPagerAdapter;
 
+	// Settings
+	// boolean plusShownInDisplay; // show plus in main display
+	// boolean allowChangingPrimaryCodes;
+	private boolean plusShownInSummary;
+	private boolean codeDescriptionInSummary;
+	private boolean descriptionTruncatedInSummary;
+	private boolean codeCheckAllCodes;
+	private String codeVerbosity;
+	private boolean useUnicodeSymbols;
+
+
 	private static final String[] revisionCodeNumbers = {"33215", "33226", "33218",
 			"33220", "33222", "33223"};
 
@@ -164,6 +175,8 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 
 			}
 		});
+
+        loadSettings();
 
 		Code[] removalCodes = Codes.getCodes(removalCodeNumbers);
 		Code[] addingCodes = Codes.getCodes(addingCodeNumbers);
@@ -257,6 +270,7 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 		summarizeCoding(codeNumbers);
 	}
 
+	// TODO: need to have preferences here too
 	private void summarizeCoding(Set<String> codeNumbers) {
 		String message = "";
 		// we will extract the raw selected codes and shoot them to the code
@@ -266,14 +280,16 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 		Code[] codes = new Code[codeNumbers.size()];
 		for (int i = 0; i < codes.length; ++i) {
 			codes[i] = Codes.getCode(codeNumberArray[i]);
-			message += codes[i].getCodeFirstFormatted() + "\n";
+			//message += codes[i].getCodeFirstFormatted() + "\n";
+			message += getSummaryFromCode(codes[i]);
 		}
 		List<Code> allCodes = new ArrayList<>();
 		allCodes.addAll(Arrays.asList(codes));
 		sedationCodes = SedationCode.sedationCoding(sedationTime, sameMD,
 				ageOver5, sedationStatus);
 		for (Code code : sedationCodes) {
-			message += code.getCodeFirstFormatted() + "\n";
+			//message += code.getCodeFirstFormatted() + "\n";
+			message += getSummaryFromCode(code);
 		}
 		allCodes.addAll(sedationCodes);
 		message += Utilities.simpleCodeAnalysis(allCodes, sedationStatus, this);
@@ -345,5 +361,35 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 		bundle.putInt(WIZARD_TIME, sedationTime);
 		bundle.putString(WIZARD_SEDATION_STATUS, sedationStatus.toString());
 
+	}
+
+	private void loadSettings() {
+		SharedPreferences sharedPreferences = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		// plusShownInDisplay = sharedPreferences.getBoolean(
+		// "show_plus_code_display", true);
+		// allowChangingPrimaryCodes = sharedPreferences.getBoolean(
+		// "allow_changing_primary_codes", false);
+		plusShownInSummary = sharedPreferences.getBoolean(
+				getString(R.string.show_plus_code_summary_key), true);
+		codeDescriptionInSummary = sharedPreferences.getBoolean(
+				getString(R.string.show_details_code_summary_key), false);
+		descriptionTruncatedInSummary = sharedPreferences
+				.getBoolean(
+						getString(R.string.truncate_long_descriptions_code_summary_key),
+						false);
+		codeCheckAllCodes = sharedPreferences.getBoolean(
+				getString(R.string.code_check_all_codes_key), false);
+		codeVerbosity = sharedPreferences
+				.getString("code_verbosity", "Verbose");
+		useUnicodeSymbols = sharedPreferences.getBoolean(
+				getString(R.string.use_unicode_symbols_key), false);
+	}
+
+	private String getSummaryFromCode(Code code) {
+		code.setPlusShown(plusShownInSummary);
+		code.setDescriptionShown(codeDescriptionInSummary);
+		code.setDescriptionShortened(descriptionTruncatedInSummary);
+		return code.getCodeFirstFormatted() + "\n";
 	}
 }

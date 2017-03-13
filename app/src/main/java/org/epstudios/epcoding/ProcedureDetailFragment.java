@@ -103,6 +103,7 @@ public class ProcedureDetailFragment extends Fragment implements
     private boolean descriptionTruncatedInSummary;
     private boolean codeCheckAllCodes;
     private String codeVerbosity;
+    private boolean useUnicodeSymbols;
     // shorten description based on screen width?
 
     // don't try to refactor these using Utilities.createCheckBoxLayoutAndCodeMap,
@@ -625,5 +626,7 @@ public class ProcedureDetailFragment extends Fragment implements
                 getString(R.string.code_check_all_codes_key), false);
         codeVerbosity = sharedPreferences
                 .getString("code_verbosity", "Verbose");
+        useUnicodeSymbols = sharedPreferences.getBoolean(
+                getString(R.string.use_unicode_symbols_key), false);
     }
 }
