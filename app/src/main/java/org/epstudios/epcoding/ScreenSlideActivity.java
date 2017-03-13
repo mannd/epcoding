@@ -173,11 +173,13 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 
         loadSettings();
 
+		Code[] revisionCodes = Codes.getCodes(revisionCodeNumbers);
 		Code[] removalCodes = Codes.getCodes(removalCodeNumbers);
 		Code[] addingCodes = Codes.getCodes(addingCodeNumbers);
 		Code[] finalCodes = Codes.getCodes(Codes.icdReplacementSecondaryCodeNumbers);
 
 		List<Code> allCodes = new ArrayList<>();
+		allCodes.addAll(Arrays.asList(revisionCodes));
 		allCodes.addAll(Arrays.asList(removalCodes));
 		allCodes.addAll(Arrays.asList(addingCodes));
 		allCodes.addAll(Arrays.asList(finalCodes));
@@ -198,6 +200,7 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 			// remove old selections when starting wizard
 			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 			SharedPreferences.Editor editor = prefs.edit();
+			editor.remove("wizardrevisioncodes");
 			editor.remove("wizardremovalcodes");
 			editor.remove("wizardaddingcodes");
 			editor.remove("wizardfinalcodes");
@@ -298,6 +301,8 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 				.getDefaultSharedPreferences(this);
 		Set<String> defaultStringSet = new TreeSet<>();
 		Set<String> codeNumbersChecked = new TreeSet<>();
+		codeNumbersChecked.addAll(prefs.getStringSet("wizardrevisioncodes",
+				defaultStringSet));
 		codeNumbersChecked.addAll(prefs.getStringSet("wizardremovalcodes",
 				defaultStringSet));
 		codeNumbersChecked.addAll(prefs.getStringSet("wizardaddingcodes",

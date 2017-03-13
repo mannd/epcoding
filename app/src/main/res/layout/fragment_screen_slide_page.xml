@@ -52,6 +52,12 @@
             android:text="Sedation" />
 
         <LinearLayout
+            android:id="@+id/revision_hardware"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <LinearLayout
             android:id="@+id/removed_hardware"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

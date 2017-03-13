@@ -170,7 +170,7 @@
     <string name="slide_step2a_heading_text">So we don\'t forget, add sedation coding now.</string>
     <string name="slide_step3_heading_text">Is this a lead revision or repair or a pocket revision
         without adding or removing any hardware?  If so use one of the codes below and
-        exit the wizard by using the back button on your device.  Otherwise
+        then skip forward to the final page of this wizard.  Otherwise
         go on to the next step.</string>
     <string name="slide_step4_heading_text">OK. We have addressed the simple scenarios.
         What\'s left are lead and generator removals/extractions,

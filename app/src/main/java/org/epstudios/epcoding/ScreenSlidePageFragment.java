@@ -75,6 +75,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
             "33249", "33216", "33217", "33225", "33212", "33213", "33240",
             "33230", "33231"};
 
+    private Map<String, CodeCheckBox> revisionCheckBoxMap;
     private Map<String, CodeCheckBox> removalCheckBoxMap;
     private Map<String, CodeCheckBox> addingCheckBoxMap;
     private Map<String, CodeCheckBox> finalCheckBoxMap;
@@ -87,6 +88,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
     private int mPageNumber;
     private Context context;
     private ScreenSlideActivity parent;
+    private Code[] revisionCodes;
     private Code[] removalCodes;
     private Code[] addingCodes;
     private Code[] finalCodes;
@@ -133,6 +135,9 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         int layout = R.layout.fragment_screen_slide_page;
         ViewGroup rootView = (ViewGroup) inflater.inflate(layout, container,
                 false);
+        LinearLayout revisionCheckBoxLayout = (LinearLayout) rootView
+                .findViewById(R.id.revision_hardware);
+        revisionCheckBoxLayout.setVisibility(View.GONE);
         LinearLayout removedCheckBoxLayout = (LinearLayout) rootView
                 .findViewById(R.id.removed_hardware);
         removedCheckBoxLayout.setVisibility(View.GONE);
@@ -147,11 +152,13 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         sedationButton.setOnClickListener(this);
         sedationButton.setVisibility(View.GONE);
 
+        revisionCodes = Codes.getCodes(revisionCodeNumbers);
         removalCodes = Codes.getCodes(removalCodeNumbers);
         addingCodes = Codes.getCodes(addingCodeNumbers);
         finalCodes = Codes.getCodes(Codes.icdReplacementSecondaryCodeNumbers);
 
         allCodes = new ArrayList<>();
+        allCodes.addAll(Arrays.asList(revisionCodes));
         allCodes.addAll(Arrays.asList(removalCodes));
         allCodes.addAll(Arrays.asList(addingCodes));
         allCodes.addAll(Arrays.asList(finalCodes));
@@ -169,6 +176,9 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         sameMDPerformsSedation = parent.isSameMD();
         sedationTime = parent.getSedationTime();
 
+        revisionCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(
+                revisionCodes, revisionCheckBoxLayout, context, true, true, this);
+        addCheckMarkListener(revisionCheckBoxMap);
         removalCheckBoxMap = Utilities.createCheckBoxLayoutAndCodeMap(
                 removalCodes, removedCheckBoxLayout, context, true, true, this);
         addCheckMarkListener(removalCheckBoxMap);
@@ -180,6 +190,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         addCheckMarkListener(finalCheckBoxMap);
 
         allCheckBoxMapList = new ArrayList<>();
+        allCheckBoxMapList.add(revisionCheckBoxMap);
         allCheckBoxMapList.add(removalCheckBoxMap);
         allCheckBoxMapList.add(addingCheckBoxMap);
         allCheckBoxMapList.add(finalCheckBoxMap);
@@ -204,12 +215,8 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                 sedationButton.setVisibility(View.VISIBLE);
                 break;
             case 3:
-                Code[] codes = Codes.getCodes(revisionCodeNumbers);
-                String text = getString(R.string.slide_step3_heading_text) + "\n\n";
-                for (Code code : codes) {
-                    text += code.getUnformattedNumberFirst() + "\n";
-                }
-                headingText.setText(text);
+                headingText.setText(getString(R.string.slide_step3_heading_text));
+                revisionCheckBoxLayout.setVisibility(View.VISIBLE);
                 break;
             case 4:
                 headingText.setText(getString(R.string.slide_step4_heading_text));
@@ -229,6 +236,8 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
             // restore state
             Log.d(EPCODING, "ScreenSlidePageFragment restore state from bundle Page "
                     + getPageNumber());
+            boolean[] revisionCodesState = savedInstanceState
+                    .getBooleanArray("revision_codes");
             boolean[] removalCodesState = savedInstanceState
                     .getBooleanArray("removal_codes");
             boolean[] addingCodesState = savedInstanceState
@@ -236,6 +245,9 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
             boolean[] finalCodesState = savedInstanceState
                     .getBooleanArray("final_codes");
             int i = 0;
+            for (Map.Entry<String, CodeCheckBox> entry : revisionCheckBoxMap.entrySet())
+                entry.getValue().setChecked(revisionCodesState != null ? revisionCodesState[i++] : false);
+            i = 0;
             for (Map.Entry<String, CodeCheckBox> entry : removalCheckBoxMap
                     .entrySet())
                 entry.getValue().setChecked(removalCodesState != null ? removalCodesState[i++] : false);
@@ -290,6 +302,9 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                 .getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor prefsEditor = prefs.edit();
         switch (mPageNumber) {
+            case 3:
+                prefsEditor.putStringSet("wizardrevisioncodes",
+                        getCheckBoxSet(revisionCheckBoxMap));
             case 4:
                 prefsEditor.putStringSet("wizardremovalcodes",
                         getCheckBoxSet(removalCheckBoxMap));
@@ -320,8 +335,13 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         super.onSaveInstanceState(savedInstanceState);
         Log.d(EPCODING, "ScreenSlidePageFragment onSaveInstanceState page " + getPageNumber());
         // store check marks here
-        boolean[] removalCodeState = new boolean[removalCheckBoxMap.size()];
+        boolean[] revisionCodeState = new boolean[revisionCheckBoxMap.size()];
         int i = 0;
+        for (Map.Entry<String, CodeCheckBox> entry : revisionCheckBoxMap
+                .entrySet())
+            revisionCodeState[i++] = entry.getValue().isChecked();
+        boolean[] removalCodeState = new boolean[removalCheckBoxMap.size()];
+        i = 0;
         for (Map.Entry<String, CodeCheckBox> entry : removalCheckBoxMap
                 .entrySet())
             removalCodeState[i++] = entry.getValue().isChecked();
@@ -336,6 +356,8 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                 .entrySet())
             finalCodeState[i++] = entry.getValue().isChecked();
         switch (mPageNumber) {
+            case 3:
+                savedInstanceState.putBooleanArray("revision_codes", revisionCodeState);
             case 4:
                 savedInstanceState.putBooleanArray("removal_codes", removalCodeState);
                 break;
