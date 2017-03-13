@@ -119,10 +119,10 @@ class Utilities {
             public void onClick(DialogInterface dialogInterface, int i) {
                 Log.d(EPCODING, "click Add");
                 Intent intent = new Intent(context, SedationActivity.class);
-                intent.putExtra("TIME", sedationTime);
-                intent.putExtra("AGE", patientOver5YrsOld);
-                intent.putExtra("SAME_MD", sameMDPerformsSedation);
-                intent.putExtra("SEDATION_STATUS", sedationStatus);
+                intent.putExtra(Constants.TIME, sedationTime);
+                intent.putExtra(Constants.AGE, patientOver5YrsOld);
+                intent.putExtra(Constants.SAME_MD, sameMDPerformsSedation);
+                intent.putExtra(Constants.SEDATION_STATUS, sedationStatus);
                 fragment.startActivityForResult(intent, SEDATION_REQUEST_CODE);
 
             }

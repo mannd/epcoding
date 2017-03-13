@@ -185,13 +185,13 @@ public class Code {
     public void addModifier(Modifier modifier) {
         // don't duplicate modifiers
         for (Modifier m : modifiers) {
-            if (Objects.equals(m.getNumber(), modifier.getNumber())) {
+            if (m.getNumber().equals(modifier.getNumber())) {
                 return;
             }
         }
         // Modifier 26 is a "pricing modifier" and must have first position in modifiers.
         // There are other such modifiers, but none in the small subset of modifiers used here.
-        if (Objects.equals(modifier.getNumber(), "26")) {
+        if (modifier.getNumber().equals("26")) {
             modifiers.add(0, modifier);
         }
         else {
