@@ -28,7 +28,6 @@ import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -38,10 +37,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static org.epstudios.epcoding.Constants.EPCODING;
-import static org.epstudios.epcoding.Constants.HAS_SEDATION;
-import static org.epstudios.epcoding.Constants.LOAD_MODIFIERS;
-import static org.epstudios.epcoding.Constants.SEDATION_STATUS;
 import static org.epstudios.epcoding.Constants.WIZARD_AGE;
 import static org.epstudios.epcoding.Constants.WIZARD_SAME_MD;
 import static org.epstudios.epcoding.Constants.WIZARD_SEDATION_STATUS;
@@ -292,7 +287,7 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 			message += getSummaryFromCode(code);
 		}
 		allCodes.addAll(sedationCodes);
-		message += Utilities.simpleCodeAnalysis(allCodes, sedationStatus, this);
+		message += Utilities.simpleCodeAnalysis(allCodes, sedationStatus, useUnicodeSymbols, this);
 		displayResult(getString(R.string.coding_summary_dialog_label), message,
 				this);
 	}

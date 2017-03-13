@@ -530,7 +530,7 @@ public class ProcedureDetailFragment extends Fragment implements
         message += Utilities.codeAnalysis(allCodes, noPrimaryCodes,
                 noSecondaryCodes, moduleHasNoSecondaryCodesNeedingChecking,
                 noAnalysis, codeVerbosity.equals("Verbose"),
-                sedationStatus, context);
+                sedationStatus, useUnicodeSymbols, context);
         Utilities.displayMessage(
                 getString(R.string.coding_summary_dialog_label), message,
                 context);

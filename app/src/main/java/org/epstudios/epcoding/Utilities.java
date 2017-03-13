@@ -9,20 +9,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import static org.epstudios.epcoding.Constants.ACTIVE_CODE_NUMBER;
-import static org.epstudios.epcoding.Constants.AGE;
 import static org.epstudios.epcoding.Constants.EPCODING;
 import static org.epstudios.epcoding.Constants.MODIFIER_REQUEST_CODE;
-import static org.epstudios.epcoding.Constants.SAME_MD;
 import static org.epstudios.epcoding.Constants.SAVE_TEMP_ADDED_MODIFIERS;
 import static org.epstudios.epcoding.Constants.SEDATION_REQUEST_CODE;
-import static org.epstudios.epcoding.Constants.SEDATION_STATUS;
-import static org.epstudios.epcoding.Constants.TIME;
 
 class Utilities {
 
@@ -54,43 +49,22 @@ class Utilities {
         return map;
     }
 
-    public static String codeAnalysis(final Code[] codes,
-                                      final boolean noPrimaryCodes, final boolean noSecondaryCodes,
-                                      final boolean moduleHasNoSecondaryCodes, boolean noAnalysis,
-                                      boolean verbose, SedationStatus sedationStatus,
-                                      Context context) {
-        CodeAnalyzer analyzer = new CodeAnalyzer(codes, noPrimaryCodes,
-                noSecondaryCodes, moduleHasNoSecondaryCodes, sedationStatus, context);
-        // no analysis for all procedures module
-        analyzer.setNoAnalysis(noAnalysis);
-        analyzer.setVerbose(verbose);
-        return analyzer.analysis();
-    }
-
     public static String codeAnalysis(final List<Code> codes,
                                       final boolean noPrimaryCodes, final boolean noSecondaryCodes,
                                       final boolean moduleHasNoSecondaryCodes, boolean noAnalysis,
                                       boolean verbose, SedationStatus sedationStatus,
-                                      Context context) {
+                                      boolean useUnicodeSymbols, Context context) {
         CodeAnalyzer analyzer = new CodeAnalyzer(codes, noPrimaryCodes,
-                noSecondaryCodes, moduleHasNoSecondaryCodes, sedationStatus, context);
+                noSecondaryCodes, moduleHasNoSecondaryCodes, sedationStatus, useUnicodeSymbols, context);
         // no analysis for all procedures module
         analyzer.setNoAnalysis(noAnalysis);
         analyzer.setVerbose(verbose);
         return analyzer.analysis();
     }
 
-    public static String simpleCodeAnalysis(final Code[] codes, SedationStatus sedationStatus,
-                                            Context context) {
-        CodeAnalyzer analyzer = new CodeAnalyzer(codes, sedationStatus, context);
-        analyzer.setVerbose(true); // if you are using the wizard you need
-        // verbose messages.
-        return analyzer.simpleAnalysis();
-    }
-
     public static String simpleCodeAnalysis(final List<Code> codes, SedationStatus sedationStatus,
-                                            Context context) {
-        CodeAnalyzer analyzer = new CodeAnalyzer(codes, sedationStatus, context);
+                                            boolean useUnicodeSymbols, Context context) {
+        CodeAnalyzer analyzer = new CodeAnalyzer(codes, sedationStatus, useUnicodeSymbols, context);
         analyzer.setVerbose(true); // if you are using the wizard you need
         // verbose messages.
         return analyzer.simpleAnalysis();

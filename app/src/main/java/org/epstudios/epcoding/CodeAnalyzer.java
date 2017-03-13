@@ -63,8 +63,6 @@ class CodeAnalyzer {
 	private final static String ASCII_ERROR = "!! ";
 	private final static String ASCII_OK = "";
 
-	boolean useUnicode = true;
-
 	// some special code lists
 	private static final List<String> mappingCodes = Arrays.asList("93609",
 			"93613");
@@ -205,49 +203,49 @@ class CodeAnalyzer {
 						final boolean noSecondaryCodes,
 						final boolean moduleHasNoSecondaryCodesNeedingChecking,
 						final SedationStatus status,
-						final Context context) {
+						boolean useUnicodeSymbols, final Context context) {
 		this.codes = codes;
 		this.noPrimaryCodes = noPrimaryCodes;
 		this.noSecondaryCodes = noSecondaryCodes;
 		this.moduleHasNoSecondaryCodesNeedingChecking = moduleHasNoSecondaryCodesNeedingChecking;
 		this.sedationStatus = status;
 		this.context = context;
-		setUpErrorSymbols(useUnicode);
+		setUpErrorSymbols(useUnicodeSymbols);
 	}
 
 	public CodeAnalyzer(final List<Code> codes, final boolean noPrimaryCodes,
 						final boolean noSecondaryCodes,
 						final boolean moduleHasNoSecondaryCodesNeedingChecking,
 						final SedationStatus status,
-						final Context context) {
+						boolean useUnicodeSymbols, final Context context) {
 		this.codes = codes.toArray(new Code[codes.size()]);
 		this.noPrimaryCodes = noPrimaryCodes;
 		this.noSecondaryCodes = noSecondaryCodes;
 		this.moduleHasNoSecondaryCodesNeedingChecking = moduleHasNoSecondaryCodesNeedingChecking;
 		this.sedationStatus = status;
 		this.context = context;
-		setUpErrorSymbols(useUnicode);
+		setUpErrorSymbols(useUnicodeSymbols);
 	}
 
 	// this simpler constructor used with code wizard
-	public CodeAnalyzer(final Code[] codes, final SedationStatus status, final Context context) {
+	public CodeAnalyzer(final Code[] codes, final SedationStatus status, boolean useUnicodeSymbols, final Context context) {
 		this.codes = codes;
 		this.context = context;
 		this.noPrimaryCodes = false;
 		this.noSecondaryCodes = false;
 		this.moduleHasNoSecondaryCodesNeedingChecking = true;
 		this.sedationStatus = status;
-		setUpErrorSymbols(useUnicode);
+		setUpErrorSymbols(useUnicodeSymbols);
 	}
 
-	public CodeAnalyzer(final List<Code> codes, final SedationStatus status, final Context context) {
+	public CodeAnalyzer(final List<Code> codes, final SedationStatus status, boolean useUnicodeSymbols, final Context context) {
 		this.codes = codes.toArray(new Code[codes.size()]);
 		this.context = context;
 		this.noPrimaryCodes = false;
 		this.noSecondaryCodes = false;
 		this.moduleHasNoSecondaryCodesNeedingChecking = true;
 		this.sedationStatus = status;
-		setUpErrorSymbols(useUnicode);
+		setUpErrorSymbols(useUnicodeSymbols);
 	}
 
 	public void setVerbose(boolean verbose) {
