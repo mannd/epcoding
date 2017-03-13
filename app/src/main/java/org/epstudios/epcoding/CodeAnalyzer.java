@@ -56,9 +56,9 @@ class CodeAnalyzer {
 	private static String WARNING = "! "; // ?? or \u26A0 or ! in triangle
 	private static String ERROR = "!! "; // \u2620 or \u24CD (skull, x)
 	private static String OK = ""; // \u263A smiley face
-	private final static String UNICODE_WARNING = "\u26A0";
-	private final static String UNICODE_ERROR = "\u24CD";
-	private final static String UNICODE_OK = "\u263A";
+	private final static String UNICODE_WARNING = "\uD83D\uDE16";	//"\u26A0";
+	private final static String UNICODE_ERROR = "\uD83D\uDE31";
+	private final static String UNICODE_OK = "\uD83D\uDE00";		//"\u263A";
 	private final static String ASCII_WARNING = "! ";
 	private final static String ASCII_ERROR = "!! ";
 	private final static String ASCII_OK = "";
