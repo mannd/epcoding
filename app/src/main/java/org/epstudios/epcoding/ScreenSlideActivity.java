@@ -28,13 +28,19 @@ import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+
+import static org.epstudios.epcoding.Constants.WIZARD_AGE;
+import static org.epstudios.epcoding.Constants.WIZARD_SAME_MD;
+import static org.epstudios.epcoding.Constants.WIZARD_SEDATION_STATUS;
+import static org.epstudios.epcoding.Constants.WIZARD_TIME;
 
 /**
  * Demonstrates a "screen-slide" animation using a {@link ViewPager}. Because
@@ -51,11 +57,12 @@ import java.util.TreeSet;
  * 
  * @see ScreenSlidePageFragment
  */
-public class ScreenSlideActivity extends ActionBarActivity {
+public class ScreenSlideActivity extends SimpleActionBarActivity {
+
 	/**
 	 * The number of pages (wizard steps) to show in this demo.
 	 */
-	private static final int NUM_PAGES = 6;
+	private static final int NUM_PAGES = 7;
 
 	/**
 	 * The pager widget, which handles animation and allows swiping horizontally
@@ -68,18 +75,73 @@ public class ScreenSlideActivity extends ActionBarActivity {
 	 */
 	private PagerAdapter mPagerAdapter;
 
+	// Settings
+	// boolean plusShownInDisplay; // show plus in main display
+	// boolean allowChangingPrimaryCodes;
+	private boolean plusShownInSummary;
+	private boolean codeDescriptionInSummary;
+	private boolean descriptionTruncatedInSummary;
+	private boolean codeCheckAllCodes;
+	private String codeVerbosity;
+	private boolean useUnicodeSymbols;
+
+
+	private static final String[] revisionCodeNumbers = {"33215", "33226", "33218",
+			"33220", "33222", "33223"};
+
+	private static final String[] removalCodeNumbers = {"33233", "33241", "33234",
+			"33235", "33244"};
+
+	private static final String[] addingCodeNumbers = {"33206", "33207", "33208",
+			"33249", "33216", "33217", "33225", "33212", "33213", "33240",
+			"33230", "33231"};
+
+	private boolean sameMD = true;
+	private boolean ageOver5 = true;
+	private int sedationTime = 0;
+	private SedationStatus sedationStatus = SedationStatus.Unassigned;
+	private List<Code> sedationCodes = new ArrayList<>();
+
+
+	public boolean isSameMD() {
+		return sameMD;
+	}
+
+	public void setSameMD(boolean sameMD) {
+		this.sameMD = sameMD;
+	}
+
+	public boolean isAgeOver5() {
+		return ageOver5;
+	}
+
+	public void setAgeOver5(boolean ageOver5) {
+		this.ageOver5 = ageOver5;
+	}
+
+	public int getSedationTime() {
+		return sedationTime;
+	}
+
+	public void setSedationTime(int sedationTime) {
+		this.sedationTime = sedationTime;
+	}
+
+	public SedationStatus getSedationStatus() {
+		return sedationStatus;
+	}
+
+	public void setSedationStatus(SedationStatus sedationStatus) {
+		this.sedationStatus = sedationStatus;
+	}
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_screen_slide);
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
-
-        // Instantiate a ViewPager and a PagerAdapter.
+		initToolbar();
+		// Instantiate a ViewPager and a PagerAdapter.
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
 		mPager.setAdapter(mPagerAdapter);
@@ -95,8 +157,45 @@ public class ScreenSlideActivity extends ActionBarActivity {
 				// but for simplicity, the activity provides the actions in this
 				// sample.
 				invalidateOptionsMenu();
+
 			}
 		});
+
+        loadSettings();
+
+		Code[] revisionCodes = Codes.getCodes(revisionCodeNumbers);
+		Code[] removalCodes = Codes.getCodes(removalCodeNumbers);
+		Code[] addingCodes = Codes.getCodes(addingCodeNumbers);
+		Code[] finalCodes = Codes.getCodes(Codes.icdReplacementSecondaryCodeNumbers);
+
+		List<Code> allCodes = new ArrayList<>();
+		allCodes.addAll(Arrays.asList(revisionCodes));
+		allCodes.addAll(Arrays.asList(removalCodes));
+		allCodes.addAll(Arrays.asList(addingCodes));
+		allCodes.addAll(Arrays.asList(finalCodes));
+
+
+		if (savedInstanceState != null) {
+			sedationTime = savedInstanceState.getInt(WIZARD_TIME, sedationTime);
+			sedationStatus = SedationStatus.stringToSedationStatus(
+					savedInstanceState.getString(WIZARD_SEDATION_STATUS));
+			sameMD = savedInstanceState.getBoolean(WIZARD_SAME_MD, sameMD);
+			ageOver5 = savedInstanceState.getBoolean(WIZARD_AGE, ageOver5);
+			sedationCodes.clear();
+			sedationCodes.addAll(SedationCode.sedationCoding(sedationTime,
+					sameMD, ageOver5, sedationStatus));
+		}
+		else {
+			Codes.resetTempAddedModifiers(allCodes, this);
+			// remove old selections when starting wizard
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+			SharedPreferences.Editor editor = prefs.edit();
+			editor.remove("wizardrevisioncodes");
+			editor.remove("wizardremovalcodes");
+			editor.remove("wizardaddingcodes");
+			editor.remove("wizardfinalcodes");
+			editor.apply();
+		}
 	}
 
 	@Override
@@ -156,7 +255,6 @@ public class ScreenSlideActivity extends ActionBarActivity {
 	private void displayResult() {
 		Set<String> codeNumbers = loadCodeNumbers();
 		summarizeCoding(codeNumbers);
-
 	}
 
 	private void summarizeCoding(Set<String> codeNumbers) {
@@ -165,21 +263,34 @@ public class ScreenSlideActivity extends ActionBarActivity {
 		// analyzer, as well as check for no primary or secondary codes
 		String[] codeNumberArray = codeNumbers.toArray(new String[codeNumbers
 				.size()]);
-		Code[] code = new Code[codeNumbers.size()];
-		for (int i = 0; i < code.length; ++i) {
-			code[i] = Codes.getCode(codeNumberArray[i]);
-			message += code[i].getCodeFirstFormatted() + "\n";
+		Code[] codes = new Code[codeNumbers.size()];
+		for (int i = 0; i < codes.length; ++i) {
+			codes[i] = Codes.getCode(codeNumberArray[i]);
+			//message += codes[i].getCodeFirstFormatted() + "\n";
+			message += getSummaryFromCode(codes[i]);
 		}
-		message += Utilities.simpleCodeAnalysis(code, this);
+		List<Code> allCodes = new ArrayList<>();
+		allCodes.addAll(Arrays.asList(codes));
+		sedationCodes = SedationCode.sedationCoding(sedationTime, sameMD,
+				ageOver5, sedationStatus);
+		for (Code code : sedationCodes) {
+			//message += code.getCodeFirstFormatted() + "\n";
+			message += getSummaryFromCode(code);
+		}
+		allCodes.addAll(sedationCodes);
+		message += Utilities.simpleCodeAnalysis(allCodes, sedationStatus, useUnicodeSymbols, this);
 		displayResult(getString(R.string.coding_summary_dialog_label), message,
 				this);
 	}
 
+	// does not load sedation codes
 	private Set<String> loadCodeNumbers() {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
 		Set<String> defaultStringSet = new TreeSet<>();
 		Set<String> codeNumbersChecked = new TreeSet<>();
+		codeNumbersChecked.addAll(prefs.getStringSet("wizardrevisioncodes",
+				defaultStringSet));
 		codeNumbersChecked.addAll(prefs.getStringSet("wizardremovalcodes",
 				defaultStringSet));
 		codeNumbersChecked.addAll(prefs.getStringSet("wizardaddingcodes",
@@ -211,7 +322,7 @@ public class ScreenSlideActivity extends ActionBarActivity {
 	}
 
 	/**
-	 * A simple pager adapter that represents 6 {@link ScreenSlidePageFragment}
+	 * A simple pager adapter that represents 7 {@link ScreenSlidePageFragment}
 	 * objects, in sequence.
 	 */
 	private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
@@ -228,5 +339,45 @@ public class ScreenSlideActivity extends ActionBarActivity {
 		public int getCount() {
 			return NUM_PAGES;
 		}
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle bundle) {
+		super.onSaveInstanceState(bundle);
+		bundle.putBoolean(WIZARD_SAME_MD, sameMD);
+		bundle.putBoolean(WIZARD_AGE, ageOver5);
+		bundle.putInt(WIZARD_TIME, sedationTime);
+		bundle.putString(WIZARD_SEDATION_STATUS, sedationStatus.toString());
+
+	}
+
+	private void loadSettings() {
+		SharedPreferences sharedPreferences = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		// plusShownInDisplay = sharedPreferences.getBoolean(
+		// "show_plus_code_display", true);
+		// allowChangingPrimaryCodes = sharedPreferences.getBoolean(
+		// "allow_changing_primary_codes", false);
+		plusShownInSummary = sharedPreferences.getBoolean(
+				getString(R.string.show_plus_code_summary_key), true);
+		codeDescriptionInSummary = sharedPreferences.getBoolean(
+				getString(R.string.show_details_code_summary_key), false);
+		descriptionTruncatedInSummary = sharedPreferences
+				.getBoolean(
+						getString(R.string.truncate_long_descriptions_code_summary_key),
+						false);
+		codeCheckAllCodes = sharedPreferences.getBoolean(
+				getString(R.string.code_check_all_codes_key), false);
+		codeVerbosity = sharedPreferences
+				.getString("code_verbosity", "Verbose");
+		useUnicodeSymbols = sharedPreferences.getBoolean(
+				getString(R.string.use_unicode_symbols_key), false);
+	}
+
+	private String getSummaryFromCode(Code code) {
+		code.setPlusShown(plusShownInSummary);
+		code.setDescriptionShown(codeDescriptionInSummary);
+		code.setDescriptionShortened(descriptionTruncatedInSummary);
+		return code.getCodeFirstFormatted() + "\n";
 	}
 }

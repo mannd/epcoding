@@ -29,16 +29,23 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-class Codes {
+public class Codes {
 
 	private final static Map<String, Code> allCodes = createMap();
+
+    private static Map<String, List<Modifier>> defaultModifiers;
 
 	private static Map<String, Code> createMap() {
 		Map<String, Code> map = new HashMap<>();
@@ -70,6 +77,10 @@ class Codes {
 		addCode(map, "0389T", "Programming evaluation/testing of leadless PPM", false);
 		addCode(map, "0390T", "Peri-procedural device evaluation/testing of leadless PPM", false);
 		addCode(map, "0391T", "Interrogation of leadless PPM", false);
+
+		// hopefully rarely needed!
+		addCode(map, "33010", "Pericardiocentesis", false);
+
 
 // New PPM with leads
 		addCode(map, "33206", "New or replacement PPM with new A lead", false);
@@ -158,8 +169,16 @@ class Codes {
 		addCode(map, "76000", "Fluoroscopic lead evaluation", false);
 		// Ablation and EP testing codes
 
+		// TEE - but only by different MD than performing procedure
+		addCode(map, "93355", "TEE for TEE for guidance of transcatheter intervention, performed by different MD than MD performing intervention.", false);
+
 		// EP Testing and Mapping ///////////////////////
-		addCode(map, "93600", "His bundle recording only", false);
+		addCode(map, "93600", "His bundle recording", false);
+		addCode(map, "93602", "Intra-atrial recording", false);
+		addCode(map, "93603", "Right ventricular recording", false);
+		addCode(map, "93610", "Intra-atrial pacing", false);
+		addCode(map, "93612", "Intraventricular pacing", false);
+		addCode(map, "93618", "Induction of arrhythmia", false);
 
 		addCode(map, "93609", "2D mapping", true);
 		addCode(map, "93613", "3D mapping", true);
@@ -197,8 +216,18 @@ class Codes {
 		addCode(map, "93660", "Tilt table test", false);
 		addCode(map, "93662", "Intracardiac echo", true);
 
+		addCode(map, "93724", "Noninvasive programmed stimulation", false);
+
 		// Unlisted procedure
 		addCode(map, "93799", "Unlisted procedure", false);
+
+		// New sedation codes, 2017
+		addCode(map, "99151", "Moderate sedation, same MD, initial 15 min, pt < 5 y/o", false);
+		addCode(map, "99152", "Moderate sedation, same MD, initial 15 min, pt ≥ 5 y/o", false);
+		addCode(map, "99153", "Moderate sedation, same MD, each additional 15 min", true);
+		addCode(map, "99155", "Moderate sedation, different MD, initial 15 min, pt < 5 y/o", false);
+		addCode(map, "99156", "Moderate sedation, different MD, initial 15 min, pt ≥ 5 y/o", false);
+		addCode(map, "99157", "Moderate sedation, different MD, each additional 15 min", true);
 
 		return Collections.unmodifiableMap(map);
 	}
@@ -309,5 +338,197 @@ class Codes {
 			}
 		}
 		return result;
+	}
+
+	static void clearMultipliers(ArrayList<Code> array) {
+        for (Code code : array) {
+            code.setMultiplier(0);
+        }
+    }
+
+    static void clearModifiers(ArrayList<Code> array) {
+        for (Code code : array) {
+            code.clearModifiers();
+        }
+    }
+
+    private static Map<String, List<Modifier>> defaultModifiers() {
+        if (defaultModifiers == null) {
+            defaultModifiers = new HashMap<>();
+            // Modifier 26 alone
+            List<Modifier> modifierList_26 = new ArrayList<>();
+            modifierList_26.add(Modifiers.getModifierForNumber("26"));
+            defaultModifiers.put("93609", modifierList_26);
+            defaultModifiers.put("93620", modifierList_26);
+            defaultModifiers.put("93619", modifierList_26);
+            defaultModifiers.put("93621", modifierList_26);
+            defaultModifiers.put("93622", modifierList_26);
+            defaultModifiers.put("93662", modifierList_26);
+            defaultModifiers.put("76000", modifierList_26);
+            defaultModifiers.put("93641", modifierList_26);
+            defaultModifiers.put("93642", modifierList_26);
+            defaultModifiers.put("93660", modifierList_26);
+            // Modifier 26 and 59
+            List<Modifier> modifierList_26_59 = new ArrayList<>();
+            modifierList_26_59.add(Modifiers.getModifierForNumber("26"));
+            modifierList_26_59.add(Modifiers.getModifierForNumber("59"));
+            defaultModifiers.put("93623", modifierList_26_59);
+            // Modifier Q0
+            List<Modifier> modifierList_Q0 = new ArrayList<>();
+            modifierList_Q0.add(Modifiers.getModifierForNumber("Q0"));
+            defaultModifiers.put("33249", modifierList_Q0);
+            defaultModifiers.put("33262", modifierList_Q0);
+            defaultModifiers.put("33263", modifierList_Q0);
+            defaultModifiers.put("33264", modifierList_Q0);
+            // Modifier 59
+            List<Modifier> modifierList_59 = new ArrayList<>();
+            modifierList_59.add(Modifiers.getModifierForNumber("59"));
+            defaultModifiers.put("33222", modifierList_59);
+            defaultModifiers.put("33223", modifierList_59);
+            defaultModifiers.put("33620", modifierList_59);
+        }
+        return defaultModifiers;
+    }
+
+    public static void clearMultipliersAndModifiers(List<Code> array) {
+        for (Code code : array) {
+            code.setMultiplier(0);
+            code.clearModifiers();
+        }
+    }
+
+    public static void clearMultipliersAndModifiers(Code[] codes) {
+		for (Code code : codes) {
+			code.setMultiplier(0);
+			code.clearModifiers();
+		}
+    }
+
+    public static void hideMultipliers(List<Code> array, Boolean hide) {
+        for (Code code : array) {
+            code.setHideMultiplier(hide);
+        }
+    }
+
+    public static void loadDefaultModifiers(List<Code> array) {
+        for (Code code : array) {
+            loadDefaultModifiersForCode(code);
+        }
+    }
+
+    public static void loadDefaultModifiers(Code[] codes) {
+		for (Code code : codes) {
+			loadDefaultModifiersForCode(code);
+		}
+    }
+
+    private static void loadDefaultModifiersForCode(Code code) {
+        List<Modifier> modifiers = defaultModifiers().get(code.getCodeNumber());
+        if (modifiers != null) {
+            code.addModifiers(modifiers);
+        }
+    }
+
+    public static void loadSavedModifiers(List<Code> array, Context context) {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(context);
+        for (Code code : array) {
+            loadSavedModifiersForCode(code, prefs);
+         }
+	}
+
+	public static void loadTempAddedModifiers(List<Code> array, Context context) {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(context);
+		for (Code code : array) {
+			loadTempAddedModifiersForCode(code, prefs);
+		}
+	}
+
+
+	public static void loadSavedModifiers(Code[] codes, Context context) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+		for (Code code : codes) {
+			loadSavedModifiersForCode(code, prefs);
+		}
+    }
+
+    private static void loadSavedModifiersForCode(Code code, SharedPreferences prefs) {
+        Set<String> modifierNumbers = prefs.getStringSet(code.getCodeNumber(),
+                null);
+        if (modifierNumbers != null) {
+            code.clearModifiers();
+            for (String s : modifierNumbers) {
+                Modifier modifier = Modifiers.getModifierForNumber(s);
+                code.addModifier(modifier);
+            }
+        }
+    }
+
+	private static void loadTempAddedModifiersForCode(Code code, SharedPreferences prefs) {
+		Set<String> modifierNumbers = prefs.getStringSet(Constants.TEMP + code.getCodeNumber(),
+				null);
+		if (modifierNumbers != null) {
+			code.clearModifiers();
+			for (String s : modifierNumbers) {
+				Modifier modifier = Modifiers.getModifierForNumber(s);
+				code.addModifier(modifier);
+			}
+		}
+	}
+
+
+	public static void resetSavedModifiers(List<Code> codes, Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        for (Code code : codes) {
+           resetSavedModifiersForCode(code, prefs);
+        }
+    }
+
+    public static void resetSavedModifiers(Code[] codes, Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		for (Code code : codes) {
+			resetSavedModifiersForCode(code, prefs);
+		}
+    }
+
+    public static void resetTempAddedModifiers(List<Code> codes, Context context) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		for (Code code : codes) {
+			resetTempAddedModifiersForCode(code, prefs);
+		}
+	}
+
+	private static void resetTempAddedModifiersForCode(Code code, SharedPreferences prefs) {
+		resetModifiersForCode(code, prefs, Constants.TEMP + code.getCodeNumber());
+	}
+
+    private static void resetSavedModifiersForCode(Code code, SharedPreferences prefs) {
+		resetModifiersForCode(code, prefs, code.getCodeNumber());
+    }
+
+	private static void resetModifiersForCode(Code code, SharedPreferences prefs, String codeNumber) {
+		SharedPreferences.Editor prefsEditor = prefs.edit();
+		prefsEditor.remove(codeNumber);
+		prefsEditor.apply();
+		code.clearModifiers();
+	}
+
+	// returns code number or null
+    public static Code setModifiersForCode(String[] codeAndModifiers) {
+		if (codeAndModifiers == null || codeAndModifiers.length < 1) {
+			return null;
+		}
+		int length = codeAndModifiers.length;
+		String codeNumber = codeAndModifiers[0];
+		Code code = Codes.getCode(codeNumber);
+		if (code != null) {
+			code.clearModifiers();
+			for (int i = 1; i < length; i++) {
+				code.addModifier(Modifiers.getModifierForNumber(codeAndModifiers[i]));
+			}
+		}
+		return code;
 	}
 }

@@ -31,99 +31,215 @@ package org.epstudios.epcoding;
 
 import android.annotation.SuppressLint;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
 @SuppressLint("DefaultLocale")
 public class Code {
-	private final String code;
-	private final String shortDescription;
-	private final boolean isAddOn;
-	// control display of code
-	private boolean plusShown = true;
-	private boolean descriptionShortened = false;
-	private boolean descriptionShown = true;
+    private final String code;
+    private final String shortDescription;
+    private final boolean isAddOn;
+    private boolean plusShown = true;
+    private boolean descriptionShortened = false;
+    private boolean descriptionShown = true;
 
-	public Code(String code, String shortDescription, boolean isAddOn) {
-		this.code = code;
-		this.shortDescription = shortDescription;
-		this.isAddOn = isAddOn;
-	}
+    public boolean isHideMultiplier() {
+        return hideMultiplier;
+    }
 
-	private String getCodeNumberWithAddOn() {
-		return (isAddOn && plusShown ? "+" : "") + code;
-	}
+    public void setHideMultiplier(boolean hideMultiplier) {
+        this.hideMultiplier = hideMultiplier;
+    }
 
-	public String getCodeNumberWithAddOnWithDescription() {
-		return getCodeNumberWithAddOn() + " (" + shortDescription + ")";
-	}
+    private boolean hideMultiplier = false;
 
-	public String getCodeNumber() {
-		return code;
-	}
+    public int getMultiplier() {
+        return multiplier;
+    }
 
-	private String getShortDescription() {
-		return shortDescription;
-	}
+    public void setMultiplier(int multiplier) {
+        this.multiplier = multiplier;
+    }
 
-	public String getDescription() {
-		return getShortDescription() + " (" + getCodeNumberWithAddOn() + ")";
-	}
+    private int multiplier = 0;
 
-	public String getCodeFirstDescription() {
-		return getCodeNumber() + " " + getShortDescription();
-	}
+    public List<Modifier> getModifiers() {
+        return modifiers;
+    }
 
-	public boolean isAddOn() {
-		return isAddOn;
-	}
+    private List<Modifier> modifiers = new ArrayList<>();
 
-	public void setPlusShown(boolean plusShown) {
-		this.plusShown = plusShown;
-	}
+    public Set<Modifier> getModifierSet() {
+        Set<Modifier> set = new HashSet<>();
+        set.addAll(modifiers);
+        return set;
+    }
 
-	public void setDescriptionShortened(boolean descriptionShortened) {
-		this.descriptionShortened = descriptionShortened;
-	}
+    public String[] getModifierNumberArray() {
+        String [] array = new String[modifiers.size()];
+        for (int i = 0; i < modifiers.size(); i++) {
+            array[i] = modifiers.get(i).getNumber();
+        }
+        return array;
+    }
 
-	public void setDescriptionShown(boolean descriptionShown) {
-		this.descriptionShown = descriptionShown;
-	}
+    public Code(String code, String shortDescription, boolean isAddOn) {
+        this.code = code;
+        this.shortDescription = shortDescription;
+        this.isAddOn = isAddOn;
+    }
 
-	// applies _all_ formatting settings with code given first
-	public String getCodeFirstFormatted() {
-		return getCodeNumberWithAddOn()
-				+ (descriptionShown ? " (" + (getFormattedDescription()) + ")"
-						: "");
-	}
+    public String getCodeNumberWithAddOnWithDescription() {
+        return getCodeNumberWithAddOn() + " (" + shortDescription + ")";
+    }
 
-	// applies _all_ formatting settings with description given first
-	public String getDescriptionFirstFormatted() {
-		return getFormattedDescription() + " (" + getCodeNumberWithAddOn()
-				+ ")";
-	}
+    private String getCodeNumberWithAddOn() {
+        return unformattedCodeNumber();
+    }
 
-	private String getFormattedDescription() {
-		return descriptionShortened ? truncateString(shortDescription, 24)
-				: shortDescription;
-	}
+    public String getCodeNumber() {
+        return code;
+    }
 
-	private String truncateString(final String s, final int newLength) {
-		if (newLength > s.length())
-			return s;
-		return s.substring(0, newLength - 3) + "...";
-	}
+    private String getShortDescription() {
+        return shortDescription;
+    }
 
-	// use this for CodeCheckBox text
-	public String getUnformattedDescriptionFirst() {
-		return shortDescription + " (" + (isAddOn ? "+" : "") + code + ")";
-	}
+    public String getDescription() {
+        return getShortDescription() + " (" + getCodeNumberWithAddOn() + ")";
+    }
 
-	public String getUnformattedNumberFirst() {
-		return (isAddOn ? "+" : "") + code + " - " + shortDescription;
+    public String getCodeFirstDescription() {
+        return getCodeNumber() + " " + getShortDescription();
+    }
 
-	}
+    public boolean isAddOn() {
+        return isAddOn;
+    }
 
-	@SuppressLint("DefaultLocale")
-	boolean codeContains(String searchString) {
-		return (code.contains(searchString) || shortDescription.toLowerCase()
-				.contains(searchString.toLowerCase()));
-	}
+    public void setPlusShown(boolean plusShown) {
+        this.plusShown = plusShown;
+    }
+
+    public void setDescriptionShortened(boolean descriptionShortened) {
+        this.descriptionShortened = descriptionShortened;
+    }
+
+    public void setDescriptionShown(boolean descriptionShown) {
+        this.descriptionShown = descriptionShown;
+    }
+
+    // applies _all_ formatting settings with code given first
+    public String getCodeFirstFormatted() {
+        return getCodeNumberWithAddOn()
+                + (descriptionShown ? " (" + (getFormattedDescription()) + ")"
+                : "");
+    }
+
+    // applies _all_ formatting settings with description given first
+    public String getDescriptionFirstFormatted() {
+        return getFormattedDescription() + " (" + getCodeNumberWithAddOn()
+                + ")";
+    }
+
+    private String getFormattedDescription() {
+        return descriptionShortened ? truncateString(shortDescription)
+                : shortDescription;
+    }
+
+    private String truncateString(final String s) {
+        if (24 > s.length())
+            return s;
+        return s.substring(0, 24 - 3) + "...";
+    }
+
+    public String unformattedCodeNumber() {
+        String plus = plusShown ? "+" : "";
+        if (multiplier < 1 || hideMultiplier) {
+            return String.format("%s%s%s", isAddOn ? plus : "", getCodeNumber(), modifierString());
+        }
+        else {
+            return String.format("%s%s%s x %d", isAddOn ? plus : "", getCodeNumber(), modifierString(), multiplier);
+        }
+    }
+
+    // use this for CodeCheckBox text
+    public String getUnformattedDescriptionFirst() {
+        return shortDescription + " (" + unformattedCodeNumber() + ")";
+    }
+
+    public String getUnformattedNumberFirst() {
+        return unformattedCodeNumber() + " - " + shortDescription;
+
+    }
+
+    @SuppressLint("DefaultLocale")
+    boolean codeContains(String searchString) {
+        return (code.contains(searchString) || shortDescription.toLowerCase()
+                .contains(searchString.toLowerCase()));
+    }
+
+    public void addModifier(Modifier modifier) {
+        // don't duplicate modifiers
+        for (Modifier m : modifiers) {
+            if (m.getNumber().equals(modifier.getNumber())) {
+                return;
+            }
+        }
+        // Modifier 26 is a "pricing modifier" and must have first position in modifiers.
+        // There are other such modifiers, but none in the small subset of modifiers used here.
+        if (modifier.getNumber().equals("26")) {
+            modifiers.add(0, modifier);
+        }
+        else {
+            modifiers.add(modifier);
+        }
+    }
+
+    public void addModifiers(List<Modifier> modifiers) {
+        for (Modifier m : modifiers) {
+            addModifier(m);
+        }
+    }
+
+    public void clearModifiers() {
+        modifiers.clear();
+    }
+
+    public String modifierString() {
+        if (modifiers.isEmpty()) {
+            return "";
+        }
+        String modString = "";
+        for (Modifier m : modifiers) {
+            String newModifier = String.format("-%s", m.getNumber());
+            modString += newModifier;
+        }
+        return modString;
+    }
+
+    // This converts code and modifiers into something that can be put into a putExtra()
+    public String[] getCodeAndModifiers() {
+        String [] array = new String[modifiers.size() + 1];
+        array[0] = getCodeNumber();
+        for (int i = 0; i < modifiers.size(); i++) {
+            array[i + 1] = modifiers.get(i).getNumber();
+        }
+        return array;
+
+    }
+
+    public static String[] makeCodeAndModifierArray(String codeNumber, Set<String> modifierNumbers) {
+        String[] array = new String[modifierNumbers.size() + 1];
+        array[0] = codeNumber;
+        int i = 1;
+        for (String number : modifierNumbers) {
+            array[i++] = number;
+        }
+        return array;
+    }
+
 }

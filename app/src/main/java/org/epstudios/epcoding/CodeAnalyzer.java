@@ -42,15 +42,21 @@ class CodeAnalyzer {
 	private final boolean noPrimaryCodes;
 	private final boolean noSecondaryCodes;
 	private final boolean moduleHasNoSecondaryCodesNeedingChecking;
+	private final SedationStatus sedationStatus;
 	private final Context context;
 	private boolean verbose = true;
 	private boolean noAnalysis = false;
 
 	// Note unicode doesn't consistently work on different Android devices.
-	// Use ASCII! Maybe will work in iOS?
-	private final static String WARNING = "! "; // ?? or \u26A0 or ! in triangle
-	private final static String ERROR = "!! "; // \u2620 or \u24CD (skull, x)
-	private final static String OK = ""; // \u263A smiley face
+	private static String WARNING = "! "; // ?? or \u26A0 or ! in triangle
+	private static String ERROR = "!! "; // \u2620 or \u24CD (skull, x)
+	private static String OK = ""; // \u263A smiley face
+	private final static String UNICODE_WARNING = "\uD83D\uDE16";
+	private final static String UNICODE_ERROR = "\uD83D\uDE31";
+	private final static String UNICODE_OK = "\uD83D\uDE00";
+	private final static String ASCII_WARNING = "! ";
+	private final static String ASCII_ERROR = "!! ";
+	private final static String ASCII_OK = "";
 
 	// some special code lists
 	private static final List<String> mappingCodes = Arrays.asList("93609",
@@ -63,6 +69,11 @@ class CodeAnalyzer {
 			"93656");
 	private static final Set<String> ablationCodeSet = new HashSet<>(
 			ablationCodes);
+
+	private static final List<String> sedationCodes = Arrays.asList("99151", "99152",
+		"99153", "99155", "99156", "99157");
+	private static final Set<String> sedationCodeSet = new HashSet<>(sedationCodes);
+
 
 	// Error messages and warnings
 	private final static String DEFAULT_DUPLICATE_ERROR = "These codes shouldn't be combined.";
@@ -86,9 +97,7 @@ class CodeAnalyzer {
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("33240", "33230", "33231", "33262", "33263", "33264"),
 				DEFAULT_DUPLICATE_ERROR));
-		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
-				.asList("93600", "93619", "93620", "93655", "93657"),
-				DEFAULT_DUPLICATE_ERROR));
+
 		// don't combine primary ablation codes, not sure what to do with
 		// AVN ablation for this...
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
@@ -98,7 +107,10 @@ class CodeAnalyzer {
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("33270", "33271"), DEFAULT_DUPLICATE_ERROR));
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
-				.asList("0389T", "0390T"), DEFAULT_DUPLICATE_ERROR));
+				.asList("0389T", "0390T", "0391T"), DEFAULT_DUPLICATE_ERROR));
+		// don't use one lead and 2 lead revision together
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR,
+				Arrays.asList("33218", "33220"), DEFAULT_DUPLICATE_ERROR));
 		return codeErrors;
 	}
 
@@ -135,9 +147,29 @@ class CodeAnalyzer {
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("93654", "93657", "93609", "93613", "93622"),
 				"Code(s) cannot be add to VT Ablation."));
-        codeErrors.add(new CodeError(CodeError.WarningLevel.WARNING, Arrays
-                .asList("93623", "93650", "93653", "93654", "93656"),
-                "Recent coding changes may disallow bundling induce post IV drug with ablation."));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.WARNING, Arrays
+				.asList("93623", "93650", "93653", "93654", "93656"),
+				"Recent coding changes may disallow bundling induce post IV drug with ablation."));
+		// don't combine raw EP study codes with comprehensive codes or ablation codes
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("93600", "93619", "93620", "93655", "93657"),
+				DEFAULT_DUPLICATE_ERROR));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("93602", "93619", "93620", "93655", "93657"),
+				DEFAULT_DUPLICATE_ERROR));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("93603", "93619", "93620", "93655", "93657"),
+				DEFAULT_DUPLICATE_ERROR));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("93610", "93619", "93620", "93655", "93657"),
+				DEFAULT_DUPLICATE_ERROR));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("93612", "93619", "93620", "93655", "93657"),
+				DEFAULT_DUPLICATE_ERROR));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
+				.asList("93618", "93619", "93620", "93655", "93657"),
+				DEFAULT_DUPLICATE_ERROR));
+
 		return codeErrors;
 	}
 
@@ -152,25 +184,41 @@ class CodeAnalyzer {
 		return codeErrors;
 	}
 
-	public CodeAnalyzer(final Code[] codes, final boolean noPrimaryCodes,
-			final boolean noSecondaryCodes,
-			final boolean moduleHasNoSecondaryCodesNeedingChecking,
-			final Context context) {
-		this.codes = codes;
+	private void setUpErrorSymbols(boolean useUnicode) {
+		if (useUnicode) {
+			WARNING = UNICODE_WARNING;
+			ERROR = UNICODE_ERROR;
+			OK = UNICODE_OK;
+		}
+		else {
+			WARNING = ASCII_WARNING;
+			ERROR = ASCII_ERROR;
+			OK = ASCII_OK;
+		}
+	}
+
+	public CodeAnalyzer(final List<Code> codes, final boolean noPrimaryCodes,
+						final boolean noSecondaryCodes,
+						final boolean moduleHasNoSecondaryCodesNeedingChecking,
+						final SedationStatus status,
+						boolean useUnicodeSymbols, final Context context) {
+		this.codes = codes.toArray(new Code[codes.size()]);
 		this.noPrimaryCodes = noPrimaryCodes;
 		this.noSecondaryCodes = noSecondaryCodes;
 		this.moduleHasNoSecondaryCodesNeedingChecking = moduleHasNoSecondaryCodesNeedingChecking;
+		this.sedationStatus = status;
 		this.context = context;
+		setUpErrorSymbols(useUnicodeSymbols);
 	}
 
-	// this simpler constructor used with code wizard
-	public CodeAnalyzer(final Code[] codes, final Context context) {
-		this.codes = codes;
+	public CodeAnalyzer(final List<Code> codes, final SedationStatus status, boolean useUnicodeSymbols, final Context context) {
+		this.codes = codes.toArray(new Code[codes.size()]);
 		this.context = context;
 		this.noPrimaryCodes = false;
 		this.noSecondaryCodes = false;
 		this.moduleHasNoSecondaryCodesNeedingChecking = true;
-
+		this.sedationStatus = status;
+		setUpErrorSymbols(useUnicodeSymbols);
 	}
 
 	public void setVerbose(boolean verbose) {
@@ -216,7 +264,7 @@ class CodeAnalyzer {
 
 	private String getCodeAnalysis(String message) {
 		String[] codeNumbers = new String[codes.length];
-		for (int i = 0; i < codes.length; ++i) {
+		for (int i = 0; i < codes.length; i++) {
 			if (codes[i] != null)
 				codeNumbers[i] = codes[i].getCodeNumber();
 		}
@@ -228,16 +276,18 @@ class CodeAnalyzer {
 		message += getErrorCodes(codeNumberSet);
 		message += getErrorCodesFirstSpecial(codeNumberSet);
 		message += getErrorCodesFirstCodeNeedsOtherCodes(codeNumberSet);
-		if (message.length() == 0) // no errors!
-			message = getMessage(OK, R.string.no_code_errors_message,
-					R.string.empty_message);
+		message += evaluateModifiers(codeNumberSet);
+		message += evaluateSedationStatus(codeNumberSet);
+		if (message.length() == 0) {
+			message = getMessage(OK, R.string.no_code_errors_message, R.string.empty_message);
+		}
 		return message;
 	}
 
 	private boolean allAddOnCodes() {
 		boolean allAddOns = true;
-		for (int i = 0; i < codes.length; ++i) {
-			if (codes[i] != null && !codes[i].isAddOn())
+		for (Code code : codes) {
+			if (code != null && !code.isAddOn())
 				allAddOns = false;
 		}
 		return allAddOns;
@@ -353,4 +403,119 @@ class CodeAnalyzer {
 			final String brief, final String details) {
 		return "\n" + threat + brief + (verbose ? " " + details : "") + "\n";
 	}
+
+
+	// Add Q0 modifier to ICD implant or generator replacement codes"
+	//				+ " if indication is primary prevention
+	private String evaluateModifiers(Set<String> codeNumbers) {
+		String message = "";
+		boolean q0ModifierFound = false;
+		List<String> badCodeList = new ArrayList<>();
+		for (String number : codeNumbers) {
+			Code code = Codes.getCode(number);
+			if (code == null) {
+				continue;
+			}
+			for (Modifier modifier : code.getModifiers()) {
+				if (modifier.getNumber().equals("Q0")) {
+					badCodeList.add(code.getCodeNumber());
+					q0ModifierFound = true;
+				}
+				if (badCodeList.size() > 0) {
+					CodeError error = new CodeError(CodeError.WarningLevel.NONE,
+							null, "Q0 modifier indicates primary prevention ICD.  " +
+					"Remove Q0 modifier for other ICD indications.");
+					message = addToErrorMessage(error, badCodeList);
+				}
+			}
+		}
+		if (!q0ModifierFound) {
+			Set<String> icdCodeNumberSet = new HashSet<>();
+			icdCodeNumberSet.add("33249");
+			icdCodeNumberSet.add("33262");
+			icdCodeNumberSet.add("33263");
+			icdCodeNumberSet.add("33264");
+			for (String codeNumber : codeNumbers) {
+				if (icdCodeNumberSet.contains(codeNumber)) {
+					badCodeList.add(codeNumber);
+				}
+				if (badCodeList.size() > 0) {
+					CodeError error = new CodeError(CodeError.WarningLevel.NONE,
+							null, "Add Q0 modifier to ICD implant or generator replacement codes " +
+					"if indication is primary prevention");
+					message = addToErrorMessage(error, badCodeList);
+				}
+			}
+		}
+		return message;
+	}
+
+	private String rawSedationCodesUsedError(final Set<String> codeNumbers) {
+		String message = "";
+		List<String> badCodeNumbers = new ArrayList<>();
+		if (rawSedationCodesUsed(codeNumbers)) {
+			for (String number : codeNumbers) {
+				if (sedationCodeSet.contains(number)) {
+					badCodeNumbers.add(number);
+				}
+			}
+			if (badCodeNumbers.size() > 0) {
+				CodeError error = new CodeError(CodeError.WarningLevel.WARNING,
+						null, "Raw sedation codes selected." +
+						"  Sedation codes may be inconsistent.  Further analysis" +
+						" of sedation codes will not be performed.");
+				message = addToErrorMessage(error, badCodeNumbers);
+			}
+		}
+		return message;
+	}
+
+	private boolean rawSedationCodesUsed(Set<String> codeNumbers) {
+		// We'll use a different logic from iOS version:
+		// if sedationStatus is incompatible with sedation codes
+		// , and yet there are sedation codes...
+		if (SedationStatus.canHaveSedationCodes(sedationStatus)) {
+			return false;
+		}
+		boolean rawCodesUsed = false;
+		for (String codeNumber : codeNumbers) {
+			if (sedationCodeSet.contains(codeNumber)) {
+				rawCodesUsed = true;
+				break;
+			}
+		}
+		return rawCodesUsed;
+	}
+
+	private String evaluateSedationStatus(Set<String> codeNumbers) {
+		String message;
+		message = rawSedationCodesUsedError(codeNumbers);
+		// no further sedation analysis if raw sedation codes used
+		if (message.length() > 0) {
+			return message;
+		}
+		switch (sedationStatus) {
+			case Unassigned:
+				message = getMessage(WARNING, R.string.unassigned_sedation_message,
+						R.string.unassigned_sedation_verbose_message);
+				break;
+			case None:
+				message = getMessage(OK, R.string.no_sedation_used_message, R.string.empty_message);
+				break;
+			case LessThan10Mins:
+				message = getMessage(OK, R.string.short_sedation_time_message, R.string.empty_message);
+				break;
+			case OtherMDCalculated:
+				message = getMessage(WARNING, R.string.sedation_other_md_message,
+						R.string.sedation_other_md_verbose_message);
+				break;
+			case AssignedSameMD:
+				break;
+			default:
+				break;
+		}
+		return message;
+	}
+
+
 }

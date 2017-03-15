@@ -33,9 +33,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 @SuppressWarnings("FieldCanBeLocal")
 public class About extends Activity {
-	private final static String VERSION = "1.3.2";
+	private final static String VERSION = "1.4";
 
 	private TextView versionTextView;
 
@@ -44,7 +46,8 @@ public class About extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.about);
 		versionTextView = (TextView) findViewById(R.id.version);
-		versionTextView.setText("Version " + VERSION);
+		versionTextView.setText(String.format(Locale.getDefault(),
+				getString(R.string.version), VERSION));
 
 	}
 }

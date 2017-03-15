@@ -65,6 +65,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ProcedureListActivity" />
         </activity>
+        <activity
+            android:name=".ModifierActivity"
+            android:label="@string/modifiers_label">
+        </activity>
+        <activity android:name=".SedationActivity"
+            android:label="@string/sedation_label">
+        </activity>
+        <activity android:name=".SedationTimeCalculator"
+            android:label="@string/sedation_time_calculator_label">
+        </activity>
     </application>
 
 </manifest>

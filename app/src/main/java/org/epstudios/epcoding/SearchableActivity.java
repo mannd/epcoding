@@ -32,29 +32,21 @@ package org.epstudios.epcoding;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class SearchableActivity extends ActionBarActivity {
+public class SearchableActivity extends BasicActionBarActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search);
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
+		initToolbar();
 		Intent intent = getIntent();
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 			String query = intent.getStringExtra(SearchManager.QUERY);
 			doMySearch(query);
 		}
-
 	}
 
 	private void doMySearch(String query) {
@@ -64,19 +56,4 @@ public class SearchableActivity extends ActionBarActivity {
 		listView.setAdapter(adapter);
 
 	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		// Respond to the action bar's Up/Home button
-		case android.R.id.home:
-			// NavUtils.navigateUpFromSameTask(this);
-			finish();
-			return true;
-
-		}
-
-		return super.onOptionsItemSelected(item);
-	}
-
 }
