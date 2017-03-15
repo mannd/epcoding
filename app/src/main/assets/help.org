@@ -401,7 +401,7 @@ you select *Help* to get help.
   small screens.
 - Check codes in All EP Codes: Turn on or off code analysis in the
   All EP Codes module.
-- Use unicode error symbols: On devices that have font support for unicode symbols (should be most devices nowadays), use these symbols for marking errors.
+- Use Unicode error symbols: On devices that have font support for Unicode symbols (should be most devices nowadays), use these symbols for marking errors.
 - Code analysis detail
   - Verbose: Full analysis with full descriptions of warnings and
     errors.
