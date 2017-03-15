@@ -61,14 +61,14 @@ coders nor is it a substitute for the [[https://commerce.ama-assn.org/store/][AM
 ** How to use EP Coding
 *** Select a procedure
 #+CAPTION: Procedure list
-[[./img/procedure_list_iphone.png]
+[[./procedure_list_phone.png]]
 
 On an Android phone, the initial screen when the app starts shows a
 list of common EP procedures.  On an Android tablet, the list of
 procedures appears at the side of the screen.
 
 #+CAPTION: Procedure list an Android tablet
-[[./img/procedure_list_ipad.png]
+[[./procedure_list_tablet.png]]
 
 The procedure list covers most common EP procedures.  If a procedure
 is not listed, you have several options.  You can use the
@@ -81,7 +81,7 @@ EP-related codes in numeric order.
 Each procedure has a list of codes
 #+CAPTION: Atrial fibrillation ablation codes.
 #+NAME: code list
-[[./img/afb_codes.png]
+[[./afb_codes.png]]
 
 Codes are organized as /primary codes/, at least one of which needs to
 be selected, and /additional codes/ which are commonly used with the
@@ -89,12 +89,12 @@ primary procedure codes.  There is a checkbox to the right of each
 code to indicate which codes are selected.  Codes that must be
 selected for a particular procedure are automatically selected
 (indicated by a checkmark) and cannot be unselected (indicated by a
-lighter gray text color).  Codes that cannot be selected because they
-are already included in the primary code(s) are also shown in a
+lighter gray text color).  Prohibited codes that cannot be selected
+because they are bundled with the primary code(s) are also shown in a
 lighter gray text color, indicating these codes are disabled.
 **** Selecting codes
 #+CAPTION: Selecting a code.  The 3D mapping code has been selected.
-[[./img/afb_selected_code.png]
+[[./afb_selected_code.png]]
 
 Select a code by tapping it.  Unselect the code by tapping it again.
 Hitting the back button and going back to the main procedure list will
@@ -118,7 +118,7 @@ The former type of code needs to have modifier 26 attached, whereas
 the latter doesn't.  Go figure.
 
 #+CAPTION: Modifier screen with Modifier 26 selected.
-[[./img/modifiers.png]
+[[./modifiers.png]]
 
 Long press on a code (for a second or two) to bring up a list of
 common code modifiers that can be added or removed from each code.
@@ -126,9 +126,10 @@ Select or unselect a modifier by tapping on it.  Tap the *Add* button
 to add the modifier (or subtract it) from the code and return to the
 code list.  Tap the *Save* button to make this modifier a default so
 that it is attached to the code all the time.  Tap *Reset* to reset
-saved modifiers back to their default values.  Note that primary codes
-and disabled codes can't be modified in the specific procedure
-modules.  However any code can be modified using the All Codes module.
+saved modifiers back to their default values.  Note that pre-selected
+primary codes and prohibited codes can't be modified in the specific
+procedure modules.  However any code can be modified using the All
+Codes module.
 **** Sedation coding
 As of 2017, the AMA, in their never ending quest to make life
 complicated for physicians, decided to unbundle sedation coding from
@@ -147,7 +148,7 @@ time.  It must be tracked and documented separately.
 
 Given all this, *EP Coding* now has a sedation calculator
 #+CAPTION: Sedation coding calculator
-[[./img/sedation_time.png]
+[[./sedation_time.png]]
 
 From the procedure code list screen (see [[code list][figure]]) tap
 *Sedation* at the bottom of the screen to add sedation codes.  You may
@@ -170,7 +171,7 @@ To assist with determining the sedation time, tap *Calculate* to the
 right of the sedation time label.  The next screen will appear.
 
 #+CAPTION: Sedation time calculator
-[[./img/sedation_time_calculator.png]
+[[./sedation_time_calculator.png]]
 
 Set the time selector (which is a 24 hour clock) to the start of
 sedation time, then tap *Set*.  Tap the button on the top of the
@@ -192,8 +193,8 @@ Summary][below]].  Sedation coding using the *Device Wizard* is
 handled a little differently than this, and is described further
 [[Wizard][below]].
 **** <<Save>>Saving codes
-#+CAPTION: Save codes icon
-(save code icon figure)
+#+CAPTION: Toolbar icons: Search, Save, and Device Wizard icons at top right of screen
+[[./icons.png]]
 
 Tap *Save* from the top right menu (it will appear as a floppy disk
 icon, see the figure) to save your selection of additional codes as a
@@ -206,6 +207,9 @@ The All EP Codes module lists every EP procedure code in numerical
 order, with code number given first.  It is the /a la carte/ menu of
 *EP Coding*.
 *** Code Summary
+#+CAPTION: Code summary
+[[./summary.png]]
+
 Tap *Summarize* to show a summary of the codes selected along with any
 comments, warnings or errors.  *EP Coding* looks for codes that don't
 belong together, add-on codes without primary codes, lack of sedation
@@ -383,6 +387,9 @@ you select *Help* to get help.
 - This module can be useful to look up specific code numbers.
 - Sedation codes are listed, but it is preferable as in the other modules to use the sedation calculator to compute sedation codes.
 ** <<Settings>>Settings
+#+CAPTION: Setting screen
+[[./settings.png]]
+
 - Settings, except for the distinguish add-on codes setting, apply
   to the format of the summary screen and code analysis, not to the
   main code display screens.
