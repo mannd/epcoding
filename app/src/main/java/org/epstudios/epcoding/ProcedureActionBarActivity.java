@@ -49,7 +49,7 @@ public class ProcedureActionBarActivity extends SimpleActionBarActivity {
                     fragment.saveCoding();
                 return true;
             case R.id.icd10:
-                // do something
+                startActivity(new Intent(this, ICD10CodeList.class));
                 return true;
             case R.id.settings:
                 startActivity(new Intent(this, Prefs.class));
