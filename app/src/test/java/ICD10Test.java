@@ -1,5 +1,11 @@
+import android.app.Application;
+import android.content.Context;
+
 import org.epstudios.epcoding.ICD10Code;
+import org.epstudios.epcoding.ICD10Codes;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 /**
  * Copyright (C) 2017 EP Studios, Inc.
@@ -39,4 +45,5 @@ public class ICD10Test {
     public void ICD10BadInitTest() {
         ICD10Code code = new ICD10Code("BAD");
     }
+
 }

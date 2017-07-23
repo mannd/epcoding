@@ -43,9 +43,9 @@ public class ICD10Code {
     // assumes valid string > 8 chars long!!
     // otherwise will throw exception
     public ICD10Code(String codeString) {
-        String rawNumber = codeString.substring(0, 6).trim();
+        String rawNumber = codeString.substring(0, 7).trim();
         if (rawNumber.length() > 3) {
-            rawNumber = rawNumber.substring(0, 2) + "." + rawNumber.substring(3);
+            rawNumber = rawNumber.substring(0, 3) + "." + rawNumber.substring(3);
         }
         String description = codeString.substring(8).trim();
         this.number = rawNumber;

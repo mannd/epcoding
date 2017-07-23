@@ -48,6 +48,9 @@ public class ProcedureActionBarActivity extends SimpleActionBarActivity {
                 if (fragment != null)
                     fragment.saveCoding();
                 return true;
+            case R.id.icd10:
+                // do something
+                return true;
             case R.id.settings:
                 startActivity(new Intent(this, Prefs.class));
                 return true;
