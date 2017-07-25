@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Copyright (C) 2017 EP Studios, Inc.
@@ -69,6 +71,16 @@ public class ICD10Codes {
             }
         }
         return allICD10CodeStrings;
+    }
+
+    public static List<String> searchCodes(String searchString, Context context) {
+        List<String> result = new ArrayList<>();
+        for (String code : getICD10CodeStrings(context)) {
+            if (code.contains(searchString)) {
+                result.add(code);
+            }
+        }
+        return result;
     }
 
 }

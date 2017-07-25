@@ -208,6 +208,7 @@
     <string name="verbose_label">Verbose</string>
     <string name="version">Version %s</string>
     <string name="icd10_code_list_label">ICD 10 Codes</string>
+    <string name="icd10_search_hint">Search ICD-10 codes</string>
 
 
 </resources>
