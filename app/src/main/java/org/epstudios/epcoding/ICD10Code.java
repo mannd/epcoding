@@ -57,4 +57,8 @@ public class ICD10Code {
         return code;
     }
 
+    public String getCodeString() {
+        return number + " - " + fullDescription;
+    }
+
 }

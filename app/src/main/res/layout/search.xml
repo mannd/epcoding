@@ -25,5 +25,5 @@
             android:layout_height="wrap_content"
             android:text="@string/no_data_label" />
 
-        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

@@ -1,6 +1,16 @@
 package org.epstudios.epcoding;
 
+import android.app.ListActivity;
+import android.app.SearchManager;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 /**
  * Copyright (C) 2017 EP Studios, Inc.
@@ -27,10 +37,33 @@ import android.os.Bundle;
 public class ICD10CodeList extends BasicActionBarActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.icd10_list);
-
         initToolbar();
+        ///TODO: we'll worry about the searching later
+//        Intent intent = getIntent();
+//        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+//            String query = intent.getStringExtra(SearchManager.QUERY);
+//            doMySearch(query);
+//        }
+        final ListView listView = (ListView) findViewById(android.R.id.list);
+        ArrayList<String> array = ICD10Codes.getICD10CodeStrings(this);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, array);
+        listView.setAdapter(adapter);
     }
+
+    private void doMySearch(String query) {
+        final ListView listView = (ListView) findViewById(android.R.id.list);
+        ArrayList<String> testArray = new ArrayList<>();
+        testArray.add("String1");
+        testArray.add("String2");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, testArray);
+        listView.setAdapter(adapter);
+
+    }
+
+
 }

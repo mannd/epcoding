@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 
 /**
@@ -33,31 +32,43 @@ import java.util.ArrayList;
 
 public class ICD10Codes {
 
-    private static ArrayList<ICD10Code> array = null;
+    private static ArrayList<ICD10Code> allICD10Codes = null;
+    private static ArrayList<String> allICD10CodeStrings = null;
     private final static String CODE_FILE_NAME = "cardICD10codes2017.txt";
 
-    public final static ArrayList<ICD10Code> createCodes(final Context context) {
-        if (array == null) {
-            array = new ArrayList<>();
+    public static ArrayList<ICD10Code> createCodes(final Context context) {
+        if (allICD10Codes == null) {
+            allICD10Codes = new ArrayList<>();
 
             try {
-                StringBuilder buf = new StringBuilder();
                 InputStream input = context.getAssets().open(CODE_FILE_NAME);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
-                String line = "";
+                String line;
                 while ((line = reader.readLine()) != null) {
-                    buf.append(line);
+                    ICD10Code code = new ICD10Code(line);
+                    allICD10Codes.add(code);
                 }
                 reader.close();
-                // process array
+                // process allICD10Codes
             } catch (IOException e) {
-                array.clear();
-                array.add(ICD10Code.fileNotFoundICD10Code());
+                allICD10Codes.clear();
+                allICD10Codes.add(ICD10Code.fileNotFoundICD10Code());
             }
 
         }
-        return array;
+        return allICD10Codes;
 
+    }
+
+    public static ArrayList<String> getICD10CodeStrings(final Context context) {
+        if (allICD10CodeStrings == null) {
+            allICD10CodeStrings = new ArrayList<>();
+            ArrayList<ICD10Code> codes = createCodes(context);
+            for (ICD10Code code : codes) {
+                allICD10CodeStrings.add(code.getCodeString());
+            }
+        }
+        return allICD10CodeStrings;
     }
 
 }
