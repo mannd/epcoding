@@ -207,6 +207,7 @@
     <string name="use_unicode_symbols_label">Use Unicode error symbols</string>
     <string name="verbose_label">Verbose</string>
     <string name="version">Version %s</string>
+    <string name="icd10_code_list_label">ICD 10 Codes</string>
 
 
 </resources>
