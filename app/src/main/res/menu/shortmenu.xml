@@ -18,6 +18,13 @@
         android:title="@string/wizard_title">
     </item>
     <item
+        android:id="@+id/icd10"
+        android:icon="@drawable/ic_icd10_white_24dp"
+        android:orderInCategory="95"
+        app:showAsAction="ifRoom"
+        android:title="ICD 10 Codes">
+    </item>
+    <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_settings_white_24dp"
         android:orderInCategory="100"

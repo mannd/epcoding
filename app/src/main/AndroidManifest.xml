@@ -75,6 +75,17 @@
         <activity android:name=".SedationTimeCalculator"
             android:label="@string/sedation_time_calculator_label">
         </activity>
+        <activity android:name=".ICD10CodeList"
+                  android:label="@string/icd10_code_list_label">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/icd10_searchable">
+            </meta-data>
+        </activity>
     </application>
 
 </manifest>

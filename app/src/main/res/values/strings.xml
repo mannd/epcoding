@@ -203,10 +203,12 @@
     <string name="sedation_time_calculator_label">Sedation Time Calculator</string>
     <string name="set_button_label">Set</string>
     <string name="use_unicode_symbols_key">use_unicode_symbols_key</string>
-    <string name="use_unicode_symbols_summary">Not all devices support unicode fonts</string>
-    <string name="use_unicode_symbols_label">Use unicode error symbols</string>
+    <string name="use_unicode_symbols_summary">Not all devices support Unicode fonts</string>
+    <string name="use_unicode_symbols_label">Use Unicode error symbols</string>
     <string name="verbose_label">Verbose</string>
     <string name="version">Version %s</string>
+    <string name="icd10_code_list_label">ICD 10 Codes</string>
+    <string name="icd10_search_hint">Search ICD-10 codes</string>
 
 
 </resources>

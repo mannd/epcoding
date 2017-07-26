@@ -32,8 +32,11 @@ package org.epstudios.epcoding;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.List;
 
 public class SearchableActivity extends BasicActionBarActivity {
 
@@ -51,9 +54,17 @@ public class SearchableActivity extends BasicActionBarActivity {
 
 	private void doMySearch(String query) {
 		final ListView listView = (ListView) findViewById(android.R.id.list);
-		ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-				android.R.layout.simple_list_item_1, Codes.searchCodes(query));
-		listView.setAdapter(adapter);
+		List<String> codes = Codes.searchCodes(query);
+		if (codes.size() == 0) {
+			listView.setVisibility(View.GONE);
+		}
+		else {
+			listView.setVisibility(View.VISIBLE);
+			ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+					android.R.layout.simple_list_item_1, Codes.searchCodes(query));
+			listView.setAdapter(adapter);
+		}
 
 	}
+
 }

@@ -3,24 +3,15 @@ EP Coding is an [Android](http://www.android.com) app
 that is intended to help practicing cardiac electrophysiology (EP) doctors
 document and bill their procedures by selecting
 proper CPT® codes, based on the latest coding guidelines.  The app is
-not for professional coders, and does not take into account the coding
-modifiers and different coding specifications of various billing
-agencies.  It is useful for those physicians who need to enter procedure
-codes directly into EHR systems, such as EPIC, or who just need to
-communicate to the coders what they have done.  Of course all codes
-billed must also be documented in procedure notes.  The rules for entering
-codes are complex, and the codes themselves are not mnemonic, hence
-this app.  This app currently uses the 2014 codes, but will be updated
-as coding changes.  We are not liable for any errors in coding that
-might occur from using this app, please see the licensing information below.
+not for professional coders.  It is useful for physicians who need to enter procedure codes directly into EHR systems, such as EPIC, or who just need to communicate to the coders what they have done.  Of course all codes billed must also be documented in procedure notes.  The rules for entering codes are complex, and the codes themselves are not mnemonic, hence this app.  This app will be updated on at least a yearly basis with the latest coding changes.  EP Studios is not liable for any errors in coding that might occur from using this app.  Please see the licensing information below.
 
 EP Coding is open source, and licensed under the 
 [GNU GPL v3 license.](http://www.gnu.org/licenses/gpl.html)
 
 ## Copyright
-Copyright © 2013, 2014 [EP Studios, Inc.](http://www.epstudiossoftware.com)
+Copyright © 2013 - 2017 [EP Studios, Inc.](http://www.epstudiossoftware.com)
 
-CPT copyright 2012 American Medical Association. All rights
+CPT copyright 2014 American Medical Association. All rights
 reserved. CPT is a registered trademark of the American Medical
 Association.
 
@@ -39,15 +30,15 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## Sources
-The ultimate source is the CPT® 2013 and 2014 Professional Editions, available
+The ultimate source is the CPT® Professional Edition, available
 from the
 [American Medical Association](http://http://www.ama-assn.org/ama/pub/physician-resources/solutions-managing-your-practice/coding-billing-insurance/cpt/cpt-featured-products.page?).
 The AMA stipulates a license fee for use of their codes.  The CPT®
 codes used in this program are only a small subset of the thousands of
 codes available, and full descriptions of the codes are not included.
 The data for this program was drawn from other readily available free
-sources, including the
-[Boston Scientific 2013 Billing and Coding Guide](http://http://www.bostonscientific.com/cardiac-rhythm-resources/assets/downloads/reimbursement/2013/CRM-129704-AA-2013-Billing-CodingGuide.pdf),
+sources, such as coding guides from 
+[Boston Scientific](https://www.bostonscientific.com/en-US/Home.html),
 and articles such as
 [this one](http://www.eplabdigest.com/articles/Changes-Coming-2013-CPT-Codes).
 For these reasons, it is felt that the use of the small subset of
@@ -57,8 +48,10 @@ the Copyright Act and not subjected to the licensing fees imposed by
 the AMA.  A full discussion of the rationale for fair use of these
 codes is contained on [our website](http://www.epstudiossoftware.com/?p=1313).
 
+ICD-10-CM codes are available for free download from [CMS.gov](https://www.cms.gov/Medicare/Coding/ICD10/2017-ICD-10-CM-and-GEMs.html) These codes are a modification by the US government of the World Health Organization ICD-10 codes.  There appears to be no specific licensing requirement for this version of the ICD-10 code set.  Only a subset of the ICD-10-CM diagnostic codes relevant to cardiology are included in this program.
+
 ## Author
 David Mann, MD
 
 Email: [mannd@epstudiossoftware.com](mailto:mannd@epstudiossoftware.com)  
-Website: [http://www.epstudiossoftware.com](http://www.epstudiossoftware.com)   
+Website: [https://www.epstudiossoftware.com](http://www.epstudiossoftware.com)   

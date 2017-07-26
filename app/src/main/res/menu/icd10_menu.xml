@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/saveCodeSelection"
-        android:icon="@drawable/ic_save_white_24dp"
-        android:orderInCategory="20"
-        app:showAsAction="ifRoom"
-        android:title="@string/save_code_selection_title">
+        android:id="@+id/search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:orderInCategory="10"
+        app:showAsAction="ifRoom|collapseActionView"
+        android:title="@string/search_title">
     </item>
 
     <item
@@ -15,5 +16,4 @@
         app:showAsAction="never"
         android:title="@string/about_title">
     </item>
-
 </menu>
