@@ -1,6 +1,7 @@
 package org.epstudios.epcoding;
 
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 /**
@@ -26,7 +27,7 @@ import android.support.v7.widget.Toolbar;
  */
 
 // just deals with toolbar
-public class SimpleActionBarActivity extends ActionBarActivity {
+public class SimpleActionBarActivity extends AppCompatActivity {
 
     void initToolbar() {
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
