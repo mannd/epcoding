@@ -63,6 +63,9 @@ I2121   ST elevation (STEMI) myocardial infarction involving left circumflex cor
 I2129   ST elevation (STEMI) myocardial infarction involving other sites
 I213    ST elevation (STEMI) myocardial infarction of unspecified site
 I214    Non-ST elevation (NSTEMI) myocardial infarction
+I219    Acute myocardial infarction, unspecified
+I21A1   Myocardial infarction type 2
+I21A9   Other myocardial infarction type
 I220    Subsequent ST elevation (STEMI) myocardial infarction of anterior wall
 I221    Subsequent ST elevation (STEMI) myocardial infarction of inferior wall
 I222    Subsequent non-ST elevation (NSTEMI) myocardial infarction
@@ -136,9 +139,15 @@ I2692   Saddle embolus of pulmonary artery without acute cor pulmonale
 I2699   Other pulmonary embolism without acute cor pulmonale
 I270    Primary pulmonary hypertension
 I271    Kyphoscoliotic heart disease
-I272    Other secondary pulmonary hypertension
+I2720   Pulmonary hypertension, unspecified
+I2721   Secondary pulmonary arterial hypertension
+I2722   Pulmonary hypertension due to left heart disease
+I2723   Pulmonary hypertension due to lung diseases and hypoxia
+I2724   Chronic thromboembolic pulmonary hypertension
+I2729   Other secondary pulmonary hypertension
 I2781   Cor pulmonale (chronic)
 I2782   Chronic pulmonary embolism
+I2783   Eisenmenger's syndrome
 I2789   Other specified pulmonary heart diseases
 I279    Pulmonary heart disease, unspecified
 I280    Arteriovenous fistula of pulmonary vessels
@@ -242,7 +251,7 @@ I4949   Other premature depolarization
 I495    Sick sinus syndrome
 I498    Other specified cardiac arrhythmias
 I499    Cardiac arrhythmia, unspecified
-I501    Left ventricular failure
+I501    Left ventricular failure, unspecified
 I5020   Unspecified systolic (congestive) heart failure
 I5021   Acute systolic (congestive) heart failure
 I5022   Chronic systolic (congestive) heart failure
@@ -255,6 +264,15 @@ I5040   Unspecified combined systolic (congestive) and diastolic (congestive) he
 I5041   Acute combined systolic (congestive) and diastolic (congestive) heart failure
 I5042   Chronic combined systolic (congestive) and diastolic (congestive) heart failure
 I5043   Acute on chronic combined systolic (congestive) and diastolic (congestive) heart failure
+I50810  Right heart failure, unspecified
+I50811  Acute right heart failure
+I50812  Chronic right heart failure
+I50813  Acute on chronic right heart failure
+I50814  Right heart failure due to left heart failure
+I5082   Biventricular heart failure
+I5083   High output heart failure
+I5084   End stage heart failure
+I5089   Other heart failure
 I509    Heart failure, unspecified
 I510    Cardiac septal defect, acquired
 I511    Rupture of chordae tendineae, not elsewhere classified
@@ -323,11 +341,11 @@ I63133  Cerebral infarction due to embolism of bilateral carotid arteries
 I63139  Cerebral infarction due to embolism of unspecified carotid artery
 I6319   Cerebral infarction due to embolism of other precerebral artery
 I6320   Cerebral infarction due to unspecified occlusion or stenosis of unspecified precerebral arteries
-I63211  Cerebral infarction due to unspecified occlusion or stenosis of right vertebral arteries
-I63212  Cerebral infarction due to unspecified occlusion or stenosis of left vertebral arteries
+I63211  Cerebral infarction due to unspecified occlusion or stenosis of right vertebral artery
+I63212  Cerebral infarction due to unspecified occlusion or stenosis of left vertebral artery
 I63213  Cerebral infarction due to unspecified occlusion or stenosis of bilateral vertebral arteries
 I63219  Cerebral infarction due to unspecified occlusion or stenosis of unspecified vertebral arteries
-I6322   Cerebral infarction due to unspecified occlusion or stenosis of basilar arteries
+I6322   Cerebral infarction due to unspecified occlusion or stenosis of basilar artery
 I63231  Cerebral infarction due to unspecified occlusion or stenosis of right carotid arteries
 I63232  Cerebral infarction due to unspecified occlusion or stenosis of left carotid arteries
 I63233  Cerebral infarction due to unspecified occlusion or stenosis of bilateral carotid arteries
@@ -340,11 +358,11 @@ I63313  Cerebral infarction due to thrombosis of bilateral middle cerebral arter
 I63319  Cerebral infarction due to thrombosis of unspecified middle cerebral artery
 I63321  Cerebral infarction due to thrombosis of right anterior cerebral artery
 I63322  Cerebral infarction due to thrombosis of left anterior cerebral artery
-I63323  Cerebral infarction due to thrombosis of bilateral anterior arteries
+I63323  Cerebral infarction due to thrombosis of bilateral anterior cerebral arteries
 I63329  Cerebral infarction due to thrombosis of unspecified anterior cerebral artery
 I63331  Cerebral infarction due to thrombosis of right posterior cerebral artery
 I63332  Cerebral infarction due to thrombosis of left posterior cerebral artery
-I63333  Cerebral infarction to thrombosis of bilateral posterior arteries
+I63333  Cerebral infarction to thrombosis of bilateral posterior cerebral arteries
 I63339  Cerebral infarction due to thrombosis of unspecified posterior cerebral artery
 I63341  Cerebral infarction due to thrombosis of right cerebellar artery
 I63342  Cerebral infarction due to thrombosis of left cerebellar artery
@@ -372,15 +390,15 @@ I6349   Cerebral infarction due to embolism of other cerebral artery
 I6350   Cerebral infarction due to unspecified occlusion or stenosis of unspecified cerebral artery
 I63511  Cerebral infarction due to unspecified occlusion or stenosis of right middle cerebral artery
 I63512  Cerebral infarction due to unspecified occlusion or stenosis of left middle cerebral artery
-I63513  Cerebral infarction due to unspecified occlusion or stenosis of bilateral middle arteries
+I63513  Cerebral infarction due to unspecified occlusion or stenosis of bilateral middle cerebral arteries
 I63519  Cerebral infarction due to unspecified occlusion or stenosis of unspecified middle cerebral artery
 I63521  Cerebral infarction due to unspecified occlusion or stenosis of right anterior cerebral artery
 I63522  Cerebral infarction due to unspecified occlusion or stenosis of left anterior cerebral artery
-I63523  Cerebral infarction due to unspecified occlusion or stenosis of bilateral anterior arteries
+I63523  Cerebral infarction due to unspecified occlusion or stenosis of bilateral anterior cerebral arteries
 I63529  Cerebral infarction due to unspecified occlusion or stenosis of unspecified anterior cerebral artery
 I63531  Cerebral infarction due to unspecified occlusion or stenosis of right posterior cerebral artery
 I63532  Cerebral infarction due to unspecified occlusion or stenosis of left posterior cerebral artery
-I63533  Cerebral infarction due to unspecified occlusion or stenosis of bilateral posterior arteries
+I63533  Cerebral infarction due to unspecified occlusion or stenosis of bilateral posterior cerebral arteries
 I63539  Cerebral infarction due to unspecified occlusion or stenosis of unspecified posterior cerebral artery
 I63541  Cerebral infarction due to unspecified occlusion or stenosis of right cerebellar artery
 I63542  Cerebral infarction due to unspecified occlusion or stenosis of left cerebellar artery
@@ -1151,10 +1169,10 @@ I82C21  Chronic embolism and thrombosis of right internal jugular vein
 I82C22  Chronic embolism and thrombosis of left internal jugular vein
 I82C23  Chronic embolism and thrombosis of internal jugular vein, bilateral
 I82C29  Chronic embolism and thrombosis of unspecified internal jugular vein
-I82811  Embolism and thrombosis of superficial veins of right lower extremities
-I82812  Embolism and thrombosis of superficial veins of left lower extremities
+I82811  Embolism and thrombosis of superficial veins of right lower extremity
+I82812  Embolism and thrombosis of superficial veins of left lower extremity
 I82813  Embolism and thrombosis of superficial veins of lower extremities, bilateral
-I82819  Embolism and thrombosis of superficial veins of unspecified lower extremities
+I82819  Embolism and thrombosis of superficial veins of unspecified lower extremity
 I82890  Acute embolism and thrombosis of other specified veins
 I82891  Chronic embolism and thrombosis of other specified veins
 I8290   Acute embolism and thrombosis of unspecified vein
@@ -1204,14 +1222,14 @@ I83224  Varicose veins of left lower extremity with both ulcer of heel and midfo
 I83225  Varicose veins of left lower extremity with both ulcer other part of foot and inflammation
 I83228  Varicose veins of left lower extremity with both ulcer of other part of lower extremity and inflammation
 I83229  Varicose veins of left lower extremity with both ulcer of unspecified site and inflammation
-I83811  Varicose veins of right lower extremities with pain
-I83812  Varicose veins of left lower extremities with pain
+I83811  Varicose veins of right lower extremity with pain
+I83812  Varicose veins of left lower extremity with pain
 I83813  Varicose veins of bilateral lower extremities with pain
-I83819  Varicose veins of unspecified lower extremities with pain
-I83891  Varicose veins of right lower extremities with other complications
-I83892  Varicose veins of left lower extremities with other complications
+I83819  Varicose veins of unspecified lower extremity with pain
+I83891  Varicose veins of right lower extremity with other complications
+I83892  Varicose veins of left lower extremity with other complications
 I83893  Varicose veins of bilateral lower extremities with other complications
-I83899  Varicose veins of unspecified lower extremities with other complications
+I83899  Varicose veins of unspecified lower extremity with other complications
 I8390   Asymptomatic varicose veins of unspecified lower extremity
 I8391   Asymptomatic varicose veins of right lower extremity
 I8392   Asymptomatic varicose veins of left lower extremity
