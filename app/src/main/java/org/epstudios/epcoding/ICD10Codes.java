@@ -36,7 +36,7 @@ public class ICD10Codes {
 
     private static ArrayList<ICD10Code> allICD10Codes = null;
     private static ArrayList<String> allICD10CodeStrings = null;
-    private final static String CODE_FILE_NAME = "cardICD10codes2017.txt";
+    private final static String CODE_FILE_NAME = "cardICD10codes2018.txt";
 
     public static ArrayList<ICD10Code> createCodes(final Context context) {
         if (allICD10Codes == null) {
@@ -76,7 +76,7 @@ public class ICD10Codes {
     public static List<String> searchCodes(String searchString, Context context) {
         List<String> result = new ArrayList<>();
         for (String code : getICD10CodeStrings(context)) {
-            if (code.contains(searchString)) {
+            if (code.toLowerCase().contains(searchString.toLowerCase())) {
                 result.add(code);
             }
         }
