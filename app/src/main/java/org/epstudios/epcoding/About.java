@@ -37,7 +37,7 @@ import java.util.Locale;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class About extends Activity {
-	private final static String VERSION = "1.8";
+	private final static String VERSION = "1.7";
 
 	private TextView versionTextView;
 
