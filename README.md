@@ -48,7 +48,7 @@ the Copyright Act and not subjected to the licensing fees imposed by
 the AMA.  A full discussion of the rationale for fair use of these
 codes is contained on [our website](http://www.epstudiossoftware.com/?p=1313).
 
-ICD-10-CM codes are available for free download from [CMS.gov](https://www.cms.gov/Medicare/Coding/ICD10/2017-ICD-10-CM-and-GEMs.html) These codes are a modification by the US government of the World Health Organization ICD-10 codes.  There appears to be no specific licensing requirement for this version of the ICD-10 code set.  Only a subset of the ICD-10-CM diagnostic codes relevant to cardiology are included in this program.
+ICD-10-CM codes are available for free download from [CMS.gov](https://www.cms.gov/Medicare/Coding/ICD10/) These codes are a modification by the US government of the World Health Organization ICD-10 codes.  There appears to be no specific licensing requirement for this version of the ICD-10 code set.  Only a subset of the ICD-10-CM diagnostic codes relevant to cardiology are included in this program.
 
 ## Author
 David Mann, MD

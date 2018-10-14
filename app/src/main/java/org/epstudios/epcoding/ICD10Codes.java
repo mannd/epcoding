@@ -36,7 +36,7 @@ public class ICD10Codes {
 
     private static ArrayList<ICD10Code> allICD10Codes = null;
     private static ArrayList<String> allICD10CodeStrings = null;
-    private final static String CODE_FILE_NAME = "cardICD10codes2018.txt";
+    private final static String CODE_FILE_NAME = "cardICD10codes2019.txt";
 
     public static ArrayList<ICD10Code> createCodes(final Context context) {
         if (allICD10Codes == null) {
