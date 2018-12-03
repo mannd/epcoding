@@ -1,4 +1,9 @@
-## Description
+EP Coding
+=========
+
+[![Build Status](https://travis-ci.org/mannd/epcoding.svg?branch=master)](https://travis-ci.org/mannd/epcoding)
+
+## Coding for electrophysiology procedures
 EP Coding is an [Android](http://www.android.com) app
 that is intended to help practicing cardiac electrophysiology (EP) doctors
 document and bill their procedures by selecting
