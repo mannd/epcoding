@@ -30,9 +30,10 @@ This file is part of EP Coding.
 package org.epstudios.epcoding;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.widget.CheckBox;
 
-class CodeCheckBox extends CheckBox {
+class CodeCheckBox extends AppCompatCheckBox {
 	private Code code;
 	private boolean codeFirst = false;
 
