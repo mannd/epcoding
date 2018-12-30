@@ -378,10 +378,6 @@ you select *Help* to get help.
 **** Lead repair
 - One lead repaired: 33218
 - Two leads repaired: 33220
-*** SubQ ICD/Leadless PPM
-- SubQ ICD and leadless PPM codes use emerging technology
-  codes that are temporary and will probably be changed in the next
-  revision of the codes.
 *** Other procedures
 - These are miscellaneous EP procedures (tilt table, cardioversion,
   etc.)
