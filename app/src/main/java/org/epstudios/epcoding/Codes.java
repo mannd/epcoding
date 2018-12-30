@@ -72,11 +72,8 @@ public class Codes {
 
 
 		// Leadless PPM
-		addCode(map, "0387T", "New or replacement leadless PPM", false);
-		addCode(map, "0388T", "Transcatheter removal of leadless PPM", false);
-		addCode(map, "0389T", "Programming evaluation/testing of leadless PPM", false);
-		addCode(map, "0390T", "Peri-procedural device evaluation/testing of leadless PPM", false);
-		addCode(map, "0391T", "Interrogation of leadless PPM", false);
+		addCode(map, "33274", "New or replacement leadless PPM", false);
+		addCode(map, "33275", "Transcatheter removal of leadless PPM", false);
 
 		// hopefully rarely needed!
 		addCode(map, "33010", "Pericardiocentesis", false);
@@ -154,8 +151,8 @@ public class Codes {
 		addCode(map, "33264", "CRT ICD generator replacement", false);
 
 		// ILR
-		addCode(map, "33282", "Insertion of loop recorder", false);
-		addCode(map, "33284", "Removal of loop recorder", false);
+		addCode(map, "33285", "Insertion of loop recorder", false);
+		addCode(map, "33286", "Removal of loop recorder", false);
 
 		addCode(map, "33999",
 				"Unlisted surgical procedure, e.g. SubQ array lead", false);
@@ -239,9 +236,9 @@ public class Codes {
 	public final static String[] epTestingPrimaryCodeNumbers = { "93619",
 			"93620" };
     public final static String[] subQIcdPrimaryCodeNumbers = { "33270", "33271",
-			"33272", "33273", "0387T", "0388T", "0389T", "0390T", "0391T" };
-	public final static String[] otherProcedurePrimaryCodeNumbers = { "33282",
-			"33284", "93660", "92960", "92961", "76000" };
+			"33272", "33273", "33274", "33275" };
+	public final static String[] otherProcedurePrimaryCodeNumbers = { "33285",
+			"33286", "93660", "92960", "92961", "76000" };
 
 	public final static String[] newPpmPrimaryCodeNumbers = { "33206", "33207",
 			"33208", "33225" };
