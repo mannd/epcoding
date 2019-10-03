@@ -233,7 +233,7 @@ added along the way.  After swiping through each page of the Wizard,
 the code summary will appear when you select *Finish* or swipe past
 the last page.
 **** <<ICD10>>ICD-10 codes
-Ah, it’s time to forget all those ICD-9 codes you spent all those years remembering, because now the NEW IMPROVED ICD-10 codes are here!  And not only are the new codes completely different, there are a whole lot more of them now too!  To help with the painful transition to ICD-10, *EP Coding* includes a searchable list of a subset of these codes.  The codes are the so-called ICD-10-CM codes which are the diagnostic codes (the ICD-10-PCS procedure codes are not included, as these are more relevant to facility coding).  The diagnostic codes included are all the cardiology-related codes.  Technically speaking, these are all codes in the ranges I00-I99, R00-R31, Q20-Q28, and Z86.74.  This is only a subset of the total code set, but still includes over 1400 codes!  Clearly not all are needed to code EP procedures, but it is easier to include this large set of codes than to pick through them all to see which are most relevant to electrophysiologists.  Fortunately there is a search bar at the top of the list.  Use this to narrow down and find the right code.  For example, here is a search for "fib":
+ *EP Coding* includes a searchable list of ICD-10 codes.  ICD-10 codes are provided by CMS.gov, and are updated on October 1 of each year.  Previous versions of the app only included a subset of the codes relating to cardiology, but now we include all the diagnostic codes.  The codes are the so-called ICD-10-CM codes, which are the diagnostic codes (the ICD-10-PCS procedure codes are not included, as these are more relevant to facility coding).  Use the search bar to narrow down and find the right code.  For example, here is a search for "fib":
 
 #+CAPTION: ICD-10 search for "fib.
 [[./icd_10_codes.png]]
@@ -435,7 +435,6 @@ you select *Help* to get help.
 - No device programming codes.
 - Only limited, common code modifiers are presented.
 - Code analysis marks common errors, but is no substitute for a professional coder!
-- Only a subset of ICD-10-CM codes are included.  For example, I did not include [[http://www.icd10data.com/ICD10CM/Codes/V00-Y99/V90-V94/V91-/V91.07XA][V91.07XA Burn due to water-skis on fire, initial encounter]].
 - ICD-10-PCS are not included, as these are generally not used by physicians.
 ** Acknowledgments
 - CPT copyright 2014 American Medical Association. All rights
