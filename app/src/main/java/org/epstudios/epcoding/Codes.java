@@ -79,7 +79,7 @@ public class Codes {
 		addCode(map, "33010", "Pericardiocentesis", false);
 
 
-// New PPM with leads
+		// New PPM with leads
 		addCode(map, "33206", "New or replacement PPM with new A lead", false);
 		addCode(map, "33207", "New or replacement PPM with new V lead", false);
 		addCode(map, "33208", "New or replacement PPM with new A and V leads",
@@ -161,13 +161,21 @@ public class Codes {
 		addCode(map, "35476", "Venous angioplasty", false);
 		addCode(map, "36620", "Arterial line placement", false);
 
+		// Imaging
 		// note fluoroscopy included in device codes, but this code
 		// used e.g to evaluate a lead such as a Riata
 		addCode(map, "76000", "Fluoroscopic lead evaluation", false);
+		addCode(map, "76937", "Ultrasonic guidance for vascular access", false);
+
 		// Ablation and EP testing codes
 
-		// TEE - but only by different MD than performing procedure
-		addCode(map, "93355", "TEE for TEE for guidance of transcatheter intervention, performed by different MD than MD performing intervention.", false);
+		// TEE
+		addCode(map, "93312", "TEE, complete", false);
+		addCode(map, "93315", "TEE. complete, congenital heart disease", false);
+		addCode(map, "93320", "Doppler imaging, complete", true);
+		addCode(map, "93321", "Doppler imaging, follow-up or limited study", true);
+		addCode(map, "93325", "Doppler color flow velocity mapping", true);
+		addCode(map, "93355", "TEE for guidance of transcatheter vascular interventions, such as TAVR, LAA closure, etc.", false);
 
 		// EP Testing and Mapping ///////////////////////
 		addCode(map, "93600", "His bundle recording", false);
@@ -225,6 +233,7 @@ public class Codes {
 		addCode(map, "99155", "Moderate sedation, different MD, initial 15 min, pt < 5 y/o", false);
 		addCode(map, "99156", "Moderate sedation, different MD, initial 15 min, pt ≥ 5 y/o", false);
 		addCode(map, "99157", "Moderate sedation, different MD, each additional 15 min", true);
+
 
 		return Collections.unmodifiableMap(map);
 	}
@@ -355,11 +364,11 @@ public class Codes {
             // Modifier 26 alone
             List<Modifier> modifierList_26 = new ArrayList<>();
             modifierList_26.add(Modifiers.getModifierForNumber("26"));
+            defaultModifiers.put("93312", modifierList_26);
             defaultModifiers.put("93609", modifierList_26);
             defaultModifiers.put("93620", modifierList_26);
             defaultModifiers.put("93619", modifierList_26);
             defaultModifiers.put("93621", modifierList_26);
-            defaultModifiers.put("93622", modifierList_26);
             defaultModifiers.put("93662", modifierList_26);
             defaultModifiers.put("76000", modifierList_26);
             defaultModifiers.put("93641", modifierList_26);

@@ -7,7 +7,7 @@
     <string name="settings_title">Settings</string>
     <string name="about_title">About</string>
     <string name="about_label">EP Coding</string>
-    <string name="about_text">Copyright \u00a9 2013-2019 EP Studios, Inc.
+    <string name="about_text">Copyright \u00a9 2013-2020 EP Studios, Inc.
 		\nAll rights reserved.\n</string>
     <string name="help_title">Help</string>
     <string name="search_title">Search</string>
@@ -129,7 +129,7 @@
     <string name="no_secondary_codes_error_message">Only additional codes can be saved. This group has only primary codes.</string>
     <string name="no_code_errors_message">No errors or warnings.</string>
     <string name="no_code_analysis_performed_message">No code analysis performed in this module.</string>
-    <string name="show_add_on_plus_label">Distinguish add-on codes</string>
+    <string name="show_add_on_plus_label">Distinguish add-on codes in summary</string>
     <string name="show_add_on_plus_on_summary">Add-on codes have +</string>
     <string name="show_add_on_plus_off_summary">Add-on codes don\'t have +</string>
     <string name="show_code_details_label">Show descriptions</string>
