@@ -369,7 +369,8 @@ public class Codes {
             defaultModifiers.put("93620", modifierList_26);
             defaultModifiers.put("93619", modifierList_26);
             defaultModifiers.put("93621", modifierList_26);
-            defaultModifiers.put("93662", modifierList_26);
+			defaultModifiers.put("93622", modifierList_26);
+			defaultModifiers.put("93662", modifierList_26);
             defaultModifiers.put("76000", modifierList_26);
             defaultModifiers.put("93641", modifierList_26);
             defaultModifiers.put("93642", modifierList_26);

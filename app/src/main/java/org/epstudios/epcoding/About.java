@@ -37,17 +37,17 @@ import java.util.Locale;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class About extends Activity {
-	private final static String VERSION = "1.11";
+    private final static String VERSION = "1.11";
 
-	private TextView versionTextView;
+    private TextView versionTextView;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.about);
-		versionTextView = (TextView) findViewById(R.id.version);
-		versionTextView.setText(String.format(Locale.getDefault(),
-				getString(R.string.version), VERSION));
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.about);
+        versionTextView = (TextView) findViewById(R.id.version);
+        versionTextView.setText(String.format(Locale.getDefault(),
+                getString(R.string.version), VERSION));
 
-	}
+    }
 }
