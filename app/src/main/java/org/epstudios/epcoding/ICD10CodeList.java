@@ -1,12 +1,11 @@
 package org.epstudios.epcoding;
 
-import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.support.v7.widget.SearchView;
+import androidx.core.app.NavUtils;
+import androidx.appcompat.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;

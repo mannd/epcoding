@@ -1,7 +1,7 @@
 package org.epstudios.epcoding;
 
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 /**
  * Copyright (C) 2017 EP Studios, Inc.

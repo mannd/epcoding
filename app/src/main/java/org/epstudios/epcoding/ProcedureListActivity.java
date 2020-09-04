@@ -29,11 +29,9 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 /**
  * An activity representing a list of Procedures. This activity has different
