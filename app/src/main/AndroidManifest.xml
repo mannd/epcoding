@@ -53,6 +53,7 @@
         </activity>
         <activity
             android:name=".Help"
+            android:configChanges="orientation|screenSize"
             android:label="@string/help_title" >
         </activity>
         <activity

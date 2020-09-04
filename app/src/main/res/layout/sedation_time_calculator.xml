@@ -1,29 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <include layout="@layout/toolbar" />
-
-
-    <ToggleButton
-        android:id="@+id/toggleButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:text="ToggleButton"
-        android:textOff="@string/start_date_time_label"
-        android:textOn="@string/finish_date_time_label" />
-
-    <TimePicker
-        android:id="@+id/timePicker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_above="@id/buttons"
+        android:orientation="vertical">
+
+        <ToggleButton
+            android:id="@+id/toggleButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="ToggleButton"
+            android:textOff="@string/start_date_time_label"
+            android:textOn="@string/finish_date_time_label" />
+
+        <TimePicker
+            android:id="@+id/timePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttons"
+        style="?android:attr/buttonBarStyle"
+        android:divider="?android:dividerVertical"
+        android:showDividers="middle"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <Button
@@ -50,4 +63,4 @@
             android:layout_weight="1"
             android:text="@string/calculate_sedation_time_button_label" />
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>
