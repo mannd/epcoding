@@ -29,6 +29,7 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.webkit.WebView;
 
@@ -44,8 +45,12 @@ public class Help extends BasicActionBarActivity {
 		String url = "file:///android_asset/help.html";
 		WebView webView = findViewById(R.id.webView);
 		webView.loadUrl(url);
-		if(WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
-			WebSettingsCompat.setForceDark(webView.getSettings(), WebSettingsCompat.FORCE_DARK_ON);
+		// See https://stackoverflow.com/questions/57449900/letting-webview-on-android-work-with-prefers-color-scheme-dark
+		int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+		if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+			if(WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+				WebSettingsCompat.setForceDark(webView.getSettings(), WebSettingsCompat.FORCE_DARK_ON);
+			}
 		}
 		initToolbar();
 	}
