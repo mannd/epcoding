@@ -125,7 +125,6 @@
     <string name="other_procedure_title">Other Procedure</string>
     <string name="all_codes_title">All EP Codes</string>
     <string name="all_codes_primary_title">All EP Procedure Codes</string>
-    <string name="save_code_selection_error_message">First select a procedure</string>
     <string name="no_secondary_codes_error_message">Only additional codes can be saved. This group has only primary codes.</string>
     <string name="no_code_errors_message">No errors or warnings.</string>
     <string name="no_code_analysis_performed_message">No code analysis performed in this module.</string>
@@ -209,6 +208,7 @@
     <string name="version">Version %s</string>
     <string name="icd10_code_list_label">ICD 10 Codes</string>
     <string name="icd10_search_hint">Search ICD-10 codes</string>
+    <string name="toggle_button_label">ToggleButton</string>
 
 
 </resources>

@@ -29,6 +29,8 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,10 +38,10 @@ import java.util.Map;
 
 class ProcedureTypes {
 
-	/**
-	 * Helper class for providing sample content for user interfaces created by
-	 * Android template wizards.
-	 * <p>
+	/*
+	  Helper class for providing sample content for user interfaces created by
+	  Android template wizards.
+	  <p>
 	 */
 
 	/**
@@ -87,6 +89,7 @@ class ProcedureTypes {
 			this.content = content;
 		}
 
+		@NonNull
 		@Override
 		public String toString() {
 			return content;

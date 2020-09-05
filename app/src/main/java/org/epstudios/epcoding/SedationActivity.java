@@ -1,23 +1,23 @@
-/**
- * Copyright (C) 2017 EP Studios, Inc.
- * www.epstudiossoftware.com
- * <p>
- * Created by mannd on 3/4/17.
- * <p>
- * This file is part of epcoding.
- * <p>
- * epcoding is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * <p>
- * epcoding is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * <p>
- * You should have received a copy of the GNU General Public License
- * along with epcoding.  If not, see <http://www.gnu.org/licenses/>.
+/*
+  Copyright (C) 2017 EP Studios, Inc.
+  www.epstudiossoftware.com
+  <p>
+  Created by mannd on 3/4/17.
+  <p>
+  This file is part of epcoding.
+  <p>
+  epcoding is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  <p>
+  epcoding is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  <p>
+  You should have received a copy of the GNU General Public License
+  along with epcoding.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package org.epstudios.epcoding;
@@ -62,19 +62,20 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
         sameMD = getIntent().getBooleanExtra("SAME_MD", true);
         sedationStatus = (SedationStatus)getIntent().getSerializableExtra("SEDATION_STATUS");
 
-        Button calculateTimeButton = (Button)findViewById(R.id.calculate_sedation_button);
-        Button cancelButton = (Button)findViewById(R.id.cancel_button);
-        Button noSedationButton = (Button)findViewById(R.id.no_sedation_button);
-        Button addButton = (Button)findViewById(R.id.add_sedation_button);
+        Button calculateTimeButton = findViewById(R.id.calculate_sedation_button);
+        Button cancelButton = findViewById(R.id.cancel_button);
+        Button noSedationButton = findViewById(R.id.no_sedation_button);
+        Button addButton = findViewById(R.id.add_sedation_button);
         calculateTimeButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
         noSedationButton.setOnClickListener(this);
         addButton.setOnClickListener(this);
 
-        timeEditText = (EditText)findViewById(R.id.sedation_time_edit_text);
-        ageCheckBox = (CheckBox)findViewById(R.id.pt_over_5_checkbox);
-        sameMDCheckBox = (CheckBox)findViewById(R.id.same_md_checkbox);
+        timeEditText = findViewById(R.id.sedation_time_edit_text);
+        ageCheckBox = findViewById(R.id.pt_over_5_checkbox);
+        sameMDCheckBox = findViewById(R.id.same_md_checkbox);
 
+        //noinspection RedundantStringFormatCall
         timeEditText.setText(String.format(Locale.getDefault(), Integer.toString(sedationTime)));
         ageCheckBox.setChecked(ageOver5);
         sameMDCheckBox.setChecked(sameMD);
@@ -89,15 +90,13 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
             case R.id.calculate_sedation_button:
                 calculateSedationTime();
                 break;
-            case R.id.cancel_button:
-                finish();
-                break;
             case R.id.no_sedation_button:
                 noSedation(returnIntent);
                 break;
             case R.id.add_sedation_button:
                 addCodes(returnIntent);
                 break;
+            case R.id.cancel_button:
             default:
                 finish();
                 break;
@@ -111,10 +110,12 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SEDATION_CALCULATOR_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                Integer result = data.getIntExtra(SEDATION_TIME, 0);
-                timeEditText.setText(String.format(Locale.getDefault(), result.toString()));
+                int result = data.getIntExtra(SEDATION_TIME, 0);
+                //noinspection RedundantStringFormatCall
+                timeEditText.setText(String.format(Locale.getDefault(), Integer.toString(result)));
 
             }
         }

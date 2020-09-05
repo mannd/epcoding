@@ -3,8 +3,8 @@ package org.epstudios.epcoding;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.NavUtils;
-import android.support.v7.widget.SearchView;
+import androidx.core.app.NavUtils;
+import androidx.appcompat.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,7 +35,7 @@ public class ProcedureActionBarActivity extends SimpleActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        ProcedureDetailFragment fragment = (ProcedureDetailFragment) getFragmentManager()
+        ProcedureDetailFragment fragment = (ProcedureDetailFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.procedure_detail_container);
         switch (item.getItemId()) {
             case android.R.id.home:

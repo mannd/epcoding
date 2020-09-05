@@ -279,9 +279,6 @@ public class Codes {
 	private final static String[] deviceSecondaryCodeNumbers = { "33210",
 			"33218", "33220", "92960", "92961" };
 
-	public final static String[] upgradeSecondaryCodeNumbers = { "33210",
-			"33218", "33220", "92960", "92961" };
-
 	public final static String[] icdDeviceSecondaryCodeNumbers = { "93641",
 			"33210", "33999", "92960", "92961" };
 
@@ -332,10 +329,10 @@ public class Codes {
 		return getCodes(deviceSecondaryCodeNumbers);
 	}
 
-	public static int allCodesSize() {
-		return allCodes.size();
-	}
-
+//	public static int allCodesSize() {
+//		return allCodes.size();
+//	}
+//
 	public static List<String> searchCodes(String searchString) {
 		List<String> result = new ArrayList<>();
 		for (Map.Entry<String, Code> entry : allCodes.entrySet()) {
@@ -346,19 +343,7 @@ public class Codes {
 		return result;
 	}
 
-	static void clearMultipliers(ArrayList<Code> array) {
-        for (Code code : array) {
-            code.setMultiplier(0);
-        }
-    }
-
-    static void clearModifiers(ArrayList<Code> array) {
-        for (Code code : array) {
-            code.clearModifiers();
-        }
-    }
-
-    private static Map<String, List<Modifier>> defaultModifiers() {
+	private static Map<String, List<Modifier>> defaultModifiers() {
         if (defaultModifiers == null) {
             defaultModifiers = new HashMap<>();
             // Modifier 26 alone
@@ -404,32 +389,13 @@ public class Codes {
         }
     }
 
-    public static void clearMultipliersAndModifiers(Code[] codes) {
-		for (Code code : codes) {
-			code.setMultiplier(0);
-			code.clearModifiers();
-		}
-    }
-
-    public static void hideMultipliers(List<Code> array, Boolean hide) {
-        for (Code code : array) {
-            code.setHideMultiplier(hide);
-        }
-    }
-
-    public static void loadDefaultModifiers(List<Code> array) {
+	public static void loadDefaultModifiers(List<Code> array) {
         for (Code code : array) {
             loadDefaultModifiersForCode(code);
         }
     }
 
-    public static void loadDefaultModifiers(Code[] codes) {
-		for (Code code : codes) {
-			loadDefaultModifiersForCode(code);
-		}
-    }
-
-    private static void loadDefaultModifiersForCode(Code code) {
+	private static void loadDefaultModifiersForCode(Code code) {
         List<Modifier> modifiers = defaultModifiers().get(code.getCodeNumber());
         if (modifiers != null) {
             code.addModifiers(modifiers);
@@ -453,15 +419,7 @@ public class Codes {
 	}
 
 
-	public static void loadSavedModifiers(Code[] codes, Context context) {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(context);
-		for (Code code : codes) {
-			loadSavedModifiersForCode(code, prefs);
-		}
-    }
-
-    private static void loadSavedModifiersForCode(Code code, SharedPreferences prefs) {
+	private static void loadSavedModifiersForCode(Code code, SharedPreferences prefs) {
         Set<String> modifierNumbers = prefs.getStringSet(code.getCodeNumber(),
                 null);
         if (modifierNumbers != null) {
@@ -493,14 +451,7 @@ public class Codes {
         }
     }
 
-    public static void resetSavedModifiers(Code[] codes, Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		for (Code code : codes) {
-			resetSavedModifiersForCode(code, prefs);
-		}
-    }
-
-    public static void resetTempAddedModifiers(List<Code> codes, Context context) {
+	public static void resetTempAddedModifiers(List<Code> codes, Context context) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		for (Code code : codes) {
 			resetTempAddedModifiersForCode(code, prefs);

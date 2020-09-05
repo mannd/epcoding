@@ -31,6 +31,7 @@ package org.epstudios.epcoding;
 
 import android.content.Context;
 
+@SuppressWarnings("ALL")
 interface Procedure {
 	String title(Context context);
 

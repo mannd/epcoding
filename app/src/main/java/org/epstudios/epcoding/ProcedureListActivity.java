@@ -29,11 +29,10 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
+
+import androidx.appcompat.widget.Toolbar;
 
 /**
  * An activity representing a list of Procedures. This activity has different
@@ -66,7 +65,7 @@ public class ProcedureListActivity extends ProcedureActionBarActivity implements
         setContentView(R.layout.activity_procedure_list);
 
         // can't use initToolbar() here, because don't want back button
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
@@ -76,15 +75,9 @@ public class ProcedureListActivity extends ProcedureActionBarActivity implements
             // res/values-sw600dp). If this view is present, then the
             // activity should be in two-pane mode.
             mTwoPane = true;
-
-            // In two-pane mode, list items should be given the
-            // 'activated' state when touched.
-            ((ProcedureListFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.procedure_list))
-                    .setActivateOnItemClick(true);
         }
-
     }
+
 
     /**
      * Callback method from {@link ProcedureListFragment.Callbacks} indicating
@@ -100,7 +93,7 @@ public class ProcedureListActivity extends ProcedureActionBarActivity implements
             arguments.putString(ProcedureDetailFragment.ARG_ITEM_ID, id);
             ProcedureDetailFragment fragment = new ProcedureDetailFragment();
             fragment.setArguments(arguments);
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .replace(R.id.procedure_detail_container, fragment)
                     .commit();
 

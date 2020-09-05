@@ -30,7 +30,7 @@
         http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
         -->
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/procedure_list"
             android:name="org.epstudios.epcoding.ProcedureListFragment"
             android:layout_width="0dp"

@@ -29,9 +29,10 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
-import android.app.Activity;
+import androidx.annotation.NonNull;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import androidx.fragment.app.ListFragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -98,12 +99,12 @@ public class ProcedureListFragment extends ListFragment {
 		super.onCreate(savedInstanceState);
 
 		setListAdapter(new ArrayAdapter<>(
-				getActivity(), android.R.layout.simple_list_item_activated_1,
+				requireActivity(), android.R.layout.simple_list_item_activated_1,
 				android.R.id.text1, ProcedureTypes.ITEMS));
 	}
 
 	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
+	public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
 		// Restore the previously serialized activated item position.
@@ -115,7 +116,7 @@ public class ProcedureListFragment extends ListFragment {
 	}
 
 	@Override
-	public void onAttach(Activity activity) {
+	public void onAttach(@NonNull Context activity) {
 		super.onAttach(activity);
 
 		// Activities containing this fragment must implement its callbacks.
@@ -136,8 +137,8 @@ public class ProcedureListFragment extends ListFragment {
 	}
 
 	@Override
-	public void onListItemClick(ListView listView, View view, int position,
-			long id) {
+	public void onListItemClick(@NonNull ListView listView, @NonNull View view, int position,
+								long id) {
 		super.onListItemClick(listView, view, position, id);
 
 		// Notify the active callbacks interface (the activity, if the
@@ -146,24 +147,12 @@ public class ProcedureListFragment extends ListFragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		if (mActivatedPosition != ListView.INVALID_POSITION) {
 			// Serialize and persist the activated item position.
 			outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
 		}
-	}
-
-	/**
-	 * Turns on activate-on-click mode. When this mode is on, list items will be
-	 * given the 'activated' state when touched.
-	 */
-	public void setActivateOnItemClick(boolean activateOnItemClick) {
-		// When setting CHOICE_MODE_SINGLE, ListView will automatically
-		// give items the 'activated' state when touched.
-		getListView().setChoiceMode(
-				activateOnItemClick ? ListView.CHOICE_MODE_SINGLE
-						: ListView.CHOICE_MODE_NONE);
 	}
 
 	private void setActivatedPosition(int position) {

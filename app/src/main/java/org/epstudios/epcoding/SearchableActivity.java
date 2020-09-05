@@ -53,7 +53,7 @@ public class SearchableActivity extends BasicActionBarActivity {
 	}
 
 	private void doMySearch(String query) {
-		final ListView listView = (ListView) findViewById(android.R.id.list);
+		final ListView listView = findViewById(android.R.id.list);
 		List<String> codes = Codes.searchCodes(query);
 		if (codes.size() == 0) {
 			listView.setVisibility(View.GONE);

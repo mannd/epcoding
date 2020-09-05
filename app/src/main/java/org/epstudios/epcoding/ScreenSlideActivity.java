@@ -17,23 +17,26 @@
 package org.epstudios.epcoding;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v13.app.FragmentStatePagerAdapter;
-import android.support.v4.app.NavUtils;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.core.app.NavUtils;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -57,6 +60,7 @@ import static org.epstudios.epcoding.Constants.WIZARD_TIME;
  * 
  * @see ScreenSlidePageFragment
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class ScreenSlideActivity extends SimpleActionBarActivity {
 
 	/**
@@ -142,10 +146,10 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 		setContentView(R.layout.activity_screen_slide);
 		initToolbar();
 		// Instantiate a ViewPager and a PagerAdapter.
-		mPager = (ViewPager) findViewById(R.id.pager);
-		mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
+		mPager = findViewById(R.id.pager);
+		mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
 		mPager.setAdapter(mPagerAdapter);
-		mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+		mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
 				// When changing pages, reset the action bar actions since they
@@ -258,28 +262,26 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 	}
 
 	private void summarizeCoding(Set<String> codeNumbers) {
-		String message = "";
+		StringBuilder message = new StringBuilder();
 		// we will extract the raw selected codes and shoot them to the code
 		// analyzer, as well as check for no primary or secondary codes
-		String[] codeNumberArray = codeNumbers.toArray(new String[codeNumbers
-				.size()]);
+		String[] codeNumberArray = codeNumbers.toArray(new String[0]);
 		Code[] codes = new Code[codeNumbers.size()];
 		for (int i = 0; i < codes.length; ++i) {
 			codes[i] = Codes.getCode(codeNumberArray[i]);
 			//message += codes[i].getCodeFirstFormatted() + "\n";
-			message += getSummaryFromCode(codes[i]);
+			message.append(getSummaryFromCode(codes[i]));
 		}
-		List<Code> allCodes = new ArrayList<>();
-		allCodes.addAll(Arrays.asList(codes));
+		List<Code> allCodes = new ArrayList<>(Arrays.asList(codes));
 		sedationCodes = SedationCode.sedationCoding(sedationTime, sameMD,
 				ageOver5, sedationStatus);
 		for (Code code : sedationCodes) {
 			//message += code.getCodeFirstFormatted() + "\n";
-			message += getSummaryFromCode(code);
+			message.append(getSummaryFromCode(code));
 		}
 		allCodes.addAll(sedationCodes);
-		message += Utilities.simpleCodeAnalysis(allCodes, sedationStatus, useUnicodeSymbols, this);
-		displayResult(getString(R.string.coding_summary_dialog_label), message,
+		message.append(Utilities.simpleCodeAnalysis(allCodes, sedationStatus, useUnicodeSymbols, this));
+		displayResult(getString(R.string.coding_summary_dialog_label), message.toString(),
 				this);
 	}
 
@@ -289,14 +291,14 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 				.getDefaultSharedPreferences(this);
 		Set<String> defaultStringSet = new TreeSet<>();
 		Set<String> codeNumbersChecked = new TreeSet<>();
-		codeNumbersChecked.addAll(prefs.getStringSet("wizardrevisioncodes",
-				defaultStringSet));
-		codeNumbersChecked.addAll(prefs.getStringSet("wizardremovalcodes",
-				defaultStringSet));
-		codeNumbersChecked.addAll(prefs.getStringSet("wizardaddingcodes",
-				defaultStringSet));
-		codeNumbersChecked.addAll(prefs.getStringSet("wizardfinalcodes",
-				defaultStringSet));
+		codeNumbersChecked.addAll(Objects.requireNonNull(prefs.getStringSet("wizardrevisioncodes",
+				defaultStringSet)));
+		codeNumbersChecked.addAll(Objects.requireNonNull(prefs.getStringSet("wizardremovalcodes",
+				defaultStringSet)));
+		codeNumbersChecked.addAll(Objects.requireNonNull(prefs.getStringSet("wizardaddingcodes",
+				defaultStringSet)));
+		codeNumbersChecked.addAll(Objects.requireNonNull(prefs.getStringSet("wizardfinalcodes",
+				defaultStringSet)));
 		return codeNumbersChecked;
 	}
 
@@ -325,11 +327,12 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 	 * A simple pager adapter that represents 7 {@link ScreenSlidePageFragment}
 	 * objects, in sequence.
 	 */
-	private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+	private static class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
 		public ScreenSlidePagerAdapter(FragmentManager fm) {
-			super(fm);
+			super(fm, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 		}
 
+		@NonNull
 		@Override
 		public Fragment getItem(int position) {
 			return ScreenSlidePageFragment.create(position);
@@ -342,7 +345,7 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle bundle) {
+	public void onSaveInstanceState(@NonNull Bundle bundle) {
 		super.onSaveInstanceState(bundle);
 		bundle.putBoolean(WIZARD_SAME_MD, sameMD);
 		bundle.putBoolean(WIZARD_AGE, ageOver5);
