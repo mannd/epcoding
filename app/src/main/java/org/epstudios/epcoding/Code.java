@@ -34,7 +34,6 @@ import android.annotation.SuppressLint;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 @SuppressLint("DefaultLocale")
@@ -70,7 +69,7 @@ public class Code {
         return modifiers;
     }
 
-    private List<Modifier> modifiers = new ArrayList<>();
+    private final List<Modifier> modifiers = new ArrayList<>();
 
     public Set<Modifier> getModifierSet() {
         Set<Modifier> set = new HashSet<>();
@@ -213,12 +212,12 @@ public class Code {
         if (modifiers.isEmpty()) {
             return "";
         }
-        String modString = "";
+        StringBuilder modString = new StringBuilder();
         for (Modifier m : modifiers) {
             String newModifier = String.format("-%s", m.getNumber());
-            modString += newModifier;
+            modString.append(newModifier);
         }
-        return modString;
+        return modString.toString();
     }
 
     // This converts code and modifiers into something that can be put into a putExtra()

@@ -31,21 +31,18 @@ package org.epstudios.epcoding;
 
 import android.os.Bundle;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import androidx.webkit.WebSettingsCompat;
 import androidx.webkit.WebViewFeature;
 
-@SuppressWarnings("deprecation")
 public class Help extends BasicActionBarActivity {
-	private WebView webView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.help);
 		String url = "file:///android_asset/help.html";
-		webView = (WebView) findViewById(R.id.webView);
+		WebView webView = findViewById(R.id.webView);
 		webView.loadUrl(url);
 		if(WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
 			WebSettingsCompat.setForceDark(webView.getSettings(), WebSettingsCompat.FORCE_DARK_ON);

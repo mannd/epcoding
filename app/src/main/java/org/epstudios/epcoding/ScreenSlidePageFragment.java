@@ -17,7 +17,6 @@
 package org.epstudios.epcoding;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,6 +38,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+
+import androidx.fragment.app.Fragment;
 
 import static org.epstudios.epcoding.Constants.AGE;
 import static org.epstudios.epcoding.Constants.BUNDLE_SEDATION_AGE;
@@ -85,7 +86,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
     private List<Code> allCodes;
 
     private SedationStatus sedationStatus = SedationStatus.Unassigned;
-    private List<Code> sedationCodes = new ArrayList<>();
+    private final List<Code> sedationCodes = new ArrayList<>();
     private int sedationTime = 0;
     private boolean sameMDPerformsSedation = true;
     private boolean patientOver5YrsOld = true;
@@ -100,9 +101,6 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         args.putInt(ARG_PAGE, pageNumber);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public ScreenSlidePageFragment() {
     }
 
     @Override
@@ -123,20 +121,20 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         int layout = R.layout.fragment_screen_slide_page;
         ViewGroup rootView = (ViewGroup) inflater.inflate(layout, container,
                 false);
-        LinearLayout revisionCheckBoxLayout = (LinearLayout) rootView
+        LinearLayout revisionCheckBoxLayout = rootView
                 .findViewById(R.id.revision_hardware);
         revisionCheckBoxLayout.setVisibility(View.GONE);
-        LinearLayout removedCheckBoxLayout = (LinearLayout) rootView
+        LinearLayout removedCheckBoxLayout = rootView
                 .findViewById(R.id.removed_hardware);
         removedCheckBoxLayout.setVisibility(View.GONE);
-        LinearLayout addingCheckBoxLayout = (LinearLayout) rootView
+        LinearLayout addingCheckBoxLayout = rootView
                 .findViewById(R.id.adding_hardware);
         addingCheckBoxLayout.setVisibility(View.GONE);
-        LinearLayout finalCheckBoxLayout = (LinearLayout) rootView
+        LinearLayout finalCheckBoxLayout = rootView
                 .findViewById(R.id.final_codes);
         finalCheckBoxLayout.setVisibility(View.GONE);
 
-        Button sedationButton = (Button) rootView.findViewById(R.id.sedation_button);
+        Button sedationButton = rootView.findViewById(R.id.sedation_button);
         sedationButton.setOnClickListener(this);
         sedationButton.setVisibility(View.GONE);
 
@@ -187,7 +185,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         ((TextView) rootView.findViewById(android.R.id.text1))
                 .setText(getString(R.string.title_template_step,
                         mPageNumber + 1));
-        TextView headingText = (TextView) rootView
+        TextView headingText = rootView
                 .findViewById(R.id.slide_help_text);
         switch (mPageNumber) {
             case 0:
@@ -418,10 +416,8 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.sedation_button:
-                addSedation();
-                break;
+        if (view.getId() == R.id.sedation_button) {
+            addSedation();
         }
     }
 

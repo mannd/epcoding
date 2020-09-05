@@ -8,7 +8,7 @@
     <include layout="@layout/toolbar" />
 
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
     android:id="@+id/procedure_list"
     android:name="org.epstudios.epcoding.ProcedureListFragment"
     android:layout_width="match_parent"
@@ -20,7 +20,7 @@
     tools:layout="@android:layout/list_content">
 
 
-</fragment>
+</androidx.fragment.app.FragmentContainerView>
 
 </LinearLayout>
 

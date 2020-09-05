@@ -40,11 +40,11 @@ public class Prefs extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.prefs);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame,
                         new MyPreferenceFragment()).commit();
 
@@ -52,10 +52,8 @@ public class Prefs extends AppCompatActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
 		// Respond to the action bar's Up/Home button
-		case android.R.id.home:
-			// NavUtils.navigateUpFromSameTask(this);
+		if (item.getItemId() == android.R.id.home) {// NavUtils.navigateUpFromSameTask(this);
 			finish();
 			return true;
 		}

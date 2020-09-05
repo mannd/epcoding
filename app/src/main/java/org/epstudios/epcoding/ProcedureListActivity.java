@@ -64,7 +64,7 @@ public class ProcedureListActivity extends ProcedureActionBarActivity implements
         setContentView(R.layout.activity_procedure_list);
 
         // can't use initToolbar() here, because don't want back button
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
@@ -98,7 +98,7 @@ public class ProcedureListActivity extends ProcedureActionBarActivity implements
             arguments.putString(ProcedureDetailFragment.ARG_ITEM_ID, id);
             ProcedureDetailFragment fragment = new ProcedureDetailFragment();
             fragment.setArguments(arguments);
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .replace(R.id.procedure_detail_container, fragment)
                     .commit();
 

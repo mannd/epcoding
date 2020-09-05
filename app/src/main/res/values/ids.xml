@@ -24,6 +24,5 @@
         are defined here.
     -->
     <item type="id" name="action_next" />
-    <item type="id" name="action_flip" />
 
 </resources>

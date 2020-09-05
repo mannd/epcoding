@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="ToggleButton"
+            android:text="@string/toggle_button_label"
             android:textOff="@string/start_date_time_label"
             android:textOn="@string/finish_date_time_label" />
 

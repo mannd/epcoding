@@ -35,7 +35,7 @@ public class ProcedureActionBarActivity extends SimpleActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        ProcedureDetailFragment fragment = (ProcedureDetailFragment) getFragmentManager()
+        ProcedureDetailFragment fragment = (ProcedureDetailFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.procedure_detail_container);
         switch (item.getItemId()) {
             case android.R.id.home:

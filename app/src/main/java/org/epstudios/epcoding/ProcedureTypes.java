@@ -36,10 +36,10 @@ import java.util.Map;
 
 class ProcedureTypes {
 
-	/**
-	 * Helper class for providing sample content for user interfaces created by
-	 * Android template wizards.
-	 * <p>
+	/*
+	  Helper class for providing sample content for user interfaces created by
+	  Android template wizards.
+	  <p>
 	 */
 
 	/**

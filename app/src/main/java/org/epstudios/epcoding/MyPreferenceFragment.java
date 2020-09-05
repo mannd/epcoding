@@ -1,10 +1,9 @@
 package org.epstudios.epcoding;
 
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 /**
  * Copyright (C) 2013, 2014 EP Studios, Inc.
@@ -38,8 +37,8 @@ import android.preference.PreferenceFragment;
  */
 
 
-public class MyPreferenceFragment extends PreferenceFragment implements
-        OnSharedPreferenceChangeListener {
+public class MyPreferenceFragment extends PreferenceFragmentCompat implements
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
 
     private String defaultVerbosity;
@@ -56,13 +55,17 @@ public class MyPreferenceFragment extends PreferenceFragment implements
                 R.string.show_details_code_summary_key);
         truncateDescriptionsKey = getActivity().getString(
                 R.string.truncate_long_descriptions_code_summary_key);
-        addPreferencesFromResource(R.xml.settings);
         Preference codeVerbosity = findPreference(verbosityKey);
         codeVerbosity.setSummary(getPreferenceScreen().getSharedPreferences()
                 .getString(verbosityKey, defaultVerbosity));
         Preference truncatePreference = findPreference(truncateDescriptionsKey);
         truncatePreference.setEnabled(getPreferenceScreen()
                 .getSharedPreferences().getBoolean(showDescriptionsKey, true));
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.settings, rootKey);
     }
 
     @Override

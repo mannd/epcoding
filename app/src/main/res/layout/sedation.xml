@@ -54,7 +54,6 @@
         android:layout_centerVertical="true">
 
         <TextView
-            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sedation_time_label"
@@ -67,11 +66,12 @@
 
             <EditText
                 android:id="@+id/sedation_time_edit_text"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="@string/sedation_time_hint"
-                android:inputType="number" />
+                android:inputType="number"
+                android:importantForAutofill="no" />
 
             <Button
                 android:id="@+id/calculate_sedation_button"

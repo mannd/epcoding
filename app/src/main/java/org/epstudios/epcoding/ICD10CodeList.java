@@ -4,7 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.core.app.NavUtils;
+
 import androidx.appcompat.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,7 +47,7 @@ public class ICD10CodeList extends SimpleActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.icd10_list);
         initToolbar();
-        listView = (ListView) findViewById(android.R.id.list);
+        listView = findViewById(android.R.id.list);
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);

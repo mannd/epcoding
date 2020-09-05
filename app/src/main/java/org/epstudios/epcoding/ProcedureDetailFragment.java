@@ -36,8 +36,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.app.Fragment;
+import androidx.preference.PreferenceManager;
+import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -139,14 +139,7 @@ public class ProcedureDetailFragment extends Fragment implements
     private Integer sedationTime = 0;
     private boolean sameMDPerformsSedation = true;
     private boolean patientOver5YrsOld = true;
-    private List<Code> sedationCodes = new ArrayList<>();
-
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public ProcedureDetailFragment() {
-    }
+    private final List<Code> sedationCodes = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -228,21 +221,18 @@ public class ProcedureDetailFragment extends Fragment implements
                 false);
         context = getActivity();
 
-        LinearLayout primaryCheckBoxLayout = (LinearLayout) rootView
+        LinearLayout primaryCheckBoxLayout = rootView
                 .findViewById(R.id.primary_checkbox_layout);
-        LinearLayout secondaryCheckBoxLayout = (LinearLayout) rootView
+        LinearLayout secondaryCheckBoxLayout = rootView
                 .findViewById(R.id.secondary_checkbox_layout);
-        TextView primaryCodeTextView = (TextView) rootView
+        TextView primaryCodeTextView = rootView
                 .findViewById(R.id.primary_code_textView);
-        TextView secondaryCodeTextView = (TextView) rootView
+        TextView secondaryCodeTextView = rootView
                 .findViewById(R.id.secondary_code_textView);
 
         loadSettings();
 
         switch (mItem) {
-            case allProcedures:
-                procedure = new AllCodes();
-                break;
             case afbAblation:
                 procedure = new AfbAblation();
                 break;
@@ -279,6 +269,7 @@ public class ProcedureDetailFragment extends Fragment implements
             case otherProcedure:
                 procedure = new OtherProcedure();
                 break;
+            case allProcedures:
             default:
                 procedure = new AllCodes();
                 break;
@@ -370,11 +361,11 @@ public class ProcedureDetailFragment extends Fragment implements
             loadCoding();
         }
         // set up buttons
-        Button sedationButton = (Button) rootView.findViewById(R.id.sedation_button);
+        Button sedationButton = rootView.findViewById(R.id.sedation_button);
         sedationButton.setOnClickListener(this);
-        Button summarizeButton = (Button) rootView.findViewById(R.id.summary_button);
+        Button summarizeButton = rootView.findViewById(R.id.summary_button);
         summarizeButton.setOnClickListener(this);
-        Button clearButton = (Button) rootView.findViewById(R.id.clear_button);
+        Button clearButton = rootView.findViewById(R.id.clear_button);
         clearButton.setOnClickListener(this);
 
         return rootView;

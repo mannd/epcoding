@@ -29,7 +29,7 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.ListFragment;
 import android.view.View;
@@ -115,7 +115,7 @@ public class ProcedureListFragment extends ListFragment {
 	}
 
 	@Override
-	public void onAttach(Activity activity) {
+	public void onAttach(Context activity) {
 		super.onAttach(activity);
 
 		// Activities containing this fragment must implement its callbacks.

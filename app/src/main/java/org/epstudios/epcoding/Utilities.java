@@ -1,7 +1,7 @@
 package org.epstudios.epcoding;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,7 +23,7 @@ class Utilities {
 
     public static Map<String, CodeCheckBox> createCheckBoxLayoutAndCodeMap(
             Code[] codes, LinearLayout layout, Context context,
-            final Fragment fragment) {
+            final ScreenSlidePageFragment fragment) {
         Map<String, CodeCheckBox> map = new LinkedHashMap<>();
         for (Code code : codes) {
             final CodeCheckBox codeCheckBox = new CodeCheckBox(context);

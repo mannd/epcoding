@@ -1,23 +1,23 @@
-/**
- * Copyright (C) 2017 EP Studios, Inc.
- * www.epstudiossoftware.com
- * <p>
- * Created by mannd on 3/2/17.
- * <p>
- * This file is part of epcoding.
- * <p>
- * epcoding is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * <p>
- * epcoding is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * <p>
- * You should have received a copy of the GNU General Public License
- * along with epcoding.  If not, see <http://www.gnu.org/licenses/>.
+/*
+  Copyright (C) 2017 EP Studios, Inc.
+  www.epstudiossoftware.com
+  <p>
+  Created by mannd on 3/2/17.
+  <p>
+  This file is part of epcoding.
+  <p>
+  epcoding is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  <p>
+  epcoding is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  <p>
+  You should have received a copy of the GNU General Public License
+  along with epcoding.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package org.epstudios.epcoding;
@@ -58,7 +58,7 @@ public class ModifierActivity extends BasicActionBarActivity implements View.OnC
         saveAddedModifiersToPrefs = getIntent().getBooleanExtra(Constants.SAVE_TEMP_ADDED_MODIFIERS,
                 false);
 
-        LinearLayout checkBoxLayout = (LinearLayout) findViewById(
+        LinearLayout checkBoxLayout = findViewById(
                 R.id.modifiers_checkbox_layout);
 
 
@@ -78,13 +78,13 @@ public class ModifierActivity extends BasicActionBarActivity implements View.OnC
         }
         initToolbar();
 
-        Button cancelButton = (Button)findViewById(R.id.cancel_button);
+        Button cancelButton = findViewById(R.id.cancel_button);
         cancelButton.setOnClickListener(this);
-        Button resetButton = (Button)findViewById(R.id.reset_button);
+        Button resetButton = findViewById(R.id.reset_button);
         resetButton.setOnClickListener(this);
-        Button saveButton = (Button)findViewById(R.id.save_button);
+        Button saveButton = findViewById(R.id.save_button);
         saveButton.setOnClickListener(this);
-        Button addButton = (Button)findViewById(R.id.add_button);
+        Button addButton = findViewById(R.id.add_button);
         addButton.setOnClickListener(this);
 
         Log.d(EPCODING, "onCreate");

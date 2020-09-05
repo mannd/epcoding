@@ -17,14 +17,15 @@
 package org.epstudios.epcoding;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import androidx.legacy.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.core.app.NavUtils;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -57,6 +58,7 @@ import static org.epstudios.epcoding.Constants.WIZARD_TIME;
  * 
  * @see ScreenSlidePageFragment
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class ScreenSlideActivity extends SimpleActionBarActivity {
 
 	/**
@@ -142,10 +144,10 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 		setContentView(R.layout.activity_screen_slide);
 		initToolbar();
 		// Instantiate a ViewPager and a PagerAdapter.
-		mPager = (ViewPager) findViewById(R.id.pager);
-		mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
+		mPager = findViewById(R.id.pager);
+		mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
 		mPager.setAdapter(mPagerAdapter);
-		mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+		mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
 				// When changing pages, reset the action bar actions since they
@@ -327,7 +329,7 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 	 */
 	private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
 		public ScreenSlidePagerAdapter(FragmentManager fm) {
-			super(fm);
+			super(fm, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 		}
 
 		@Override

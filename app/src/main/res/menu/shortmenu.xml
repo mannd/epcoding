@@ -22,7 +22,7 @@
         android:icon="@drawable/ic_icd10_white_24dp"
         android:orderInCategory="95"
         app:showAsAction="ifRoom"
-        android:title="ICD 10 Codes">
+        android:title="@string/icd10_code_list_label">
     </item>
     <item
         android:id="@+id/settings"
