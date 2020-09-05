@@ -8,8 +8,8 @@ android {
         applicationId "org.epstudios.epcoding"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 22
-        versionName "1.11.1"
+        versionCode 23
+        versionName "1.12"
     }
 
     buildTypes {

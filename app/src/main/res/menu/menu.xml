@@ -10,10 +10,10 @@
         android:title="@string/save_code_selection_title">
     </item>
 
-    <item
-        android:id="@+id/about"
-        app:showAsAction="never"
-        android:title="@string/about_title">
-    </item>
+<!--    <item-->
+<!--        android:id="@+id/about"-->
+<!--        app:showAsAction="never"-->
+<!--        android:title="@string/about_title">-->
+<!--    </item>-->
 
 </menu>
