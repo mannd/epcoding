@@ -97,6 +97,10 @@ public class ICD10CodeList extends SimpleActionBarActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
+                Intent parentActivityIntent = new Intent(this, ProcedureListActivity.class);
+                parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(parentActivityIntent);
                 finish();
                 return true;
             case R.id.about:
