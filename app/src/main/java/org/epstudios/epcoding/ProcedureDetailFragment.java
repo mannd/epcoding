@@ -149,7 +149,7 @@ public class ProcedureDetailFragment extends Fragment implements
         setHasOptionsMenu(true);
 
         if (requireArguments().containsKey(ARG_ITEM_ID)) {
-            String itemID = getArguments().getString(ARG_ITEM_ID);
+            String itemID = requireArguments().getString(ARG_ITEM_ID);
             try {
                 mItem = Integer.parseInt(Objects.requireNonNull(itemID));
             } catch (NumberFormatException e) {

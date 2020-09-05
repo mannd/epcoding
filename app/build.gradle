@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "org.epstudios.epcoding"
-        minSdkVersion 14
+        minSdkVersion 19
         targetSdkVersion 29
         versionCode 22
         versionName "1.11.1"

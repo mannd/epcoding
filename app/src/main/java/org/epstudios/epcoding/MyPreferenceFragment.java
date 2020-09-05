@@ -53,7 +53,7 @@ public class MyPreferenceFragment extends PreferenceFragmentCompat implements
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         defaultVerbosity = requireActivity().getString(R.string.default_verbosity);
-        verbosityKey = getActivity().getString(R.string.code_verbosity_key);
+        verbosityKey = requireActivity().getString(R.string.code_verbosity_key);
         showDescriptionsKey = getActivity().getString(
                 R.string.show_details_code_summary_key);
         truncateDescriptionsKey = getActivity().getString(
