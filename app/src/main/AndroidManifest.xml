@@ -71,6 +71,7 @@
             android:label="@string/modifiers_label">
         </activity>
         <activity android:name=".SedationActivity"
+            android:windowSoftInputMode="adjustResize"
             android:label="@string/sedation_label">
         </activity>
         <activity android:name=".SedationTimeCalculator"

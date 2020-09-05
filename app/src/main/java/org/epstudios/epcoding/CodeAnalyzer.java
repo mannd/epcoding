@@ -202,7 +202,7 @@ class CodeAnalyzer {
 						final boolean moduleHasNoSecondaryCodesNeedingChecking,
 						final SedationStatus status,
 						boolean useUnicodeSymbols, final Context context) {
-		this.codes = codes.toArray(new Code[codes.size()]);
+		this.codes = codes.toArray(new Code[0]);
 		this.noPrimaryCodes = noPrimaryCodes;
 		this.noSecondaryCodes = noSecondaryCodes;
 		this.moduleHasNoSecondaryCodesNeedingChecking = moduleHasNoSecondaryCodesNeedingChecking;
@@ -212,7 +212,7 @@ class CodeAnalyzer {
 	}
 
 	public CodeAnalyzer(final List<Code> codes, final SedationStatus status, boolean useUnicodeSymbols, final Context context) {
-		this.codes = codes.toArray(new Code[codes.size()]);
+		this.codes = codes.toArray(new Code[0]);
 		this.context = context;
 		this.noPrimaryCodes = false;
 		this.noSecondaryCodes = false;
@@ -287,8 +287,10 @@ class CodeAnalyzer {
 	private boolean allAddOnCodes() {
 		boolean allAddOns = true;
 		for (Code code : codes) {
-			if (code != null && !code.isAddOn())
+			if (code != null && !code.isAddOn()) {
 				allAddOns = false;
+				break;
+			}
 		}
 		return allAddOns;
 	}

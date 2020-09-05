@@ -70,10 +70,6 @@ class CodeCheckBox extends AppCompatCheckBox {
 			setChecked(false);
 	}
 
-	public boolean isCodeFirst() {
-		return codeFirst;
-	}
-
 	public void setCodeFirst(boolean codeFirst) {
 		this.codeFirst = codeFirst;
 	}

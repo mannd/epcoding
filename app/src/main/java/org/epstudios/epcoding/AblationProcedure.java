@@ -31,7 +31,7 @@ package org.epstudios.epcoding;
 
 // This partially implements the Procedure interface, only the parts common to 
 // all ablation procedures (secondary codes).
-@SuppressWarnings("SameReturnValue")
+@SuppressWarnings({"SameReturnValue"})
 class AblationProcedure {
     public boolean disablePrimaryCodes() {
         return true;

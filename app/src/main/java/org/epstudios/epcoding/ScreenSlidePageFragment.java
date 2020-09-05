@@ -36,9 +36,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import static org.epstudios.epcoding.Constants.AGE;
@@ -106,7 +108,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPageNumber = getArguments().getInt(ARG_PAGE);
+        mPageNumber = requireArguments().getInt(ARG_PAGE);
         context = getActivity();
         parent = (ScreenSlideActivity) context;
         Log.d(EPCODING, "ScreenSlidePageFragment onCreate page " + mPageNumber);
@@ -315,7 +317,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
     }
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
+    public void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         Log.d(EPCODING, "ScreenSlidePageFragment onSaveInstanceState page " + getPageNumber());
         // store check marks here
@@ -366,7 +368,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         if (requestCode == MODIFIER_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 String[] result = data.getStringArrayExtra(Constants.MODIFIER_RESULT);
-                if (result.length == 1 && result[0].equals(Constants.RESET_MODIFIERS)) {
+                if (Objects.requireNonNull(result).length == 1 && result[0].equals(Constants.RESET_MODIFIERS)) {
                     resetModifiers();
                     resetCodes();
                     return;

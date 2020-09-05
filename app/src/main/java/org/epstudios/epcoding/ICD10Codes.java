@@ -45,7 +45,7 @@ public class ICD10Codes {
 
             try {
                 InputStream input = context.getAssets().open(CODE_FILE_NAME);
-                BufferedReader reader = null;
+                BufferedReader reader;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
                     reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8));
                 } else {

@@ -45,19 +45,11 @@ public class Code {
     private boolean descriptionShortened = false;
     private boolean descriptionShown = true;
 
-    public boolean isHideMultiplier() {
-        return hideMultiplier;
-    }
-
     public void setHideMultiplier(boolean hideMultiplier) {
         this.hideMultiplier = hideMultiplier;
     }
 
     private boolean hideMultiplier = false;
-
-    public int getMultiplier() {
-        return multiplier;
-    }
 
     public void setMultiplier(int multiplier) {
         this.multiplier = multiplier;
@@ -72,9 +64,7 @@ public class Code {
     private final List<Modifier> modifiers = new ArrayList<>();
 
     public Set<Modifier> getModifierSet() {
-        Set<Modifier> set = new HashSet<>();
-        set.addAll(modifiers);
-        return set;
+        return new HashSet<>(modifiers);
     }
 
     public String[] getModifierNumberArray() {
@@ -91,28 +81,12 @@ public class Code {
         this.isAddOn = isAddOn;
     }
 
-    public String getCodeNumberWithAddOnWithDescription() {
-        return getCodeNumberWithAddOn() + " (" + shortDescription + ")";
-    }
-
     private String getCodeNumberWithAddOn() {
         return unformattedCodeNumber();
     }
 
     public String getCodeNumber() {
         return code;
-    }
-
-    private String getShortDescription() {
-        return shortDescription;
-    }
-
-    public String getDescription() {
-        return getShortDescription() + " (" + getCodeNumberWithAddOn() + ")";
-    }
-
-    public String getCodeFirstDescription() {
-        return getCodeNumber() + " " + getShortDescription();
     }
 
     public boolean isAddOn() {
@@ -136,12 +110,6 @@ public class Code {
         return getCodeNumberWithAddOn()
                 + (descriptionShown ? " (" + (getFormattedDescription()) + ")"
                 : "");
-    }
-
-    // applies _all_ formatting settings with description given first
-    public String getDescriptionFirstFormatted() {
-        return getFormattedDescription() + " (" + getCodeNumberWithAddOn()
-                + ")";
     }
 
     private String getFormattedDescription() {

@@ -42,8 +42,9 @@ public class Prefs extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        if (getSupportActionBar() != null) {
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		}
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame,
                         new MyPreferenceFragment()).commit();

@@ -75,6 +75,7 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
         ageCheckBox = findViewById(R.id.pt_over_5_checkbox);
         sameMDCheckBox = findViewById(R.id.same_md_checkbox);
 
+        //noinspection RedundantStringFormatCall
         timeEditText.setText(String.format(Locale.getDefault(), Integer.toString(sedationTime)));
         ageCheckBox.setChecked(ageOver5);
         sameMDCheckBox.setChecked(sameMD);
@@ -112,8 +113,9 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SEDATION_CALCULATOR_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                Integer result = data.getIntExtra(SEDATION_TIME, 0);
-                timeEditText.setText(String.format(Locale.getDefault(), result.toString()));
+                int result = data.getIntExtra(SEDATION_TIME, 0);
+                //noinspection RedundantStringFormatCall
+                timeEditText.setText(String.format(Locale.getDefault(), Integer.toString(result)));
 
             }
         }

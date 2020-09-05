@@ -22,6 +22,7 @@
 
 package org.epstudios.epcoding;
 
+import androidx.annotation.NonNull;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -128,7 +129,7 @@ public class ModifierActivity extends BasicActionBarActivity implements View.OnC
     }
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
+    public void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         boolean[] checkBoxState = new boolean[checkBoxes.length];
         for (int i = 0; i < checkBoxes.length; i++) {

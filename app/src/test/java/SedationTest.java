@@ -31,11 +31,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+@SuppressWarnings("ConstantConditions")
 public class SedationTest {
 
     @Test
     public void sedationMultiplierTest() {
-        Integer time = 23;
+        int time = 23;
         boolean sameMD = true;
         boolean ptOver5 = true;
         List<Code> sedationCodes = SedationCode.sedationCoding(time, sameMD, ptOver5,

@@ -36,9 +36,7 @@ class Utilities {
                 public boolean onLongClick(View view) {
                     Intent intent = new Intent(theContext, ModifierActivity.class);
                     intent.putExtra(ACTIVE_CODE_NUMBER, codeCheckBox.getCodeNumber());
-                    if (true) {
-                        intent.putExtra(SAVE_TEMP_ADDED_MODIFIERS, true);
-                    }
+                    intent.putExtra(SAVE_TEMP_ADDED_MODIFIERS, true);
                     fragment.startActivityForResult(intent, MODIFIER_REQUEST_CODE);
                     return true;
                 }

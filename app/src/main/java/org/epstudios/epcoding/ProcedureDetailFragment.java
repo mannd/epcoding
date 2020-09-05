@@ -29,6 +29,7 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
+import androidx.annotation.NonNull;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -56,6 +57,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -146,10 +148,10 @@ public class ProcedureDetailFragment extends Fragment implements
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
+        if (requireArguments().containsKey(ARG_ITEM_ID)) {
             String itemID = getArguments().getString(ARG_ITEM_ID);
             try {
-                mItem = Integer.parseInt(itemID);
+                mItem = Integer.parseInt(Objects.requireNonNull(itemID));
             } catch (NumberFormatException e) {
                 mItem = 0; // AFB ablation will be shown
             }
@@ -157,7 +159,7 @@ public class ProcedureDetailFragment extends Fragment implements
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu, menu);
     }
 
@@ -168,7 +170,7 @@ public class ProcedureDetailFragment extends Fragment implements
     }
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
+    public void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         // store check marks here
         boolean[] primaryCodeState = new boolean[primaryCheckBoxMap.size()];
@@ -283,7 +285,7 @@ public class ProcedureDetailFragment extends Fragment implements
         Codes.loadSavedModifiers(allPrimaryAndSecondaryCodes(), context);
 
 
-        getActivity().setTitle(procedure.title(context));
+        requireActivity().setTitle(procedure.title(context));
 
         Code[] secondaryCodes = procedure.secondaryCodes();
 
@@ -304,7 +306,7 @@ public class ProcedureDetailFragment extends Fragment implements
         String[] disabledCodeNumbers = procedure.disabledCodeNumbers();
 
         for (String disabledCodeNumber : disabledCodeNumbers)
-            secondaryCheckBoxMap.get(disabledCodeNumber).disable();
+            Objects.requireNonNull(secondaryCheckBoxMap.get(disabledCodeNumber)).disable();
 
 
         createCheckBoxLayoutAndCodeMap(primaryCodes, primaryCheckBoxMap,
@@ -412,7 +414,7 @@ public class ProcedureDetailFragment extends Fragment implements
         if (requestCode == MODIFIER_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 String[] result = data.getStringArrayExtra(Constants.MODIFIER_RESULT);
-                if (result.length == 1 && result[0].equals(Constants.RESET_MODIFIERS)) {
+                if (Objects.requireNonNull(result).length == 1 && result[0].equals(Constants.RESET_MODIFIERS)) {
                     resetModifiers();
                     resetCodes();
                     return;
@@ -477,7 +479,7 @@ public class ProcedureDetailFragment extends Fragment implements
     }
 
     private void summarizeCoding() {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         // we will extract the raw selected codes and shoot them to the code
         // analyzer, as well as check for no primary or secondary codes
         int size = primaryCheckBoxMap.size() + secondaryCheckBoxMap.size() + sedationCodes.size();
@@ -489,7 +491,7 @@ public class ProcedureDetailFragment extends Fragment implements
                 .entrySet()) {
             if (entry.getValue().isChecked()) {
                 codes[i] = entry.getValue().getCode();
-                message += getSummaryFromCode(codes[i++]);
+                message.append(getSummaryFromCode(codes[i++]));
             }
         }
         int primaryCodeCounter = i;
@@ -500,11 +502,11 @@ public class ProcedureDetailFragment extends Fragment implements
                 .entrySet()) {
             if (entry.getValue().isChecked()) {
                 codes[i] = entry.getValue().getCode();
-                message += getSummaryFromCode(codes[i++]);
+                message.append(getSummaryFromCode(codes[i++]));
             }
         }
         for (Code code: sedationCodes) {
-            message += getSummaryFromCode(code);
+            message.append(getSummaryFromCode(code));
 
         }
         List<Code> allCodes = new ArrayList<>();
@@ -515,12 +517,12 @@ public class ProcedureDetailFragment extends Fragment implements
                 .doNotWarnForNoSecondaryCodesSelected();
         boolean noAnalysis = codeVerbosity.equals("None")
                 || (mItem == allProcedures && !codeCheckAllCodes);
-        message += Utilities.codeAnalysis(allCodes, noPrimaryCodes,
+        message.append(Utilities.codeAnalysis(allCodes, noPrimaryCodes,
                 noSecondaryCodes, moduleHasNoSecondaryCodesNeedingChecking,
                 noAnalysis, codeVerbosity.equals("Verbose"),
-                sedationStatus, useUnicodeSymbols, context);
+                sedationStatus, useUnicodeSymbols, context));
         Utilities.displayMessage(
-                getString(R.string.coding_summary_dialog_label), message,
+                getString(R.string.coding_summary_dialog_label), message.toString(),
                 context);
     }
 
@@ -589,7 +591,7 @@ public class ProcedureDetailFragment extends Fragment implements
         // String numbers = codeNumbersChecked.toString();
         for (Map.Entry<String, CodeCheckBox> entry : secondaryCheckBoxMap
                 .entrySet()) {
-            if (codeNumbersChecked.contains(entry.getValue().getCodeNumber()))
+            if (Objects.requireNonNull(codeNumbersChecked).contains(entry.getValue().getCodeNumber()))
                 entry.getValue().setChecked(true);
         }
 

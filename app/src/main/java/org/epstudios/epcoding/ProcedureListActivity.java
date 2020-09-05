@@ -31,6 +31,7 @@ package org.epstudios.epcoding;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.appcompat.widget.Toolbar;
 
 /**
@@ -74,15 +75,9 @@ public class ProcedureListActivity extends ProcedureActionBarActivity implements
             // res/values-sw600dp). If this view is present, then the
             // activity should be in two-pane mode.
             mTwoPane = true;
-
-            // In two-pane mode, list items should be given the
-            // 'activated' state when touched.
-            ((ProcedureListFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.procedure_list))
-                    .setActivateOnItemClick(true);
         }
-
     }
+
 
     /**
      * Callback method from {@link ProcedureListFragment.Callbacks} indicating

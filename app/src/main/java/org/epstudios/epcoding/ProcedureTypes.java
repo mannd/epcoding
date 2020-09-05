@@ -29,6 +29,8 @@ This file is part of EP Coding.
 
 package org.epstudios.epcoding;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -87,6 +89,7 @@ class ProcedureTypes {
 			this.content = content;
 		}
 
+		@NonNull
 		@Override
 		public String toString() {
 			return content;
