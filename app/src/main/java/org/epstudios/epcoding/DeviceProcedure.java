@@ -31,6 +31,7 @@ package org.epstudios.epcoding;
 
 import android.content.Context;
 
+@SuppressWarnings({"SameReturnValue"})
 class DeviceProcedure {
 	public boolean disablePrimaryCodes() {
 		return false;

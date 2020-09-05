@@ -202,7 +202,7 @@ class CodeAnalyzer {
 						final boolean moduleHasNoSecondaryCodesNeedingChecking,
 						final SedationStatus status,
 						boolean useUnicodeSymbols, final Context context) {
-		this.codes = codes.toArray(new Code[codes.size()]);
+		this.codes = codes.toArray(new Code[0]);
 		this.noPrimaryCodes = noPrimaryCodes;
 		this.noSecondaryCodes = noSecondaryCodes;
 		this.moduleHasNoSecondaryCodesNeedingChecking = moduleHasNoSecondaryCodesNeedingChecking;
@@ -212,7 +212,7 @@ class CodeAnalyzer {
 	}
 
 	public CodeAnalyzer(final List<Code> codes, final SedationStatus status, boolean useUnicodeSymbols, final Context context) {
-		this.codes = codes.toArray(new Code[codes.size()]);
+		this.codes = codes.toArray(new Code[0]);
 		this.context = context;
 		this.noPrimaryCodes = false;
 		this.noSecondaryCodes = false;
@@ -287,8 +287,10 @@ class CodeAnalyzer {
 	private boolean allAddOnCodes() {
 		boolean allAddOns = true;
 		for (Code code : codes) {
-			if (code != null && !code.isAddOn())
+			if (code != null && !code.isAddOn()) {
 				allAddOns = false;
+				break;
+			}
 		}
 		return allAddOns;
 	}
@@ -308,53 +310,53 @@ class CodeAnalyzer {
 	// This tests for 2 or more codes in a code set and is used
 	// if 2 or more codes should not be used together
 	private String getErrorCodes(final Set<String> codeNumbers) {
-		String errorCodes = "";
+		StringBuilder errorCodes = new StringBuilder();
 		for (CodeError codeError : duplicateCodeErrors) {
 			List<String> badCombo = codeError.getCodes();
 			List<String> badCodeList = hasBadCombo(badCombo, codeNumbers);
 			if (badCodeList.size() > 1) {
-				errorCodes += addToErrorMessage(codeError,
-						badCodeList);
+				errorCodes.append(addToErrorMessage(codeError,
+						badCodeList));
 			}
 		}
-		return errorCodes;
+		return errorCodes.toString();
 	}
 
 	// This tests for errors where a single code should not be used with
 	// multiple other codes. E.g. PPM removal should not be used with any of the
 	// specially, i.e. skips testing if the first number is not present
 	private String getErrorCodesFirstSpecial(final Set<String> codeNumbers) {
-		String errorCodes = "";
+		StringBuilder errorCodes = new StringBuilder();
 		// first see if first error code is contained in codeNumbers set
 		for (CodeError codeError : specialFirstCodeErrors) {
 			List<String> badCombo = codeError.getCodes();
 			if (codeNumbers.contains(badCombo.get(0))) {
 				List<String> badCodeList = hasBadCombo(badCombo, codeNumbers);
 				if (badCodeList.size() > 1) {
-					errorCodes += addToErrorMessage(codeError,
-							badCodeList);
+					errorCodes.append(addToErrorMessage(codeError,
+							badCodeList));
 				}
 			}
 		}
-		return errorCodes;
+		return errorCodes.toString();
 	}
 
 	// This tests to see if at least one necessary accompanying code is present
 	// if first code is present
 	private String getErrorCodesFirstCodeNeedsOtherCodes(
 			final Set<String> codeNumbers) {
-		String errorCodes = "";
+		StringBuilder errorCodes = new StringBuilder();
 		for (CodeError codeError : firstCodeNeedsOtherCodes) {
 			List<String> badCombo = codeError.getCodes();
 			if (codeNumbers.contains(badCombo.get(0))) {
 				List<String> badCodeList = hasBadCombo(badCombo, codeNumbers);
 				if (badCodeList.size() == 1) { // oops only first code present
-					errorCodes += addToErrorMessage(codeError,
-							badCodeList);
+					errorCodes.append(addToErrorMessage(codeError,
+							badCodeList));
 				}
 			}
 		}
-		return errorCodes;
+		return errorCodes.toString();
 	}
 
 	private String addToErrorMessage(final CodeError codeError, final List<String> badCodeList) {
@@ -510,7 +512,6 @@ class CodeAnalyzer {
 						R.string.sedation_other_md_verbose_message);
 				break;
 			case AssignedSameMD:
-				break;
 			default:
 				break;
 		}

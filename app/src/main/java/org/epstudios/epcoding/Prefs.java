@@ -30,8 +30,8 @@ This file is part of EP Coding.
 package org.epstudios.epcoding;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 
 public class Prefs extends AppCompatActivity {
@@ -40,11 +40,12 @@ public class Prefs extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.prefs);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        getFragmentManager().beginTransaction()
+        if (getSupportActionBar() != null) {
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		}
+        getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame,
                         new MyPreferenceFragment()).commit();
 
@@ -52,10 +53,8 @@ public class Prefs extends AppCompatActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
 		// Respond to the action bar's Up/Home button
-		case android.R.id.home:
-			// NavUtils.navigateUpFromSameTask(this);
+		if (item.getItemId() == android.R.id.home) {// NavUtils.navigateUpFromSameTask(this);
 			finish();
 			return true;
 		}

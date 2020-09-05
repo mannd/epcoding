@@ -8,19 +8,19 @@
     <include layout="@layout/toolbar" />
 
 
-    <fragment
-    android:id="@+id/procedure_list"
-    android:name="org.epstudios.epcoding.ProcedureListFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginRight="16dip"
-    android:layout_marginLeft="16dip"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/procedure_list"
+        android:name="org.epstudios.epcoding.ProcedureListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="16dip"
+        android:layout_marginLeft="16dip"
 
-    tools:context=".ProcedureListActivity"
-    tools:layout="@android:layout/list_content">
+        tools:context=".ProcedureListActivity"
+        tools:layout="@android:layout/list_content">
 
 
-</fragment>
+    </androidx.fragment.app.FragmentContainerView>
 
 </LinearLayout>
 

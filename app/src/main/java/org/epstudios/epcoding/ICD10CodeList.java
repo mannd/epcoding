@@ -1,12 +1,11 @@
 package org.epstudios.epcoding;
 
-import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.support.v7.widget.SearchView;
+
+import androidx.appcompat.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -48,7 +47,7 @@ public class ICD10CodeList extends SimpleActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.icd10_list);
         initToolbar();
-        listView = (ListView) findViewById(android.R.id.list);
+        listView = findViewById(android.R.id.list);
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
@@ -98,6 +97,10 @@ public class ICD10CodeList extends SimpleActionBarActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
+                Intent parentActivityIntent = new Intent(this, ProcedureListActivity.class);
+                parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(parentActivityIntent);
                 finish();
                 return true;
             case R.id.about:

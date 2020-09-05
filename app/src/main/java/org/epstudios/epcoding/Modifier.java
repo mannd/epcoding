@@ -1,6 +1,6 @@
 package org.epstudios.epcoding;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * Copyright (C) 2017 EP Studios, Inc.

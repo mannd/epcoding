@@ -34,7 +34,6 @@ import android.annotation.SuppressLint;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 @SuppressLint("DefaultLocale")
@@ -46,19 +45,11 @@ public class Code {
     private boolean descriptionShortened = false;
     private boolean descriptionShown = true;
 
-    public boolean isHideMultiplier() {
-        return hideMultiplier;
-    }
-
     public void setHideMultiplier(boolean hideMultiplier) {
         this.hideMultiplier = hideMultiplier;
     }
 
     private boolean hideMultiplier = false;
-
-    public int getMultiplier() {
-        return multiplier;
-    }
 
     public void setMultiplier(int multiplier) {
         this.multiplier = multiplier;
@@ -70,12 +61,10 @@ public class Code {
         return modifiers;
     }
 
-    private List<Modifier> modifiers = new ArrayList<>();
+    private final List<Modifier> modifiers = new ArrayList<>();
 
     public Set<Modifier> getModifierSet() {
-        Set<Modifier> set = new HashSet<>();
-        set.addAll(modifiers);
-        return set;
+        return new HashSet<>(modifiers);
     }
 
     public String[] getModifierNumberArray() {
@@ -92,28 +81,12 @@ public class Code {
         this.isAddOn = isAddOn;
     }
 
-    public String getCodeNumberWithAddOnWithDescription() {
-        return getCodeNumberWithAddOn() + " (" + shortDescription + ")";
-    }
-
     private String getCodeNumberWithAddOn() {
         return unformattedCodeNumber();
     }
 
     public String getCodeNumber() {
         return code;
-    }
-
-    private String getShortDescription() {
-        return shortDescription;
-    }
-
-    public String getDescription() {
-        return getShortDescription() + " (" + getCodeNumberWithAddOn() + ")";
-    }
-
-    public String getCodeFirstDescription() {
-        return getCodeNumber() + " " + getShortDescription();
     }
 
     public boolean isAddOn() {
@@ -137,12 +110,6 @@ public class Code {
         return getCodeNumberWithAddOn()
                 + (descriptionShown ? " (" + (getFormattedDescription()) + ")"
                 : "");
-    }
-
-    // applies _all_ formatting settings with description given first
-    public String getDescriptionFirstFormatted() {
-        return getFormattedDescription() + " (" + getCodeNumberWithAddOn()
-                + ")";
     }
 
     private String getFormattedDescription() {
@@ -213,12 +180,12 @@ public class Code {
         if (modifiers.isEmpty()) {
             return "";
         }
-        String modString = "";
+        StringBuilder modString = new StringBuilder();
         for (Modifier m : modifiers) {
             String newModifier = String.format("-%s", m.getNumber());
-            modString += newModifier;
+            modString.append(newModifier);
         }
-        return modString;
+        return modString.toString();
     }
 
     // This converts code and modifiers into something that can be put into a putExtra()

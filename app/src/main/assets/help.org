@@ -13,7 +13,7 @@
 #+LINK_UP:   
 #+LINK_HOME: 
 #+XSLT:
-#+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="./org.css"/>
 * EP Coding Help
 ** EP Coding 101
 Don't want to read the manual?  Here's the TL;DR:
@@ -62,31 +62,26 @@ coders nor is it a substitute for the [[https://commerce.ama-assn.org/store/][AM
 ** How to use EP Coding
 *** Select a procedure
 #+CAPTION: Procedure list
-[[./procedure_list_phone.png]]
+[[./procedure_list_phone2.png]]
 
 On an Android phone, the initial screen when the app starts shows a
 list of common EP procedures.  On an Android tablet, the list of
-procedures appears at the side of the screen.
-
-#+CAPTION: Procedure list an Android tablet
-[[./procedure_list_tablet.png]]
-
-The procedure list covers most common EP procedures.  If a procedure
-is not listed, you have several options.  You can use the
-[[Wizard][*Device Wizard*]] to code complicated device procedures.
-You can [[Search][*Search*]] for specific codes.  You can also use the
-*All EP Codes* option of the procedure list, which contains all
-EP-related codes in numeric order.
+procedures appears at the side of the screen.  The procedure list
+covers most common EP procedures.  If a procedure is not listed, you
+have several options.  You can use the [[Wizard][*Device Wizard*]] to code
+complicated device procedures.  You can [[Search][*Search*]] for specific codes.
+You can also use the *All EP Codes* option of the procedure list, which
+contains all EP-related codes in numeric order.
 *** Procedure codes
 **** Types of codes
 Each procedure has a list of codes
 #+CAPTION: Atrial fibrillation ablation codes.
 #+NAME: code list
-[[./afb_codes.png]]
+[[./afb_codes2.png]]
 
 Codes are organized as /primary codes/, at least one of which needs to
 be selected, and /additional codes/ which are commonly used with the
-primary procedure codes.  There is a checkbox to the right of each
+primary procedure codes.  There is a checkbox to the left of each
 code to indicate which codes are selected.  Codes that must be
 selected for a particular procedure are automatically selected
 (indicated by a checkmark) and cannot be unselected (indicated by a
@@ -95,7 +90,7 @@ because they are bundled with the primary code(s) are also shown in a
 lighter gray text color, indicating these codes are disabled.
 **** Selecting codes
 #+CAPTION: Selecting a code.  The 3D mapping code has been selected.
-[[./afb_selected_code.png]]
+[[./afb_selected_code2.png]]
 
 Select a code by tapping it.  Unselect the code by tapping it again.
 Hitting the back button and going back to the main procedure list will
@@ -116,10 +111,10 @@ program's defaults, or if the AMA decides to change which modifiers
 are appropriate.  For example, some codes contain both a physician and
 facility component, while others contain only a physician component.
 The former type of code needs to have modifier 26 attached, whereas
-the latter doesn't.  Go figure.
+the latter doesn't. 
 
 #+CAPTION: Modifier screen with Modifier 26 selected.
-[[./modifiers.png]]
+[[./modifiers2.png]]
 
 Long press on a code (for a second or two) to bring up a list of
 common code modifiers that can be added or removed from each code.
@@ -149,18 +144,16 @@ time.  It must be tracked and documented separately.
 
 Given all this, *EP Coding* now has a sedation calculator
 #+CAPTION: Sedation coding calculator
-[[./sedation_time.png]]
+[[./sedation_time2.png]]
 
-From the procedure code list screen (see [[code list][figure]]) tap
-*Sedation* at the bottom of the screen to add sedation codes.  You may
-need to scroll the screen down to see the set of buttons which are at
-the end of the list of procedure codes.  When you tap the button a
-menu appears offering to *Add* sedation codes.  (Note that after
-adding sedation codes, this button appears as *Edit*).  Selecting
-*Add* then brings up a screen similar to the one above.  Enter the
-sedation time (not procedure time), rounded down to the nearest
-minute.  Select whether the same MD (i.e. you) performed the procedure
-and administered sedation (administering doesn't mean you did it
+From the procedure code list screen (see [[code list][figure]]) tap *Sedation* at the
+bottom of the screen to add sedation codes.  When you tap the button a
+menu appears offering to *Add* sedation codes.  (Note that after adding
+sedation codes, this button appears as *Edit*).  Selecting *Add* then
+brings up a screen similar to the one above.  Enter the sedation time
+(not procedure time), rounded down to the nearest minute.  Select
+whether the same MD (i.e. you) performed the procedure and
+administered sedation (administering doesn't mean you did it
 personally, just that you were the one supervising whoever gave the
 sedation).  If another physician, e.g. an anesthesiologist,
 administered the sedation, the calculator will determine the proper
@@ -172,7 +165,7 @@ To assist with determining the sedation time, tap *Calculate* to the
 right of the sedation time label.  The next screen will appear.
 
 #+CAPTION: Sedation time calculator
-[[./sedation_time_calculator.png]]
+[[./sedation_time_calculator2.png]]
 
 Set the time selector (which is a 24 hour clock) to the start of
 sedation time, then tap *Set*.  Tap the button on the top of the
@@ -183,33 +176,28 @@ Note that if the end time is earlier than the start time, the
 calculator assumes that the procedure went past midnight (too bad!),
 and calculates accordingly.
 
-Tap *Add Sedation* to add the sedation codes to the procedure.  A
-dialog box will appear summarizing the sedation coding.  Tap *No
-Sedation* if you did not use sedation during the procedure.  Tap
-*Cancel* or the back button if you don't Want to add sedation coding
-at this time.  When you return to the procedure detail screen, the
-sedation codes won't appear on the list of codes, but they will appear
-when you tap *Summarize* to get a Code Summary as described [[Code
-Summary][below]].  Sedation coding using the *Device Wizard* is
-handled a little differently than this, and is described further
-[[Wizard][below]].
+Tap *Add Sedation* to add the sedation codes to the procedure.  A dialog
+box will appear summarizing the sedation coding.  Tap *No Sedation* if
+you did not use sedation during the procedure.  Tap *Cancel* or the back
+button if you don't want to add sedation coding at this time.  When
+you return to the procedure detail screen, the sedation codes won't
+appear on the list of codes, but they will appear when you tap
+*Summarize* to get a Code Summary as described [[Code Summary][below]].  Sedation coding
+using the *Device Wizard* is handled a little differently than this, and
+is described further [[Wizard][below]].
 **** <<Save>>Saving codes
-#+CAPTION: Toolbar icons: Search, Save, and Device Wizard icons at top right of screen
-[[./icons.png]]
-
-Tap *Save* from the top right menu (it will appear as a floppy disk
-icon, see the figure) to save your selection of additional codes as a
-default.  If you nearly always select the same additional codes
-(e.g. always do 3D mapping with SVT ablation), save the codes and they
-will preselected when you use the app again. Note that primary code
-selections are not saved.
+Tap *Save* from the top right menu to save your selection of additional
+codes as a default.  If you nearly always select the same additional
+codes (e.g. always do 3D mapping with SVT ablation), save the codes
+and they will preselected when you use the app again. Note that
+primary code selections are not saved.
 **** All EP codes module
 The All EP Codes module lists every EP procedure code in numerical
 order, with code number given first.  It is the /a la carte/ menu of
 *EP Coding*.
 *** Code Summary
 #+CAPTION: Code summary
-[[./summary.png]]
+[[./summary2.png]]
 
 Tap *Summarize* to show a summary of the codes selected along with any
 comments, warnings or errors.  *EP Coding* looks for codes that don't
@@ -220,11 +208,10 @@ consult with your professional coders.
 *** Searching, Device wizard, 1CD-10 codes
 Tap the menu icon on the upper right of the screen for more options.
 **** <<Search>>Search CPT codes
-Tap *Search* to search for CPT codes by name or number.  Note that due to
-the [[Abbreviations][abbreviations]] used, a search that you expect to
-have results may come up empty.  For example to search for
-pacer/pacemaker codes, search for "PPM."  [[Abbreviations][Here]] is a
-list of abbreviations used in *EP Coding*.
+Tap *Search* to search for CPT codes by name or number.  Note that due
+to the [[Abbreviations][abbreviations]] used, a search that you expect to have results
+may come up empty.  For example to search for pacer/pacemaker codes,
+search for "PPM."  [[Abbreviations][Here]] is a list of abbreviations used in *EP Coding*.
 **** <<Wizard>>Device wizard
 Tap *Device Wizard* to steer you through complex device upgrades and
 revisions.  A list of steps and possible codes is shown.  Swipe each
@@ -233,10 +220,17 @@ added along the way.  After swiping through each page of the Wizard,
 the code summary will appear when you select *Finish* or swipe past
 the last page.
 **** <<ICD10>>ICD-10 codes
- *EP Coding* includes a searchable list of ICD-10 codes.  ICD-10 codes are provided by CMS.gov, and are updated on October 1 of each year.  Previous versions of the app only included a subset of the codes relating to cardiology, but now we include all the diagnostic codes.  The codes are the so-called ICD-10-CM codes, which are the diagnostic codes (the ICD-10-PCS procedure codes are not included, as these are more relevant to facility coding).  Use the search bar to narrow down and find the right code.  For example, here is a search for "fib":
+*EP Coding* includes a searchable list of ICD-10 codes.  ICD-10 codes
+are provided by CMS.gov, and are updated on October 1 of each year.
+Previous versions of the app only included a subset of the codes
+relating to cardiology, but now we include all the diagnostic codes.
+The codes are the so-called ICD-10-CM codes, which are the diagnostic
+codes (the ICD-10-PCS procedure codes are not included, as these are
+more relevant to facility coding).  Use the search bar to narrow down
+and find the right code.  For example, here is a search for "atrial fib":
 
-#+CAPTION: ICD-10 search for "fib.
-[[./icd_10_codes.png]]
+#+CAPTION: ICD-10 search for "atrial fib."
+[[./icd_10_codes2.png]]
 
 Note that all ICD-10 codes start with a /letter/ not a /number/.  Thus for example the code for /Paroxysmal atrial fibrillation is *I48.0*, /not/ *148.0*.
 **** Help
@@ -257,9 +251,10 @@ you select *Help* to get help.
 - Don't try to add codes that are disabled in a procedure module.
 - If you nearly always add codes to a procedure (e.g. 3D mapping with
   AFB ablation), then save it as a default using the [[Save][*Save*]] icon.
-- *Warnings* (indicated by *!* or an emoticon, depending on the capabilities of your device, and [[Settings][*Settings*]]) point out codes that you may be
-  missing or code combinations that possibly shouldn't be used
-  together.
+- *Warnings* (indicated by *!* or an emoticon, depending on the
+  capabilities of your device, and [[Settings][*Settings*]]) point out codes that
+  you may be missing or code combinations that possibly shouldn't be
+  used together.
 - *Errors* (indicated by *!!* or an emoticon) indicate code
   combinations that almost certainly are not allowed.
 - Check with your coders or the [[https://commerce.ama-assn.org/store/][AMA documentation]] if you are not sure
@@ -392,7 +387,7 @@ you select *Help* to get help.
 - Sedation codes are listed, but it is preferable as in the other modules to use the sedation calculator to compute sedation codes.
 ** <<Settings>>Settings
 #+CAPTION: Setting screen
-[[./settings.png]]
+[[./settings2.png]]
 
 - Settings, except for the distinguish add-on codes setting, apply
   to the format of the summary screen and code analysis, not to the

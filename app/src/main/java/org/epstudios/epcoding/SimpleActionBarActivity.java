@@ -1,7 +1,9 @@
 package org.epstudios.epcoding;
 
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import java.util.Objects;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 /**
  * Copyright (C) 2017 EP Studios, Inc.
@@ -29,8 +31,8 @@ import android.support.v7.widget.Toolbar;
 public class SimpleActionBarActivity extends AppCompatActivity {
 
     void initToolbar() {
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 }

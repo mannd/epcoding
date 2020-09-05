@@ -53,8 +53,7 @@ public class ICD10Code {
     }
 
     static public ICD10Code fileNotFoundICD10Code() {
-        ICD10Code code = new ICD10Code("Error", "Could not open ICD-10 code list file");
-        return code;
+        return new ICD10Code("Error", "Could not open ICD-10 code list file");
     }
 
     public String getCodeString() {
