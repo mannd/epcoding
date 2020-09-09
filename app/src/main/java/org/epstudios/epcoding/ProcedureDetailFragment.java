@@ -508,7 +508,6 @@ public class ProcedureDetailFragment extends Fragment implements
         }
         for (Code code: sedationCodes) {
             message.append(getSummaryFromCode(code));
-
         }
         List<Code> allCodes = new ArrayList<>();
         allCodes.addAll(Arrays.asList(codes));
