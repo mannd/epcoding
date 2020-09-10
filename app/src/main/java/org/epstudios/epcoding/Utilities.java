@@ -72,6 +72,14 @@ class Utilities {
         AlertDialog dialog = new AlertDialog.Builder(context).create();
         dialog.setMessage(message);
         dialog.setTitle(title);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.setCancelable(true);
+        dialog.setButton(AlertDialog.BUTTON_POSITIVE, context.getString(R.string.ok_label), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
         dialog.show();
     }
 
