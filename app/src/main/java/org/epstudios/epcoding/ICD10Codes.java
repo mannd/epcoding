@@ -65,7 +65,6 @@ public class ICD10Codes {
 
         }
         return allICD10Codes;
-
     }
 
     public static ArrayList<String> getICD10CodeStrings(final Context context) {
