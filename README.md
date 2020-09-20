@@ -14,7 +14,7 @@ EP Coding is open source, and licensed under the
 [GNU GPL v3 license.](http://www.gnu.org/licenses/gpl.html)
 
 ## Copyright
-Copyright © 2013 - 2018 [EP Studios, Inc.](http://www.epstudiossoftware.com)
+Copyright © 2013 - 2020 [EP Studios, Inc.](http://www.epstudiossoftware.com)
 
 CPT copyright 2014 American Medical Association. All rights
 reserved. CPT is a registered trademark of the American Medical

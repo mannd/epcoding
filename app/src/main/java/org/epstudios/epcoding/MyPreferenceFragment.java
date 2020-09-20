@@ -56,7 +56,7 @@ public class MyPreferenceFragment extends PreferenceFragmentCompat implements
         verbosityKey = requireActivity().getString(R.string.code_verbosity_key);
         showDescriptionsKey = requireActivity().getString(
                 R.string.show_details_code_summary_key);
-        truncateDescriptionsKey = getActivity().getString(
+        truncateDescriptionsKey = requireActivity().getString(
                 R.string.truncate_long_descriptions_code_summary_key);
         Preference codeVerbosity = findPreference(verbosityKey);
         Objects.requireNonNull(codeVerbosity).setSummary(getPreferenceScreen().getSharedPreferences()
