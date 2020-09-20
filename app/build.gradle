@@ -12,13 +12,13 @@ android {
         versionName "1.12.2"
     }
 
+//  Keep proguard off.  It doesn't analyze the app correctly and strips out too much, so it crashes.
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

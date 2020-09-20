@@ -34,7 +34,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
 
-/**
+/*
  * An activity representing a list of Procedures. This activity has different
  * presentations for handset and tablet-size devices. On handsets, the activity
  * presents a list of items, which when touched, lead to a
