@@ -51,10 +51,10 @@ public class Codes {
 		Map<String, Code> map = new HashMap<>();
 		// addCode(map, String codeNumber, String codeName, boolean isAddOn)
 
-		// Devices ////////////////////////////////////////
+		// Devices /////////////////////////////////////////
 		// SubQ ICD New Codes
 		addCode(map, "33270",
-				"New or replacement SubQ ICD system, includes testing",
+				"New or replacement SubQ ICD system, including SubQ lead, and including testing",
 				false);
 		addCode(map, "33271", "Insertion of SubQ defibrillator electrode only",
 				false);
@@ -146,7 +146,7 @@ public class Codes {
 		addCode(map, "33249", "New ICD, single or dual, with leads", false);
 
 		// Replacement ICD/CRT
-		addCode(map, "33262", "Single lead ICD generator replacement", false);
+		addCode(map, "33262", "Single lead ICD generator or SubQ ICD generator replacement", false);
 		addCode(map, "33263", "Dual lead ICD generator replacement", false);
 		addCode(map, "33264", "CRT ICD generator replacement", false);
 
@@ -244,7 +244,7 @@ public class Codes {
 	public final static String[] avnAblationPrimaryCodeNumbers = { "93650" };
 	public final static String[] epTestingPrimaryCodeNumbers = { "93619",
 			"93620" };
-    public final static String[] subQIcdPrimaryCodeNumbers = { "33270", "33271",
+    public final static String[] subQIcdPrimaryCodeNumbers = { "33270", "33262", "33271",
 			"33272", "33273", "33274", "33275" };
 	public final static String[] otherProcedurePrimaryCodeNumbers = { "33285",
 			"33286", "93660", "92960", "92961", "76000" };
