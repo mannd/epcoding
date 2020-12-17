@@ -31,7 +31,7 @@ package org.epstudios.epcoding;
 
 import android.content.Context;
 
-public class SubQIcd implements Procedure {
+public class SubQIcd extends IcdDeviceProcedure implements Procedure {
 
 	@Override
 	public String title(Context context) {
@@ -49,11 +49,6 @@ public class SubQIcd implements Procedure {
 	}
 
 	@Override
-	public Code[] secondaryCodes() {
-		return new Code[]{};
-	}
-
-	@Override
 	public String[] disabledCodeNumbers() {
 		return new String[]{};
 	}
@@ -61,11 +56,6 @@ public class SubQIcd implements Procedure {
 	@Override
 	public String helpText(Context context) {
 		return context.getString(R.string.subq_icd_help_text);
-	}
-
-	@Override
-	public boolean doNotWarnForNoSecondaryCodesSelected() {
-		return true;
 	}
 
 }
