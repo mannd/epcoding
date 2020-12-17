@@ -8,8 +8,8 @@ android {
         applicationId "org.epstudios.epcoding"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 26
-        versionName "1.13"
+        versionCode 28
+        versionName "1.14"
     }
 
 //  Keep proguard off.  It doesn't analyze the app correctly and strips out too much, so it crashes.
