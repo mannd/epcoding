@@ -111,6 +111,8 @@ class CodeAnalyzer {
 		// don't use one lead and 2 lead revision together
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR,
 				Arrays.asList("33218", "33220"), DEFAULT_DUPLICATE_ERROR));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR,
+				Arrays.asList("33270", "93641"), DEFAULT_DUPLICATE_ERROR));
 		return codeErrors;
 	}
 
