@@ -37,31 +37,36 @@ public class ProcedureActionBarActivity extends SimpleActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         ProcedureDetailFragment fragment = (ProcedureDetailFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.procedure_detail_container);
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-            case R.id.help:
-                startActivity(new Intent(this, Help.class));
-                return true;
-            case R.id.saveCodeSelection:
-                if (fragment != null)
-                    fragment.saveCoding();
-                return true;
-            case R.id.icd10:
-                startActivity(new Intent(this, ICD10CodeList.class));
-                return true;
-            case R.id.settings:
-                startActivity(new Intent(this, Prefs.class));
-                return true;
-            case R.id.wizard:
-                startActivity(new Intent(this, ScreenSlideActivity.class));
-                return true;
-            case R.id.about:
-                startActivity(new Intent(this, About.class));
-                return true;
+        final int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
         }
-
+        else if (itemId == R.id.help) {
+            startActivity(new Intent(this, Help.class));
+            return true;
+        }
+        else if (itemId == R.id.saveCodeSelection) {
+            if (fragment != null)
+                fragment.saveCoding();
+            return true;
+        }
+        else if (itemId == R.id.icd10) {
+            startActivity(new Intent(this, ICD10CodeList.class));
+            return true;
+        }
+        else if (itemId == R.id.settings) {
+            startActivity(new Intent(this, Prefs.class));
+            return true;
+        }
+        else if (itemId == R.id.wizard) {
+            startActivity(new Intent(this, ScreenSlideActivity.class));
+            return true;
+        }
+        else if (itemId == R.id.about) {
+            startActivity(new Intent(this, About.class));
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

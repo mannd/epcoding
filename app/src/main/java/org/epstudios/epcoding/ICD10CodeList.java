@@ -94,22 +94,19 @@ public class ICD10CodeList extends SimpleActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                Intent parentActivityIntent = new Intent(this, ProcedureListActivity.class);
-                parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(parentActivityIntent);
-                finish();
-                return true;
-            case R.id.about:
-                startActivity(new Intent(this, About.class));
-                return true;
-
+        final int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
+            Intent parentActivityIntent = new Intent(this, ProcedureListActivity.class);
+            parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(parentActivityIntent);
+            finish();
+            return true;
         }
-
-
+        else if (itemId == R.id.about) {
+            startActivity(new Intent(this, About.class));
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -81,11 +81,8 @@ public class ProcedureListFragment extends ListFragment {
 	 * A dummy implementation of the {@link Callbacks} interface that does
 	 * nothing. Used only when this fragment is not attached to an activity.
 	 */
-	private static final Callbacks sDummyCallbacks = new Callbacks() {
-		@Override
-		public void onItemSelected(String id) {
-		}
-	};
+	private static final Callbacks sDummyCallbacks = id -> {
+    };
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the

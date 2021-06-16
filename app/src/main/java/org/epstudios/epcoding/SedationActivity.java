@@ -86,20 +86,21 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
     public void onClick(View v) {
         Intent returnIntent = new Intent();
         setResult(Activity.RESULT_CANCELED, returnIntent);
-        switch (v.getId()) {
-            case R.id.calculate_sedation_button:
-                calculateSedationTime();
-                break;
-            case R.id.no_sedation_button:
-                noSedation(returnIntent);
-                break;
-            case R.id.add_sedation_button:
-                addCodes(returnIntent);
-                break;
-            case R.id.cancel_button:
-            default:
-                finish();
-                break;
+        final int id = v.getId();
+        if (id == R.id.calculate_sedation_button) {
+            calculateSedationTime();
+        }
+        else if (id == R.id.no_sedation_button) {
+            noSedation(returnIntent);
+        }
+        else if (id == R.id.add_sedation_button) {
+            addCodes(returnIntent);
+        }
+        else if (id == R.id.cancel_button) {
+            finish();
+        }
+        else {
+            finish();
         }
     }
 
@@ -189,18 +190,12 @@ public class SedationActivity extends BasicActionBarActivity implements View.OnC
 
         dialog.setMessage(message);
         dialog.setTitle(title);
-        dialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                putSedationData(theIntent);
-                finish();
-            }
+        dialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", (dialogInterface, i) -> {
+            putSedationData(theIntent);
+            finish();
         });
-        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                // make finished false
-            }
+        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", (dialogInterface, i) -> {
+            // make finished false
         });
         dialog.show();
     }

@@ -268,14 +268,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
     private void addCheckMarkListener(Map<String, CodeCheckBox> codeMap) {
         for (Map.Entry<String, CodeCheckBox> entry : codeMap.entrySet()) {
             entry.getValue().setOnCheckedChangeListener(
-                    new OnCheckedChangeListener() {
-
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView,
-                                                     boolean isChecked) {
-                            checkChanged();
-                        }
-                    });
+                    (buttonView, isChecked) -> checkChanged());
         }
     }
 

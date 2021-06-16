@@ -80,20 +80,20 @@ public class SedationTimeCalculator extends BasicActionBarActivity
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.cancel_button:
-                finish();
-                break;
-            case R.id.calculate_button:
-                calculate();
-                break;
-            case R.id.toggleButton:
-                break;
-            case R.id.set_button:
-                setTime();
-                break;
+        final int id = view.getId();
+        if (id == R.id.cancel_button) {
+            finish();
         }
-
+        else if (id == R.id.calculate_button) {
+            calculate();
+        }
+        else if (id == R.id.toggleButton) {
+            // break;
+            // there is no toggle button anymore...
+        }
+        else if (id == R.id.set_button) {
+            setTime();
+        }
     }
 
     private void calculate() {
