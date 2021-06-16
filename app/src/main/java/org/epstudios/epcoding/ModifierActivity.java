@@ -96,19 +96,19 @@ public class ModifierActivity extends BasicActionBarActivity implements View.OnC
         Log.d(EPCODING, "click view");
         Intent returnIntent = new Intent();
         setResult(Activity.RESULT_CANCELED, returnIntent);
-        switch (v.getId()) {
-            case R.id.cancel_button:
-                // Just go back
-                break;
-            case R.id.reset_button:
-                resetModifiers(returnIntent);
-                break;
-            case R.id.save_button:
-                saveModifiers();
-                // fall-through -- need to add them too so they appear
-            case R.id.add_button:
-                addModifiers(returnIntent);
-                break;
+        final int id = v.getId();
+        if (id == R.id.cancel_button) {
+           // just go back
+        }
+        else if (id == R.id.reset_button) {
+            resetModifiers(returnIntent);
+        }
+        else if (id == R.id.save_button) {
+            saveModifiers();
+            addModifiers(returnIntent);
+        }
+        else if (id == R.id.add_button) {
+            addModifiers(returnIntent);
         }
         finish();
     }

@@ -38,17 +38,15 @@ public class BasicActionBarActivity extends SimpleActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                finish();
-                return true;
-            case R.id.about:
-                startActivity(new Intent(this, About.class));
-                return true;
-
+        final int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
+            finish();
+            return true;
         }
-
+        else if (itemId == R.id.about) {
+            startActivity(new Intent(this, About.class));
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

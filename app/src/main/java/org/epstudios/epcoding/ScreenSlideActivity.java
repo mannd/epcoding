@@ -226,22 +226,22 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
+		final int itemId = item.getItemId();
+		if (itemId == android.R.id.home) {
 			// Navigate "up" the demo structure to the launchpad activity.
 			// See http://developer.android.com/design/patterns/navigation.html
 			// for more.
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
-
-		case R.id.action_previous:
+		}
+		else if (itemId == R.id.action_previous) {
 			// Go to the previous step in the wizard. If there is no previous
 			// step,
 			// setCurrentItem will do nothing.
 			mPager.setCurrentItem(mPager.getCurrentItem() - 1);
 			return true;
-
-		case R.id.action_next:
+		}
+		else if (itemId == R.id.action_next) {
 			// Advance to the next step in the wizard. If there is no next step,
 			// setCurrentItem
 			// will do nothing.
@@ -252,7 +252,6 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 			}
 			return true;
 		}
-
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -306,18 +305,10 @@ public class ScreenSlideActivity extends SimpleActionBarActivity {
 		AlertDialog dialog = new AlertDialog.Builder(context).create();
 		dialog.setMessage(message);
 		dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Exit Wizard",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						finish();
-					}
-				});
+				(dialog12, which) -> finish());
 		dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "Cancel",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-                        // just close dialog
-					}
+				(dialog1, which) -> {
+// just close dialog
 				});
 		dialog.setTitle(title);
 		dialog.show();

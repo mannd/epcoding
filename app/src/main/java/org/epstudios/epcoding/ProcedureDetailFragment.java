@@ -204,16 +204,15 @@ public class ProcedureDetailFragment extends Fragment implements
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.sedation_button:
-                addSedation();
-                break;
-            case R.id.summary_button:
-                summarizeCoding();
-                break;
-            case R.id.clear_button:
-                clearEntries();
-                break;
+        final int id = v.getId();
+        if (id == R.id.sedation_button) {
+            addSedation();
+        }
+        else if (id == R.id.summary_button) {
+            summarizeCoding();
+        }
+        else if (id == R.id.clear_button) {
+            clearEntries();
         }
     }
 
@@ -394,15 +393,12 @@ public class ProcedureDetailFragment extends Fragment implements
             // add long click listener to open modifier dialog
             // because they are disabled.  This is an Android limitation, though
             // any code can be long clicked and modified in the all codes module.
-            codeCheckBox.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    Intent intent = new Intent(getActivity(), ModifierActivity.class);
-                    intent.putExtra(ACTIVE_CODE_NUMBER, codeCheckBox.getCodeNumber());
-                    intent.putExtra(SAVE_TEMP_ADDED_MODIFIERS, false);
-                    startActivityForResult(intent, MODIFIER_REQUEST_CODE);
-                    return true;
-                }
+            codeCheckBox.setOnLongClickListener(view -> {
+                Intent intent = new Intent(getActivity(), ModifierActivity.class);
+                intent.putExtra(ACTIVE_CODE_NUMBER, codeCheckBox.getCodeNumber());
+                intent.putExtra(SAVE_TEMP_ADDED_MODIFIERS, false);
+                startActivityForResult(intent, MODIFIER_REQUEST_CODE);
+                return true;
             });
             layout.addView(codeCheckBox);
         }
@@ -547,17 +543,9 @@ public class ProcedureDetailFragment extends Fragment implements
         dialog.setMessage(message);
         dialog.setTitle("Save Defaults");
         dialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        save();
-                    }
-                });
+                (dialog12, which) -> save());
         dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
+                (dialog1, which) -> {
                 });
         dialog.show();
     }

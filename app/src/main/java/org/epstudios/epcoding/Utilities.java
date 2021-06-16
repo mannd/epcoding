@@ -31,15 +31,12 @@ class Utilities {
             codeCheckBox.setCodeFirst(true);
             codeCheckBox.setCode(code);
             map.put(code.getCodeNumber(), codeCheckBox);
-            codeCheckBox.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    Intent intent = new Intent(theContext, ModifierActivity.class);
-                    intent.putExtra(ACTIVE_CODE_NUMBER, codeCheckBox.getCodeNumber());
-                    intent.putExtra(SAVE_TEMP_ADDED_MODIFIERS, true);
-                    fragment.startActivityForResult(intent, MODIFIER_REQUEST_CODE);
-                    return true;
-                }
+            codeCheckBox.setOnLongClickListener(view -> {
+                Intent intent = new Intent(theContext, ModifierActivity.class);
+                intent.putExtra(ACTIVE_CODE_NUMBER, codeCheckBox.getCodeNumber());
+                intent.putExtra(SAVE_TEMP_ADDED_MODIFIERS, true);
+                fragment.startActivityForResult(intent, MODIFIER_REQUEST_CODE);
+                return true;
             });
             layout.addView(codeCheckBox);
         }
@@ -74,12 +71,7 @@ class Utilities {
         dialog.setTitle(title);
         dialog.setCanceledOnTouchOutside(true);
         dialog.setCancelable(true);
-        dialog.setButton(AlertDialog.BUTTON_POSITIVE, context.getString(R.string.ok_label), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        dialog.setButton(AlertDialog.BUTTON_POSITIVE, context.getString(R.string.ok_label), (dialog1, which) -> dialog1.cancel());
         dialog.show();
     }
 
@@ -120,25 +112,17 @@ class Utilities {
         }
         dialog.setMessage(message);
         dialog.setTitle(title);
-        dialog.setButton(AlertDialog.BUTTON_POSITIVE, buttonLabel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Log.d(EPCODING, "click Add");
-                Intent intent = new Intent(context, SedationActivity.class);
-                intent.putExtra(Constants.TIME, sedationTime);
-                intent.putExtra(Constants.AGE, patientOver5YrsOld);
-                intent.putExtra(Constants.SAME_MD, sameMDPerformsSedation);
-                intent.putExtra(Constants.SEDATION_STATUS, sedationStatus);
-                fragment.startActivityForResult(intent, SEDATION_REQUEST_CODE);
+        dialog.setButton(AlertDialog.BUTTON_POSITIVE, buttonLabel, (dialogInterface, i) -> {
+            Log.d(EPCODING, "click Add");
+            Intent intent = new Intent(context, SedationActivity.class);
+            intent.putExtra(Constants.TIME, sedationTime);
+            intent.putExtra(Constants.AGE, patientOver5YrsOld);
+            intent.putExtra(Constants.SAME_MD, sameMDPerformsSedation);
+            intent.putExtra(Constants.SEDATION_STATUS, sedationStatus);
+            fragment.startActivityForResult(intent, SEDATION_REQUEST_CODE);
 
-            }
         });
-        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Log.d(EPCODING, "click cancel");
-            }
-        });
+        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", (dialogInterface, i) -> Log.d(EPCODING, "click cancel"));
 
         dialog.show();
     }
