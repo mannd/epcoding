@@ -16,7 +16,12 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="./org.css"/>
 * EP Coding Help
 ** 2022 Update
-As of January 1, 2022, 3D mapping and intra-cardiac echocardiogram have been bundled into the atrial fibrillation ablation coding, and 3D mapping and LA pacing and recording have been bundled into the SVT ablation coding.  This is now reflected in the app, in that these bundled codes are now hashed out in their respective screens, and a warning will appear if these codes are combined.
+As of January 1, 2022, 3D mapping and intra-cardiac echocardiogram
+have been bundled into the atrial fibrillation ablation coding, and 3D
+mapping and LA pacing and recording have been bundled into the SVT
+ablation coding.  This is now reflected in the app, in that these
+bundled codes are now grayed out in their respective screens, and a
+warning will appear if these codes are combined.
 ** EP Coding 101
 Don't want to read the manual?  Here's the TL;DR:
 - Choose a procedure.
@@ -234,7 +239,9 @@ and find the right code.  For example, here is a search for "atrial fib":
 #+CAPTION: ICD-10 search for "atrial fib."
 [[./icd_10_codes2.png]]
 
-Note that all ICD-10 codes start with a /letter/ not a /number/.  Thus for example the code for /Paroxysmal atrial fibrillation is *I48.0*, /not/ *148.0*.
+Note that all ICD-10 codes start with a /letter/ not a /number/.  Thus for
+example the code for /Paroxysmal atrial fibrillation is *I48.0*, /not/
+*148.0*.
 **** Help
 Well, you're reading this, so you must have figured out already that
 you select *Help* to get help.
@@ -242,7 +249,8 @@ you select *Help* to get help.
 - Set code analysis to verbose.
 - Use the specific procedure modules rather than the All EP Codes
   module for coding procedures.
-- Don't use the raw sedation codes in the All EP Codes module for sedation coding.  Use the *Sedation* button instead.
+- Don't use the raw sedation codes in the All EP Codes module for
+  sedation coding.  Use the *Sedation* button instead.
 - You may find it easier to use the [[Wizard][*Device Wizard*]] to do device
   upgrade coding rather than the Upgrade/Revision/Extraction module.
 - Use the All EP Codes module if you need to look up a specific code,
@@ -263,7 +271,9 @@ you select *Help* to get help.
   how to code a procedure.
 ** Specific procedures
 *** AFB ablation
-- As of January, 2022, AFB ablation, 93656, now includes 3D mapping, and intra-cardiac echo, as well as LA pacing and recording and transseptal puncture.
+- As of January, 2022, AFB ablation, 93656, now includes 3D mapping,
+  and intra-cardiac echo, as well as LA pacing and recording and
+  transseptal puncture.
 - Includes comprehensive EP testing, LA pacing and recording and transseptal puncture.
 - Add 93657 if additional AFB ablation done beyond pulmonary vein
   isolation.

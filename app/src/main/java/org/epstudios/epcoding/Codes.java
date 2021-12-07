@@ -286,8 +286,8 @@ public class Codes {
 			"93641", "33210", "33218", "33220", "92960", "92961" };
 
 	public final static String[] afbAblationDisabledCodeNumbers = { "93621",
-			"93462" };
-	public final static String[] svtAblationDisabledCodeNumbers = { "93657" };
+			"93462", "93613", "93662", "93609" };
+	public final static String[] svtAblationDisabledCodeNumbers = { "93657", "93613", "93621", "93609" };
 	public final static String[] vtAblationDisabledCodeNumbers = { "93657",
 			"93609", "93613", "93622" };
 	public final static String[] epTestingDisabledCodeNumbers = { "93657",
