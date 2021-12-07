@@ -15,6 +15,8 @@
 #+XSLT:
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="./org.css"/>
 * EP Coding Help
+** 2022 Update
+As of January 1, 2022, 3D mapping and intra-cardiac echocardiogram have been bundled into the atrial fibrillation ablation coding, and 3D mapping and LA pacing and recording have been bundled into the SVT ablation coding.  This is now reflected in the app, in that these bundled codes are now hashed out in their respective screens, and a warning will appear if these codes are combined.
 ** EP Coding 101
 Don't want to read the manual?  Here's the TL;DR:
 - Choose a procedure.
@@ -261,13 +263,14 @@ you select *Help* to get help.
   how to code a procedure.
 ** Specific procedures
 *** AFB ablation
-- Includes comprehensive EP testing, LA pacing and recording and
-  transseptal puncture.
+- As of January, 2022, AFB ablation, 93656, now includes 3D mapping, and intra-cardiac echo, as well as LA pacing and recording and transseptal puncture.
+- Includes comprehensive EP testing, LA pacing and recording and transseptal puncture.
 - Add 93657 if additional AFB ablation done beyond pulmonary vein
   isolation.
 - Add 93655 if separate supraventricular arrhythmia mechanism
   ablated (e.g. focal atrial tachycardia).
 *** SVT ablation
+- As of January, 2022, SVT ablation, 93653, now includes 3D mapping and LA pacing and recording.
 - Includes comprehensive EP testing.
 - SVT ablation code is used for any kind of SVT ablation including
   WPW, focal atrial tachycardia, atrial flutter, and AV nodal reentry.
