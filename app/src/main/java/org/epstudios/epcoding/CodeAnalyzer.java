@@ -139,7 +139,7 @@ class CodeAnalyzer {
 						.asList("93650", "93600", "93619", "93620"),
 						"It is unclear if AV node ablation can be combined with EP testing codes."));
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
-				.asList("93656", "93621", "93462"),
+				.asList("93656", "93621", "93462", "93609", "93613", "93662"),
 				"Code(s) selected are already included in AFB Ablation."));
 		codeErrors
 				.add(new CodeError(
@@ -148,7 +148,10 @@ class CodeAnalyzer {
 						"AFB Ablation should not be added on to SVT ablation.  Use AFB ablation as the primary code."));
 		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR, Arrays
 				.asList("93654", "93657", "93609", "93613", "93622"),
-				"Code(s) cannot be add to VT Ablation."));
+				"Code(s) cannot be added to VT Ablation."));
+		codeErrors.add(new CodeError(CodeError.WarningLevel.ERROR,
+				Arrays.asList("93653", "93621", "93613", "93609"),
+				"Code(s) selected are already included in SVT Ablation."));
 		codeErrors.add(new CodeError(CodeError.WarningLevel.WARNING, Arrays
 				.asList("93623", "93650", "93653", "93654", "93656"),
 				"Recent coding changes may disallow bundling induce post IV drug with ablation."));
@@ -297,16 +300,20 @@ class CodeAnalyzer {
 		return allAddOns;
 	}
 
+	// This function must always return false since the 2022 coding
+	// update, as all ablations now including mapping.  Original code
+	// left commented out for historical purposes.
 	private boolean noMappingCodesForAblation(final List<String> codeNumbers) {
-		boolean noMappingCodes = true;
-		boolean hasAblationCodes = false;
-		for (String codeNumber : codeNumbers) {
-			if (ablationCodeSet.contains(codeNumber))
-				hasAblationCodes = true;
-			if (mappingCodeSet.contains(codeNumber))
-				noMappingCodes = false;
-		}
-		return (hasAblationCodes && noMappingCodes);
+		return false;
+//		boolean noMappingCodes = true;
+//		boolean hasAblationCodes = false;
+//		for (String codeNumber : codeNumbers) {
+//			if (ablationCodeSet.contains(codeNumber))
+//				hasAblationCodes = true;
+//			if (mappingCodeSet.contains(codeNumber))
+//				noMappingCodes = false;
+//		}
+//		return (hasAblationCodes && noMappingCodes);
 	}
 
 	// This tests for 2 or more codes in a code set and is used

@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="org.epstudios.epcoding.ProcedureListActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +23,8 @@
                 android:name="android.app.default_searchable"
                 android:value=".SearchableActivity" />
         </activity>
-        <activity android:name=".SearchableActivity" >
+        <activity android:name=".SearchableActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -79,7 +81,8 @@
             android:label="@string/sedation_time_calculator_label">
         </activity>
         <activity android:name=".ICD10CodeList"
-                  android:label="@string/icd10_code_list_label">
+                  android:label="@string/icd10_code_list_label"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
