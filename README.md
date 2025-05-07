@@ -1,7 +1,14 @@
 EP Coding
 =========
 
-[![Build Status](https://travis-ci.org/mannd/epcoding.svg?branch=master)](https://travis-ci.org/mannd/epcoding)
+## NOTE: EP CODING is at EOL*
+EP Coding has been unpublished from Google Play.  It has become too
+difficult to maintain and keep up-to-date with changes in the coding
+of electrophysiologic procedures.  Current users still have access to
+it, but there will be no further updates.  More information [is
+available here](https://www.epstudiossoftware.com/farewell-ep-coding/).
+
+*End of life
 
 ## Coding for electrophysiology procedures
 EP Coding is an [Android](http://www.android.com) app
